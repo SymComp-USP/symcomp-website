@@ -1,0 +1,1 @@
+"""SymComp FastAPI application."""

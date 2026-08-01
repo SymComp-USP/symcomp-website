@@ -1,0 +1,19 @@
+# uv local virtual environment
+.venv/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+
+# Environment variables (secret keys)
+.env
+.envrc
+
+# Build and distribution artifacts
+build/
+dist/
+*.egg-info/
+
