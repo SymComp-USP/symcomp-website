@@ -2,7 +2,7 @@ import uuid
 from datetime import datetime
 
 from sqlalchemy import MetaData, func
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, declared_attr
+from sqlalchemy.orm import DeclarativeBase, Mapped, declared_attr, mapped_column
 
 POSTGRES_NAMING_CONVENTION = {
     "ix": "%(column_0_label)s_idx",
