@@ -12,35 +12,29 @@ POSTGRES_NAMING_CONVENTION = {
     "pk": "%(table_name)s_pkey",
 }
 
+
 class Base(DeclarativeBase):
     """Base class for all SQLAlchemy models."""
-    
+
     metadata = MetaData(naming_convention=POSTGRES_NAMING_CONVENTION)
-    
+
     @declared_attr.directive
     def __tablename__(cls) -> str:
-        """ This __tablename__ may be overriden in children classes, avoiding cases like "Activity" -> "activitys" """
+        """This __tablename__ may be overriden in children classes, avoiding cases like "Activity" -> "activitys" """
         return cls.__name__.lower() + "s"
-    
+
     id: Mapped[uuid.UUID] = mapped_column(
-        primary_key=True,
-        default=uuid.uuid4,
-        sort_order=-1
+        primary_key=True, default=uuid.uuid4, sort_order=-1
     )
-    
+
     created_at: Mapped[datetime] = mapped_column(
-        server_default=func.now(),
-        sort_order=9997
+        server_default=func.now(), sort_order=9997
     )
-    
+
     updated_at: Mapped[datetime] = mapped_column(
-        server_default=func.now(), 
-        onupdate=func.now(),
-        sort_order=9998
+        server_default=func.now(), onupdate=func.now(), sort_order=9998
     )
-    
+
     deleted_at: Mapped[datetime | None] = mapped_column(
-        default=None,
-        index=True,
-        sort_order=9999
+        default=None, index=True, sort_order=9999
     )
