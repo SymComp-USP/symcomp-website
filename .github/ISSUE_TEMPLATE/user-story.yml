@@ -1,0 +1,35 @@
+name: "User Story"
+description: "New feature based on user request"
+title: "feat: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for new features.
+
+  - type: textarea
+    id: story_format
+    attributes:
+      label: "Story structure"
+      description: "Defines detail about the story"
+      placeholder: |
+        As a [persona]
+        I want to [do something]
+        So that I can [reach a benefit or resolve an error]
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: "Estimated priority"
+      description: "What is the level of priority for this feature?"
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+    validations:
+      required: true
+

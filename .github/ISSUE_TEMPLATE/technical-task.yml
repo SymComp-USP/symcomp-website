@@ -1,0 +1,32 @@
+name: "Technical Task"
+description: "Melhorias de arquitetura, débitos técnicos ou tarefas de infraestrutura."
+title: "<frontend/backend>: "
+labels: []
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: "Context"
+      description: "Why do we need to do this?"
+      placeholder: "Ex: O componente de autenticação atual está acoplado com a API antiga"
+    validations:
+      required: false
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: "What to do"
+      description: "List steps to complete this task"
+      placeholder: "Ex: 1. Add backend endpoint 2. Add frontend page"
+    validations:
+      required: false
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: "Expected Behaviour"
+      description: "What is the expected result after completing this task"
+      placeholder: "Ex: Introduce a new conferences page"
+    validations:
+      required: false
+
