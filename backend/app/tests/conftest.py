@@ -36,7 +36,22 @@ async def db_session(test_settings: Settings):
 
 
 @pytest_asyncio.fixture
-async def client(db_session: AsyncSession, test_settings: Settings):
+async def client(test_settings: Settings):
+    def override_get_settings():
+        return test_settings
+
+    app.dependency_overrides[get_settings] = override_get_settings
+
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as ac:
+        yield ac
+
+    app.dependency_overrides.clear()
+
+
+@pytest_asyncio.fixture
+async def db_client(db_session: AsyncSession, test_settings: Settings):
     async def override_get_session():
         yield db_session
 

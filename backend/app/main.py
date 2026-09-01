@@ -1,9 +1,9 @@
 from contextlib import asynccontextmanager
 
-from fastapi import Depends, FastAPI
+from fastapi import FastAPI
 
-from app.api.router import api_router
 from app.core import config, database
+from app.core.health import router as health_router
 
 
 @asynccontextmanager
@@ -19,8 +19,4 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="SymComp API", version="0.1.0", lifespan=lifespan)
-app.include_router(
-    api_router,
-    prefix="/api/v1",
-    dependencies=[Depends(config.get_settings), Depends(database.get_session)],
-)
+app.include_router(health_router, prefix="/api/v1")
