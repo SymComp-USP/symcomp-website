@@ -1,5 +1,4 @@
 import asyncio
-import os
 from logging.config import fileConfig
 
 from sqlalchemy import pool
@@ -7,7 +6,12 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
+from app.core.config import get_settings
 from app.core.models import Base
+
+# Import model modules so their tables are registered on Base.metadata
+# and picked up by `alembic revision --autogenerate`.
+from app.users import models as user_models  # noqa: F401
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -29,10 +33,10 @@ target_metadata = Base.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
-# getting database connection string from .env
-database_url = os.getenv(
-    "DATABASE_URL", "postgresql+asyncpg://user:password@postgres/database"
-)
+# getting database connection string from Settings (which loads .env
+# automatically via pydantic-settings) — keeps a single source of truth
+# with the rest of the app, instead of re-reading env vars here.
+database_url = str(get_settings().database_url)
 config.set_main_option("sqlalchemy.url", database_url)
 
 

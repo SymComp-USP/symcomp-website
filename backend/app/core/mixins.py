@@ -17,7 +17,7 @@ class TimestampsMixin:
     )
 
     updated_at: Mapped[datetime] = mapped_column(
-        default=None, onupdate=func.now(), sort_order=9998
+        server_default=func.now(), onupdate=func.now(), sort_order=9998
     )
 
     deleted_at: Mapped[datetime | None] = mapped_column(
