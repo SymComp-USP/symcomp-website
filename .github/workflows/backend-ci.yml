@@ -48,7 +48,11 @@ jobs:
         run: uv run ruff check .
 
       - name: Run migrations
+        env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@127.0.0.1:5432/symcomp
         run: uv run alembic upgrade head
 
       - name: Run tests
+        env:
+          DATABASE_URL: postgresql+asyncpg://postgres:postgres@127.0.0.1:5432/symcomp
         run: uv run pytest

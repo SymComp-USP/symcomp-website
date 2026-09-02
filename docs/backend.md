@@ -58,6 +58,17 @@ new versioned paths rather than preserving these prefixes by default.
 
 Prefer a password reset for imported accounts;
 
+## Model Conventions
+
+- Use UUID rather than integer IDs for primary keys.
+- Table names match model names, but using lowercase and plural. For example: Model "User" -> table "users".
+- Every instanced model is automatically filled with "created_at", "updated_at" and "deleted_at"* fields.
+- Foreign keys are indexed automatically. Constraint names are standardized via SQLAlchemy's MetaData conventions. You should also index frequently searched fields.
+
+These conventions are coded in the base model class, at backend/app/models/base.py.
+
+\* Data is never physically deleted: we use the "deleted_at" field to control if a record is meant to be deleted (i.e. "soft delete").
+
 ## Important rules
 
 - PostgreSQL remains the database; create a new schema with Alembic rather
