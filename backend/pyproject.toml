@@ -8,6 +8,7 @@ dependencies = [
     "alembic>=1.18.5",
     "asyncpg>=0.31.0",
     "fastapi[standard]>=0.141.1",
+    "pwdlib[argon2]>=0.2.0",
     "pytest>=9.1.1",
     "ruff>=0.16.1",
     "sqlalchemy>=2.0.51",

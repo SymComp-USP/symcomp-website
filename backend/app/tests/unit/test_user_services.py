@@ -6,6 +6,49 @@ from app.users.schemas import UserCreate, UserUpdate
 from app.users.services import UserAlreadyDeletedError, UserAlreadyExistsError
 
 
+def test_hash_password_returns_a_different_string_from_plain_password():
+    plain_password = "password123"
+
+    hashed_password = services.hash_password(plain_password)
+
+    assert hashed_password != plain_password
+    assert isinstance(hashed_password, str)
+
+
+def test_hash_password_uses_argon2():
+    hashed_password = services.hash_password("password123")
+
+    # pwdlib com Argon2Hasher gera hashes no formato $argon2...
+    assert hashed_password.startswith("$argon2")
+
+
+def test_hash_password_generates_different_hashes_for_same_password():
+    # O salt aleatório garante hashes diferentes mesmo para a mesma senha
+    first_hash = services.hash_password("password123")
+    second_hash = services.hash_password("password123")
+
+    assert first_hash != second_hash
+
+
+def test_verify_password_returns_true_for_correct_password():
+    plain_password = "password123"
+    hashed_password = services.hash_password(plain_password)
+
+    assert services.verify_password(plain_password, hashed_password) is True
+
+
+def test_verify_password_returns_false_for_incorrect_password():
+    hashed_password = services.hash_password("password123")
+
+    assert services.verify_password("wrong_password", hashed_password) is False
+
+
+def test_verify_password_is_case_sensitive():
+    hashed_password = services.hash_password("Password123")
+
+    assert services.verify_password("password123", hashed_password) is False
+
+
 @pytest.mark.asyncio
 async def test_create_user_service(db_session: AsyncSession):
     user_in = UserCreate(
