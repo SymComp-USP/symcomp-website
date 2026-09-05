@@ -40,6 +40,11 @@ class Settings(BaseSettings):
         description="HTTP url's recognized by the server",
     )
 
+    secret_key: str = Field(
+        title="Secret Key",
+        description="Chave secreta para assinatura de tokens/sessões",
+    )
+
     model_config = SettingsConfigDict(
         env_file=".env", validate_default=True, case_sensitive=False
     )

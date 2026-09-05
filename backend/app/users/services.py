@@ -1,33 +1,28 @@
-# Imports temporários para o hash_password -> hashlib e os
-# NÃO DEIXAR ISSO PASSAR PARA PRODUÇÃO!!!!!!!!!!!
-import hashlib
-import os
+import asyncio
 import uuid
 from datetime import UTC, datetime
 
+from pwdlib import PasswordHash
+from pwdlib.hashers.argon2 import Argon2Hasher
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.users.models import User
 from app.users.schemas import UserCreate, UserUpdate
 
+# --- funções de autenticação ---
+# Inicialização da biblioteca de hash
+ph = PasswordHash((Argon2Hasher(),))
 
-# Função de hash temporária na falta da implementação do atuh/
-# NÃO DEIXAR ISSO PASSAR PARA PRODUÇÃO!!!!!!!!!!!
+
+# Função de criar hash
 def hash_password(password: str) -> str:
-    """
-    Gera um hash seguro usando PBKDF2-HMAC com SHA256 e Salt aleatório.
-    Módulo puro do Python (hashlib / os).
-    """
-    salt = os.urandom(16)
-    hashed = hashlib.pbkdf2_hmac(
-        hash_name="sha256",
-        password=password.encode("utf-8"),
-        salt=salt,
-        iterations=100_000,
-    )
-    # Retorna salt e hash codificados em hexadecimal juntos (separados por $)
-    return f"{salt.hex()}${hashed.hex()}"
+    return ph.hash(password)
+
+
+# Função de verificação da hash
+def verify_password(plain_password, hashed_password):
+    return ph.verify(plain_password, hashed_password)
 
 
 # --- classes de erro ---
@@ -50,8 +45,6 @@ class UserAlreadyExistsError(Exception):
 
 
 # --- buscas "normais": ignoram usuários soft-deletados ---
-
-
 async def get_user_by_id(session: AsyncSession, user_id: uuid.UUID) -> User | None:
     result = await session.execute(
         select(User).where(User.id == user_id, User.deleted_at.is_(None))
@@ -107,7 +100,9 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
     if deleted_user is not None:
         deleted_user.deleted_at = None
         deleted_user.name = user_in.name
-        deleted_user.password_hash = hash_password(user_in.password)
+        deleted_user.password_hash = await asyncio.to_thread(
+            hash_password, user_in.password
+        )
 
         # Reseta verificações e privilégios
         deleted_user.is_admin = False
@@ -121,7 +116,7 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
     user = User(
         email=user_in.email,
         name=user_in.name,
-        password_hash=hash_password(user_in.password),
+        password_hash=await asyncio.to_thread(hash_password, user_in.password),
     )
 
     session.add(user)
@@ -139,7 +134,7 @@ async def update_user(session: AsyncSession, user: User, user_in: UserUpdate) ->
         setattr(user, field, value)
 
     if user_in.password is not None:
-        user.password_hash = hash_password(user_in.password)
+        user.password_hash = await asyncio.to_thread(hash_password, user_in.password)
 
     await session.flush()
     await session.refresh(user)
