@@ -1,8 +1,9 @@
+import secrets
 from enum import StrEnum
 from functools import lru_cache
 from typing import TypeAlias
 
-from pydantic import AnyHttpUrl, Field, HttpUrl, PostgresDsn
+from pydantic import AnyHttpUrl, Field, HttpUrl, PostgresDsn, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -40,7 +41,9 @@ class Settings(BaseSettings):
         description="HTTP url's recognized by the server",
     )
 
-    secret_key: str = Field(
+    # Lembre-se de ler como settings.secret_key.get_secret_value()
+    secret_key: SecretStr = Field(
+        default_factory=lambda: SecretStr(secrets.token_urlsafe(32)),
         title="Secret Key",
         description="Chave secreta para assinatura de tokens/sessões",
     )
