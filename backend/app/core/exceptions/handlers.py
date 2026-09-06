@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Request
+from fastapi import Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-from app.core.exceptions.exceptions import AppError, InternalServerError
+from app.core.exceptions.app_errors import AppError, InternalServerError
 
 
 class ApiErrorResponse(BaseModel):
@@ -43,7 +43,7 @@ async def app_error_handler(request: Request, error: Exception):
     )
 
 
-async def internal_server_error_handler(request: Request, _: Exception):
+async def exception_handler(request: Request, _: Exception):
     error = InternalServerError("An unexpected error occurred.")
 
     body = ApiErrorResponse(
@@ -57,8 +57,3 @@ async def internal_server_error_handler(request: Request, _: Exception):
     return JSONResponse(
         status_code=body.status, content=body.model_dump(exclude_none=True)
     )
-
-
-def register_exception_handlers(app: FastAPI) -> None:
-    app.add_exception_handler(AppError, app_error_handler)
-    app.add_exception_handler(Exception, internal_server_error_handler)
