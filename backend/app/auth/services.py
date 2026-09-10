@@ -7,13 +7,13 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import app.users.services as user_services
 from app.auth.models import RefreshToken
-from app.auth.schemas import InvalidRefreshTokenException
 from app.auth.security import (
     create_random_token,
     hash_token,
     verify_password,
 )
 from app.core.config import get_settings
+from app.core.exceptions.app_errors import BadRequestError, UnauthorizedError
 
 
 async def authenticate(db_session: AsyncSession, email: str, password: str):
@@ -71,7 +71,7 @@ async def refresh_access_token(session: AsyncSession, refresh_token_str: str):
     ).scalar_one_or_none()
 
     if refresh_token is None:
-        raise InvalidRefreshTokenException()
+        raise UnauthorizedError(detail="Invalid refresh token")
 
     expires_at = refresh_token.expires_at
 
@@ -79,15 +79,18 @@ async def refresh_access_token(session: AsyncSession, refresh_token_str: str):
         expires_at = expires_at.replace(tzinfo=UTC)
 
     if expires_at <= datetime.now(UTC):
-        raise InvalidRefreshTokenException()
+        raise UnauthorizedError(detail="Invalid refresh token")
 
     if refresh_token.revoked_at is not None:
-        raise InvalidRefreshTokenException()
+        raise UnauthorizedError(detail="Invalid refresh token")
 
     user = await user_services.get_user_by_id(session, refresh_token.user_id)
 
-    if user is None or user.deleted_at is not None:
-        raise InvalidRefreshTokenException()
+    if user is None:
+        raise UnauthorizedError(detail="Invalid refresh token")
+
+    if user.deleted_at is not None:
+        raise BadRequestError(detail="Inactive user")
 
     return create_access_token({"sub": user.email})
 

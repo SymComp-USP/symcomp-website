@@ -263,7 +263,7 @@ async def test_me_with_token_without_sub_returns_401(
 
 
 @pytest.mark.asyncio
-async def test_me_for_deleted_user_returns_401(
+async def test_me_for_deleted_user_returns_400(
     db_client: AsyncClient, db_session, user_factory
 ):
     user = await user_factory(email="me-deleted@example.com")
@@ -277,4 +277,4 @@ async def test_me_for_deleted_user_returns_401(
         headers={"Authorization": f"Bearer {access_token}"},
     )
 
-    assert response.status_code == 401
+    assert response.status_code == 400

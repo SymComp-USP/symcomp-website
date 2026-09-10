@@ -6,13 +6,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth import services
 from app.auth.dependencies import get_current_active_user
-from app.auth.schemas import (
-    InvalidPasswordException,
-    InvalidRefreshTokenException,
-    Token,
-)
+from app.auth.schemas import Token
 from app.core.config import Settings, get_settings
 from app.core.database import get_session
+from app.core.exceptions.app_errors import UnauthorizedError
 from app.users.models import User
 
 router = APIRouter(tags=["auth"])
@@ -30,7 +27,7 @@ async def login_with_password(
     )
 
     if user is None:
-        raise InvalidPasswordException()
+        raise UnauthorizedError(detail="Invalid username or password")
 
     access_token = services.create_access_token(data={"sub": user.email})
     refresh_token_str = await services.create_refresh_token(db_session, user.id)
@@ -61,7 +58,7 @@ async def refresh_token(
     token_str = request.cookies.get("refresh_token")
 
     if not token_str:
-        raise InvalidRefreshTokenException()
+        raise UnauthorizedError(detail="Invalid refresh token")
 
     new_access_token = await services.refresh_access_token(db_session, token_str)
 

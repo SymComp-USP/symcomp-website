@@ -2,7 +2,6 @@ from datetime import UTC, datetime
 
 import jwt
 import pytest
-from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -10,6 +9,7 @@ from app.auth import services as auth_services
 from app.auth.models import RefreshToken
 from app.auth.security import hash_token
 from app.core.config import Settings
+from app.core.exceptions.app_errors import AppError
 
 # ===========================================================================
 # helpers
@@ -122,7 +122,7 @@ async def test_refresh_access_token_returns_new_access_token(
 
 @pytest.mark.asyncio
 async def test_refresh_access_token_rejects_unknown_token(db_session: AsyncSession):
-    with pytest.raises(HTTPException, match="Invalid refresh token"):
+    with pytest.raises(AppError, match="Invalid refresh token"):
         await auth_services.refresh_access_token(db_session, "does-not-exist")
 
 
@@ -133,7 +133,7 @@ async def test_refresh_access_token_rejects_expired_token(
     user = await user_factory(email="refresh-svc-exp@example.com")
     token = await expired_refresh_token_factory(user.id)
 
-    with pytest.raises(HTTPException, match="Invalid refresh token"):
+    with pytest.raises(AppError, match="Invalid refresh token"):
         await auth_services.refresh_access_token(db_session, token)
 
 
@@ -144,7 +144,7 @@ async def test_refresh_access_token_rejects_revoked_token(
     user = await user_factory(email="refresh-svc-rev@example.com")
     token = await revoked_refresh_token_factory(user.id)
 
-    with pytest.raises(HTTPException, match="Invalid refresh token"):
+    with pytest.raises(AppError, match="Invalid refresh token"):
         await auth_services.refresh_access_token(db_session, token)
 
 
@@ -158,7 +158,7 @@ async def test_refresh_access_token_rejects_deleted_user(
     user.deleted_at = datetime.now(UTC)
     await db_session.flush()
 
-    with pytest.raises(HTTPException, match="Invalid refresh token"):
+    with pytest.raises(AppError, match="Invalid refresh token"):
         await auth_services.refresh_access_token(db_session, token)
 
 
@@ -176,7 +176,7 @@ async def test_revoke_refresh_token_marks_as_revoked(
 
     await auth_services.revoke_refresh_token(db_session, token)
 
-    with pytest.raises(HTTPException):
+    with pytest.raises(AppError):
         await auth_services.refresh_access_token(db_session, token)
 
 
