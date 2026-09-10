@@ -2,27 +2,12 @@ import asyncio
 import uuid
 from datetime import UTC, datetime
 
-from pwdlib import PasswordHash
-from pwdlib.hashers.argon2 import Argon2Hasher
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.auth.security import hash_password
 from app.users.models import User
 from app.users.schemas import UserCreate, UserUpdate
-
-# --- funções de autenticação ---
-# Inicialização da biblioteca de hash
-ph = PasswordHash((Argon2Hasher(),))
-
-
-# Função de criar hash
-def hash_password(password: str) -> str:
-    return ph.hash(password)
-
-
-# Função de verificação da hash
-def verify_password(plain_password, hashed_password):
-    return ph.verify(plain_password, hashed_password)
 
 
 # --- classes de erro ---
