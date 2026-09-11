@@ -6,6 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 import app.users.services as user_services
 from app.auth.models import RefreshToken
+from app.auth.schemas import RotationResult
 from app.auth.scopes import Scope
 from app.auth.security import (
     create_jwt_token,
@@ -90,51 +91,6 @@ async def create_refresh_token(
     return token_str
 
 
-async def refresh_access_token(
-    session: AsyncSession,
-    refresh_token_str: str,
-    requested_scopes: list[str] | None = None,
-):
-    hashed = hash_token(refresh_token_str)
-
-    refresh_token = (
-        await session.execute(
-            select(RefreshToken).where(RefreshToken.token_hash == hashed)
-        )
-    ).scalar_one_or_none()
-
-    if refresh_token is None:
-        raise UnauthorizedError(detail="Invalid refresh token")
-
-    expires_at = refresh_token.expires_at
-
-    if expires_at.tzinfo is None:
-        expires_at = expires_at.replace(tzinfo=UTC)
-
-    if expires_at <= datetime.now(UTC):
-        raise UnauthorizedError(detail="Invalid refresh token")
-
-    if refresh_token.revoked_at is not None:
-        raise UnauthorizedError(detail="Invalid refresh token")
-
-    user = await user_services.get_user_by_id(session, refresh_token.user_id)
-
-    if user is None or user.deleted_at is not None:
-        raise UnauthorizedError(detail="Invalid refresh token")
-
-    # Scopes podem ser removidos a partir do refresh token; nunca adicionados.
-    original_scopes = refresh_token.scopes.split(" ") if refresh_token.scopes else []
-
-    if requested_scopes is not None:
-        if not set(requested_scopes).issubset(set(original_scopes)):
-            raise UnauthorizedError(detail="Invalid scopes for refresh")
-        scopes = requested_scopes
-    else:
-        scopes = original_scopes
-
-    return create_access_token(user.id, scopes)
-
-
 async def revoke_refresh_token(session: AsyncSession, refresh_token_str: str):
     hashed = hash_token(refresh_token_str)
 
@@ -164,3 +120,69 @@ def build_refresh_token_cookie(refresh_token: str) -> dict:
         "samesite": "lax",
         "max_age": REFRESH_EXPIRE_TIME_SECONDS,
     }
+
+
+async def refresh_access_token(
+    session: AsyncSession,
+    old_token_str: str,
+    requested_scopes: list[str] | None = None,
+):
+    """Cria um novo access token e rotaciona o refresh token (revoga o atual e cria um novo)"""
+
+    old = await _validate_old_refresh_token(session, old_token_str)
+    scopes = _narrow_scopes(old.scopes.split(" "), requested_scopes)
+
+    old.revoked_at = datetime.now(UTC)
+    await session.flush()
+
+    new_token_str = await create_refresh_token(session, old.user_id, scopes)
+    access_token = create_access_token(old.user_id, scopes)
+
+    return RotationResult(
+        access_token=access_token,
+        refresh_token=new_token_str,
+    )
+
+
+async def _validate_old_refresh_token(session: AsyncSession, old_refresh_token: str):
+    hashed = hash_token(old_refresh_token)
+
+    refresh_token = (
+        await session.execute(
+            select(RefreshToken).where(RefreshToken.token_hash == hashed)
+        )
+    ).scalar_one_or_none()
+
+    if refresh_token is None:
+        raise UnauthorizedError(detail="Invalid refresh token")
+
+    expires_at = refresh_token.expires_at
+
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=UTC)
+
+    if expires_at <= datetime.now(UTC):
+        raise UnauthorizedError(detail="Invalid refresh token")
+
+    if refresh_token.revoked_at is not None:
+        raise UnauthorizedError(detail="Invalid refresh token")
+
+    user = await user_services.get_user_by_id(session, refresh_token.user_id)
+
+    if user is None or user.deleted_at is not None:
+        raise UnauthorizedError(detail="Invalid refresh token")
+
+    return refresh_token
+
+
+def _narrow_scopes(old_scopes: list[str], requested_scopes: list[str]):
+    # Scopes podem ser removidos a partir do refresh token; nunca adicionados.
+
+    if requested_scopes is not None:
+        if not set(requested_scopes).issubset(set(old_scopes)):
+            raise UnauthorizedError(detail="Invalid scopes for refresh")
+        scopes = requested_scopes
+    else:
+        scopes = old_scopes
+
+    return scopes

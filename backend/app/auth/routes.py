@@ -62,12 +62,14 @@ async def get_my_info(
 @router.post("/refresh")
 async def refresh_token(
     request: Request,
+    response: Response,
     db_session: Annotated[AsyncSession, Depends(get_session)],
     requested_scopes_body: RequestedScopesBody | None = None,
 ):
-    token_str = request.cookies.get("refresh_token")
+    """Cria um novo access token e rotaciona o refresh token (revoga o atual e cria um novo)"""
 
-    if not token_str:
+    old_token_str = request.cookies.get("refresh_token")
+    if not old_token_str:
         raise UnauthorizedError(detail="Invalid refresh token")
 
     scopes = (
@@ -76,11 +78,11 @@ async def refresh_token(
         else None
     )
 
-    new_access_token = await services.refresh_access_token(
-        db_session, token_str, scopes
-    )
+    result = await services.refresh_access_token(db_session, old_token_str, scopes)
 
-    return Token(access_token=new_access_token, token_type="bearer")
+    response.set_cookie(**services.build_refresh_token_cookie(result.refresh_token))
+
+    return Token(access_token=result.access_token, token_type="bearer")
 
 
 @router.post("/logout", status_code=status.HTTP_204_NO_CONTENT)

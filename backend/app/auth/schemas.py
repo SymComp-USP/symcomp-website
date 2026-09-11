@@ -16,3 +16,8 @@ class TokenData(BaseModel):
 
 class RequestedScopesBody(BaseModel):
     requested_scopes: list[str] | None = None
+
+
+class RotationResult(BaseModel):
+    access_token: str
+    refresh_token: str
