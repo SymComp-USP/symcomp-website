@@ -15,47 +15,72 @@ class AppError(Exception):
         detail: Explanation specific to this occurrence of the error.
     """
 
-    def __init__(self, status_code: int, type: str, title: str, detail: str):
+    def __init__(
+        self,
+        status_code: int,
+        type: str,
+        title: str,
+        detail: str,
+        headers: dict[str, str] | None = None,
+    ):
         self.status_code = status_code
         self.type = type
         self.title = title
         self.detail = detail
+        self.headers = headers
         super().__init__(detail)
 
 
 class BadRequestError(AppError):
-    def __init__(self, detail: str):
+    def __init__(self, detail: str, headers: dict[str, str] | None = None):
         super().__init__(
-            status_code=400, type="bad_request", title="Bad request", detail=detail
+            status_code=400,
+            type="bad_request",
+            title="Bad request",
+            detail=detail,
+            headers=headers,
         )
 
 
 class UnauthorizedError(AppError):
-    def __init__(self, detail: str):
+    def __init__(self, detail: str, headers: dict[str, str] | None = None):
         super().__init__(
-            status_code=401, type="unauthorized", title="Unauthorized", detail=detail
+            status_code=401,
+            type="unauthorized",
+            title="Unauthorized",
+            detail=detail,
+            headers=headers,
         )
 
 
 class ForbiddenError(AppError):
-    def __init__(self, detail: str):
+    def __init__(self, detail: str, headers: dict[str, str] | None = None):
         super().__init__(
-            status_code=403, type="forbidden", title="Forbidden", detail=detail
+            status_code=403,
+            type="forbidden",
+            title="Forbidden",
+            detail=detail,
+            headers=headers,
         )
 
 
 class NotFoundError(AppError):
-    def __init__(self, detail: str):
+    def __init__(self, detail: str, headers: dict[str, str] | None = None):
         super().__init__(
-            status_code=404, type="not_found", title="Resource not found", detail=detail
+            status_code=404,
+            type="not_found",
+            title="Resource not found",
+            detail=detail,
+            headers=headers,
         )
 
 
 class InternalServerError(AppError):
-    def __init__(self, detail: str):
+    def __init__(self, detail: str, headers: dict[str, str] | None = None):
         super().__init__(
             status_code=500,
             type="internal_server_error",
             title="Internal server error",
             detail=detail,
+            headers=headers,
         )
