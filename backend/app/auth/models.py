@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlalchemy import DateTime, ForeignKey, String, func
 from sqlalchemy.orm import Mapped, mapped_column
 
+from app.auth.scopes import DEFAULT_SCOPES
 from app.core.mixins import UUIDPKMixin
 from app.core.models import Base
 
@@ -20,6 +21,12 @@ class RefreshToken(Base, UUIDPKMixin):
         String(64),
         nullable=False,
         unique=True,
+    )
+
+    scopes: Mapped[str] = mapped_column(
+        String(255),
+        nullable=False,
+        default=" ".join(DEFAULT_SCOPES),
     )
 
     created_at: Mapped[datetime] = mapped_column(

@@ -70,6 +70,18 @@ class Settings(BaseSettings):
         env_file=".env", validate_default=True, case_sensitive=False
     )
 
+    issuer: AnyHttpUrl = Field(
+        default="http://localhost:8000",
+        title="Issuer",
+        description="URL que identifica este servidor (claim 'iss' do id_token)",
+    )
+
+    audience: str = Field(
+        default="symcomp-frontend",
+        title="Audience (client_id)",
+        description="Identificador do cliente que consome o id_token (claim 'aud')",
+    )
+
 
 @lru_cache
 def get_settings() -> Settings:
