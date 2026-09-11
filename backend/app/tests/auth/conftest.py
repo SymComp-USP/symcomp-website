@@ -108,3 +108,54 @@ def access_token_wrong_signature_factory(test_settings: Settings):
         )
 
     return _make
+
+
+@pytest.fixture
+def refresh_token_factory(db_session: AsyncSession):
+    """Cria um refresh token comum via service (não expirado, não revogado)."""
+    from app.auth import services as auth_services
+    from app.auth.scopes import DEFAULT_SCOPES
+
+    async def _make(user_id, scopes: list[str] | None = None):
+        return await auth_services.create_refresh_token(
+            db_session, user_id, scopes or list(DEFAULT_SCOPES)
+        )
+
+    return _make
+
+
+# tests/unit/auth/conftest.py
+
+
+@pytest.fixture
+def refresh_token_repo(db_session: AsyncSession):
+    """Acesso ao banco para inspecionar refresh tokens nos testes."""
+    from sqlalchemy import select
+
+    from app.auth.models import RefreshToken
+    from app.auth.security import hash_token
+
+    class Repo:
+        async def get_by_plaintext(self, token_str: str) -> RefreshToken | None:
+            return (
+                await db_session.execute(
+                    select(RefreshToken).where(
+                        RefreshToken.token_hash == hash_token(token_str)
+                    )
+                )
+            ).scalar_one_or_none()
+
+        async def all_for_user(self, user_id) -> list[RefreshToken]:
+            return (
+                (
+                    await db_session.execute(
+                        select(RefreshToken)
+                        .where(RefreshToken.user_id == user_id)
+                        .order_by(RefreshToken.created_at)
+                    )
+                )
+                .scalars()
+                .all()
+            )
+
+    return Repo()

@@ -229,7 +229,7 @@ async def test_refresh_access_token_returns_new_access_token(
 
     new_access = await auth_services.refresh_access_token(db_session, token)
 
-    payload = _decode_access(new_access, jwt_settings)
+    payload = _decode_access(new_access.access_token, jwt_settings)
     assert payload["sub"] == str(user.id)
     assert set(payload["scopes"].split(" ")) == set(DEFAULT_SCOPES)
 
@@ -291,7 +291,7 @@ async def test_refresh_access_token_narrowing_is_allowed(
         db_session, token, requested_scopes=[Scope.OPENID, Scope.PROFILE]
     )
 
-    payload = _decode_access(new_access, jwt_settings)
+    payload = _decode_access(new_access.access_token, jwt_settings)
     assert set(payload["scopes"].split(" ")) == {"openid", "profile"}
 
 
@@ -323,7 +323,7 @@ async def test_refresh_access_token_uses_original_scopes_when_not_specified(
 
     new_access = await auth_services.refresh_access_token(db_session, token)
 
-    payload = _decode_access(new_access, jwt_settings)
+    payload = _decode_access(new_access.access_token, jwt_settings)
     assert set(payload["scopes"].split(" ")) == {"openid", "email"}
 
 
