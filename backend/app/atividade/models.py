@@ -1,12 +1,14 @@
-from sqlalchemy import String, DateTime, UUIDType, ForeignKey, LargeBinary
-from sqlalchemy.orm import Mapped, mapped_column, SQLEnum, relationship
+from datetime import UTC, datetime
 from enum import Enum
-from core.models import Base
-from datetime import datetime, timezone
 from uuid import UUID, uuid4
-from app.core.config import settings
+
 import jwt
+from core.models import Base
 from presenca import Presenca
+from sqlalchemy import DateTime, ForeignKey, LargeBinary, String, UUIDType
+from sqlalchemy.orm import Mapped, SQLEnum, mapped_column, relationship
+
+from app.core.config import settings
 
 
 class StatusAtividade(str, Enum):
@@ -58,7 +60,7 @@ class Atividade(Base):
         payload = {
             "uid": str(self.uid),
             "type": "qr_presence",
-            "iat": int(datetime.now(timezone.utc).timestamp()),
+            "iat": int(datetime.now(UTC).timestamp()),
         }
 
         token = jwt.encode(
