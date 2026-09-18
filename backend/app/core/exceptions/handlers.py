@@ -39,7 +39,9 @@ async def app_error_handler(request: Request, error: Exception):
     )
 
     return JSONResponse(
-        status_code=body.status, content=body.model_dump(exclude_none=True)
+        status_code=body.status,
+        content=body.model_dump(exclude_none=True),
+        headers=error.headers,
     )
 
 

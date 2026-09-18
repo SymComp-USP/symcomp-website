@@ -1,3 +1,4 @@
+# ruff: noqa I001
 import asyncio
 from logging.config import fileConfig
 
@@ -11,7 +12,8 @@ from app.core.models import Base
 
 # Import model modules so their tables are registered on Base.metadata
 # and picked up by `alembic revision --autogenerate`.
-from app.users import models as user_models  # noqa: F401
+from app.auth import models as auth_models  # noqa: F401 noqa
+from app.users import models as user_models  # noqa: F401 noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
