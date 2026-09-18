@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, Request, Response, Security, status
+from fastapi import APIRouter, Cookie, Depends, Request, Response, Security, status
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -61,15 +61,14 @@ async def get_my_info(
 
 @router.post("/refresh")
 async def refresh_token(
-    request: Request,
     response: Response,
     db_session: Annotated[AsyncSession, Depends(get_session)],
     requested_scopes_body: RequestedScopesBody | None = None,
+    refresh_token: Annotated[str | None, Cookie()] = None,
 ):
     """Cria um novo access token e rotaciona o refresh token (revoga o atual e cria um novo)"""
 
-    old_token_str = request.cookies.get("refresh_token")
-    if not old_token_str:
+    if not refresh_token:
         raise UnauthorizedError(detail="Invalid refresh token")
 
     scopes = (
@@ -78,7 +77,7 @@ async def refresh_token(
         else None
     )
 
-    result = await services.refresh_access_token(db_session, old_token_str, scopes)
+    result = await services.refresh_access_token(db_session, refresh_token, scopes)
 
     response.set_cookie(**services.build_refresh_token_cookie(result.refresh_token))
 
