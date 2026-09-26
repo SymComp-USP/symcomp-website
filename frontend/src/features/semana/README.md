@@ -5,6 +5,21 @@ The Semana website is themed at the feature boundary. Shared components under
 colors, while components in this directory supply the event's distinctive
 shape, typography, and decoration.
 
+## Preview period
+
+`/semana` is intentionally a plain, standalone preview placeholder. The full
+event pages remain implemented in the `(site)` route group, which keeps their
+public URLs unchanged while applying `SemanaShell` only to those pages. During
+the preview period, their shared layout redirects every event route back to the
+preview. Set `SEMANA_PREVIEW_MODE` to `false` in `config.ts` when those routes
+are production-ready, then replace the preview page with the event entry point.
+
+The 2025 preview can be used as visual reference from commit `4ed8a52`. It used
+`logo-colorida-symcomp.svg`, `barra-carregamento.svg`, `2025.svg`, `ime-usp.svg`,
+and sponsor logos from `public/sc-2025/`. Commit `5c79f87` later added its pixel
+particle background. Recover or replace only the assets selected for the new
+design; the old sponsor list must not be copied into a new edition.
+
 ## Starting a new edition
 
 1. Choose the edition palette and update `.semana-theme` in
