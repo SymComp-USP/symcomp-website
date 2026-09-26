@@ -63,6 +63,30 @@
     --chart-5: 340 75% 55%;
   }
 
+  .semana-theme {
+    --background: 179 73% 29%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 244 75% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 244 75% 16%;
+    --primary: 45 100% 52%;
+    --primary-foreground: 244 75% 16%;
+    --secondary: 285 44% 53%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 221 100% 92%;
+    --muted-foreground: 244 30% 35%;
+    --accent: 285 44% 53%;
+    --accent-foreground: 0 0% 100%;
+    --border: 244 75% 16%;
+    --input: 244 75% 16%;
+    --ring: 45 100% 52%;
+    --semana-tertiary: 17 97% 51%;
+    --semana-contrast: 244 75% 16%;
+    --semana-accent: 221 100% 92%;
+    --radius: 0.125rem;
+  }
+
   body {
     font-family: 'DM Sans', 'Montserrat', 'Courier Prime', sans-serif;
     background-color: hsl(var(--background));

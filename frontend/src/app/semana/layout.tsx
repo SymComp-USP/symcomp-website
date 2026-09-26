@@ -11,5 +11,5 @@ export const metadata: Metadata = {
 }
 
 export default function SemanaLayout({ children }: SemanaLayoutProps) {
-  return <>{children}</>
+  return children
 }
