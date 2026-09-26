@@ -1,15 +1,18 @@
 /** @type {import("eslint").Linter.Config} */
 module.exports = {
-  extends: [
-    'next/core-web-vitals',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:prettier/recommended',
-  ],
+  root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['simple-import-sort'],
+  plugins: ['@typescript-eslint', 'react-hooks'],
+  ignorePatterns: ['.next/', 'next-env.d.ts'],
   rules: {
-    '@typescript-eslint/no-explicit-any': 'error',
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+    ],
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    'no-unreachable': 'error',
+    'no-constant-condition': ['error', { checkLoops: false }],
+    'no-duplicate-imports': 'error',
   },
 }
