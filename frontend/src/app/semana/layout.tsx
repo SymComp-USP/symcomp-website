@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 
+import { SemanaShell } from '@/features/semana/components/semana-shell'
+
 interface SemanaLayoutProps {
   children: ReactNode
 }
@@ -11,5 +13,5 @@ export const metadata: Metadata = {
 }
 
 export default function SemanaLayout({ children }: SemanaLayoutProps) {
-  return <>{children}</>
+  return <SemanaShell>{children}</SemanaShell>
 }
