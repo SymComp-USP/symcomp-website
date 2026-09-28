@@ -1,29 +1,37 @@
-# SymComp Project
+# SymComp
 
-Welcome to the SymComp website repository!
+Next.js frontend (`frontend/`), FastAPI backend (`backend/`), and PostgreSQL.
+`symcomp-server/` is archived Django reference code.
 
-First of all, copy .env.example to .env file
-
-Next, to run it locally, use
-
-```bash
-docker compose up --build
-```
-
-## Docs
-
-To find the backend documentation: `localhost:8000/docs`.
-
-## Linter
-
-To run the linter inside the Docker container:
+## Local development
 
 ```bash
-docker compose exec backend ruff check .
-``` 
-
-To automatically fix issues when possible:
-
+docker compose -f docker-compose.dev.yml up --build
 ```
-docker compose exec backend ruff check . --fix
+
+Open http://localhost:3000. API documentation is at http://localhost:8000/docs.
+Development uses its own Compose project and database volume; it requires no
+`.env` file. Existing volumes from the old default development stack are not
+migrated automatically.
+
+```bash
+docker compose -f docker-compose.dev.yml exec backend ruff check .
+docker compose -f docker-compose.dev.yml exec backend ruff format --check .
+docker compose -f docker-compose.dev.yml exec backend pytest
+docker compose -f docker-compose.dev.yml exec frontend pnpm run lint
+docker compose -f docker-compose.dev.yml exec frontend pnpm run format
+```
+
+Backend tests use the development database; use a disposable local database for
+integration tests. CI provides a separate PostgreSQL service. Do not run tests
+against production. `pnpm test` modifies formatting; use the explicit checks above.
+
+## Production
+
+The default Compose file runs Caddy, Next.js, FastAPI, and PostgreSQL on one VM.
+Follow [the deployment guide](docs/deployment.md) to configure DNS, credentials,
+backups, and the firewall before running:
+
+```bash
+docker compose up -d --build
 ```

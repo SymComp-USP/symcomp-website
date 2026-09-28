@@ -1,0 +1,51 @@
+# Standalone development stack: docker compose -f docker-compose.dev.yml up --build
+name: symcomp-dev
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: symcomp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres", "-d", "symcomp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  backend:
+    build:
+      context: ./backend
+      target: development
+    environment:
+      APP_ENV: dev
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/symcomp
+      SECRET_KEY: local-development-only-do-not-use-in-production
+      ISSUER: http://localhost:8000
+    entrypoint: ["/bin/sh", "/app/entrypoint.sh"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/.venv
+    ports:
+      - "127.0.0.1:8000:8000"
+  frontend:
+    build:
+      context: ./frontend
+      target: development
+    environment:
+      INTERNAL_API_URL: http://backend:8000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "127.0.0.1:3000:3000"
+volumes:
+  postgres_data:
