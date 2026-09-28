@@ -8,3 +8,7 @@ __pycache__/
 *.pyc
 .pytest_cache/
 .ruff_cache/
+# Never copy credentials into images
+.env
+.env.*
+.git/

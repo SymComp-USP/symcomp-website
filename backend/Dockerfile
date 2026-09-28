@@ -13,7 +13,7 @@ WORKDIR /app
 # ==========================================
 FROM base AS builder
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.12.5 /uv /uvx /bin/
 
 COPY pyproject.toml uv.lock ./
 
@@ -37,7 +37,7 @@ EXPOSE 8000
 # ==========================================
 FROM runtime AS development
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+COPY --from=ghcr.io/astral-sh/uv:0.12.5 /uv /uvx /bin/
 
 RUN uv sync --frozen
 

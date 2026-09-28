@@ -1,5 +1,5 @@
 # --- Base Stage ---
-FROM node:24 AS base
+FROM node:24-bookworm-slim AS base
 WORKDIR /app
 
 RUN corepack enable && corepack prepare pnpm@11.3.0 --activate
@@ -26,23 +26,21 @@ COPY . .
 RUN pnpm build
 
 # --- Production Stage ---
-FROM node:24 AS production
+FROM node:24-bookworm-slim AS production
 WORKDIR /app
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-RUN corepack enable && corepack prepare pnpm@11.3.0 --activate
+RUN groupadd --system --gid 1001 nodejs && useradd --system --uid 1001 --gid nodejs nextjs
 
-# Copie apenas os arquivos necessários
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
-COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
-COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Reinstale as dependências de produção
-RUN pnpm install --frozen-lockfile --prod --ignore-scripts
+USER nextjs
 
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["node", "server.js"]
