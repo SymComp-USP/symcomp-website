@@ -1,5 +1,6 @@
 import uuid
 from datetime import UTC, datetime
+from shutil import rmtree
 
 import pytest
 import pytest_asyncio
@@ -131,6 +132,13 @@ async def username_catalog(db_session: AsyncSession) -> list[Username]:
     return usernames
 
 
+@pytest.fixture(autouse=True)
+def cleanup_generated_challenge_images():
+    settings = get_settings()
+    yield
+    rmtree(settings.media_root / "challenges", ignore_errors=True)
+
+
 @pytest.fixture
 def media_root(tmp_path, monkeypatch):
     """Redireciona media_root para um tmp_path durante o teste.
@@ -140,4 +148,7 @@ def media_root(tmp_path, monkeypatch):
     """
     settings = get_settings()
     monkeypatch.setattr(settings, "media_root", tmp_path)
-    return tmp_path
+    try:
+        yield tmp_path
+    finally:
+        rmtree(tmp_path, ignore_errors=True)
