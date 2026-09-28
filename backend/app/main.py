@@ -4,6 +4,8 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from app.auth.routes import router as auth_router
+from app.challenges.admin_routes import router as challenge_admin_router
+from app.challenges.routes import router as challenge_router
 from app.core import config, database
 from app.core.exceptions.app_errors import AppError
 from app.core.exceptions.handlers import app_error_handler, exception_handler
@@ -33,6 +35,8 @@ app = FastAPI(title="SymComp API", version="0.1.0", lifespan=lifespan)
 app.include_router(health_router, prefix="/api/v1")
 app.include_router(auth_router, prefix="/api/v1/auth")
 app.include_router(user_router, prefix="/api/v1/user")
+app.include_router(challenge_router, prefix="/api/v1/challenge")
+app.include_router(challenge_admin_router, prefix="/api/v1/admin/challenge")
 
 # ---------------------------------------------------------------------------
 # Arquivos estáticos (imagens de challenges)
