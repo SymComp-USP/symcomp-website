@@ -1,0 +1,3249 @@
+nickname,first_mome_full_name,last_mome_full_name
+MargaretMaryJane,Margaret Hamilton,Mary Jane Irwin
+NamiKoller,Nami Kobayashi,Daphne Koller
+MargaretNinaSumiko,Margaret Hamilton,Nina Sumiko Tomita Hirata
+BorgRenata,Anita Borg,Renata Wassermann
+RenataKelly,Renata Wassermann,Kelly Braghetto
+NunesdeBarrosAda,Leliane Nunes de Barros,Ada Lovelace
+WakabayashiPerlman,Yoshiko Wakabayashi,Radia Perlman
+ConwayKoller,Lynn Conway,Daphne Koller
+JenniferLi,Jennifer Klawe,Fei-Fei Li
+KollerGoldwasser,Daphne Koller,Shafi Goldwasser
+HopperMarissa,Grace Hopper,Marissa Mayer
+NinaSumikoGoldwasser,Nina Sumiko Tomita Hirata,Shafi Goldwasser
+RadiaBorg,Radia Perlman,Anita Borg
+GoldwasserLiskov,Shafi Goldwasser,Barbara Liskov
+LiAnaCristina,Fei-Fei Li,Ana Cristina Viera de Melo
+MargaretAnita,Margaret Hamilton,Anita Borg
+YoshikoFrances,Yoshiko Wakabayashi,Frances Allen
+EasleyRadia,Annie Easley,Radia Perlman
+AllenLiskov,Frances Allen,Barbara Liskov
+EasleyAnita,Annie Easley,Anita Borg
+TomitaHirataKobayashi,Nina Sumiko Tomita Hirata,Nami Kobayashi
+PerlmanGoldwasser,Radia Perlman,Shafi Goldwasser
+FrancesBarbara,Frances Allen,Barbara Liskov
+DorothyLeliane,Dorothy Vaughan,Leliane Nunes de Barros
+GebruLeliane,Timnit Gebru,Leliane Nunes de Barros
+AsakawaBorg,Chieko Asakawa,Anita Borg
+AnnieFernandes,Annie Easley,Cristina Fernandes
+KlaweKobayashi,Jennifer Klawe,Nami Kobayashi
+AllenAsakawa,Frances Allen,Chieko Asakawa
+ChiekoGrace,Chieko Asakawa,Grace Hopper
+ChiekoLovelace,Chieko Asakawa,Ada Lovelace
+BarbaraLeliane,Barbara Liskov,Leliane Nunes de Barros
+LovelaceSaujani,Ada Lovelace,Reshma Saujani
+MaryJaneVaughan,Mary Jane Irwin,Dorothy Vaughan
+FrancesBorg,Frances Allen,Anita Borg
+WakabayashiSieckenius,Yoshiko Wakabayashi,Mary Sieckenius
+GebruGrace,Timnit Gebru,Grace Hopper
+TomitaHirataAnnie,Nina Sumiko Tomita Hirata,Annie Easley
+AllenLeliane,Frances Allen,Leliane Nunes de Barros
+MaryIrwin,Mary Sieckenius,Mary Jane Irwin
+EasleyGebru,Annie Easley,Timnit Gebru
+ConwayMary,Lynn Conway,Mary Sieckenius
+ShafiAsakawa,Shafi Goldwasser,Chieko Asakawa
+AnaCristinaHopper,Ana Cristina Viera de Melo,Grace Hopper
+LelianeTomitaHirata,Leliane Nunes de Barros,Nina Sumiko Tomita Hirata
+AsakawaAnita,Chieko Asakawa,Anita Borg
+FernandesSisterMaryKenneth,Cristina Fernandes,Sister Mary Kenneth Keller
+GraceAllen,Grace Hopper,Frances Allen
+KobayashiAnnie,Nami Kobayashi,Annie Easley
+DaphneBorg,Daphne Koller,Anita Borg
+AnaCristinaRenata,Ana Cristina Viera de Melo,Renata Wassermann
+ReshmaKlawe,Reshma Saujani,Jennifer Klawe
+KollerAsakawa,Daphne Koller,Chieko Asakawa
+GebruFernandes,Timnit Gebru,Cristina Fernandes
+FrancesPerlman,Frances Allen,Radia Perlman
+PerlmanAnita,Radia Perlman,Anita Borg
+DorothyKeller,Dorothy Vaughan,Sister Mary Kenneth Keller
+HopperVieradeMelo,Grace Hopper,Ana Cristina Viera de Melo
+LiskovChieko,Barbara Liskov,Chieko Asakawa
+GraceGoldwasser,Grace Hopper,Shafi Goldwasser
+NunesdeBarrosAllen,Leliane Nunes de Barros,Frances Allen
+KellyMargaret,Kelly Braghetto,Margaret Hamilton
+KellyNami,Kelly Braghetto,Nami Kobayashi
+FeiFeiKelly,Fei-Fei Li,Kelly Braghetto
+TomitaHirataMaryJane,Nina Sumiko Tomita Hirata,Mary Jane Irwin
+GoldwasserSisterMaryKenneth,Shafi Goldwasser,Sister Mary Kenneth Keller
+MaryAnnie,Mary Sieckenius,Annie Easley
+IrwinVieradeMelo,Mary Jane Irwin,Ana Cristina Viera de Melo
+WassermannMaryJane,Renata Wassermann,Mary Jane Irwin
+KlaweMarissa,Jennifer Klawe,Marissa Mayer
+NunesdeBarrosLynn,Leliane Nunes de Barros,Lynn Conway
+SaujaniTimnit,Reshma Saujani,Timnit Gebru
+CristinaAnaCristina,Cristina Fernandes,Ana Cristina Viera de Melo
+DorothyGoldwasser,Dorothy Vaughan,Shafi Goldwasser
+BorgAnnie,Anita Borg,Annie Easley
+PerlmanDorothy,Radia Perlman,Dorothy Vaughan
+KellerVaughan,Sister Mary Kenneth Keller,Dorothy Vaughan
+WassermannKobayashi,Renata Wassermann,Nami Kobayashi
+HamiltonFeiFei,Margaret Hamilton,Fei-Fei Li
+MayerSisterMaryKenneth,Marissa Mayer,Sister Mary Kenneth Keller
+CristinaKeller,Cristina Fernandes,Sister Mary Kenneth Keller
+KellyKobayashi,Kelly Braghetto,Nami Kobayashi
+ShafiLiskov,Shafi Goldwasser,Barbara Liskov
+LiVieradeMelo,Fei-Fei Li,Ana Cristina Viera de Melo
+FeiFeiAnita,Fei-Fei Li,Anita Borg
+GoldwasserGebru,Shafi Goldwasser,Timnit Gebru
+AnnieMargaret,Annie Easley,Margaret Hamilton
+SieckeniusBorg,Mary Sieckenius,Anita Borg
+NinaSumikoLeliane,Nina Sumiko Tomita Hirata,Leliane Nunes de Barros
+LovelaceAnnie,Ada Lovelace,Annie Easley
+LiskovMary,Barbara Liskov,Mary Sieckenius
+LiRenata,Fei-Fei Li,Renata Wassermann
+AsakawaKoller,Chieko Asakawa,Daphne Koller
+EasleyLeliane,Annie Easley,Leliane Nunes de Barros
+BraghettoShafi,Kelly Braghetto,Shafi Goldwasser
+MargaretVaughan,Margaret Hamilton,Dorothy Vaughan
+BorgDorothy,Anita Borg,Dorothy Vaughan
+BorgJennifer,Anita Borg,Jennifer Klawe
+FrancesReshma,Frances Allen,Reshma Saujani
+TimnitReshma,Timnit Gebru,Reshma Saujani
+DorothyGebru,Dorothy Vaughan,Timnit Gebru
+MargaretSaujani,Margaret Hamilton,Reshma Saujani
+MayerSieckenius,Marissa Mayer,Mary Sieckenius
+SaujaniBraghetto,Reshma Saujani,Kelly Braghetto
+FeiFeiDorothy,Fei-Fei Li,Dorothy Vaughan
+ChiekoSisterMaryKenneth,Chieko Asakawa,Sister Mary Kenneth Keller
+AsakawaRadia,Chieko Asakawa,Radia Perlman
+GoldwasserTomitaHirata,Shafi Goldwasser,Nina Sumiko Tomita Hirata
+HamiltonFernandes,Margaret Hamilton,Cristina Fernandes
+HamiltonLi,Margaret Hamilton,Fei-Fei Li
+LynnYoshiko,Lynn Conway,Yoshiko Wakabayashi
+CristinaSisterMaryKenneth,Cristina Fernandes,Sister Mary Kenneth Keller
+SaujaniIrwin,Reshma Saujani,Mary Jane Irwin
+KlaweGebru,Jennifer Klawe,Timnit Gebru
+FeiFeiAsakawa,Fei-Fei Li,Chieko Asakawa
+VieradeMeloHamilton,Ana Cristina Viera de Melo,Margaret Hamilton
+KellyRadia,Kelly Braghetto,Radia Perlman
+ChiekoKeller,Chieko Asakawa,Sister Mary Kenneth Keller
+TomitaHirataPerlman,Nina Sumiko Tomita Hirata,Radia Perlman
+HopperWassermann,Grace Hopper,Renata Wassermann
+SisterMaryKennethIrwin,Sister Mary Kenneth Keller,Mary Jane Irwin
+GraceBraghetto,Grace Hopper,Kelly Braghetto
+KobayashiMary,Nami Kobayashi,Mary Sieckenius
+ShafiLovelace,Shafi Goldwasser,Ada Lovelace
+SieckeniusWakabayashi,Mary Sieckenius,Yoshiko Wakabayashi
+VaughanJennifer,Dorothy Vaughan,Jennifer Klawe
+CristinaAda,Cristina Fernandes,Ada Lovelace
+WakabayashiSisterMaryKenneth,Yoshiko Wakabayashi,Sister Mary Kenneth Keller
+GebruNami,Timnit Gebru,Nami Kobayashi
+GebruMarissa,Timnit Gebru,Marissa Mayer
+FernandesMarissa,Cristina Fernandes,Marissa Mayer
+GraceKeller,Grace Hopper,Sister Mary Kenneth Keller
+ConwayKobayashi,Lynn Conway,Nami Kobayashi
+NinaSumikoConway,Nina Sumiko Tomita Hirata,Lynn Conway
+GraceWakabayashi,Grace Hopper,Yoshiko Wakabayashi
+ConwayTimnit,Lynn Conway,Timnit Gebru
+KellerBarbara,Sister Mary Kenneth Keller,Barbara Liskov
+TomitaHirataLi,Nina Sumiko Tomita Hirata,Fei-Fei Li
+TimnitCristina,Timnit Gebru,Cristina Fernandes
+RenataNami,Renata Wassermann,Nami Kobayashi
+GraceSaujani,Grace Hopper,Reshma Saujani
+ShafiYoshiko,Shafi Goldwasser,Yoshiko Wakabayashi
+MarissaAnaCristina,Marissa Mayer,Ana Cristina Viera de Melo
+AsakawaMaryJane,Chieko Asakawa,Mary Jane Irwin
+EasleyFeiFei,Annie Easley,Fei-Fei Li
+AllenMarissa,Frances Allen,Marissa Mayer
+LynnKelly,Lynn Conway,Kelly Braghetto
+ShafiSieckenius,Shafi Goldwasser,Mary Sieckenius
+NunesdeBarrosLiskov,Leliane Nunes de Barros,Barbara Liskov
+LovelaceKeller,Ada Lovelace,Sister Mary Kenneth Keller
+SisterMaryKennethAnnie,Sister Mary Kenneth Keller,Annie Easley
+MayerHamilton,Marissa Mayer,Margaret Hamilton
+LiDaphne,Fei-Fei Li,Daphne Koller
+RenataTomitaHirata,Renata Wassermann,Nina Sumiko Tomita Hirata
+GebruTomitaHirata,Timnit Gebru,Nina Sumiko Tomita Hirata
+EasleyMary,Annie Easley,Mary Sieckenius
+LovelaceNami,Ada Lovelace,Nami Kobayashi
+WassermannAnita,Renata Wassermann,Anita Borg
+MaryMarissa,Mary Sieckenius,Marissa Mayer
+GebruLovelace,Timnit Gebru,Ada Lovelace
+JenniferNinaSumiko,Jennifer Klawe,Nina Sumiko Tomita Hirata
+ConwayNami,Lynn Conway,Nami Kobayashi
+LynnGoldwasser,Lynn Conway,Shafi Goldwasser
+DorothyDaphne,Dorothy Vaughan,Daphne Koller
+MayerFrances,Marissa Mayer,Frances Allen
+YoshikoDaphne,Yoshiko Wakabayashi,Daphne Koller
+HopperKlawe,Grace Hopper,Jennifer Klawe
+VaughanPerlman,Dorothy Vaughan,Radia Perlman
+SisterMaryKennethReshma,Sister Mary Kenneth Keller,Reshma Saujani
+ConwayMayer,Lynn Conway,Marissa Mayer
+ShafiPerlman,Shafi Goldwasser,Radia Perlman
+HamiltonGebru,Margaret Hamilton,Timnit Gebru
+AnaCristinaLiskov,Ana Cristina Viera de Melo,Barbara Liskov
+WassermannIrwin,Renata Wassermann,Mary Jane Irwin
+ShafiMayer,Shafi Goldwasser,Marissa Mayer
+YoshikoReshma,Yoshiko Wakabayashi,Reshma Saujani
+VieradeMeloPerlman,Ana Cristina Viera de Melo,Radia Perlman
+FernandesGrace,Cristina Fernandes,Grace Hopper
+MarissaTimnit,Marissa Mayer,Timnit Gebru
+DorothyLynn,Dorothy Vaughan,Lynn Conway
+AdaHamilton,Ada Lovelace,Margaret Hamilton
+BraghettoAllen,Kelly Braghetto,Frances Allen
+TomitaHirataDorothy,Nina Sumiko Tomita Hirata,Dorothy Vaughan
+KobayashiFeiFei,Nami Kobayashi,Fei-Fei Li
+VieradeMeloLiskov,Ana Cristina Viera de Melo,Barbara Liskov
+KlaweAnaCristina,Jennifer Klawe,Ana Cristina Viera de Melo
+SieckeniusSisterMaryKenneth,Mary Sieckenius,Sister Mary Kenneth Keller
+MaryJaneKeller,Mary Jane Irwin,Sister Mary Kenneth Keller
+VieradeMeloAnnie,Ana Cristina Viera de Melo,Annie Easley
+RadiaRenata,Radia Perlman,Renata Wassermann
+AdaPerlman,Ada Lovelace,Radia Perlman
+MayerMary,Marissa Mayer,Mary Sieckenius
+FrancesIrwin,Frances Allen,Mary Jane Irwin
+ChiekoVaughan,Chieko Asakawa,Dorothy Vaughan
+AnaCristinaWassermann,Ana Cristina Viera de Melo,Renata Wassermann
+BarbaraVaughan,Barbara Liskov,Dorothy Vaughan
+TomitaHirataGrace,Nina Sumiko Tomita Hirata,Grace Hopper
+LelianePerlman,Leliane Nunes de Barros,Radia Perlman
+KobayashiLynn,Nami Kobayashi,Lynn Conway
+AllenReshma,Frances Allen,Reshma Saujani
+KollerMary,Daphne Koller,Mary Sieckenius
+SaujaniVaughan,Reshma Saujani,Dorothy Vaughan
+LiskovAllen,Barbara Liskov,Frances Allen
+NunesdeBarrosLi,Leliane Nunes de Barros,Fei-Fei Li
+KlaweMaryJane,Jennifer Klawe,Mary Jane Irwin
+DorothyKelly,Dorothy Vaughan,Kelly Braghetto
+NunesdeBarrosRadia,Leliane Nunes de Barros,Radia Perlman
+HopperRenata,Grace Hopper,Renata Wassermann
+WakabayashiLovelace,Yoshiko Wakabayashi,Ada Lovelace
+MaryJaneHamilton,Mary Jane Irwin,Margaret Hamilton
+WassermannNunesdeBarros,Renata Wassermann,Leliane Nunes de Barros
+TimnitLeliane,Timnit Gebru,Leliane Nunes de Barros
+KlaweWassermann,Jennifer Klawe,Renata Wassermann
+AnitaAnaCristina,Anita Borg,Ana Cristina Viera de Melo
+JenniferMarissa,Jennifer Klawe,Marissa Mayer
+AnaCristinaAnita,Ana Cristina Viera de Melo,Anita Borg
+EasleyMarissa,Annie Easley,Marissa Mayer
+NunesdeBarrosCristina,Leliane Nunes de Barros,Cristina Fernandes
+CristinaWassermann,Cristina Fernandes,Renata Wassermann
+RadiaAnaCristina,Radia Perlman,Ana Cristina Viera de Melo
+MarissaMargaret,Marissa Mayer,Margaret Hamilton
+AnnieNami,Annie Easley,Nami Kobayashi
+ReshmaMarissa,Reshma Saujani,Marissa Mayer
+TimnitSaujani,Timnit Gebru,Reshma Saujani
+MarissaRenata,Marissa Mayer,Renata Wassermann
+MarissaSieckenius,Marissa Mayer,Mary Sieckenius
+RenataEasley,Renata Wassermann,Annie Easley
+GraceNinaSumiko,Grace Hopper,Nina Sumiko Tomita Hirata
+HamiltonLynn,Margaret Hamilton,Lynn Conway
+WassermannGoldwasser,Renata Wassermann,Shafi Goldwasser
+NamiMary,Nami Kobayashi,Mary Sieckenius
+MaryJaneWakabayashi,Mary Jane Irwin,Yoshiko Wakabayashi
+LiskovLeliane,Barbara Liskov,Leliane Nunes de Barros
+NinaSumikoAnnie,Nina Sumiko Tomita Hirata,Annie Easley
+GebruAda,Timnit Gebru,Ada Lovelace
+SieckeniusSaujani,Mary Sieckenius,Reshma Saujani
+WassermannJennifer,Renata Wassermann,Jennifer Klawe
+WakabayashiNunesdeBarros,Yoshiko Wakabayashi,Leliane Nunes de Barros
+ReshmaLi,Reshma Saujani,Fei-Fei Li
+BorgVieradeMelo,Anita Borg,Ana Cristina Viera de Melo
+KollerRenata,Daphne Koller,Renata Wassermann
+WassermannAllen,Renata Wassermann,Frances Allen
+MaryJaneTimnit,Mary Jane Irwin,Timnit Gebru
+NinaSumikoAsakawa,Nina Sumiko Tomita Hirata,Chieko Asakawa
+MarissaSaujani,Marissa Mayer,Reshma Saujani
+NamiWakabayashi,Nami Kobayashi,Yoshiko Wakabayashi
+LynnHamilton,Lynn Conway,Margaret Hamilton
+ConwayShafi,Lynn Conway,Shafi Goldwasser
+NamiJennifer,Nami Kobayashi,Jennifer Klawe
+NinaSumikoFrances,Nina Sumiko Tomita Hirata,Frances Allen
+ReshmaChieko,Reshma Saujani,Chieko Asakawa
+YoshikoDorothy,Yoshiko Wakabayashi,Dorothy Vaughan
+DorothyNunesdeBarros,Dorothy Vaughan,Leliane Nunes de Barros
+VieradeMeloFernandes,Ana Cristina Viera de Melo,Cristina Fernandes
+BorgTomitaHirata,Anita Borg,Nina Sumiko Tomita Hirata
+LynnEasley,Lynn Conway,Annie Easley
+HopperWakabayashi,Grace Hopper,Yoshiko Wakabayashi
+HamiltonAnnie,Margaret Hamilton,Annie Easley
+TomitaHirataRenata,Nina Sumiko Tomita Hirata,Renata Wassermann
+MaryJaneDorothy,Mary Jane Irwin,Dorothy Vaughan
+FrancesLi,Frances Allen,Fei-Fei Li
+KellerPerlman,Sister Mary Kenneth Keller,Radia Perlman
+FrancesYoshiko,Frances Allen,Yoshiko Wakabayashi
+AnitaMayer,Anita Borg,Marissa Mayer
+ChiekoBraghetto,Chieko Asakawa,Kelly Braghetto
+MaryAda,Mary Sieckenius,Ada Lovelace
+FernandesYoshiko,Cristina Fernandes,Yoshiko Wakabayashi
+FrancesMarissa,Frances Allen,Marissa Mayer
+PerlmanGebru,Radia Perlman,Timnit Gebru
+LiLynn,Fei-Fei Li,Lynn Conway
+LynnCristina,Lynn Conway,Cristina Fernandes
+MargaretGrace,Margaret Hamilton,Grace Hopper
+MaryJaneBraghetto,Mary Jane Irwin,Kelly Braghetto
+KollerGebru,Daphne Koller,Timnit Gebru
+WakabayashiAda,Yoshiko Wakabayashi,Ada Lovelace
+ShafiKeller,Shafi Goldwasser,Sister Mary Kenneth Keller
+MaryGoldwasser,Mary Sieckenius,Shafi Goldwasser
+AdaDorothy,Ada Lovelace,Dorothy Vaughan
+SieckeniusPerlman,Mary Sieckenius,Radia Perlman
+MargaretDaphne,Margaret Hamilton,Daphne Koller
+ConwayAsakawa,Lynn Conway,Chieko Asakawa
+YoshikoBarbara,Yoshiko Wakabayashi,Barbara Liskov
+BorgNami,Anita Borg,Nami Kobayashi
+LovelaceNunesdeBarros,Ada Lovelace,Leliane Nunes de Barros
+LelianeTimnit,Leliane Nunes de Barros,Timnit Gebru
+AnitaMarissa,Anita Borg,Marissa Mayer
+IrwinAda,Mary Jane Irwin,Ada Lovelace
+AnnieMayer,Annie Easley,Marissa Mayer
+KellyCristina,Kelly Braghetto,Cristina Fernandes
+WakabayashiDorothy,Yoshiko Wakabayashi,Dorothy Vaughan
+LiskovKelly,Barbara Liskov,Kelly Braghetto
+KellerYoshiko,Sister Mary Kenneth Keller,Yoshiko Wakabayashi
+ChiekoPerlman,Chieko Asakawa,Radia Perlman
+LiskovLi,Barbara Liskov,Fei-Fei Li
+HopperPerlman,Grace Hopper,Radia Perlman
+WassermannPerlman,Renata Wassermann,Radia Perlman
+MarissaVaughan,Marissa Mayer,Dorothy Vaughan
+ShafiMary,Shafi Goldwasser,Mary Sieckenius
+GebruAsakawa,Timnit Gebru,Chieko Asakawa
+ReshmaKoller,Reshma Saujani,Daphne Koller
+VieradeMeloAda,Ana Cristina Viera de Melo,Ada Lovelace
+ShafiDorothy,Shafi Goldwasser,Dorothy Vaughan
+MargaretFrances,Margaret Hamilton,Frances Allen
+DaphneGrace,Daphne Koller,Grace Hopper
+LiskovHamilton,Barbara Liskov,Margaret Hamilton
+NinaSumikoIrwin,Nina Sumiko Tomita Hirata,Mary Jane Irwin
+SisterMaryKennethNami,Sister Mary Kenneth Keller,Nami Kobayashi
+LynnDaphne,Lynn Conway,Daphne Koller
+LelianeAnnie,Leliane Nunes de Barros,Annie Easley
+NunesdeBarrosWakabayashi,Leliane Nunes de Barros,Yoshiko Wakabayashi
+KellyDorothy,Kelly Braghetto,Dorothy Vaughan
+MaryMaryJane,Mary Sieckenius,Mary Jane Irwin
+DaphneTimnit,Daphne Koller,Timnit Gebru
+SieckeniusConway,Mary Sieckenius,Lynn Conway
+LiskovEasley,Barbara Liskov,Annie Easley
+AnnieGebru,Annie Easley,Timnit Gebru
+SisterMaryKennethFeiFei,Sister Mary Kenneth Keller,Fei-Fei Li
+LiskovVaughan,Barbara Liskov,Dorothy Vaughan
+LelianeLovelace,Leliane Nunes de Barros,Ada Lovelace
+WassermannLynn,Renata Wassermann,Lynn Conway
+GraceHamilton,Grace Hopper,Margaret Hamilton
+JenniferFernandes,Jennifer Klawe,Cristina Fernandes
+RenataRadia,Renata Wassermann,Radia Perlman
+RenataFrances,Renata Wassermann,Frances Allen
+VieradeMeloMarissa,Ana Cristina Viera de Melo,Marissa Mayer
+KlaweHamilton,Jennifer Klawe,Margaret Hamilton
+KobayashiSieckenius,Nami Kobayashi,Mary Sieckenius
+DaphneLeliane,Daphne Koller,Leliane Nunes de Barros
+BraghettoKobayashi,Kelly Braghetto,Nami Kobayashi
+ShafiBorg,Shafi Goldwasser,Anita Borg
+EasleyAda,Annie Easley,Ada Lovelace
+KellerAsakawa,Sister Mary Kenneth Keller,Chieko Asakawa
+BorgKlawe,Anita Borg,Jennifer Klawe
+RadiaChieko,Radia Perlman,Chieko Asakawa
+MayerKlawe,Marissa Mayer,Jennifer Klawe
+AnnieChieko,Annie Easley,Chieko Asakawa
+LiGebru,Fei-Fei Li,Timnit Gebru
+KollerWassermann,Daphne Koller,Renata Wassermann
+MarissaKelly,Marissa Mayer,Kelly Braghetto
+IrwinGrace,Mary Jane Irwin,Grace Hopper
+HopperJennifer,Grace Hopper,Jennifer Klawe
+FernandesSieckenius,Cristina Fernandes,Mary Sieckenius
+KellerSaujani,Sister Mary Kenneth Keller,Reshma Saujani
+VieradeMeloLi,Ana Cristina Viera de Melo,Fei-Fei Li
+NunesdeBarrosAnita,Leliane Nunes de Barros,Anita Borg
+ReshmaTomitaHirata,Reshma Saujani,Nina Sumiko Tomita Hirata
+SisterMaryKennethHopper,Sister Mary Kenneth Keller,Grace Hopper
+FeiFeiSaujani,Fei-Fei Li,Reshma Saujani
+LovelaceLi,Ada Lovelace,Fei-Fei Li
+HopperConway,Grace Hopper,Lynn Conway
+SisterMaryKennethShafi,Sister Mary Kenneth Keller,Shafi Goldwasser
+AnitaAda,Anita Borg,Ada Lovelace
+FrancesLeliane,Frances Allen,Leliane Nunes de Barros
+ShafiTimnit,Shafi Goldwasser,Timnit Gebru
+BarbaraIrwin,Barbara Liskov,Mary Jane Irwin
+IrwinAnnie,Mary Jane Irwin,Annie Easley
+PerlmanAda,Radia Perlman,Ada Lovelace
+KlaweBorg,Jennifer Klawe,Anita Borg
+SisterMaryKennethAllen,Sister Mary Kenneth Keller,Frances Allen
+ShafiMargaret,Shafi Goldwasser,Margaret Hamilton
+BarbaraChieko,Barbara Liskov,Chieko Asakawa
+SaujaniPerlman,Reshma Saujani,Radia Perlman
+AllenGebru,Frances Allen,Timnit Gebru
+DorothyPerlman,Dorothy Vaughan,Radia Perlman
+KollerMargaret,Daphne Koller,Margaret Hamilton
+MarissaAnnie,Marissa Mayer,Annie Easley
+MargaretJennifer,Margaret Hamilton,Jennifer Klawe
+NunesdeBarrosSieckenius,Leliane Nunes de Barros,Mary Sieckenius
+PerlmanLi,Radia Perlman,Fei-Fei Li
+LiMargaret,Fei-Fei Li,Margaret Hamilton
+SieckeniusVaughan,Mary Sieckenius,Dorothy Vaughan
+ChiekoAnita,Chieko Asakawa,Anita Borg
+TimnitAnaCristina,Timnit Gebru,Ana Cristina Viera de Melo
+WakabayashiWassermann,Yoshiko Wakabayashi,Renata Wassermann
+FrancesMary,Frances Allen,Mary Sieckenius
+BorgAsakawa,Anita Borg,Chieko Asakawa
+LiskovMargaret,Barbara Liskov,Margaret Hamilton
+DaphneMargaret,Daphne Koller,Margaret Hamilton
+HopperHamilton,Grace Hopper,Margaret Hamilton
+FernandesVieradeMelo,Cristina Fernandes,Ana Cristina Viera de Melo
+AsakawaNunesdeBarros,Chieko Asakawa,Leliane Nunes de Barros
+GebruDorothy,Timnit Gebru,Dorothy Vaughan
+NinaSumikoHopper,Nina Sumiko Tomita Hirata,Grace Hopper
+LelianeKobayashi,Leliane Nunes de Barros,Nami Kobayashi
+NinaSumikoFernandes,Nina Sumiko Tomita Hirata,Cristina Fernandes
+AllenHamilton,Frances Allen,Margaret Hamilton
+LelianeAllen,Leliane Nunes de Barros,Frances Allen
+LovelaceAsakawa,Ada Lovelace,Chieko Asakawa
+VaughanTomitaHirata,Dorothy Vaughan,Nina Sumiko Tomita Hirata
+KollerSaujani,Daphne Koller,Reshma Saujani
+GoldwasserLeliane,Shafi Goldwasser,Leliane Nunes de Barros
+TimnitJennifer,Timnit Gebru,Jennifer Klawe
+LiJennifer,Fei-Fei Li,Jennifer Klawe
+IrwinLynn,Mary Jane Irwin,Lynn Conway
+NamiGebru,Nami Kobayashi,Timnit Gebru
+KellerLiskov,Sister Mary Kenneth Keller,Barbara Liskov
+CristinaEasley,Cristina Fernandes,Annie Easley
+NinaSumikoLi,Nina Sumiko Tomita Hirata,Fei-Fei Li
+LiskovAda,Barbara Liskov,Ada Lovelace
+LynnLi,Lynn Conway,Fei-Fei Li
+TimnitSisterMaryKenneth,Timnit Gebru,Sister Mary Kenneth Keller
+KobayashiNunesdeBarros,Nami Kobayashi,Leliane Nunes de Barros
+VieradeMeloMaryJane,Ana Cristina Viera de Melo,Mary Jane Irwin
+DaphneBraghetto,Daphne Koller,Kelly Braghetto
+AllenMaryJane,Frances Allen,Mary Jane Irwin
+ReshmaKobayashi,Reshma Saujani,Nami Kobayashi
+DaphneMayer,Daphne Koller,Marissa Mayer
+ShafiGrace,Shafi Goldwasser,Grace Hopper
+AdaAnaCristina,Ada Lovelace,Ana Cristina Viera de Melo
+VieradeMeloAsakawa,Ana Cristina Viera de Melo,Chieko Asakawa
+SieckeniusAnita,Mary Sieckenius,Anita Borg
+AdaVaughan,Ada Lovelace,Dorothy Vaughan
+FrancesMargaret,Frances Allen,Margaret Hamilton
+JenniferNunesdeBarros,Jennifer Klawe,Leliane Nunes de Barros
+LovelaceFrances,Ada Lovelace,Frances Allen
+SisterMaryKennethWassermann,Sister Mary Kenneth Keller,Renata Wassermann
+MayerGebru,Marissa Mayer,Timnit Gebru
+LovelaceHamilton,Ada Lovelace,Margaret Hamilton
+LelianeIrwin,Leliane Nunes de Barros,Mary Jane Irwin
+AdaGrace,Ada Lovelace,Grace Hopper
+VieradeMeloReshma,Ana Cristina Viera de Melo,Reshma Saujani
+AnaCristinaPerlman,Ana Cristina Viera de Melo,Radia Perlman
+MaryJaneAsakawa,Mary Jane Irwin,Chieko Asakawa
+ShafiNunesdeBarros,Shafi Goldwasser,Leliane Nunes de Barros
+YoshikoGrace,Yoshiko Wakabayashi,Grace Hopper
+GoldwasserNinaSumiko,Shafi Goldwasser,Nina Sumiko Tomita Hirata
+RadiaNunesdeBarros,Radia Perlman,Leliane Nunes de Barros
+KobayashiAnita,Nami Kobayashi,Anita Borg
+FernandesLi,Cristina Fernandes,Fei-Fei Li
+EasleyKoller,Annie Easley,Daphne Koller
+VaughanMarissa,Dorothy Vaughan,Marissa Mayer
+AnitaShafi,Anita Borg,Shafi Goldwasser
+GraceRadia,Grace Hopper,Radia Perlman
+BorgLi,Anita Borg,Fei-Fei Li
+NinaSumikoSisterMaryKenneth,Nina Sumiko Tomita Hirata,Sister Mary Kenneth Keller
+KobayashiSisterMaryKenneth,Nami Kobayashi,Sister Mary Kenneth Keller
+PerlmanMary,Radia Perlman,Mary Sieckenius
+BarbaraPerlman,Barbara Liskov,Radia Perlman
+ReshmaVieradeMelo,Reshma Saujani,Ana Cristina Viera de Melo
+HopperYoshiko,Grace Hopper,Yoshiko Wakabayashi
+EasleyKeller,Annie Easley,Sister Mary Kenneth Keller
+CristinaVaughan,Cristina Fernandes,Dorothy Vaughan
+GebruIrwin,Timnit Gebru,Mary Jane Irwin
+NunesdeBarrosVaughan,Leliane Nunes de Barros,Dorothy Vaughan
+MarissaLi,Marissa Mayer,Fei-Fei Li
+DorothyKlawe,Dorothy Vaughan,Jennifer Klawe
+IrwinAnita,Mary Jane Irwin,Anita Borg
+HamiltonReshma,Margaret Hamilton,Reshma Saujani
+DaphneMarissa,Daphne Koller,Marissa Mayer
+KellerKoller,Sister Mary Kenneth Keller,Daphne Koller
+AllenBarbara,Frances Allen,Barbara Liskov
+KlaweEasley,Jennifer Klawe,Annie Easley
+AnitaHamilton,Anita Borg,Margaret Hamilton
+AdaRadia,Ada Lovelace,Radia Perlman
+GoldwasserKelly,Shafi Goldwasser,Kelly Braghetto
+VaughanNunesdeBarros,Dorothy Vaughan,Leliane Nunes de Barros
+GoldwasserHamilton,Shafi Goldwasser,Margaret Hamilton
+ChiekoConway,Chieko Asakawa,Lynn Conway
+ChiekoHamilton,Chieko Asakawa,Margaret Hamilton
+MaryJaneKelly,Mary Jane Irwin,Kelly Braghetto
+BarbaraAnaCristina,Barbara Liskov,Ana Cristina Viera de Melo
+MaryJaneKoller,Mary Jane Irwin,Daphne Koller
+MayerDaphne,Marissa Mayer,Daphne Koller
+IrwinVaughan,Mary Jane Irwin,Dorothy Vaughan
+BorgSisterMaryKenneth,Anita Borg,Sister Mary Kenneth Keller
+SaujaniHamilton,Reshma Saujani,Margaret Hamilton
+KlaweDaphne,Jennifer Klawe,Daphne Koller
+DaphneVaughan,Daphne Koller,Dorothy Vaughan
+AnaCristinaWakabayashi,Ana Cristina Viera de Melo,Yoshiko Wakabayashi
+ShafiReshma,Shafi Goldwasser,Reshma Saujani
+LelianeMaryJane,Leliane Nunes de Barros,Mary Jane Irwin
+ShafiTomitaHirata,Shafi Goldwasser,Nina Sumiko Tomita Hirata
+TimnitFernandes,Timnit Gebru,Cristina Fernandes
+BraghettoGoldwasser,Kelly Braghetto,Shafi Goldwasser
+VieradeMeloRadia,Ana Cristina Viera de Melo,Radia Perlman
+VaughanSieckenius,Dorothy Vaughan,Mary Sieckenius
+GebruHamilton,Timnit Gebru,Margaret Hamilton
+WassermannTomitaHirata,Renata Wassermann,Nina Sumiko Tomita Hirata
+NamiAllen,Nami Kobayashi,Frances Allen
+MayerVaughan,Marissa Mayer,Dorothy Vaughan
+RenataIrwin,Renata Wassermann,Mary Jane Irwin
+LovelaceReshma,Ada Lovelace,Reshma Saujani
+RenataAsakawa,Renata Wassermann,Chieko Asakawa
+MaryChieko,Mary Sieckenius,Chieko Asakawa
+NunesdeBarrosShafi,Leliane Nunes de Barros,Shafi Goldwasser
+DorothyFeiFei,Dorothy Vaughan,Fei-Fei Li
+ChiekoKlawe,Chieko Asakawa,Jennifer Klawe
+DorothyMary,Dorothy Vaughan,Mary Sieckenius
+BraghettoMargaret,Kelly Braghetto,Margaret Hamilton
+EasleyFernandes,Annie Easley,Cristina Fernandes
+MaryFeiFei,Mary Sieckenius,Fei-Fei Li
+AnitaReshma,Anita Borg,Reshma Saujani
+BraghettoBarbara,Kelly Braghetto,Barbara Liskov
+KobayashiPerlman,Nami Kobayashi,Radia Perlman
+GebruLiskov,Timnit Gebru,Barbara Liskov
+AsakawaAllen,Chieko Asakawa,Frances Allen
+FrancesFernandes,Frances Allen,Cristina Fernandes
+VaughanKeller,Dorothy Vaughan,Sister Mary Kenneth Keller
+LiskovMaryJane,Barbara Liskov,Mary Jane Irwin
+MayerIrwin,Marissa Mayer,Mary Jane Irwin
+IrwinMarissa,Mary Jane Irwin,Marissa Mayer
+VieradeMeloDorothy,Ana Cristina Viera de Melo,Dorothy Vaughan
+SisterMaryKennethFernandes,Sister Mary Kenneth Keller,Cristina Fernandes
+RadiaAsakawa,Radia Perlman,Chieko Asakawa
+ChiekoAnaCristina,Chieko Asakawa,Ana Cristina Viera de Melo
+AsakawaAda,Chieko Asakawa,Ada Lovelace
+LovelaceNinaSumiko,Ada Lovelace,Nina Sumiko Tomita Hirata
+VieradeMeloNinaSumiko,Ana Cristina Viera de Melo,Nina Sumiko Tomita Hirata
+DaphneMary,Daphne Koller,Mary Sieckenius
+WassermannLi,Renata Wassermann,Fei-Fei Li
+MargaretLeliane,Margaret Hamilton,Leliane Nunes de Barros
+MayerYoshiko,Marissa Mayer,Yoshiko Wakabayashi
+BorgVaughan,Anita Borg,Dorothy Vaughan
+MaryJaneNami,Mary Jane Irwin,Nami Kobayashi
+JenniferLovelace,Jennifer Klawe,Ada Lovelace
+FernandesNunesdeBarros,Cristina Fernandes,Leliane Nunes de Barros
+YoshikoKlawe,Yoshiko Wakabayashi,Jennifer Klawe
+LelianeReshma,Leliane Nunes de Barros,Reshma Saujani
+SieckeniusLiskov,Mary Sieckenius,Barbara Liskov
+ConwayFeiFei,Lynn Conway,Fei-Fei Li
+DorothyVieradeMelo,Dorothy Vaughan,Ana Cristina Viera de Melo
+GebruAnita,Timnit Gebru,Anita Borg
+MarissaReshma,Marissa Mayer,Reshma Saujani
+ChiekoSaujani,Chieko Asakawa,Reshma Saujani
+DaphneFeiFei,Daphne Koller,Fei-Fei Li
+AnaCristinaKlawe,Ana Cristina Viera de Melo,Jennifer Klawe
+KlaweNinaSumiko,Jennifer Klawe,Nina Sumiko Tomita Hirata
+ConwayCristina,Lynn Conway,Cristina Fernandes
+YoshikoGoldwasser,Yoshiko Wakabayashi,Shafi Goldwasser
+AsakawaHamilton,Chieko Asakawa,Margaret Hamilton
+EasleyTimnit,Annie Easley,Timnit Gebru
+BarbaraBraghetto,Barbara Liskov,Kelly Braghetto
+HamiltonDorothy,Margaret Hamilton,Dorothy Vaughan
+LynnFernandes,Lynn Conway,Cristina Fernandes
+KlaweBraghetto,Jennifer Klawe,Kelly Braghetto
+BorgMarissa,Anita Borg,Marissa Mayer
+NunesdeBarrosBorg,Leliane Nunes de Barros,Anita Borg
+LiskovShafi,Barbara Liskov,Shafi Goldwasser
+AnnieFrances,Annie Easley,Frances Allen
+AsakawaCristina,Chieko Asakawa,Cristina Fernandes
+NamiGrace,Nami Kobayashi,Grace Hopper
+LiskovKlawe,Barbara Liskov,Jennifer Klawe
+NinaSumikoKlawe,Nina Sumiko Tomita Hirata,Jennifer Klawe
+LelianeAnaCristina,Leliane Nunes de Barros,Ana Cristina Viera de Melo
+ConwayMaryJane,Lynn Conway,Mary Jane Irwin
+WassermannNami,Renata Wassermann,Nami Kobayashi
+VaughanHamilton,Dorothy Vaughan,Margaret Hamilton
+GraceVieradeMelo,Grace Hopper,Ana Cristina Viera de Melo
+EasleyYoshiko,Annie Easley,Yoshiko Wakabayashi
+LiskovVieradeMelo,Barbara Liskov,Ana Cristina Viera de Melo
+AdaMarissa,Ada Lovelace,Marissa Mayer
+BorgFrances,Anita Borg,Frances Allen
+IrwinHamilton,Mary Jane Irwin,Margaret Hamilton
+AllenDaphne,Frances Allen,Daphne Koller
+NamiIrwin,Nami Kobayashi,Mary Jane Irwin
+WassermannBorg,Renata Wassermann,Anita Borg
+CristinaKobayashi,Cristina Fernandes,Nami Kobayashi
+ChiekoMary,Chieko Asakawa,Mary Sieckenius
+VaughanMargaret,Dorothy Vaughan,Margaret Hamilton
+MargaretBraghetto,Margaret Hamilton,Kelly Braghetto
+ReshmaHamilton,Reshma Saujani,Margaret Hamilton
+MaryKobayashi,Mary Sieckenius,Nami Kobayashi
+SisterMaryKennethKlawe,Sister Mary Kenneth Keller,Jennifer Klawe
+VaughanAllen,Dorothy Vaughan,Frances Allen
+WassermannMargaret,Renata Wassermann,Margaret Hamilton
+BarbaraLovelace,Barbara Liskov,Ada Lovelace
+NinaSumikoBarbara,Nina Sumiko Tomita Hirata,Barbara Liskov
+WakabayashiKeller,Yoshiko Wakabayashi,Sister Mary Kenneth Keller
+MargaretMary,Margaret Hamilton,Mary Sieckenius
+NamiFeiFei,Nami Kobayashi,Fei-Fei Li
+SisterMaryKennethCristina,Sister Mary Kenneth Keller,Cristina Fernandes
+AnnieJennifer,Annie Easley,Jennifer Klawe
+RadiaNinaSumiko,Radia Perlman,Nina Sumiko Tomita Hirata
+NunesdeBarrosKelly,Leliane Nunes de Barros,Kelly Braghetto
+TimnitLiskov,Timnit Gebru,Barbara Liskov
+BraghettoGebru,Kelly Braghetto,Timnit Gebru
+PerlmanLeliane,Radia Perlman,Leliane Nunes de Barros
+JenniferDorothy,Jennifer Klawe,Dorothy Vaughan
+YoshikoVieradeMelo,Yoshiko Wakabayashi,Ana Cristina Viera de Melo
+MayerWassermann,Marissa Mayer,Renata Wassermann
+EasleyNunesdeBarros,Annie Easley,Leliane Nunes de Barros
+EasleyHamilton,Annie Easley,Margaret Hamilton
+KollerGrace,Daphne Koller,Grace Hopper
+MargaretMarissa,Margaret Hamilton,Marissa Mayer
+TimnitMayer,Timnit Gebru,Marissa Mayer
+MaryJaneSisterMaryKenneth,Mary Jane Irwin,Sister Mary Kenneth Keller
+BorgIrwin,Anita Borg,Mary Jane Irwin
+BorgLeliane,Anita Borg,Leliane Nunes de Barros
+FeiFeiBarbara,Fei-Fei Li,Barbara Liskov
+KlaweMargaret,Jennifer Klawe,Margaret Hamilton
+JenniferLynn,Jennifer Klawe,Lynn Conway
+BarbaraAsakawa,Barbara Liskov,Chieko Asakawa
+FeiFeiHopper,Fei-Fei Li,Grace Hopper
+ConwayTomitaHirata,Lynn Conway,Nina Sumiko Tomita Hirata
+NunesdeBarrosKeller,Leliane Nunes de Barros,Sister Mary Kenneth Keller
+AdaTimnit,Ada Lovelace,Timnit Gebru
+VaughanLiskov,Dorothy Vaughan,Barbara Liskov
+AsakawaGebru,Chieko Asakawa,Timnit Gebru
+RadiaLovelace,Radia Perlman,Ada Lovelace
+EasleyConway,Annie Easley,Lynn Conway
+PerlmanShafi,Radia Perlman,Shafi Goldwasser
+AsakawaShafi,Chieko Asakawa,Shafi Goldwasser
+NunesdeBarrosRenata,Leliane Nunes de Barros,Renata Wassermann
+JenniferMaryJane,Jennifer Klawe,Mary Jane Irwin
+WassermannLovelace,Renata Wassermann,Ada Lovelace
+BarbaraTimnit,Barbara Liskov,Timnit Gebru
+KellerEasley,Sister Mary Kenneth Keller,Annie Easley
+MarissaWassermann,Marissa Mayer,Renata Wassermann
+KlaweMayer,Jennifer Klawe,Marissa Mayer
+ChiekoDorothy,Chieko Asakawa,Dorothy Vaughan
+MarissaFernandes,Marissa Mayer,Cristina Fernandes
+ChiekoLi,Chieko Asakawa,Fei-Fei Li
+YoshikoTimnit,Yoshiko Wakabayashi,Timnit Gebru
+VieradeMeloAllen,Ana Cristina Viera de Melo,Frances Allen
+RadiaLynn,Radia Perlman,Lynn Conway
+KobayashiGebru,Nami Kobayashi,Timnit Gebru
+FeiFeiChieko,Fei-Fei Li,Chieko Asakawa
+LiVaughan,Fei-Fei Li,Dorothy Vaughan
+JenniferNami,Jennifer Klawe,Nami Kobayashi
+IrwinBorg,Mary Jane Irwin,Anita Borg
+AnitaChieko,Anita Borg,Chieko Asakawa
+RadiaGoldwasser,Radia Perlman,Shafi Goldwasser
+MargaretWakabayashi,Margaret Hamilton,Yoshiko Wakabayashi
+LovelaceAnaCristina,Ada Lovelace,Ana Cristina Viera de Melo
+HopperBarbara,Grace Hopper,Barbara Liskov
+RenataWakabayashi,Renata Wassermann,Yoshiko Wakabayashi
+NinaSumikoYoshiko,Nina Sumiko Tomita Hirata,Yoshiko Wakabayashi
+KobayashiNinaSumiko,Nami Kobayashi,Nina Sumiko Tomita Hirata
+KellyLynn,Kelly Braghetto,Lynn Conway
+ChiekoFeiFei,Chieko Asakawa,Fei-Fei Li
+DorothyBarbara,Dorothy Vaughan,Barbara Liskov
+IrwinSaujani,Mary Jane Irwin,Reshma Saujani
+MaryNinaSumiko,Mary Sieckenius,Nina Sumiko Tomita Hirata
+LovelaceSisterMaryKenneth,Ada Lovelace,Sister Mary Kenneth Keller
+AllenEasley,Frances Allen,Annie Easley
+AdaReshma,Ada Lovelace,Reshma Saujani
+WassermannDorothy,Renata Wassermann,Dorothy Vaughan
+BarbaraGebru,Barbara Liskov,Timnit Gebru
+ReshmaFrances,Reshma Saujani,Frances Allen
+NamiReshma,Nami Kobayashi,Reshma Saujani
+SieckeniusLeliane,Mary Sieckenius,Leliane Nunes de Barros
+HopperReshma,Grace Hopper,Reshma Saujani
+KollerKelly,Daphne Koller,Kelly Braghetto
+IrwinNunesdeBarros,Mary Jane Irwin,Leliane Nunes de Barros
+WakabayashiMarissa,Yoshiko Wakabayashi,Marissa Mayer
+LelianeHopper,Leliane Nunes de Barros,Grace Hopper
+NinaSumikoDaphne,Nina Sumiko Tomita Hirata,Daphne Koller
+DorothyFrances,Dorothy Vaughan,Frances Allen
+KlaweLi,Jennifer Klawe,Fei-Fei Li
+AsakawaMargaret,Chieko Asakawa,Margaret Hamilton
+WassermannLiskov,Renata Wassermann,Barbara Liskov
+JenniferGrace,Jennifer Klawe,Grace Hopper
+AdaWakabayashi,Ada Lovelace,Yoshiko Wakabayashi
+MaryVieradeMelo,Mary Sieckenius,Ana Cristina Viera de Melo
+GoldwasserAnita,Shafi Goldwasser,Anita Borg
+PerlmanFernandes,Radia Perlman,Cristina Fernandes
+GebruKoller,Timnit Gebru,Daphne Koller
+ReshmaDorothy,Reshma Saujani,Dorothy Vaughan
+MarissaGrace,Marissa Mayer,Grace Hopper
+FeiFeiJennifer,Fei-Fei Li,Jennifer Klawe
+IrwinSieckenius,Mary Jane Irwin,Mary Sieckenius
+FrancesAsakawa,Frances Allen,Chieko Asakawa
+LelianeGoldwasser,Leliane Nunes de Barros,Shafi Goldwasser
+GebruChieko,Timnit Gebru,Chieko Asakawa
+KlaweVaughan,Jennifer Klawe,Dorothy Vaughan
+GebruFeiFei,Timnit Gebru,Fei-Fei Li
+AnaCristinaMaryJane,Ana Cristina Viera de Melo,Mary Jane Irwin
+VaughanShafi,Dorothy Vaughan,Shafi Goldwasser
+FernandesRenata,Cristina Fernandes,Renata Wassermann
+AllenAnnie,Frances Allen,Annie Easley
+KlaweSisterMaryKenneth,Jennifer Klawe,Sister Mary Kenneth Keller
+TimnitWassermann,Timnit Gebru,Renata Wassermann
+SisterMaryKennethRenata,Sister Mary Kenneth Keller,Renata Wassermann
+VaughanNinaSumiko,Dorothy Vaughan,Nina Sumiko Tomita Hirata
+DaphneIrwin,Daphne Koller,Mary Jane Irwin
+NunesdeBarrosReshma,Leliane Nunes de Barros,Reshma Saujani
+LiNami,Fei-Fei Li,Nami Kobayashi
+HopperMayer,Grace Hopper,Marissa Mayer
+CristinaSaujani,Cristina Fernandes,Reshma Saujani
+IrwinNami,Mary Jane Irwin,Nami Kobayashi
+AnnieBraghetto,Annie Easley,Kelly Braghetto
+TomitaHirataBraghetto,Nina Sumiko Tomita Hirata,Kelly Braghetto
+AnitaRenata,Anita Borg,Renata Wassermann
+SieckeniusIrwin,Mary Sieckenius,Mary Jane Irwin
+LovelaceTimnit,Ada Lovelace,Timnit Gebru
+BraghettoGrace,Kelly Braghetto,Grace Hopper
+BorgNinaSumiko,Anita Borg,Nina Sumiko Tomita Hirata
+HamiltonMarissa,Margaret Hamilton,Marissa Mayer
+FernandesNinaSumiko,Cristina Fernandes,Nina Sumiko Tomita Hirata
+KellerChieko,Sister Mary Kenneth Keller,Chieko Asakawa
+MaryAllen,Mary Sieckenius,Frances Allen
+SisterMaryKennethLovelace,Sister Mary Kenneth Keller,Ada Lovelace
+HopperDaphne,Grace Hopper,Daphne Koller
+SieckeniusTomitaHirata,Mary Sieckenius,Nina Sumiko Tomita Hirata
+HopperLi,Grace Hopper,Fei-Fei Li
+FernandesMary,Cristina Fernandes,Mary Sieckenius
+PerlmanBraghetto,Radia Perlman,Kelly Braghetto
+ReshmaAnnie,Reshma Saujani,Annie Easley
+GraceBorg,Grace Hopper,Anita Borg
+AsakawaKelly,Chieko Asakawa,Kelly Braghetto
+AdaNinaSumiko,Ada Lovelace,Nina Sumiko Tomita Hirata
+IrwinKoller,Mary Jane Irwin,Daphne Koller
+RenataNunesdeBarros,Renata Wassermann,Leliane Nunes de Barros
+DorothyLi,Dorothy Vaughan,Fei-Fei Li
+TimnitLi,Timnit Gebru,Fei-Fei Li
+GebruMayer,Timnit Gebru,Marissa Mayer
+MaryReshma,Mary Sieckenius,Reshma Saujani
+HopperAda,Grace Hopper,Ada Lovelace
+ConwayKelly,Lynn Conway,Kelly Braghetto
+VieradeMeloNunesdeBarros,Ana Cristina Viera de Melo,Leliane Nunes de Barros
+WakabayashiConway,Yoshiko Wakabayashi,Lynn Conway
+KollerConway,Daphne Koller,Lynn Conway
+YoshikoVaughan,Yoshiko Wakabayashi,Dorothy Vaughan
+RadiaDorothy,Radia Perlman,Dorothy Vaughan
+BarbaraYoshiko,Barbara Liskov,Yoshiko Wakabayashi
+HamiltonNinaSumiko,Margaret Hamilton,Nina Sumiko Tomita Hirata
+RadiaDaphne,Radia Perlman,Daphne Koller
+PerlmanConway,Radia Perlman,Lynn Conway
+AnitaEasley,Anita Borg,Annie Easley
+KobayashiHamilton,Nami Kobayashi,Margaret Hamilton
+SaujaniKobayashi,Reshma Saujani,Nami Kobayashi
+ConwayDaphne,Lynn Conway,Daphne Koller
+RenataKobayashi,Renata Wassermann,Nami Kobayashi
+SisterMaryKennethNunesdeBarros,Sister Mary Kenneth Keller,Leliane Nunes de Barros
+EasleyVaughan,Annie Easley,Dorothy Vaughan
+LiskovTimnit,Barbara Liskov,Timnit Gebru
+SaujaniLiskov,Reshma Saujani,Barbara Liskov
+FeiFeiRenata,Fei-Fei Li,Renata Wassermann
+AnitaGoldwasser,Anita Borg,Shafi Goldwasser
+GebruLi,Timnit Gebru,Fei-Fei Li
+NamiMarissa,Nami Kobayashi,Marissa Mayer
+GraceAnnie,Grace Hopper,Annie Easley
+GebruRadia,Timnit Gebru,Radia Perlman
+LiskovGrace,Barbara Liskov,Grace Hopper
+RenataKlawe,Renata Wassermann,Jennifer Klawe
+MarissaAllen,Marissa Mayer,Frances Allen
+NunesdeBarrosJennifer,Leliane Nunes de Barros,Jennifer Klawe
+AsakawaVaughan,Chieko Asakawa,Dorothy Vaughan
+KellyAda,Kelly Braghetto,Ada Lovelace
+KlaweVieradeMelo,Jennifer Klawe,Ana Cristina Viera de Melo
+NamiBarbara,Nami Kobayashi,Barbara Liskov
+AsakawaSieckenius,Chieko Asakawa,Mary Sieckenius
+YoshikoNinaSumiko,Yoshiko Wakabayashi,Nina Sumiko Tomita Hirata
+GebruDaphne,Timnit Gebru,Daphne Koller
+JenniferYoshiko,Jennifer Klawe,Yoshiko Wakabayashi
+MarissaGebru,Marissa Mayer,Timnit Gebru
+BorgWakabayashi,Anita Borg,Yoshiko Wakabayashi
+MayerTimnit,Marissa Mayer,Timnit Gebru
+SieckeniusJennifer,Mary Sieckenius,Jennifer Klawe
+EasleyNinaSumiko,Annie Easley,Nina Sumiko Tomita Hirata
+ConwayMarissa,Lynn Conway,Marissa Mayer
+LelianeCristina,Leliane Nunes de Barros,Cristina Fernandes
+MayerNami,Marissa Mayer,Nami Kobayashi
+IrwinLovelace,Mary Jane Irwin,Ada Lovelace
+HopperLynn,Grace Hopper,Lynn Conway
+KobayashiDaphne,Nami Kobayashi,Daphne Koller
+AsakawaEasley,Chieko Asakawa,Annie Easley
+NunesdeBarrosBarbara,Leliane Nunes de Barros,Barbara Liskov
+KobayashiVieradeMelo,Nami Kobayashi,Ana Cristina Viera de Melo
+AdaHopper,Ada Lovelace,Grace Hopper
+YoshikoSisterMaryKenneth,Yoshiko Wakabayashi,Sister Mary Kenneth Keller
+BarbaraKelly,Barbara Liskov,Kelly Braghetto
+JenniferIrwin,Jennifer Klawe,Mary Jane Irwin
+VieradeMeloSieckenius,Ana Cristina Viera de Melo,Mary Sieckenius
+DaphneHamilton,Daphne Koller,Margaret Hamilton
+TomitaHirataNunesdeBarros,Nina Sumiko Tomita Hirata,Leliane Nunes de Barros
+MayerGrace,Marissa Mayer,Grace Hopper
+IrwinRenata,Mary Jane Irwin,Renata Wassermann
+DaphneGebru,Daphne Koller,Timnit Gebru
+YoshikoSaujani,Yoshiko Wakabayashi,Reshma Saujani
+CristinaTimnit,Cristina Fernandes,Timnit Gebru
+LovelaceGrace,Ada Lovelace,Grace Hopper
+KellerNinaSumiko,Sister Mary Kenneth Keller,Nina Sumiko Tomita Hirata
+KellyMarissa,Kelly Braghetto,Marissa Mayer
+FeiFeiNinaSumiko,Fei-Fei Li,Nina Sumiko Tomita Hirata
+MargaretBorg,Margaret Hamilton,Anita Borg
+SaujaniDaphne,Reshma Saujani,Daphne Koller
+KobayashiTimnit,Nami Kobayashi,Timnit Gebru
+NinaSumikoEasley,Nina Sumiko Tomita Hirata,Annie Easley
+DorothyMargaret,Dorothy Vaughan,Margaret Hamilton
+RadiaAda,Radia Perlman,Ada Lovelace
+MaryJaneAnita,Mary Jane Irwin,Anita Borg
+SieckeniusCristina,Mary Sieckenius,Cristina Fernandes
+ShafiDaphne,Shafi Goldwasser,Daphne Koller
+BorgFernandes,Anita Borg,Cristina Fernandes
+SieckeniusChieko,Mary Sieckenius,Chieko Asakawa
+NamiKeller,Nami Kobayashi,Sister Mary Kenneth Keller
+JenniferSieckenius,Jennifer Klawe,Mary Sieckenius
+FernandesJennifer,Cristina Fernandes,Jennifer Klawe
+WassermannFrances,Renata Wassermann,Frances Allen
+RadiaWassermann,Radia Perlman,Renata Wassermann
+SieckeniusGebru,Mary Sieckenius,Timnit Gebru
+AnaCristinaSaujani,Ana Cristina Viera de Melo,Reshma Saujani
+SisterMaryKennethNinaSumiko,Sister Mary Kenneth Keller,Nina Sumiko Tomita Hirata
+WakabayashiKlawe,Yoshiko Wakabayashi,Jennifer Klawe
+MarissaYoshiko,Marissa Mayer,Yoshiko Wakabayashi
+VieradeMeloRenata,Ana Cristina Viera de Melo,Renata Wassermann
+KellerHamilton,Sister Mary Kenneth Keller,Margaret Hamilton
+TimnitBarbara,Timnit Gebru,Barbara Liskov
+FeiFeiGrace,Fei-Fei Li,Grace Hopper
+DaphneAnaCristina,Daphne Koller,Ana Cristina Viera de Melo
+MayerChieko,Marissa Mayer,Chieko Asakawa
+LiAllen,Fei-Fei Li,Frances Allen
+GebruKeller,Timnit Gebru,Sister Mary Kenneth Keller
+AsakawaJennifer,Chieko Asakawa,Jennifer Klawe
+HopperDorothy,Grace Hopper,Dorothy Vaughan
+TomitaHirataGoldwasser,Nina Sumiko Tomita Hirata,Shafi Goldwasser
+MarissaHopper,Marissa Mayer,Grace Hopper
+KobayashiKelly,Nami Kobayashi,Kelly Braghetto
+VaughanRadia,Dorothy Vaughan,Radia Perlman
+RenataAda,Renata Wassermann,Ada Lovelace
+JenniferSisterMaryKenneth,Jennifer Klawe,Sister Mary Kenneth Keller
+GoldwasserPerlman,Shafi Goldwasser,Radia Perlman
+EasleyMayer,Annie Easley,Marissa Mayer
+NinaSumikoMargaret,Nina Sumiko Tomita Hirata,Margaret Hamilton
+LovelacePerlman,Ada Lovelace,Radia Perlman
+FeiFeiBraghetto,Fei-Fei Li,Kelly Braghetto
+MaryJaneLeliane,Mary Jane Irwin,Leliane Nunes de Barros
+LiMary,Fei-Fei Li,Mary Sieckenius
+FrancesVaughan,Frances Allen,Dorothy Vaughan
+KellyLi,Kelly Braghetto,Fei-Fei Li
+HopperAnaCristina,Grace Hopper,Ana Cristina Viera de Melo
+GraceBarbara,Grace Hopper,Barbara Liskov
+KellyBarbara,Kelly Braghetto,Barbara Liskov
+AsakawaLeliane,Chieko Asakawa,Leliane Nunes de Barros
+AnitaLovelace,Anita Borg,Ada Lovelace
+KollerAda,Daphne Koller,Ada Lovelace
+DaphneSisterMaryKenneth,Daphne Koller,Sister Mary Kenneth Keller
+FrancesRenata,Frances Allen,Renata Wassermann
+MargaretEasley,Margaret Hamilton,Annie Easley
+WassermannMary,Renata Wassermann,Mary Sieckenius
+SaujaniNami,Reshma Saujani,Nami Kobayashi
+IrwinYoshiko,Mary Jane Irwin,Yoshiko Wakabayashi
+ChiekoMaryJane,Chieko Asakawa,Mary Jane Irwin
+LiskovNinaSumiko,Barbara Liskov,Nina Sumiko Tomita Hirata
+CristinaSieckenius,Cristina Fernandes,Mary Sieckenius
+LovelaceFeiFei,Ada Lovelace,Fei-Fei Li
+FrancesRadia,Frances Allen,Radia Perlman
+SaujaniLovelace,Reshma Saujani,Ada Lovelace
+FrancesAnaCristina,Frances Allen,Ana Cristina Viera de Melo
+AnitaSaujani,Anita Borg,Reshma Saujani
+VieradeMeloSisterMaryKenneth,Ana Cristina Viera de Melo,Sister Mary Kenneth Keller
+DorothyHamilton,Dorothy Vaughan,Margaret Hamilton
+RenataVieradeMelo,Renata Wassermann,Ana Cristina Viera de Melo
+TomitaHirataAda,Nina Sumiko Tomita Hirata,Ada Lovelace
+LelianeBraghetto,Leliane Nunes de Barros,Kelly Braghetto
+NamiNunesdeBarros,Nami Kobayashi,Leliane Nunes de Barros
+ReshmaAnita,Reshma Saujani,Anita Borg
+RenataBorg,Renata Wassermann,Anita Borg
+FernandesDorothy,Cristina Fernandes,Dorothy Vaughan
+WassermannKeller,Renata Wassermann,Sister Mary Kenneth Keller
+GebruCristina,Timnit Gebru,Cristina Fernandes
+ChiekoBarbara,Chieko Asakawa,Barbara Liskov
+AnnieHamilton,Annie Easley,Margaret Hamilton
+PerlmanTimnit,Radia Perlman,Timnit Gebru
+LynnSieckenius,Lynn Conway,Mary Sieckenius
+KellyReshma,Kelly Braghetto,Reshma Saujani
+TomitaHirataFernandes,Nina Sumiko Tomita Hirata,Cristina Fernandes
+KlaweGoldwasser,Jennifer Klawe,Shafi Goldwasser
+KlaweKelly,Jennifer Klawe,Kelly Braghetto
+KollerAllen,Daphne Koller,Frances Allen
+AnaCristinaFernandes,Ana Cristina Viera de Melo,Cristina Fernandes
+GoldwasserSaujani,Shafi Goldwasser,Reshma Saujani
+ReshmaAnaCristina,Reshma Saujani,Ana Cristina Viera de Melo
+EasleySaujani,Annie Easley,Reshma Saujani
+LiAnita,Fei-Fei Li,Anita Borg
+NunesdeBarrosEasley,Leliane Nunes de Barros,Annie Easley
+FernandesTomitaHirata,Cristina Fernandes,Nina Sumiko Tomita Hirata
+SisterMaryKennethMarissa,Sister Mary Kenneth Keller,Marissa Mayer
+AnaCristinaKoller,Ana Cristina Viera de Melo,Daphne Koller
+RadiaWakabayashi,Radia Perlman,Yoshiko Wakabayashi
+BraghettoFeiFei,Kelly Braghetto,Fei-Fei Li
+AnitaPerlman,Anita Borg,Radia Perlman
+SieckeniusKlawe,Mary Sieckenius,Jennifer Klawe
+AnaCristinaSisterMaryKenneth,Ana Cristina Viera de Melo,Sister Mary Kenneth Keller
+HamiltonMary,Margaret Hamilton,Mary Sieckenius
+SisterMaryKennethVaughan,Sister Mary Kenneth Keller,Dorothy Vaughan
+LynnRenata,Lynn Conway,Renata Wassermann
+AdaConway,Ada Lovelace,Lynn Conway
+AnaCristinaConway,Ana Cristina Viera de Melo,Lynn Conway
+WakabayashiShafi,Yoshiko Wakabayashi,Shafi Goldwasser
+GraceFernandes,Grace Hopper,Cristina Fernandes
+RadiaAnnie,Radia Perlman,Annie Easley
+VaughanSaujani,Dorothy Vaughan,Reshma Saujani
+FernandesConway,Cristina Fernandes,Lynn Conway
+LynnAnita,Lynn Conway,Anita Borg
+KellyLovelace,Kelly Braghetto,Ada Lovelace
+BorgKobayashi,Anita Borg,Nami Kobayashi
+NinaSumikoBraghetto,Nina Sumiko Tomita Hirata,Kelly Braghetto
+FrancesTomitaHirata,Frances Allen,Nina Sumiko Tomita Hirata
+WassermannKlawe,Renata Wassermann,Jennifer Klawe
+HamiltonKoller,Margaret Hamilton,Daphne Koller
+PerlmanMayer,Radia Perlman,Marissa Mayer
+SieckeniusReshma,Mary Sieckenius,Reshma Saujani
+KollerFernandes,Daphne Koller,Cristina Fernandes
+BorgChieko,Anita Borg,Chieko Asakawa
+ChiekoMayer,Chieko Asakawa,Marissa Mayer
+FernandesAda,Cristina Fernandes,Ada Lovelace
+ConwayNinaSumiko,Lynn Conway,Nina Sumiko Tomita Hirata
+KellyFeiFei,Kelly Braghetto,Fei-Fei Li
+KellyHopper,Kelly Braghetto,Grace Hopper
+DorothyChieko,Dorothy Vaughan,Chieko Asakawa
+KellerSieckenius,Sister Mary Kenneth Keller,Mary Sieckenius
+LovelaceGoldwasser,Ada Lovelace,Shafi Goldwasser
+GoldwasserKeller,Shafi Goldwasser,Sister Mary Kenneth Keller
+KellyKoller,Kelly Braghetto,Daphne Koller
+TomitaHirataMary,Nina Sumiko Tomita Hirata,Mary Sieckenius
+NunesdeBarrosVieradeMelo,Leliane Nunes de Barros,Ana Cristina Viera de Melo
+TimnitKoller,Timnit Gebru,Daphne Koller
+MaryRadia,Mary Sieckenius,Radia Perlman
+YoshikoHopper,Yoshiko Wakabayashi,Grace Hopper
+MaryRenata,Mary Sieckenius,Renata Wassermann
+AsakawaWassermann,Chieko Asakawa,Renata Wassermann
+HamiltonYoshiko,Margaret Hamilton,Yoshiko Wakabayashi
+LovelaceSieckenius,Ada Lovelace,Mary Sieckenius
+SisterMaryKennethFrances,Sister Mary Kenneth Keller,Frances Allen
+NunesdeBarrosMargaret,Leliane Nunes de Barros,Margaret Hamilton
+HamiltonBorg,Margaret Hamilton,Anita Borg
+AnaCristinaNami,Ana Cristina Viera de Melo,Nami Kobayashi
+BorgLiskov,Anita Borg,Barbara Liskov
+RadiaFernandes,Radia Perlman,Cristina Fernandes
+HamiltonRadia,Margaret Hamilton,Radia Perlman
+AnaCristinaDaphne,Ana Cristina Viera de Melo,Daphne Koller
+JenniferAnita,Jennifer Klawe,Anita Borg
+BraghettoHamilton,Kelly Braghetto,Margaret Hamilton
+RenataAnnie,Renata Wassermann,Annie Easley
+LiskovDaphne,Barbara Liskov,Daphne Koller
+LovelaceJennifer,Ada Lovelace,Jennifer Klawe
+KobayashiLi,Nami Kobayashi,Fei-Fei Li
+AnnieAllen,Annie Easley,Frances Allen
+TomitaHirataRadia,Nina Sumiko Tomita Hirata,Radia Perlman
+YoshikoTomitaHirata,Yoshiko Wakabayashi,Nina Sumiko Tomita Hirata
+ReshmaConway,Reshma Saujani,Lynn Conway
+FrancesConway,Frances Allen,Lynn Conway
+KellyAsakawa,Kelly Braghetto,Chieko Asakawa
+VieradeMeloLynn,Ana Cristina Viera de Melo,Lynn Conway
+LynnGrace,Lynn Conway,Grace Hopper
+LynnKobayashi,Lynn Conway,Nami Kobayashi
+NinaSumikoNami,Nina Sumiko Tomita Hirata,Nami Kobayashi
+JenniferSaujani,Jennifer Klawe,Reshma Saujani
+MargaretTimnit,Margaret Hamilton,Timnit Gebru
+EasleyRenata,Annie Easley,Renata Wassermann
+BraghettoMary,Kelly Braghetto,Mary Sieckenius
+LiGrace,Fei-Fei Li,Grace Hopper
+GebruKlawe,Timnit Gebru,Jennifer Klawe
+KobayashiLovelace,Nami Kobayashi,Ada Lovelace
+LynnChieko,Lynn Conway,Chieko Asakawa
+MayerAda,Marissa Mayer,Ada Lovelace
+SaujaniFernandes,Reshma Saujani,Cristina Fernandes
+RenataMargaret,Renata Wassermann,Margaret Hamilton
+DorothyAnita,Dorothy Vaughan,Anita Borg
+LiTimnit,Fei-Fei Li,Timnit Gebru
+LiskovSieckenius,Barbara Liskov,Mary Sieckenius
+FeiFeiSieckenius,Fei-Fei Li,Mary Sieckenius
+MarissaKobayashi,Marissa Mayer,Nami Kobayashi
+FernandesLynn,Cristina Fernandes,Lynn Conway
+MaryPerlman,Mary Sieckenius,Radia Perlman
+NinaSumikoKobayashi,Nina Sumiko Tomita Hirata,Nami Kobayashi
+HamiltonPerlman,Margaret Hamilton,Radia Perlman
+MarissaCristina,Marissa Mayer,Cristina Fernandes
+NamiTimnit,Nami Kobayashi,Timnit Gebru
+EasleyDaphne,Annie Easley,Daphne Koller
+GraceMarissa,Grace Hopper,Marissa Mayer
+AdaMaryJane,Ada Lovelace,Mary Jane Irwin
+GraceGebru,Grace Hopper,Timnit Gebru
+SieckeniusKeller,Mary Sieckenius,Sister Mary Kenneth Keller
+TimnitBorg,Timnit Gebru,Anita Borg
+MarissaKoller,Marissa Mayer,Daphne Koller
+GoldwasserBorg,Shafi Goldwasser,Anita Borg
+BorgKeller,Anita Borg,Sister Mary Kenneth Keller
+AnaCristinaKeller,Ana Cristina Viera de Melo,Sister Mary Kenneth Keller
+LynnLiskov,Lynn Conway,Barbara Liskov
+AllenYoshiko,Frances Allen,Yoshiko Wakabayashi
+FernandesWassermann,Cristina Fernandes,Renata Wassermann
+MargaretVieradeMelo,Margaret Hamilton,Ana Cristina Viera de Melo
+MaryJaneVieradeMelo,Mary Jane Irwin,Ana Cristina Viera de Melo
+CristinaNami,Cristina Fernandes,Nami Kobayashi
+SieckeniusHopper,Mary Sieckenius,Grace Hopper
+MarissaJennifer,Marissa Mayer,Jennifer Klawe
+BarbaraSieckenius,Barbara Liskov,Mary Sieckenius
+NinaSumikoTimnit,Nina Sumiko Tomita Hirata,Timnit Gebru
+RenataCristina,Renata Wassermann,Cristina Fernandes
+DorothyNami,Dorothy Vaughan,Nami Kobayashi
+KlaweTimnit,Jennifer Klawe,Timnit Gebru
+ReshmaRadia,Reshma Saujani,Radia Perlman
+LovelaceDorothy,Ada Lovelace,Dorothy Vaughan
+VieradeMeloKeller,Ana Cristina Viera de Melo,Sister Mary Kenneth Keller
+PerlmanLovelace,Radia Perlman,Ada Lovelace
+WassermannVaughan,Renata Wassermann,Dorothy Vaughan
+AllenTomitaHirata,Frances Allen,Nina Sumiko Tomita Hirata
+ChiekoGebru,Chieko Asakawa,Timnit Gebru
+ConwaySisterMaryKenneth,Lynn Conway,Sister Mary Kenneth Keller
+AnitaBarbara,Anita Borg,Barbara Liskov
+WassermannAnaCristina,Renata Wassermann,Ana Cristina Viera de Melo
+LynnNunesdeBarros,Lynn Conway,Leliane Nunes de Barros
+ReshmaGoldwasser,Reshma Saujani,Shafi Goldwasser
+KellerGoldwasser,Sister Mary Kenneth Keller,Shafi Goldwasser
+TimnitBraghetto,Timnit Gebru,Kelly Braghetto
+KellyLeliane,Kelly Braghetto,Leliane Nunes de Barros
+KellerLeliane,Sister Mary Kenneth Keller,Leliane Nunes de Barros
+AsakawaFeiFei,Chieko Asakawa,Fei-Fei Li
+SaujaniCristina,Reshma Saujani,Cristina Fernandes
+KobayashiTomitaHirata,Nami Kobayashi,Nina Sumiko Tomita Hirata
+FrancesHamilton,Frances Allen,Margaret Hamilton
+LelianeLiskov,Leliane Nunes de Barros,Barbara Liskov
+TimnitLynn,Timnit Gebru,Lynn Conway
+FrancesVieradeMelo,Frances Allen,Ana Cristina Viera de Melo
+BraghettoAsakawa,Kelly Braghetto,Chieko Asakawa
+KlaweWakabayashi,Jennifer Klawe,Yoshiko Wakabayashi
+KobayashiJennifer,Nami Kobayashi,Jennifer Klawe
+MaryJaneMayer,Mary Jane Irwin,Marissa Mayer
+HopperFrances,Grace Hopper,Frances Allen
+BraghettoVieradeMelo,Kelly Braghetto,Ana Cristina Viera de Melo
+LiskovTomitaHirata,Barbara Liskov,Nina Sumiko Tomita Hirata
+AdaSaujani,Ada Lovelace,Reshma Saujani
+RenataAnita,Renata Wassermann,Anita Borg
+AnitaTomitaHirata,Anita Borg,Nina Sumiko Tomita Hirata
+FeiFeiAllen,Fei-Fei Li,Frances Allen
+MaryJaneGebru,Mary Jane Irwin,Timnit Gebru
+FernandesGebru,Cristina Fernandes,Timnit Gebru
+EasleyAsakawa,Annie Easley,Chieko Asakawa
+GraceJennifer,Grace Hopper,Jennifer Klawe
+AdaJennifer,Ada Lovelace,Jennifer Klawe
+LiskovFernandes,Barbara Liskov,Cristina Fernandes
+LynnMayer,Lynn Conway,Marissa Mayer
+NinaSumikoVieradeMelo,Nina Sumiko Tomita Hirata,Ana Cristina Viera de Melo
+KellerAnnie,Sister Mary Kenneth Keller,Annie Easley
+BraghettoTomitaHirata,Kelly Braghetto,Nina Sumiko Tomita Hirata
+FeiFeiConway,Fei-Fei Li,Lynn Conway
+ShafiMaryJane,Shafi Goldwasser,Mary Jane Irwin
+KollerYoshiko,Daphne Koller,Yoshiko Wakabayashi
+KellyKeller,Kelly Braghetto,Sister Mary Kenneth Keller
+AsakawaLynn,Chieko Asakawa,Lynn Conway
+CristinaChieko,Cristina Fernandes,Chieko Asakawa
+AnitaNinaSumiko,Anita Borg,Nina Sumiko Tomita Hirata
+VieradeMeloTimnit,Ana Cristina Viera de Melo,Timnit Gebru
+DaphneConway,Daphne Koller,Lynn Conway
+KellerFernandes,Sister Mary Kenneth Keller,Cristina Fernandes
+CristinaNinaSumiko,Cristina Fernandes,Nina Sumiko Tomita Hirata
+SaujaniLi,Reshma Saujani,Fei-Fei Li
+YoshikoAsakawa,Yoshiko Wakabayashi,Chieko Asakawa
+ChiekoDaphne,Chieko Asakawa,Daphne Koller
+KellyPerlman,Kelly Braghetto,Radia Perlman
+BorgSieckenius,Anita Borg,Mary Sieckenius
+VaughanAsakawa,Dorothy Vaughan,Chieko Asakawa
+KobayashiMargaret,Nami Kobayashi,Margaret Hamilton
+YoshikoBraghetto,Yoshiko Wakabayashi,Kelly Braghetto
+PerlmanNami,Radia Perlman,Nami Kobayashi
+VaughanNami,Dorothy Vaughan,Nami Kobayashi
+FeiFeiKobayashi,Fei-Fei Li,Nami Kobayashi
+FrancesLiskov,Frances Allen,Barbara Liskov
+TimnitMargaret,Timnit Gebru,Margaret Hamilton
+ShafiVieradeMelo,Shafi Goldwasser,Ana Cristina Viera de Melo
+LiskovWakabayashi,Barbara Liskov,Yoshiko Wakabayashi
+LovelaceVieradeMelo,Ada Lovelace,Ana Cristina Viera de Melo
+CristinaLynn,Cristina Fernandes,Lynn Conway
+RenataMary,Renata Wassermann,Mary Sieckenius
+KellyEasley,Kelly Braghetto,Annie Easley
+GoldwasserSieckenius,Shafi Goldwasser,Mary Sieckenius
+BarbaraMary,Barbara Liskov,Mary Sieckenius
+BarbaraReshma,Barbara Liskov,Reshma Saujani
+TimnitShafi,Timnit Gebru,Shafi Goldwasser
+ShafiNami,Shafi Goldwasser,Nami Kobayashi
+MaryCristina,Mary Sieckenius,Cristina Fernandes
+ConwayGoldwasser,Lynn Conway,Shafi Goldwasser
+GoldwasserEasley,Shafi Goldwasser,Annie Easley
+BraghettoLeliane,Kelly Braghetto,Leliane Nunes de Barros
+BarbaraSisterMaryKenneth,Barbara Liskov,Sister Mary Kenneth Keller
+DorothyNinaSumiko,Dorothy Vaughan,Nina Sumiko Tomita Hirata
+MarissaAnita,Marissa Mayer,Anita Borg
+KobayashiGrace,Nami Kobayashi,Grace Hopper
+GoldwasserBraghetto,Shafi Goldwasser,Kelly Braghetto
+KellerTomitaHirata,Sister Mary Kenneth Keller,Nina Sumiko Tomita Hirata
+RenataPerlman,Renata Wassermann,Radia Perlman
+LynnAsakawa,Lynn Conway,Chieko Asakawa
+GebruMary,Timnit Gebru,Mary Sieckenius
+LiskovGoldwasser,Barbara Liskov,Shafi Goldwasser
+ChiekoFernandes,Chieko Asakawa,Cristina Fernandes
+CristinaRadia,Cristina Fernandes,Radia Perlman
+FernandesAnnie,Cristina Fernandes,Annie Easley
+KollerBraghetto,Daphne Koller,Kelly Braghetto
+HopperBorg,Grace Hopper,Anita Borg
+RadiaLi,Radia Perlman,Fei-Fei Li
+FeiFeiShafi,Fei-Fei Li,Shafi Goldwasser
+AllenDorothy,Frances Allen,Dorothy Vaughan
+IrwinFernandes,Mary Jane Irwin,Cristina Fernandes
+MarissaBorg,Marissa Mayer,Anita Borg
+AnaCristinaLynn,Ana Cristina Viera de Melo,Lynn Conway
+RadiaGrace,Radia Perlman,Grace Hopper
+RadiaConway,Radia Perlman,Lynn Conway
+AnitaConway,Anita Borg,Lynn Conway
+FeiFeiLynn,Fei-Fei Li,Lynn Conway
+TomitaHirataFrances,Nina Sumiko Tomita Hirata,Frances Allen
+ConwayBraghetto,Lynn Conway,Kelly Braghetto
+KellyGrace,Kelly Braghetto,Grace Hopper
+LiReshma,Fei-Fei Li,Reshma Saujani
+GraceVaughan,Grace Hopper,Dorothy Vaughan
+ShafiEasley,Shafi Goldwasser,Annie Easley
+LiLeliane,Fei-Fei Li,Leliane Nunes de Barros
+BorgPerlman,Anita Borg,Radia Perlman
+EasleyBorg,Annie Easley,Anita Borg
+PerlmanNinaSumiko,Radia Perlman,Nina Sumiko Tomita Hirata
+KellerRenata,Sister Mary Kenneth Keller,Renata Wassermann
+MarissaAsakawa,Marissa Mayer,Chieko Asakawa
+EasleyIrwin,Annie Easley,Mary Jane Irwin
+AsakawaMary,Chieko Asakawa,Mary Sieckenius
+ConwayAnaCristina,Lynn Conway,Ana Cristina Viera de Melo
+BraghettoIrwin,Kelly Braghetto,Mary Jane Irwin
+LynnWakabayashi,Lynn Conway,Yoshiko Wakabayashi
+FeiFeiKeller,Fei-Fei Li,Sister Mary Kenneth Keller
+MargaretCristina,Margaret Hamilton,Cristina Fernandes
+RenataBarbara,Renata Wassermann,Barbara Liskov
+TimnitAnita,Timnit Gebru,Anita Borg
+IrwinBarbara,Mary Jane Irwin,Barbara Liskov
+AsakawaLi,Chieko Asakawa,Fei-Fei Li
+LovelaceLiskov,Ada Lovelace,Barbara Liskov
+AdaLiskov,Ada Lovelace,Barbara Liskov
+AsakawaGoldwasser,Chieko Asakawa,Shafi Goldwasser
+GraceIrwin,Grace Hopper,Mary Jane Irwin
+AnnieRenata,Annie Easley,Renata Wassermann
+SaujaniNinaSumiko,Reshma Saujani,Nina Sumiko Tomita Hirata
+GoldwasserKoller,Shafi Goldwasser,Daphne Koller
+CristinaTomitaHirata,Cristina Fernandes,Nina Sumiko Tomita Hirata
+VaughanAda,Dorothy Vaughan,Ada Lovelace
+SieckeniusAda,Mary Sieckenius,Ada Lovelace
+HopperNami,Grace Hopper,Nami Kobayashi
+AdaEasley,Ada Lovelace,Annie Easley
+DorothyJennifer,Dorothy Vaughan,Jennifer Klawe
+MargaretWassermann,Margaret Hamilton,Renata Wassermann
+KollerHamilton,Daphne Koller,Margaret Hamilton
+MargaretRenata,Margaret Hamilton,Renata Wassermann
+BorgAda,Anita Borg,Ada Lovelace
+MaryJaneKobayashi,Mary Jane Irwin,Nami Kobayashi
+AdaGebru,Ada Lovelace,Timnit Gebru
+AnnieAda,Annie Easley,Ada Lovelace
+SisterMaryKennethWakabayashi,Sister Mary Kenneth Keller,Yoshiko Wakabayashi
+JenniferTomitaHirata,Jennifer Klawe,Nina Sumiko Tomita Hirata
+SisterMaryKennethGrace,Sister Mary Kenneth Keller,Grace Hopper
+KellerLovelace,Sister Mary Kenneth Keller,Ada Lovelace
+YoshikoMary,Yoshiko Wakabayashi,Mary Sieckenius
+TomitaHirataVaughan,Nina Sumiko Tomita Hirata,Dorothy Vaughan
+TimnitDorothy,Timnit Gebru,Dorothy Vaughan
+ChiekoHopper,Chieko Asakawa,Grace Hopper
+GraceKelly,Grace Hopper,Kelly Braghetto
+HopperNunesdeBarros,Grace Hopper,Leliane Nunes de Barros
+MayerBorg,Marissa Mayer,Anita Borg
+LynnShafi,Lynn Conway,Shafi Goldwasser
+LovelaceEasley,Ada Lovelace,Annie Easley
+LovelaceVaughan,Ada Lovelace,Dorothy Vaughan
+VaughanReshma,Dorothy Vaughan,Reshma Saujani
+GoldwasserVaughan,Shafi Goldwasser,Dorothy Vaughan
+AnnieAsakawa,Annie Easley,Chieko Asakawa
+LelianeGrace,Leliane Nunes de Barros,Grace Hopper
+TomitaHirataSieckenius,Nina Sumiko Tomita Hirata,Mary Sieckenius
+SaujaniRenata,Reshma Saujani,Renata Wassermann
+VieradeMeloBarbara,Ana Cristina Viera de Melo,Barbara Liskov
+SaujaniAda,Reshma Saujani,Ada Lovelace
+BraghettoAnnie,Kelly Braghetto,Annie Easley
+EasleyAllen,Annie Easley,Frances Allen
+GebruBorg,Timnit Gebru,Anita Borg
+KollerAnnie,Daphne Koller,Annie Easley
+BarbaraDorothy,Barbara Liskov,Dorothy Vaughan
+NunesdeBarrosFernandes,Leliane Nunes de Barros,Cristina Fernandes
+VieradeMeloKlawe,Ana Cristina Viera de Melo,Jennifer Klawe
+AnitaVaughan,Anita Borg,Dorothy Vaughan
+TimnitKobayashi,Timnit Gebru,Nami Kobayashi
+PerlmanVieradeMelo,Radia Perlman,Ana Cristina Viera de Melo
+SisterMaryKennethKobayashi,Sister Mary Kenneth Keller,Nami Kobayashi
+ReshmaFeiFei,Reshma Saujani,Fei-Fei Li
+ReshmaAda,Reshma Saujani,Ada Lovelace
+KlaweHopper,Jennifer Klawe,Grace Hopper
+AllenAnaCristina,Frances Allen,Ana Cristina Viera de Melo
+BarbaraConway,Barbara Liskov,Lynn Conway
+KollerTomitaHirata,Daphne Koller,Nina Sumiko Tomita Hirata
+FernandesKlawe,Cristina Fernandes,Jennifer Klawe
+RadiaAnita,Radia Perlman,Anita Borg
+ReshmaCristina,Reshma Saujani,Cristina Fernandes
+AnitaYoshiko,Anita Borg,Yoshiko Wakabayashi
+WassermannKoller,Renata Wassermann,Daphne Koller
+AnitaVieradeMelo,Anita Borg,Ana Cristina Viera de Melo
+ShafiFernandes,Shafi Goldwasser,Cristina Fernandes
+VaughanChieko,Dorothy Vaughan,Chieko Asakawa
+AnitaKobayashi,Anita Borg,Nami Kobayashi
+NamiRadia,Nami Kobayashi,Radia Perlman
+MarissaHamilton,Marissa Mayer,Margaret Hamilton
+MayerAnnie,Marissa Mayer,Annie Easley
+KollerMayer,Daphne Koller,Marissa Mayer
+HopperVaughan,Grace Hopper,Dorothy Vaughan
+YoshikoRadia,Yoshiko Wakabayashi,Radia Perlman
+NunesdeBarrosChieko,Leliane Nunes de Barros,Chieko Asakawa
+ReshmaAllen,Reshma Saujani,Frances Allen
+NinaSumikoSaujani,Nina Sumiko Tomita Hirata,Reshma Saujani
+NinaSumikoShafi,Nina Sumiko Tomita Hirata,Shafi Goldwasser
+AnitaWakabayashi,Anita Borg,Yoshiko Wakabayashi
+ReshmaLeliane,Reshma Saujani,Leliane Nunes de Barros
+VieradeMeloLovelace,Ana Cristina Viera de Melo,Ada Lovelace
+WakabayashiLeliane,Yoshiko Wakabayashi,Leliane Nunes de Barros
+KobayashiKlawe,Nami Kobayashi,Jennifer Klawe
+ChiekoNunesdeBarros,Chieko Asakawa,Leliane Nunes de Barros
+WakabayashiFernandes,Yoshiko Wakabayashi,Cristina Fernandes
+AnaCristinaBarbara,Ana Cristina Viera de Melo,Barbara Liskov
+AdaKoller,Ada Lovelace,Daphne Koller
+ConwayDorothy,Lynn Conway,Dorothy Vaughan
+TomitaHirataSaujani,Nina Sumiko Tomita Hirata,Reshma Saujani
+AllenGrace,Frances Allen,Grace Hopper
+GebruFrances,Timnit Gebru,Frances Allen
+DorothyRenata,Dorothy Vaughan,Renata Wassermann
+JenniferBorg,Jennifer Klawe,Anita Borg
+GraceLeliane,Grace Hopper,Leliane Nunes de Barros
+MaryFernandes,Mary Sieckenius,Cristina Fernandes
+WassermannMarissa,Renata Wassermann,Marissa Mayer
+SaujaniRadia,Reshma Saujani,Radia Perlman
+AnitaSisterMaryKenneth,Anita Borg,Sister Mary Kenneth Keller
+GoldwasserConway,Shafi Goldwasser,Lynn Conway
+KobayashiConway,Nami Kobayashi,Lynn Conway
+AnaCristinaLeliane,Ana Cristina Viera de Melo,Leliane Nunes de Barros
+MaryMargaret,Mary Sieckenius,Margaret Hamilton
+BarbaraJennifer,Barbara Liskov,Jennifer Klawe
+JenniferAda,Jennifer Klawe,Ada Lovelace
+DaphneChieko,Daphne Koller,Chieko Asakawa
+LovelaceWakabayashi,Ada Lovelace,Yoshiko Wakabayashi
+LovelaceConway,Ada Lovelace,Lynn Conway
+MaryJaneAnaCristina,Mary Jane Irwin,Ana Cristina Viera de Melo
+KellyIrwin,Kelly Braghetto,Mary Jane Irwin
+LynnNami,Lynn Conway,Nami Kobayashi
+KobayashiMayer,Nami Kobayashi,Marissa Mayer
+MayerLiskov,Marissa Mayer,Barbara Liskov
+FeiFeiMargaret,Fei-Fei Li,Margaret Hamilton
+WassermannNinaSumiko,Renata Wassermann,Nina Sumiko Tomita Hirata
+GoldwasserMarissa,Shafi Goldwasser,Marissa Mayer
+GraceYoshiko,Grace Hopper,Yoshiko Wakabayashi
+AnaCristinaAsakawa,Ana Cristina Viera de Melo,Chieko Asakawa
+GebruShafi,Timnit Gebru,Shafi Goldwasser
+HopperShafi,Grace Hopper,Shafi Goldwasser
+GebruYoshiko,Timnit Gebru,Yoshiko Wakabayashi
+AdaLeliane,Ada Lovelace,Leliane Nunes de Barros
+MaryLeliane,Mary Sieckenius,Leliane Nunes de Barros
+VaughanFeiFei,Dorothy Vaughan,Fei-Fei Li
+TomitaHirataVieradeMelo,Nina Sumiko Tomita Hirata,Ana Cristina Viera de Melo
+MayerJennifer,Marissa Mayer,Jennifer Klawe
+KollerKobayashi,Daphne Koller,Nami Kobayashi
+TomitaHirataKoller,Nina Sumiko Tomita Hirata,Daphne Koller
+MaryJaneAllen,Mary Jane Irwin,Frances Allen
+NamiAda,Nami Kobayashi,Ada Lovelace
+MargaretGoldwasser,Margaret Hamilton,Shafi Goldwasser
+HamiltonVieradeMelo,Margaret Hamilton,Ana Cristina Viera de Melo
+RadiaLeliane,Radia Perlman,Leliane Nunes de Barros
+VaughanMary,Dorothy Vaughan,Mary Sieckenius
+ReshmaFernandes,Reshma Saujani,Cristina Fernandes
+FeiFeiGebru,Fei-Fei Li,Timnit Gebru
+RadiaShafi,Radia Perlman,Shafi Goldwasser
+ReshmaMaryJane,Reshma Saujani,Mary Jane Irwin
+HamiltonChieko,Margaret Hamilton,Chieko Asakawa
+LiskovAnaCristina,Barbara Liskov,Ana Cristina Viera de Melo
+WakabayashiMaryJane,Yoshiko Wakabayashi,Mary Jane Irwin
+AnnieTimnit,Annie Easley,Timnit Gebru
+VieradeMeloShafi,Ana Cristina Viera de Melo,Shafi Goldwasser
+LynnDorothy,Lynn Conway,Dorothy Vaughan
+WassermannGrace,Renata Wassermann,Grace Hopper
+LynnIrwin,Lynn Conway,Mary Jane Irwin
+AllenMargaret,Frances Allen,Margaret Hamilton
+SaujaniChieko,Reshma Saujani,Chieko Asakawa
+GraceSisterMaryKenneth,Grace Hopper,Sister Mary Kenneth Keller
+MaryBarbara,Mary Sieckenius,Barbara Liskov
+NamiFernandes,Nami Kobayashi,Cristina Fernandes
+WassermannMayer,Renata Wassermann,Marissa Mayer
+LynnAda,Lynn Conway,Ada Lovelace
+LelianeMayer,Leliane Nunes de Barros,Marissa Mayer
+SieckeniusWassermann,Mary Sieckenius,Renata Wassermann
+NamiBorg,Nami Kobayashi,Anita Borg
+AnaCristinaLi,Ana Cristina Viera de Melo,Fei-Fei Li
+ConwayLi,Lynn Conway,Fei-Fei Li
+KollerReshma,Daphne Koller,Reshma Saujani
+NinaSumikoHamilton,Nina Sumiko Tomita Hirata,Margaret Hamilton
+AsakawaLiskov,Chieko Asakawa,Barbara Liskov
+ChiekoShafi,Chieko Asakawa,Shafi Goldwasser
+MayerHopper,Marissa Mayer,Grace Hopper
+HamiltonConway,Margaret Hamilton,Lynn Conway
+DaphneAllen,Daphne Koller,Frances Allen
+JenniferAnnie,Jennifer Klawe,Annie Easley
+ShafiAnnie,Shafi Goldwasser,Annie Easley
+YoshikoMargaret,Yoshiko Wakabayashi,Margaret Hamilton
+HopperChieko,Grace Hopper,Chieko Asakawa
+GebruMargaret,Timnit Gebru,Margaret Hamilton
+VaughanBorg,Dorothy Vaughan,Anita Borg
+VaughanMayer,Dorothy Vaughan,Marissa Mayer
+KobayashiCristina,Nami Kobayashi,Cristina Fernandes
+JenniferMargaret,Jennifer Klawe,Margaret Hamilton
+TomitaHirataNami,Nina Sumiko Tomita Hirata,Nami Kobayashi
+MaryJaneKlawe,Mary Jane Irwin,Jennifer Klawe
+WassermannReshma,Renata Wassermann,Reshma Saujani
+IrwinGoldwasser,Mary Jane Irwin,Shafi Goldwasser
+ConwayHamilton,Lynn Conway,Margaret Hamilton
+FrancesMayer,Frances Allen,Marissa Mayer
+TomitaHirataShafi,Nina Sumiko Tomita Hirata,Shafi Goldwasser
+ShafiKlawe,Shafi Goldwasser,Jennifer Klawe
+BraghettoRenata,Kelly Braghetto,Renata Wassermann
+LelianeVieradeMelo,Leliane Nunes de Barros,Ana Cristina Viera de Melo
+SieckeniusFernandes,Mary Sieckenius,Cristina Fernandes
+HopperLiskov,Grace Hopper,Barbara Liskov
+BorgGebru,Anita Borg,Timnit Gebru
+GraceConway,Grace Hopper,Lynn Conway
+DorothyHopper,Dorothy Vaughan,Grace Hopper
+MaryJaneRadia,Mary Jane Irwin,Radia Perlman
+HamiltonSisterMaryKenneth,Margaret Hamilton,Sister Mary Kenneth Keller
+ReshmaMayer,Reshma Saujani,Marissa Mayer
+NinaSumikoMayer,Nina Sumiko Tomita Hirata,Marissa Mayer
+MaryJaneSaujani,Mary Jane Irwin,Reshma Saujani
+MarissaMaryJane,Marissa Mayer,Mary Jane Irwin
+KlaweShafi,Jennifer Klawe,Shafi Goldwasser
+MaryDaphne,Mary Sieckenius,Daphne Koller
+LiConway,Fei-Fei Li,Lynn Conway
+PerlmanAnaCristina,Radia Perlman,Ana Cristina Viera de Melo
+NinaSumikoMarissa,Nina Sumiko Tomita Hirata,Marissa Mayer
+KlaweChieko,Jennifer Klawe,Chieko Asakawa
+GoldwasserMargaret,Shafi Goldwasser,Margaret Hamilton
+ShafiLynn,Shafi Goldwasser,Lynn Conway
+FernandesTimnit,Cristina Fernandes,Timnit Gebru
+LovelaceCristina,Ada Lovelace,Cristina Fernandes
+AnitaDaphne,Anita Borg,Daphne Koller
+KollerFrances,Daphne Koller,Frances Allen
+GoldwasserRenata,Shafi Goldwasser,Renata Wassermann
+DaphneGoldwasser,Daphne Koller,Shafi Goldwasser
+LynnLeliane,Lynn Conway,Leliane Nunes de Barros
+SieckeniusEasley,Mary Sieckenius,Annie Easley
+LiWassermann,Fei-Fei Li,Renata Wassermann
+MayerDorothy,Marissa Mayer,Dorothy Vaughan
+PerlmanKoller,Radia Perlman,Daphne Koller
+ConwayAnita,Lynn Conway,Anita Borg
+LynnSisterMaryKenneth,Lynn Conway,Sister Mary Kenneth Keller
+MaryJaneCristina,Mary Jane Irwin,Cristina Fernandes
+MargaretTomitaHirata,Margaret Hamilton,Nina Sumiko Tomita Hirata
+IrwinFeiFei,Mary Jane Irwin,Fei-Fei Li
+AdaKelly,Ada Lovelace,Kelly Braghetto
+FeiFeiVaughan,Fei-Fei Li,Dorothy Vaughan
+SisterMaryKennethBraghetto,Sister Mary Kenneth Keller,Kelly Braghetto
+SisterMaryKennethDaphne,Sister Mary Kenneth Keller,Daphne Koller
+KollerHopper,Daphne Koller,Grace Hopper
+NunesdeBarrosGebru,Leliane Nunes de Barros,Timnit Gebru
+SaujaniKelly,Reshma Saujani,Kelly Braghetto
+LiskovNunesdeBarros,Barbara Liskov,Leliane Nunes de Barros
+SisterMaryKennethPerlman,Sister Mary Kenneth Keller,Radia Perlman
+FrancesLynn,Frances Allen,Lynn Conway
+DaphneTomitaHirata,Daphne Koller,Nina Sumiko Tomita Hirata
+LynnReshma,Lynn Conway,Reshma Saujani
+ReshmaHopper,Reshma Saujani,Grace Hopper
+AnaCristinaCristina,Ana Cristina Viera de Melo,Cristina Fernandes
+EasleyCristina,Annie Easley,Cristina Fernandes
+NunesdeBarrosMarissa,Leliane Nunes de Barros,Marissa Mayer
+CristinaDaphne,Cristina Fernandes,Daphne Koller
+DaphneFernandes,Daphne Koller,Cristina Fernandes
+AnnieShafi,Annie Easley,Shafi Goldwasser
+SieckeniusMaryJane,Mary Sieckenius,Mary Jane Irwin
+BorgRadia,Anita Borg,Radia Perlman
+KellyNunesdeBarros,Kelly Braghetto,Leliane Nunes de Barros
+PerlmanTomitaHirata,Radia Perlman,Nina Sumiko Tomita Hirata
+KellerConway,Sister Mary Kenneth Keller,Lynn Conway
+AnnieRadia,Annie Easley,Radia Perlman
+AllenKoller,Frances Allen,Daphne Koller
+AnitaWassermann,Anita Borg,Renata Wassermann
+BorgKoller,Anita Borg,Daphne Koller
+GraceShafi,Grace Hopper,Shafi Goldwasser
+VaughanAnita,Dorothy Vaughan,Anita Borg
+BorgTimnit,Anita Borg,Timnit Gebru
+VaughanEasley,Dorothy Vaughan,Annie Easley
+MarissaPerlman,Marissa Mayer,Radia Perlman
+LiTomitaHirata,Fei-Fei Li,Nina Sumiko Tomita Hirata
+RenataMaryJane,Renata Wassermann,Mary Jane Irwin
+AdaFeiFei,Ada Lovelace,Fei-Fei Li
+PerlmanFeiFei,Radia Perlman,Fei-Fei Li
+YoshikoWassermann,Yoshiko Wakabayashi,Renata Wassermann
+KlaweAda,Jennifer Klawe,Ada Lovelace
+ReshmaLovelace,Reshma Saujani,Ada Lovelace
+JenniferShafi,Jennifer Klawe,Shafi Goldwasser
+GraceTomitaHirata,Grace Hopper,Nina Sumiko Tomita Hirata
+MayerLeliane,Marissa Mayer,Leliane Nunes de Barros
+YoshikoAllen,Yoshiko Wakabayashi,Frances Allen
+WakabayashiLynn,Yoshiko Wakabayashi,Lynn Conway
+AsakawaNami,Chieko Asakawa,Nami Kobayashi
+HamiltonMaryJane,Margaret Hamilton,Mary Jane Irwin
+WakabayashiJennifer,Yoshiko Wakabayashi,Jennifer Klawe
+KellyGoldwasser,Kelly Braghetto,Shafi Goldwasser
+KlaweLovelace,Jennifer Klawe,Ada Lovelace
+MaryKelly,Mary Sieckenius,Kelly Braghetto
+ChiekoEasley,Chieko Asakawa,Annie Easley
+AnnieKelly,Annie Easley,Kelly Braghetto
+ReshmaLiskov,Reshma Saujani,Barbara Liskov
+ShafiBarbara,Shafi Goldwasser,Barbara Liskov
+ChiekoKobayashi,Chieko Asakawa,Nami Kobayashi
+NunesdeBarrosWassermann,Leliane Nunes de Barros,Renata Wassermann
+BraghettoNunesdeBarros,Kelly Braghetto,Leliane Nunes de Barros
+SieckeniusNunesdeBarros,Mary Sieckenius,Leliane Nunes de Barros
+LynnKlawe,Lynn Conway,Jennifer Klawe
+ChiekoReshma,Chieko Asakawa,Reshma Saujani
+SieckeniusRenata,Mary Sieckenius,Renata Wassermann
+KollerSisterMaryKenneth,Daphne Koller,Sister Mary Kenneth Keller
+PerlmanSieckenius,Radia Perlman,Mary Sieckenius
+DaphneAsakawa,Daphne Koller,Chieko Asakawa
+KollerTimnit,Daphne Koller,Timnit Gebru
+JenniferTimnit,Jennifer Klawe,Timnit Gebru
+HopperSaujani,Grace Hopper,Reshma Saujani
+AnitaNunesdeBarros,Anita Borg,Leliane Nunes de Barros
+BorgDaphne,Anita Borg,Daphne Koller
+MargaretBarbara,Margaret Hamilton,Barbara Liskov
+BarbaraMayer,Barbara Liskov,Marissa Mayer
+RadiaBarbara,Radia Perlman,Barbara Liskov
+AnaCristinaNunesdeBarros,Ana Cristina Viera de Melo,Leliane Nunes de Barros
+GoldwasserRadia,Shafi Goldwasser,Radia Perlman
+RenataVaughan,Renata Wassermann,Dorothy Vaughan
+HopperAnita,Grace Hopper,Anita Borg
+KlaweConway,Jennifer Klawe,Lynn Conway
+HopperEasley,Grace Hopper,Annie Easley
+FernandesKelly,Cristina Fernandes,Kelly Braghetto
+ReshmaMargaret,Reshma Saujani,Margaret Hamilton
+MaryJaneMary,Mary Jane Irwin,Mary Sieckenius
+DaphneKlawe,Daphne Koller,Jennifer Klawe
+NamiSieckenius,Nami Kobayashi,Mary Sieckenius
+HamiltonShafi,Margaret Hamilton,Shafi Goldwasser
+KlaweFeiFei,Jennifer Klawe,Fei-Fei Li
+KobayashiAllen,Nami Kobayashi,Frances Allen
+RadiaHopper,Radia Perlman,Grace Hopper
+HamiltonJennifer,Margaret Hamilton,Jennifer Klawe
+ConwayWakabayashi,Lynn Conway,Yoshiko Wakabayashi
+WakabayashiLi,Yoshiko Wakabayashi,Fei-Fei Li
+BraghettoMaryJane,Kelly Braghetto,Mary Jane Irwin
+DaphneAnita,Daphne Koller,Anita Borg
+AdaAsakawa,Ada Lovelace,Chieko Asakawa
+AsakawaNinaSumiko,Chieko Asakawa,Nina Sumiko Tomita Hirata
+LiskovAnita,Barbara Liskov,Anita Borg
+PerlmanSisterMaryKenneth,Radia Perlman,Sister Mary Kenneth Keller
+KlaweAnnie,Jennifer Klawe,Annie Easley
+SieckeniusMargaret,Mary Sieckenius,Margaret Hamilton
+ChiekoIrwin,Chieko Asakawa,Mary Jane Irwin
+GraceWassermann,Grace Hopper,Renata Wassermann
+WassermannKelly,Renata Wassermann,Kelly Braghetto
+TimnitLovelace,Timnit Gebru,Ada Lovelace
+LynnMary,Lynn Conway,Mary Sieckenius
+TimnitRenata,Timnit Gebru,Renata Wassermann
+KollerKeller,Daphne Koller,Sister Mary Kenneth Keller
+NinaSumikoMaryJane,Nina Sumiko Tomita Hirata,Mary Jane Irwin
+NinaSumikoKoller,Nina Sumiko Tomita Hirata,Daphne Koller
+LovelaceMarissa,Ada Lovelace,Marissa Mayer
+ChiekoRenata,Chieko Asakawa,Renata Wassermann
+GoldwasserAsakawa,Shafi Goldwasser,Chieko Asakawa
+FernandesKobayashi,Cristina Fernandes,Nami Kobayashi
+MayerPerlman,Marissa Mayer,Radia Perlman
+LiskovJennifer,Barbara Liskov,Jennifer Klawe
+KellySaujani,Kelly Braghetto,Reshma Saujani
+GebruWakabayashi,Timnit Gebru,Yoshiko Wakabayashi
+LovelaceShafi,Ada Lovelace,Shafi Goldwasser
+GoldwasserLynn,Shafi Goldwasser,Lynn Conway
+GoldwasserMaryJane,Shafi Goldwasser,Mary Jane Irwin
+TomitaHirataTimnit,Nina Sumiko Tomita Hirata,Timnit Gebru
+BarbaraFernandes,Barbara Liskov,Cristina Fernandes
+NinaSumikoAnaCristina,Nina Sumiko Tomita Hirata,Ana Cristina Viera de Melo
+LelianeWassermann,Leliane Nunes de Barros,Renata Wassermann
+BarbaraSaujani,Barbara Liskov,Reshma Saujani
+EasleyGrace,Annie Easley,Grace Hopper
+JenniferKoller,Jennifer Klawe,Daphne Koller
+LiKobayashi,Fei-Fei Li,Nami Kobayashi
+KellyHamilton,Kelly Braghetto,Margaret Hamilton
+GebruEasley,Timnit Gebru,Annie Easley
+TimnitMary,Timnit Gebru,Mary Sieckenius
+BarbaraFrances,Barbara Liskov,Frances Allen
+LovelaceGebru,Ada Lovelace,Timnit Gebru
+BarbaraCristina,Barbara Liskov,Cristina Fernandes
+GoldwasserJennifer,Shafi Goldwasser,Jennifer Klawe
+FeiFeiRadia,Fei-Fei Li,Radia Perlman
+MaryJaneFernandes,Mary Jane Irwin,Cristina Fernandes
+KellerBraghetto,Sister Mary Kenneth Keller,Kelly Braghetto
+ConwayGebru,Lynn Conway,Timnit Gebru
+AsakawaFernandes,Chieko Asakawa,Cristina Fernandes
+KellerLi,Sister Mary Kenneth Keller,Fei-Fei Li
+LiskovMarissa,Barbara Liskov,Marissa Mayer
+HamiltonCristina,Margaret Hamilton,Cristina Fernandes
+MarissaDaphne,Marissa Mayer,Daphne Koller
+AnnieGoldwasser,Annie Easley,Shafi Goldwasser
+KollerLi,Daphne Koller,Fei-Fei Li
+GebruVieradeMelo,Timnit Gebru,Ana Cristina Viera de Melo
+MayerAsakawa,Marissa Mayer,Chieko Asakawa
+MarissaAda,Marissa Mayer,Ada Lovelace
+DorothyBorg,Dorothy Vaughan,Anita Borg
+IrwinReshma,Mary Jane Irwin,Reshma Saujani
+NinaSumikoReshma,Nina Sumiko Tomita Hirata,Reshma Saujani
+CristinaAsakawa,Cristina Fernandes,Chieko Asakawa
+FrancesDorothy,Frances Allen,Dorothy Vaughan
+IrwinWassermann,Mary Jane Irwin,Renata Wassermann
+MargaretKelly,Margaret Hamilton,Kelly Braghetto
+ReshmaDaphne,Reshma Saujani,Daphne Koller
+KlaweReshma,Jennifer Klawe,Reshma Saujani
+LelianeRenata,Leliane Nunes de Barros,Renata Wassermann
+KlaweNami,Jennifer Klawe,Nami Kobayashi
+CristinaKoller,Cristina Fernandes,Daphne Koller
+AllenShafi,Frances Allen,Shafi Goldwasser
+DaphneLiskov,Daphne Koller,Barbara Liskov
+WassermannChieko,Renata Wassermann,Chieko Asakawa
+LiskovHopper,Barbara Liskov,Grace Hopper
+LovelaceKelly,Ada Lovelace,Kelly Braghetto
+BarbaraEasley,Barbara Liskov,Annie Easley
+MaryJaneAnnie,Mary Jane Irwin,Annie Easley
+FrancesTimnit,Frances Allen,Timnit Gebru
+HamiltonAsakawa,Margaret Hamilton,Chieko Asakawa
+AnitaAsakawa,Anita Borg,Chieko Asakawa
+KellyWakabayashi,Kelly Braghetto,Yoshiko Wakabayashi
+LelianeKlawe,Leliane Nunes de Barros,Jennifer Klawe
+ReshmaIrwin,Reshma Saujani,Mary Jane Irwin
+GraceTimnit,Grace Hopper,Timnit Gebru
+NinaSumikoKeller,Nina Sumiko Tomita Hirata,Sister Mary Kenneth Keller
+VaughanSisterMaryKenneth,Dorothy Vaughan,Sister Mary Kenneth Keller
+WakabayashiSaujani,Yoshiko Wakabayashi,Reshma Saujani
+TomitaHirataConway,Nina Sumiko Tomita Hirata,Lynn Conway
+ChiekoNinaSumiko,Chieko Asakawa,Nina Sumiko Tomita Hirata
+AdaKobayashi,Ada Lovelace,Nami Kobayashi
+PerlmanSaujani,Radia Perlman,Reshma Saujani
+HamiltonAnaCristina,Margaret Hamilton,Ana Cristina Viera de Melo
+NunesdeBarrosKlawe,Leliane Nunes de Barros,Jennifer Klawe
+BorgCristina,Anita Borg,Cristina Fernandes
+HopperNinaSumiko,Grace Hopper,Nina Sumiko Tomita Hirata
+AllenKeller,Frances Allen,Sister Mary Kenneth Keller
+CristinaIrwin,Cristina Fernandes,Mary Jane Irwin
+WakabayashiKelly,Yoshiko Wakabayashi,Kelly Braghetto
+GraceLiskov,Grace Hopper,Barbara Liskov
+LynnTimnit,Lynn Conway,Timnit Gebru
+SisterMaryKennethChieko,Sister Mary Kenneth Keller,Chieko Asakawa
+FernandesShafi,Cristina Fernandes,Shafi Goldwasser
+SisterMaryKennethAnaCristina,Sister Mary Kenneth Keller,Ana Cristina Viera de Melo
+YoshikoConway,Yoshiko Wakabayashi,Lynn Conway
+LynnMaryJane,Lynn Conway,Mary Jane Irwin
+VaughanCristina,Dorothy Vaughan,Cristina Fernandes
+MaryEasley,Mary Sieckenius,Annie Easley
+SaujaniLynn,Reshma Saujani,Lynn Conway
+VieradeMeloChieko,Ana Cristina Viera de Melo,Chieko Asakawa
+GoldwasserYoshiko,Shafi Goldwasser,Yoshiko Wakabayashi
+DaphneLi,Daphne Koller,Fei-Fei Li
+BraghettoSaujani,Kelly Braghetto,Reshma Saujani
+LiMaryJane,Fei-Fei Li,Mary Jane Irwin
+ChiekoWassermann,Chieko Asakawa,Renata Wassermann
+BraghettoLi,Kelly Braghetto,Fei-Fei Li
+KollerLiskov,Daphne Koller,Barbara Liskov
+GoldwasserFernandes,Shafi Goldwasser,Cristina Fernandes
+AsakawaTimnit,Chieko Asakawa,Timnit Gebru
+AsakawaIrwin,Chieko Asakawa,Mary Jane Irwin
+HamiltonGrace,Margaret Hamilton,Grace Hopper
+MaryJanePerlman,Mary Jane Irwin,Radia Perlman
+YoshikoKobayashi,Yoshiko Wakabayashi,Nami Kobayashi
+MarissaLiskov,Marissa Mayer,Barbara Liskov
+FernandesSaujani,Cristina Fernandes,Reshma Saujani
+AnnieNinaSumiko,Annie Easley,Nina Sumiko Tomita Hirata
+AdaTomitaHirata,Ada Lovelace,Nina Sumiko Tomita Hirata
+LelianeConway,Leliane Nunes de Barros,Lynn Conway
+MarissaTomitaHirata,Marissa Mayer,Nina Sumiko Tomita Hirata
+LiskovBraghetto,Barbara Liskov,Kelly Braghetto
+DorothyFernandes,Dorothy Vaughan,Cristina Fernandes
+FernandesVaughan,Cristina Fernandes,Dorothy Vaughan
+IrwinFrances,Mary Jane Irwin,Frances Allen
+JenniferHamilton,Jennifer Klawe,Margaret Hamilton
+AnnieWakabayashi,Annie Easley,Yoshiko Wakabayashi
+AllenHopper,Frances Allen,Grace Hopper
+SaujaniKlawe,Reshma Saujani,Jennifer Klawe
+GebruHopper,Timnit Gebru,Grace Hopper
+PerlmanChieko,Radia Perlman,Chieko Asakawa
+SaujaniMary,Reshma Saujani,Mary Sieckenius
+RadiaKlawe,Radia Perlman,Jennifer Klawe
+TomitaHirataAllen,Nina Sumiko Tomita Hirata,Frances Allen
+KellyLiskov,Kelly Braghetto,Barbara Liskov
+HopperBraghetto,Grace Hopper,Kelly Braghetto
+DorothyAsakawa,Dorothy Vaughan,Chieko Asakawa
+MarissaBarbara,Marissa Mayer,Barbara Liskov
+MarissaFrances,Marissa Mayer,Frances Allen
+YoshikoIrwin,Yoshiko Wakabayashi,Mary Jane Irwin
+ReshmaKeller,Reshma Saujani,Sister Mary Kenneth Keller
+NamiNinaSumiko,Nami Kobayashi,Nina Sumiko Tomita Hirata
+LynnSaujani,Lynn Conway,Reshma Saujani
+MayerRadia,Marissa Mayer,Radia Perlman
+KollerJennifer,Daphne Koller,Jennifer Klawe
+DaphneFrances,Daphne Koller,Frances Allen
+RenataAllen,Renata Wassermann,Frances Allen
+KellyAnita,Kelly Braghetto,Anita Borg
+FeiFeiYoshiko,Fei-Fei Li,Yoshiko Wakabayashi
+NamiBraghetto,Nami Kobayashi,Kelly Braghetto
+TomitaHirataLovelace,Nina Sumiko Tomita Hirata,Ada Lovelace
+MaryDorothy,Mary Sieckenius,Dorothy Vaughan
+BraghettoNami,Kelly Braghetto,Nami Kobayashi
+ConwayChieko,Lynn Conway,Chieko Asakawa
+NamiFrances,Nami Kobayashi,Frances Allen
+KellyTimnit,Kelly Braghetto,Timnit Gebru
+FernandesIrwin,Cristina Fernandes,Mary Jane Irwin
+DaphneWakabayashi,Daphne Koller,Yoshiko Wakabayashi
+EasleyTomitaHirata,Annie Easley,Nina Sumiko Tomita Hirata
+BorgLovelace,Anita Borg,Ada Lovelace
+ChiekoKelly,Chieko Asakawa,Kelly Braghetto
+AdaNami,Ada Lovelace,Nami Kobayashi
+DaphneKelly,Daphne Koller,Kelly Braghetto
+MaryJaneFrances,Mary Jane Irwin,Frances Allen
+EasleyAnaCristina,Annie Easley,Ana Cristina Viera de Melo
+SieckeniusAllen,Mary Sieckenius,Frances Allen
+RadiaYoshiko,Radia Perlman,Yoshiko Wakabayashi
+WassermannDaphne,Renata Wassermann,Daphne Koller
+KobayashiHopper,Nami Kobayashi,Grace Hopper
+AnaCristinaGebru,Ana Cristina Viera de Melo,Timnit Gebru
+VaughanFernandes,Dorothy Vaughan,Cristina Fernandes
+GoldwasserNunesdeBarros,Shafi Goldwasser,Leliane Nunes de Barros
+NamiGoldwasser,Nami Kobayashi,Shafi Goldwasser
+FeiFeiLiskov,Fei-Fei Li,Barbara Liskov
+BraghettoWakabayashi,Kelly Braghetto,Yoshiko Wakabayashi
+FernandesLovelace,Cristina Fernandes,Ada Lovelace
+MargaretKoller,Margaret Hamilton,Daphne Koller
+CristinaGoldwasser,Cristina Fernandes,Shafi Goldwasser
+WassermannAnnie,Renata Wassermann,Annie Easley
+TimnitFeiFei,Timnit Gebru,Fei-Fei Li
+HopperKeller,Grace Hopper,Sister Mary Kenneth Keller
+FrancesMaryJane,Frances Allen,Mary Jane Irwin
+GebruPerlman,Timnit Gebru,Radia Perlman
+MaryJaneReshma,Mary Jane Irwin,Reshma Saujani
+YoshikoLi,Yoshiko Wakabayashi,Fei-Fei Li
+SisterMaryKennethMayer,Sister Mary Kenneth Keller,Marissa Mayer
+TomitaHirataIrwin,Nina Sumiko Tomita Hirata,Mary Jane Irwin
+VaughanHopper,Dorothy Vaughan,Grace Hopper
+TimnitGrace,Timnit Gebru,Grace Hopper
+KlaweLiskov,Jennifer Klawe,Barbara Liskov
+SisterMaryKennethRadia,Sister Mary Kenneth Keller,Radia Perlman
+KobayashiAda,Nami Kobayashi,Ada Lovelace
+HopperCristina,Grace Hopper,Cristina Fernandes
+AsakawaYoshiko,Chieko Asakawa,Yoshiko Wakabayashi
+JenniferBarbara,Jennifer Klawe,Barbara Liskov
+MaryVaughan,Mary Sieckenius,Dorothy Vaughan
+FeiFeiVieradeMelo,Fei-Fei Li,Ana Cristina Viera de Melo
+KollerShafi,Daphne Koller,Shafi Goldwasser
+AnitaKoller,Anita Borg,Daphne Koller
+IrwinGebru,Mary Jane Irwin,Timnit Gebru
+ConwayIrwin,Lynn Conway,Mary Jane Irwin
+CristinaShafi,Cristina Fernandes,Shafi Goldwasser
+YoshikoJennifer,Yoshiko Wakabayashi,Jennifer Klawe
+KellerLynn,Sister Mary Kenneth Keller,Lynn Conway
+MaryBorg,Mary Sieckenius,Anita Borg
+LelianeKelly,Leliane Nunes de Barros,Kelly Braghetto
+BorgShafi,Anita Borg,Shafi Goldwasser
+ReshmaEasley,Reshma Saujani,Annie Easley
+MayerTomitaHirata,Marissa Mayer,Nina Sumiko Tomita Hirata
+BarbaraKobayashi,Barbara Liskov,Nami Kobayashi
+CristinaLiskov,Cristina Fernandes,Barbara Liskov
+WakabayashiRadia,Yoshiko Wakabayashi,Radia Perlman
+KellerFrances,Sister Mary Kenneth Keller,Frances Allen
+GebruConway,Timnit Gebru,Lynn Conway
+NinaSumikoAda,Nina Sumiko Tomita Hirata,Ada Lovelace
+AllenNinaSumiko,Frances Allen,Nina Sumiko Tomita Hirata
+LynnFeiFei,Lynn Conway,Fei-Fei Li
+MargaretKeller,Margaret Hamilton,Sister Mary Kenneth Keller
+AdaShafi,Ada Lovelace,Shafi Goldwasser
+FernandesAnita,Cristina Fernandes,Anita Borg
+GebruAllen,Timnit Gebru,Frances Allen
+AnitaDorothy,Anita Borg,Dorothy Vaughan
+AnnieNunesdeBarros,Annie Easley,Leliane Nunes de Barros
+NamiRenata,Nami Kobayashi,Renata Wassermann
+AsakawaLovelace,Chieko Asakawa,Ada Lovelace
+KellyBorg,Kelly Braghetto,Anita Borg
+LiskovRenata,Barbara Liskov,Renata Wassermann
+DaphneNunesdeBarros,Daphne Koller,Leliane Nunes de Barros
+SisterMaryKennethMary,Sister Mary Kenneth Keller,Mary Sieckenius
+MarySisterMaryKenneth,Mary Sieckenius,Sister Mary Kenneth Keller
+NamiSisterMaryKenneth,Nami Kobayashi,Sister Mary Kenneth Keller
+MargaretPerlman,Margaret Hamilton,Radia Perlman
+VaughanConway,Dorothy Vaughan,Lynn Conway
+ChiekoKoller,Chieko Asakawa,Daphne Koller
+VaughanKlawe,Dorothy Vaughan,Jennifer Klawe
+TomitaHirataMargaret,Nina Sumiko Tomita Hirata,Margaret Hamilton
+ChiekoRadia,Chieko Asakawa,Radia Perlman
+SieckeniusShafi,Mary Sieckenius,Shafi Goldwasser
+FrancesLovelace,Frances Allen,Ada Lovelace
+AnaCristinaChieko,Ana Cristina Viera de Melo,Chieko Asakawa
+AnaCristinaNinaSumiko,Ana Cristina Viera de Melo,Nina Sumiko Tomita Hirata
+AnitaAllen,Anita Borg,Frances Allen
+GraceNami,Grace Hopper,Nami Kobayashi
+GoldwasserFrances,Shafi Goldwasser,Frances Allen
+MaryTomitaHirata,Mary Sieckenius,Nina Sumiko Tomita Hirata
+GebruNinaSumiko,Timnit Gebru,Nina Sumiko Tomita Hirata
+AllenKobayashi,Frances Allen,Nami Kobayashi
+PerlmanKobayashi,Radia Perlman,Nami Kobayashi
+AdaMargaret,Ada Lovelace,Margaret Hamilton
+ChiekoSieckenius,Chieko Asakawa,Mary Sieckenius
+WakabayashiIrwin,Yoshiko Wakabayashi,Mary Jane Irwin
+ChiekoJennifer,Chieko Asakawa,Jennifer Klawe
+IrwinSisterMaryKenneth,Mary Jane Irwin,Sister Mary Kenneth Keller
+YoshikoAnaCristina,Yoshiko Wakabayashi,Ana Cristina Viera de Melo
+AnnieGrace,Annie Easley,Grace Hopper
+VaughanBarbara,Dorothy Vaughan,Barbara Liskov
+MarySaujani,Mary Sieckenius,Reshma Saujani
+AnaCristinaReshma,Ana Cristina Viera de Melo,Reshma Saujani
+JenniferVaughan,Jennifer Klawe,Dorothy Vaughan
+BarbaraAnnie,Barbara Liskov,Annie Easley
+LelianeHamilton,Leliane Nunes de Barros,Margaret Hamilton
+VieradeMeloGrace,Ana Cristina Viera de Melo,Grace Hopper
+ConwayAnnie,Lynn Conway,Annie Easley
+RenataMayer,Renata Wassermann,Marissa Mayer
+NunesdeBarrosAsakawa,Leliane Nunes de Barros,Chieko Asakawa
+DorothySieckenius,Dorothy Vaughan,Mary Sieckenius
+BarbaraHamilton,Barbara Liskov,Margaret Hamilton
+LiSisterMaryKenneth,Fei-Fei Li,Sister Mary Kenneth Keller
+HamiltonLiskov,Margaret Hamilton,Barbara Liskov
+YoshikoAda,Yoshiko Wakabayashi,Ada Lovelace
+RenataDaphne,Renata Wassermann,Daphne Koller
+WakabayashiRenata,Yoshiko Wakabayashi,Renata Wassermann
+NunesdeBarrosBraghetto,Leliane Nunes de Barros,Kelly Braghetto
+MayerMaryJane,Marissa Mayer,Mary Jane Irwin
+BraghettoLovelace,Kelly Braghetto,Ada Lovelace
+FeiFeiGoldwasser,Fei-Fei Li,Shafi Goldwasser
+SaujaniKeller,Reshma Saujani,Sister Mary Kenneth Keller
+FeiFeiEasley,Fei-Fei Li,Annie Easley
+PerlmanIrwin,Radia Perlman,Mary Jane Irwin
+TimnitKlawe,Timnit Gebru,Jennifer Klawe
+BraghettoTimnit,Kelly Braghetto,Timnit Gebru
+ShafiAda,Shafi Goldwasser,Ada Lovelace
+DaphneHopper,Daphne Koller,Grace Hopper
+FrancesJennifer,Frances Allen,Jennifer Klawe
+HamiltonVaughan,Margaret Hamilton,Dorothy Vaughan
+FernandesLiskov,Cristina Fernandes,Barbara Liskov
+BarbaraNunesdeBarros,Barbara Liskov,Leliane Nunes de Barros
+AnnieYoshiko,Annie Easley,Yoshiko Wakabayashi
+AsakawaPerlman,Chieko Asakawa,Radia Perlman
+KollerMaryJane,Daphne Koller,Mary Jane Irwin
+LiGoldwasser,Fei-Fei Li,Shafi Goldwasser
+AnaCristinaTimnit,Ana Cristina Viera de Melo,Timnit Gebru
+ShafiRadia,Shafi Goldwasser,Radia Perlman
+WassermannCristina,Renata Wassermann,Cristina Fernandes
+SaujaniMaryJane,Reshma Saujani,Mary Jane Irwin
+KellyFrances,Kelly Braghetto,Frances Allen
+ReshmaAsakawa,Reshma Saujani,Chieko Asakawa
+WakabayashiBorg,Yoshiko Wakabayashi,Anita Borg
+AnnieLovelace,Annie Easley,Ada Lovelace
+ShafiAnita,Shafi Goldwasser,Anita Borg
+WassermannFernandes,Renata Wassermann,Cristina Fernandes
+BraghettoRadia,Kelly Braghetto,Radia Perlman
+LelianeRadia,Leliane Nunes de Barros,Radia Perlman
+AsakawaSisterMaryKenneth,Chieko Asakawa,Sister Mary Kenneth Keller
+LelianeAnita,Leliane Nunes de Barros,Anita Borg
+MarissaConway,Marissa Mayer,Lynn Conway
+LiskovGebru,Barbara Liskov,Timnit Gebru
+ReshmaTimnit,Reshma Saujani,Timnit Gebru
+BorgMargaret,Anita Borg,Margaret Hamilton
+GoldwasserDorothy,Shafi Goldwasser,Dorothy Vaughan
+BarbaraFeiFei,Barbara Liskov,Fei-Fei Li
+BorgConway,Anita Borg,Lynn Conway
+MarissaLovelace,Marissa Mayer,Ada Lovelace
+BraghettoKeller,Kelly Braghetto,Sister Mary Kenneth Keller
+ChiekoTomitaHirata,Chieko Asakawa,Nina Sumiko Tomita Hirata
+FrancesCristina,Frances Allen,Cristina Fernandes
+LovelaceLynn,Ada Lovelace,Lynn Conway
+MaryYoshiko,Mary Sieckenius,Yoshiko Wakabayashi
+FeiFeiTimnit,Fei-Fei Li,Timnit Gebru
+WassermannLeliane,Renata Wassermann,Leliane Nunes de Barros
+NinaSumikoRenata,Nina Sumiko Tomita Hirata,Renata Wassermann
+WassermannVieradeMelo,Renata Wassermann,Ana Cristina Viera de Melo
+EasleyKelly,Annie Easley,Kelly Braghetto
+SaujaniAllen,Reshma Saujani,Frances Allen
+LelianeBarbara,Leliane Nunes de Barros,Barbara Liskov
+LovelaceDaphne,Ada Lovelace,Daphne Koller
+ChiekoAda,Chieko Asakawa,Ada Lovelace
+PerlmanCristina,Radia Perlman,Cristina Fernandes
+ShafiKobayashi,Shafi Goldwasser,Nami Kobayashi
+DorothyMarissa,Dorothy Vaughan,Marissa Mayer
+KellerGebru,Sister Mary Kenneth Keller,Timnit Gebru
+NamiVieradeMelo,Nami Kobayashi,Ana Cristina Viera de Melo
+GebruLynn,Timnit Gebru,Lynn Conway
+MaryJaneLi,Mary Jane Irwin,Fei-Fei Li
+NinaSumikoLiskov,Nina Sumiko Tomita Hirata,Barbara Liskov
+LovelaceAnita,Ada Lovelace,Anita Borg
+IrwinCristina,Mary Jane Irwin,Cristina Fernandes
+LelianeAsakawa,Leliane Nunes de Barros,Chieko Asakawa
+HamiltonKeller,Margaret Hamilton,Sister Mary Kenneth Keller
+AllenNami,Frances Allen,Nami Kobayashi
+RadiaReshma,Radia Perlman,Reshma Saujani
+MaryJaneYoshiko,Mary Jane Irwin,Yoshiko Wakabayashi
+NamiLovelace,Nami Kobayashi,Ada Lovelace
+ChiekoLynn,Chieko Asakawa,Lynn Conway
+MayerRenata,Marissa Mayer,Renata Wassermann
+AnaCristinaTomitaHirata,Ana Cristina Viera de Melo,Nina Sumiko Tomita Hirata
+VaughanAnaCristina,Dorothy Vaughan,Ana Cristina Viera de Melo
+GoldwasserFeiFei,Shafi Goldwasser,Fei-Fei Li
+FeiFeiMarissa,Fei-Fei Li,Marissa Mayer
+DorothyKobayashi,Dorothy Vaughan,Nami Kobayashi
+MayerReshma,Marissa Mayer,Reshma Saujani
+BraghettoConway,Kelly Braghetto,Lynn Conway
+AnnieMarissa,Annie Easley,Marissa Mayer
+AllenPerlman,Frances Allen,Radia Perlman
+GoldwasserIrwin,Shafi Goldwasser,Mary Jane Irwin
+YoshikoKoller,Yoshiko Wakabayashi,Daphne Koller
+SieckeniusYoshiko,Mary Sieckenius,Yoshiko Wakabayashi
+ConwayYoshiko,Lynn Conway,Yoshiko Wakabayashi
+KollerPerlman,Daphne Koller,Radia Perlman
+LiskovAsakawa,Barbara Liskov,Chieko Asakawa
+MarissaIrwin,Marissa Mayer,Mary Jane Irwin
+BraghettoLynn,Kelly Braghetto,Lynn Conway
+FeiFeiTomitaHirata,Fei-Fei Li,Nina Sumiko Tomita Hirata
+LynnAnnie,Lynn Conway,Annie Easley
+BarbaraHopper,Barbara Liskov,Grace Hopper
+LynnWassermann,Lynn Conway,Renata Wassermann
+YoshikoFernandes,Yoshiko Wakabayashi,Cristina Fernandes
+RenataMarissa,Renata Wassermann,Marissa Mayer
+RenataGrace,Renata Wassermann,Grace Hopper
+JenniferAllen,Jennifer Klawe,Frances Allen
+ShafiGebru,Shafi Goldwasser,Timnit Gebru
+SaujaniAnnie,Reshma Saujani,Annie Easley
+MaryJaneTomitaHirata,Mary Jane Irwin,Nina Sumiko Tomita Hirata
+SieckeniusLynn,Mary Sieckenius,Lynn Conway
+KollerEasley,Daphne Koller,Annie Easley
+FrancesDaphne,Frances Allen,Daphne Koller
+HamiltonSaujani,Margaret Hamilton,Reshma Saujani
+DorothyWakabayashi,Dorothy Vaughan,Yoshiko Wakabayashi
+AllenBraghetto,Frances Allen,Kelly Braghetto
+EasleyVieradeMelo,Annie Easley,Ana Cristina Viera de Melo
+AnitaSieckenius,Anita Borg,Mary Sieckenius
+KlaweAnita,Jennifer Klawe,Anita Borg
+MayerVieradeMelo,Marissa Mayer,Ana Cristina Viera de Melo
+MargaretNunesdeBarros,Margaret Hamilton,Leliane Nunes de Barros
+MayerShafi,Marissa Mayer,Shafi Goldwasser
+VaughanTimnit,Dorothy Vaughan,Timnit Gebru
+JenniferMary,Jennifer Klawe,Mary Sieckenius
+HamiltonWassermann,Margaret Hamilton,Renata Wassermann
+LiskovSaujani,Barbara Liskov,Reshma Saujani
+AnnieMary,Annie Easley,Mary Sieckenius
+AllenFernandes,Frances Allen,Cristina Fernandes
+VaughanGrace,Dorothy Vaughan,Grace Hopper
+BarbaraMarissa,Barbara Liskov,Marissa Mayer
+SieckeniusDaphne,Mary Sieckenius,Daphne Koller
+ConwayVieradeMelo,Lynn Conway,Ana Cristina Viera de Melo
+RadiaSieckenius,Radia Perlman,Mary Sieckenius
+GraceKoller,Grace Hopper,Daphne Koller
+BarbaraMargaret,Barbara Liskov,Margaret Hamilton
+TomitaHirataFeiFei,Nina Sumiko Tomita Hirata,Fei-Fei Li
+HopperAnnie,Grace Hopper,Annie Easley
+AnitaHopper,Anita Borg,Grace Hopper
+FernandesFeiFei,Cristina Fernandes,Fei-Fei Li
+AdaLi,Ada Lovelace,Fei-Fei Li
+GebruJennifer,Timnit Gebru,Jennifer Klawe
+NamiMargaret,Nami Kobayashi,Margaret Hamilton
+HopperLovelace,Grace Hopper,Ada Lovelace
+HopperTomitaHirata,Grace Hopper,Nina Sumiko Tomita Hirata
+WakabayashiChieko,Yoshiko Wakabayashi,Chieko Asakawa
+ConwaySaujani,Lynn Conway,Reshma Saujani
+AsakawaConway,Chieko Asakawa,Lynn Conway
+MaryJaneNunesdeBarros,Mary Jane Irwin,Leliane Nunes de Barros
+LovelaceMaryJane,Ada Lovelace,Mary Jane Irwin
+TomitaHirataMayer,Nina Sumiko Tomita Hirata,Marissa Mayer
+ReshmaGrace,Reshma Saujani,Grace Hopper
+PerlmanGrace,Radia Perlman,Grace Hopper
+WakabayashiMary,Yoshiko Wakabayashi,Mary Sieckenius
+LiSieckenius,Fei-Fei Li,Mary Sieckenius
+BarbaraLi,Barbara Liskov,Fei-Fei Li
+GebruRenata,Timnit Gebru,Renata Wassermann
+NamiCristina,Nami Kobayashi,Cristina Fernandes
+SisterMaryKennethYoshiko,Sister Mary Kenneth Keller,Yoshiko Wakabayashi
+DaphneRadia,Daphne Koller,Radia Perlman
+VaughanGebru,Dorothy Vaughan,Timnit Gebru
+VaughanKoller,Dorothy Vaughan,Daphne Koller
+LiskovFeiFei,Barbara Liskov,Fei-Fei Li
+ShafiSisterMaryKenneth,Shafi Goldwasser,Sister Mary Kenneth Keller
+AnaCristinaAda,Ana Cristina Viera de Melo,Ada Lovelace
+WakabayashiGebru,Yoshiko Wakabayashi,Timnit Gebru
+ConwayBarbara,Lynn Conway,Barbara Liskov
+LynnNinaSumiko,Lynn Conway,Nina Sumiko Tomita Hirata
+LovelaceKoller,Ada Lovelace,Daphne Koller
+LiAda,Fei-Fei Li,Ada Lovelace
+WassermannSieckenius,Renata Wassermann,Mary Sieckenius
+TimnitAsakawa,Timnit Gebru,Chieko Asakawa
+LiAnnie,Fei-Fei Li,Annie Easley
+NamiAnnie,Nami Kobayashi,Annie Easley
+RenataShafi,Renata Wassermann,Shafi Goldwasser
+RenataConway,Renata Wassermann,Lynn Conway
+AllenAda,Frances Allen,Ada Lovelace
+EasleyReshma,Annie Easley,Reshma Saujani
+MarissaWakabayashi,Marissa Mayer,Yoshiko Wakabayashi
+CristinaJennifer,Cristina Fernandes,Jennifer Klawe
+GoldwasserChieko,Shafi Goldwasser,Chieko Asakawa
+LovelaceChieko,Ada Lovelace,Chieko Asakawa
+LiskovDorothy,Barbara Liskov,Dorothy Vaughan
+AsakawaVieradeMelo,Chieko Asakawa,Ana Cristina Viera de Melo
+LelianeGebru,Leliane Nunes de Barros,Timnit Gebru
+NinaSumikoDorothy,Nina Sumiko Tomita Hirata,Dorothy Vaughan
+GraceAnaCristina,Grace Hopper,Ana Cristina Viera de Melo
+CristinaLi,Cristina Fernandes,Fei-Fei Li
+RadiaNami,Radia Perlman,Nami Kobayashi
+SisterMaryKennethJennifer,Sister Mary Kenneth Keller,Jennifer Klawe
+MargaretGebru,Margaret Hamilton,Timnit Gebru
+GraceEasley,Grace Hopper,Annie Easley
+KellyFernandes,Kelly Braghetto,Cristina Fernandes
+TimnitHamilton,Timnit Gebru,Margaret Hamilton
+TomitaHirataKeller,Nina Sumiko Tomita Hirata,Sister Mary Kenneth Keller
+KlaweLynn,Jennifer Klawe,Lynn Conway
+LelianeDaphne,Leliane Nunes de Barros,Daphne Koller
+KellerWassermann,Sister Mary Kenneth Keller,Renata Wassermann
+LiskovMayer,Barbara Liskov,Marissa Mayer
+AnnieAnita,Annie Easley,Anita Borg
+MargaretReshma,Margaret Hamilton,Reshma Saujani
+AllenLynn,Frances Allen,Lynn Conway
+SisterMaryKennethGoldwasser,Sister Mary Kenneth Keller,Shafi Goldwasser
+CristinaBorg,Cristina Fernandes,Anita Borg
+MayerLovelace,Marissa Mayer,Ada Lovelace
+CristinaHopper,Cristina Fernandes,Grace Hopper
+RenataYoshiko,Renata Wassermann,Yoshiko Wakabayashi
+ReshmaWassermann,Reshma Saujani,Renata Wassermann
+SaujaniSisterMaryKenneth,Reshma Saujani,Sister Mary Kenneth Keller
+JenniferMayer,Jennifer Klawe,Marissa Mayer
+LovelaceYoshiko,Ada Lovelace,Yoshiko Wakabayashi
+AllenBorg,Frances Allen,Anita Borg
+ConwayRadia,Lynn Conway,Radia Perlman
+MayerConway,Marissa Mayer,Lynn Conway
+LynnGebru,Lynn Conway,Timnit Gebru
+ReshmaRenata,Reshma Saujani,Renata Wassermann
+AsakawaSaujani,Chieko Asakawa,Reshma Saujani
+ReshmaPerlman,Reshma Saujani,Radia Perlman
+ConwayVaughan,Lynn Conway,Dorothy Vaughan
+AnnieDaphne,Annie Easley,Daphne Koller
+TomitaHirataLynn,Nina Sumiko Tomita Hirata,Lynn Conway
+CristinaNunesdeBarros,Cristina Fernandes,Leliane Nunes de Barros
+FernandesAllen,Cristina Fernandes,Frances Allen
+AsakawaDaphne,Chieko Asakawa,Daphne Koller
+MaryLi,Mary Sieckenius,Fei-Fei Li
+RenataSisterMaryKenneth,Renata Wassermann,Sister Mary Kenneth Keller
+DorothySisterMaryKenneth,Dorothy Vaughan,Sister Mary Kenneth Keller
+YoshikoBorg,Yoshiko Wakabayashi,Anita Borg
+ShafiFeiFei,Shafi Goldwasser,Fei-Fei Li
+DaphneEasley,Daphne Koller,Annie Easley
+TomitaHirataHamilton,Nina Sumiko Tomita Hirata,Margaret Hamilton
+SieckeniusKobayashi,Mary Sieckenius,Nami Kobayashi
+AnaCristinaYoshiko,Ana Cristina Viera de Melo,Yoshiko Wakabayashi
+NamiDaphne,Nami Kobayashi,Daphne Koller
+MargaretDorothy,Margaret Hamilton,Dorothy Vaughan
+LiHamilton,Fei-Fei Li,Margaret Hamilton
+LovelaceMayer,Ada Lovelace,Marissa Mayer
+HopperGoldwasser,Grace Hopper,Shafi Goldwasser
+SieckeniusRadia,Mary Sieckenius,Radia Perlman
+NunesdeBarrosSaujani,Leliane Nunes de Barros,Reshma Saujani
+LiskovWassermann,Barbara Liskov,Renata Wassermann
+GraceFrances,Grace Hopper,Frances Allen
+AnaCristinaGoldwasser,Ana Cristina Viera de Melo,Shafi Goldwasser
+WassermannGebru,Renata Wassermann,Timnit Gebru
+AnaCristinaMarissa,Ana Cristina Viera de Melo,Marissa Mayer
+WassermannConway,Renata Wassermann,Lynn Conway
+IrwinLeliane,Mary Jane Irwin,Leliane Nunes de Barros
+SieckeniusDorothy,Mary Sieckenius,Dorothy Vaughan
+RenataLi,Renata Wassermann,Fei-Fei Li
+AsakawaFrances,Chieko Asakawa,Frances Allen
+KlaweRenata,Jennifer Klawe,Renata Wassermann
+AnaCristinaIrwin,Ana Cristina Viera de Melo,Mary Jane Irwin
+WakabayashiNami,Yoshiko Wakabayashi,Nami Kobayashi
+NamiAsakawa,Nami Kobayashi,Chieko Asakawa
+KobayashiAnaCristina,Nami Kobayashi,Ana Cristina Viera de Melo
+KellerMarissa,Sister Mary Kenneth Keller,Marissa Mayer
+FeiFeiLeliane,Fei-Fei Li,Leliane Nunes de Barros
+CristinaMarissa,Cristina Fernandes,Marissa Mayer
+TimnitChieko,Timnit Gebru,Chieko Asakawa
+RenataReshma,Renata Wassermann,Reshma Saujani
+AllenChieko,Frances Allen,Chieko Asakawa
+DaphneWassermann,Daphne Koller,Renata Wassermann
+VaughanRenata,Dorothy Vaughan,Renata Wassermann
+FeiFeiNunesdeBarros,Fei-Fei Li,Leliane Nunes de Barros
+MaryLynn,Mary Sieckenius,Lynn Conway
+LelianeJennifer,Leliane Nunes de Barros,Jennifer Klawe
+MaryJaneJennifer,Mary Jane Irwin,Jennifer Klawe
+YoshikoKelly,Yoshiko Wakabayashi,Kelly Braghetto
+MaryBraghetto,Mary Sieckenius,Kelly Braghetto
+JenniferRadia,Jennifer Klawe,Radia Perlman
+ShafiHopper,Shafi Goldwasser,Grace Hopper
+DorothyLiskov,Dorothy Vaughan,Barbara Liskov
+ReshmaVaughan,Reshma Saujani,Dorothy Vaughan
+ConwayNunesdeBarros,Lynn Conway,Leliane Nunes de Barros
+AnnieKobayashi,Annie Easley,Nami Kobayashi
+LiBraghetto,Fei-Fei Li,Kelly Braghetto
+GraceAda,Grace Hopper,Ada Lovelace
+AnnieLi,Annie Easley,Fei-Fei Li
+MaryKeller,Mary Sieckenius,Sister Mary Kenneth Keller
+BorgLynn,Anita Borg,Lynn Conway
+GraceRenata,Grace Hopper,Renata Wassermann
+YoshikoShafi,Yoshiko Wakabayashi,Shafi Goldwasser
+ChiekoLiskov,Chieko Asakawa,Barbara Liskov
+SisterMaryKennethLeliane,Sister Mary Kenneth Keller,Leliane Nunes de Barros
+BorgBraghetto,Anita Borg,Kelly Braghetto
+JenniferLeliane,Jennifer Klawe,Leliane Nunes de Barros
+SaujaniAnaCristina,Reshma Saujani,Ana Cristina Viera de Melo
+KellerAnaCristina,Sister Mary Kenneth Keller,Ana Cristina Viera de Melo
+SaujaniLeliane,Reshma Saujani,Leliane Nunes de Barros
+LiskovSisterMaryKenneth,Barbara Liskov,Sister Mary Kenneth Keller
+GraceLynn,Grace Hopper,Lynn Conway
+AnaCristinaBraghetto,Ana Cristina Viera de Melo,Kelly Braghetto
+FrancesAda,Frances Allen,Ada Lovelace
+AllenMary,Frances Allen,Mary Sieckenius
+AnitaBraghetto,Anita Borg,Kelly Braghetto
+BraghettoVaughan,Kelly Braghetto,Dorothy Vaughan
+RenataSieckenius,Renata Wassermann,Mary Sieckenius
+HamiltonNami,Margaret Hamilton,Nami Kobayashi
+LiNinaSumiko,Fei-Fei Li,Nina Sumiko Tomita Hirata
+DorothySaujani,Dorothy Vaughan,Reshma Saujani
+SaujaniSieckenius,Reshma Saujani,Mary Sieckenius
+SieckeniusBarbara,Mary Sieckenius,Barbara Liskov
+ShafiFrances,Shafi Goldwasser,Frances Allen
+HamiltonAnita,Margaret Hamilton,Anita Borg
+FrancesWassermann,Frances Allen,Renata Wassermann
+NunesdeBarrosNami,Leliane Nunes de Barros,Nami Kobayashi
+KobayashiFrances,Nami Kobayashi,Frances Allen
+BarbaraMaryJane,Barbara Liskov,Mary Jane Irwin
+YoshikoEasley,Yoshiko Wakabayashi,Annie Easley
+KobayashiLiskov,Nami Kobayashi,Barbara Liskov
+MaryNami,Mary Sieckenius,Nami Kobayashi
+AdaBraghetto,Ada Lovelace,Kelly Braghetto
+MargaretKobayashi,Margaret Hamilton,Nami Kobayashi
+WassermannFeiFei,Renata Wassermann,Fei-Fei Li
+PerlmanKelly,Radia Perlman,Kelly Braghetto
+LovelaceRadia,Ada Lovelace,Radia Perlman
+NinaSumikoCristina,Nina Sumiko Tomita Hirata,Cristina Fernandes
+NinaSumikoBorg,Nina Sumiko Tomita Hirata,Anita Borg
+BarbaraAda,Barbara Liskov,Ada Lovelace
+LiskovFrances,Barbara Liskov,Frances Allen
+MaryLovelace,Mary Sieckenius,Ada Lovelace
+AsakawaDorothy,Chieko Asakawa,Dorothy Vaughan
+SieckeniusAsakawa,Mary Sieckenius,Chieko Asakawa
+PerlmanWassermann,Radia Perlman,Renata Wassermann
+VieradeMeloMayer,Ana Cristina Viera de Melo,Marissa Mayer
+RenataChieko,Renata Wassermann,Chieko Asakawa
+MaryJaneAda,Mary Jane Irwin,Ada Lovelace
+KellySisterMaryKenneth,Kelly Braghetto,Sister Mary Kenneth Keller
+CristinaFrances,Cristina Fernandes,Frances Allen
+TimnitWakabayashi,Timnit Gebru,Yoshiko Wakabayashi
+SaujaniWakabayashi,Reshma Saujani,Yoshiko Wakabayashi
+HamiltonEasley,Margaret Hamilton,Annie Easley
+MaryJaneBorg,Mary Jane Irwin,Anita Borg
+AllenLi,Frances Allen,Fei-Fei Li
+WakabayashiFeiFei,Yoshiko Wakabayashi,Fei-Fei Li
+RadiaKobayashi,Radia Perlman,Nami Kobayashi
+NamiEasley,Nami Kobayashi,Annie Easley
+GoldwasserAnnie,Shafi Goldwasser,Annie Easley
+WassermannAsakawa,Renata Wassermann,Chieko Asakawa
+VieradeMeloLeliane,Ana Cristina Viera de Melo,Leliane Nunes de Barros
+YoshikoGebru,Yoshiko Wakabayashi,Timnit Gebru
+VieradeMeloYoshiko,Ana Cristina Viera de Melo,Yoshiko Wakabayashi
+LelianeNinaSumiko,Leliane Nunes de Barros,Nina Sumiko Tomita Hirata
+SisterMaryKennethLynn,Sister Mary Kenneth Keller,Lynn Conway
+KollerAnita,Daphne Koller,Anita Borg
+AsakawaAnnie,Chieko Asakawa,Annie Easley
+DorothyTimnit,Dorothy Vaughan,Timnit Gebru
+SisterMaryKennethKelly,Sister Mary Kenneth Keller,Kelly Braghetto
+TimnitKelly,Timnit Gebru,Kelly Braghetto
+TomitaHirataLiskov,Nina Sumiko Tomita Hirata,Barbara Liskov
+CristinaAnnie,Cristina Fernandes,Annie Easley
+AnitaCristina,Anita Borg,Cristina Fernandes
+MaryJaneMargaret,Mary Jane Irwin,Margaret Hamilton
+MargaretRadia,Margaret Hamilton,Radia Perlman
+SaujaniFeiFei,Reshma Saujani,Fei-Fei Li
+AdaBarbara,Ada Lovelace,Barbara Liskov
+MaryJaneLovelace,Mary Jane Irwin,Ada Lovelace
+KollerLynn,Daphne Koller,Lynn Conway
+SaujaniMayer,Reshma Saujani,Marissa Mayer
+RenataSaujani,Renata Wassermann,Reshma Saujani
+MargaretLovelace,Margaret Hamilton,Ada Lovelace
+SieckeniusGrace,Mary Sieckenius,Grace Hopper
+EasleyFrances,Annie Easley,Frances Allen
+NamiTomitaHirata,Nami Kobayashi,Nina Sumiko Tomita Hirata
+HamiltonAllen,Margaret Hamilton,Frances Allen
+BraghettoBorg,Kelly Braghetto,Anita Borg
+CristinaKelly,Cristina Fernandes,Kelly Braghetto
+GebruAnnie,Timnit Gebru,Annie Easley
+AnitaAnnie,Anita Borg,Annie Easley
+AnitaFrances,Anita Borg,Frances Allen
+AllenRadia,Frances Allen,Radia Perlman
+AnnieHopper,Annie Easley,Grace Hopper
+IrwinLiskov,Mary Jane Irwin,Barbara Liskov
+YoshikoCristina,Yoshiko Wakabayashi,Cristina Fernandes
+IrwinAllen,Mary Jane Irwin,Frances Allen
+FrancesKlawe,Frances Allen,Jennifer Klawe
+BorgEasley,Anita Borg,Annie Easley
+GraceLi,Grace Hopper,Fei-Fei Li
+AnnieWassermann,Annie Easley,Renata Wassermann
+JenniferFeiFei,Jennifer Klawe,Fei-Fei Li
+MaryKlawe,Mary Sieckenius,Jennifer Klawe
+AnitaTimnit,Anita Borg,Timnit Gebru
+EasleyJennifer,Annie Easley,Jennifer Klawe
+GraceKlawe,Grace Hopper,Jennifer Klawe
+KobayashiKoller,Nami Kobayashi,Daphne Koller
+FernandesBraghetto,Cristina Fernandes,Kelly Braghetto
+MargaretLiskov,Margaret Hamilton,Barbara Liskov
+AnnieBorg,Annie Easley,Anita Borg
+SisterMaryKennethLiskov,Sister Mary Kenneth Keller,Barbara Liskov
+AnnieIrwin,Annie Easley,Mary Jane Irwin
+PerlmanHamilton,Radia Perlman,Margaret Hamilton
+AllenCristina,Frances Allen,Cristina Fernandes
+AnaCristinaMayer,Ana Cristina Viera de Melo,Marissa Mayer
+MarissaDorothy,Marissa Mayer,Dorothy Vaughan
+GoldwasserKlawe,Shafi Goldwasser,Jennifer Klawe
+MaryWassermann,Mary Sieckenius,Renata Wassermann
+RadiaMargaret,Radia Perlman,Margaret Hamilton
+DaphneMaryJane,Daphne Koller,Mary Jane Irwin
+KellerDorothy,Sister Mary Kenneth Keller,Dorothy Vaughan
+IrwinTomitaHirata,Mary Jane Irwin,Nina Sumiko Tomita Hirata
+WakabayashiLiskov,Yoshiko Wakabayashi,Barbara Liskov
+KobayashiLeliane,Nami Kobayashi,Leliane Nunes de Barros
+KellyChieko,Kelly Braghetto,Chieko Asakawa
+NamiConway,Nami Kobayashi,Lynn Conway
+KobayashiShafi,Nami Kobayashi,Shafi Goldwasser
+ShafiLeliane,Shafi Goldwasser,Leliane Nunes de Barros
+GraceMayer,Grace Hopper,Marissa Mayer
+CristinaMary,Cristina Fernandes,Mary Sieckenius
+GoldwasserVieradeMelo,Shafi Goldwasser,Ana Cristina Viera de Melo
+BraghettoSieckenius,Kelly Braghetto,Mary Sieckenius
+TimnitTomitaHirata,Timnit Gebru,Nina Sumiko Tomita Hirata
+GraceCristina,Grace Hopper,Cristina Fernandes
+ShafiConway,Shafi Goldwasser,Lynn Conway
+KlaweYoshiko,Jennifer Klawe,Yoshiko Wakabayashi
+EasleyWakabayashi,Annie Easley,Yoshiko Wakabayashi
+SisterMaryKennethTomitaHirata,Sister Mary Kenneth Keller,Nina Sumiko Tomita Hirata
+HamiltonKlawe,Margaret Hamilton,Jennifer Klawe
+AnnieFeiFei,Annie Easley,Fei-Fei Li
+BraghettoSisterMaryKenneth,Kelly Braghetto,Sister Mary Kenneth Keller
+RadiaMarissa,Radia Perlman,Marissa Mayer
+EasleyMaryJane,Annie Easley,Mary Jane Irwin
+DaphneAda,Daphne Koller,Ada Lovelace
+KollerAnaCristina,Daphne Koller,Ana Cristina Viera de Melo
+PerlmanKlawe,Radia Perlman,Jennifer Klawe
+MaryHamilton,Mary Sieckenius,Margaret Hamilton
+MarissaKeller,Marissa Mayer,Sister Mary Kenneth Keller
+IrwinMary,Mary Jane Irwin,Mary Sieckenius
+HamiltonGoldwasser,Margaret Hamilton,Shafi Goldwasser
+MargaretHopper,Margaret Hamilton,Grace Hopper
+BarbaraWassermann,Barbara Liskov,Renata Wassermann
+MargaretFeiFei,Margaret Hamilton,Fei-Fei Li
+BarbaraWakabayashi,Barbara Liskov,Yoshiko Wakabayashi
+DorothyConway,Dorothy Vaughan,Lynn Conway
+WassermannSaujani,Renata Wassermann,Reshma Saujani
+SaujaniFrances,Reshma Saujani,Frances Allen
+MayerSaujani,Marissa Mayer,Reshma Saujani
+KollerCristina,Daphne Koller,Cristina Fernandes
+FernandesKoller,Cristina Fernandes,Daphne Koller
+CristinaGebru,Cristina Fernandes,Timnit Gebru
+MarissaEasley,Marissa Mayer,Annie Easley
+KollerVieradeMelo,Daphne Koller,Ana Cristina Viera de Melo
+EasleyShafi,Annie Easley,Shafi Goldwasser
+AdaRenata,Ada Lovelace,Renata Wassermann
+MarissaSisterMaryKenneth,Marissa Mayer,Sister Mary Kenneth Keller
+LiskovKoller,Barbara Liskov,Daphne Koller
+RenataFeiFei,Renata Wassermann,Fei-Fei Li
+AllenConway,Frances Allen,Lynn Conway
+LiskovNami,Barbara Liskov,Nami Kobayashi
+SaujaniHopper,Reshma Saujani,Grace Hopper
+GoldwasserGrace,Shafi Goldwasser,Grace Hopper
+SisterMaryKennethMaryJane,Sister Mary Kenneth Keller,Mary Jane Irwin
+TimnitIrwin,Timnit Gebru,Mary Jane Irwin
+AsakawaKeller,Chieko Asakawa,Sister Mary Kenneth Keller
+BarbaraDaphne,Barbara Liskov,Daphne Koller
+VieradeMeloAnita,Ana Cristina Viera de Melo,Anita Borg
+SisterMaryKennethGebru,Sister Mary Kenneth Keller,Timnit Gebru
+ChiekoGoldwasser,Chieko Asakawa,Shafi Goldwasser
+WakabayashiNinaSumiko,Yoshiko Wakabayashi,Nina Sumiko Tomita Hirata
+MargaretFernandes,Margaret Hamilton,Cristina Fernandes
+KlaweAllen,Jennifer Klawe,Frances Allen
+MaryWakabayashi,Mary Sieckenius,Yoshiko Wakabayashi
+LiNunesdeBarros,Fei-Fei Li,Leliane Nunes de Barros
+GraceFeiFei,Grace Hopper,Fei-Fei Li
+ShafiSaujani,Shafi Goldwasser,Reshma Saujani
+BraghettoFrances,Kelly Braghetto,Frances Allen
+LiskovAnnie,Barbara Liskov,Annie Easley
+ShafiLi,Shafi Goldwasser,Fei-Fei Li
+PerlmanKeller,Radia Perlman,Sister Mary Kenneth Keller
+MargaretConway,Margaret Hamilton,Lynn Conway
+BorgReshma,Anita Borg,Reshma Saujani
+LelianeMary,Leliane Nunes de Barros,Mary Sieckenius
+FrancesBraghetto,Frances Allen,Kelly Braghetto
+YoshikoLiskov,Yoshiko Wakabayashi,Barbara Liskov
+HopperKobayashi,Grace Hopper,Nami Kobayashi
+YoshikoSieckenius,Yoshiko Wakabayashi,Mary Sieckenius
+GraceLovelace,Grace Hopper,Ada Lovelace
+GebruKobayashi,Timnit Gebru,Nami Kobayashi
+SaujaniBorg,Reshma Saujani,Anita Borg
+VaughanYoshiko,Dorothy Vaughan,Yoshiko Wakabayashi
+KellyRenata,Kelly Braghetto,Renata Wassermann
+KollerDorothy,Daphne Koller,Dorothy Vaughan
+GoldwasserWassermann,Shafi Goldwasser,Renata Wassermann
+MarissaNami,Marissa Mayer,Nami Kobayashi
+DaphneCristina,Daphne Koller,Cristina Fernandes
+YoshikoNami,Yoshiko Wakabayashi,Nami Kobayashi
+WakabayashiMargaret,Yoshiko Wakabayashi,Margaret Hamilton
+NamiAnita,Nami Kobayashi,Anita Borg
+YoshikoMayer,Yoshiko Wakabayashi,Marissa Mayer
+AnaCristinaRadia,Ana Cristina Viera de Melo,Radia Perlman
+PerlmanMarissa,Radia Perlman,Marissa Mayer
+SisterMaryKennethMargaret,Sister Mary Kenneth Keller,Margaret Hamilton
+SaujaniYoshiko,Reshma Saujani,Yoshiko Wakabayashi
+LynnBraghetto,Lynn Conway,Kelly Braghetto
+VaughanKobayashi,Dorothy Vaughan,Nami Kobayashi
+RadiaKoller,Radia Perlman,Daphne Koller
+ChiekoLeliane,Chieko Asakawa,Leliane Nunes de Barros
+GebruAnaCristina,Timnit Gebru,Ana Cristina Viera de Melo
+KobayashiIrwin,Nami Kobayashi,Mary Jane Irwin
+WakabayashiAnnie,Yoshiko Wakabayashi,Annie Easley
+AsakawaAnaCristina,Chieko Asakawa,Ana Cristina Viera de Melo
+LiBorg,Fei-Fei Li,Anita Borg
+FernandesDaphne,Cristina Fernandes,Daphne Koller
+BarbaraShafi,Barbara Liskov,Shafi Goldwasser
+AnnieLeliane,Annie Easley,Leliane Nunes de Barros
+ReshmaWakabayashi,Reshma Saujani,Yoshiko Wakabayashi
+NinaSumikoKelly,Nina Sumiko Tomita Hirata,Kelly Braghetto
+SieckeniusNami,Mary Sieckenius,Nami Kobayashi
+LelianeDorothy,Leliane Nunes de Barros,Dorothy Vaughan
+FeiFeiWakabayashi,Fei-Fei Li,Yoshiko Wakabayashi
+LynnFrances,Lynn Conway,Frances Allen
+NunesdeBarrosGrace,Leliane Nunes de Barros,Grace Hopper
+BraghettoPerlman,Kelly Braghetto,Radia Perlman
+ShafiAnaCristina,Shafi Goldwasser,Ana Cristina Viera de Melo
+EasleySieckenius,Annie Easley,Mary Sieckenius
+ShafiRenata,Shafi Goldwasser,Renata Wassermann
+KellerJennifer,Sister Mary Kenneth Keller,Jennifer Klawe
+VieradeMeloFeiFei,Ana Cristina Viera de Melo,Fei-Fei Li
+BraghettoFernandes,Kelly Braghetto,Cristina Fernandes
+LiskovLynn,Barbara Liskov,Lynn Conway
+AnitaFernandes,Anita Borg,Cristina Fernandes
+JenniferGoldwasser,Jennifer Klawe,Shafi Goldwasser
+HamiltonLovelace,Margaret Hamilton,Ada Lovelace
+NamiKelly,Nami Kobayashi,Kelly Braghetto
+MayerNinaSumiko,Marissa Mayer,Nina Sumiko Tomita Hirata
+IrwinMayer,Mary Jane Irwin,Marissa Mayer
+FeiFeiHamilton,Fei-Fei Li,Margaret Hamilton
+KellyYoshiko,Kelly Braghetto,Yoshiko Wakabayashi
+RenataTimnit,Renata Wassermann,Timnit Gebru
+MayerLi,Marissa Mayer,Fei-Fei Li
+MarissaRadia,Marissa Mayer,Radia Perlman
+RenataAnaCristina,Renata Wassermann,Ana Cristina Viera de Melo
+KobayashiWassermann,Nami Kobayashi,Renata Wassermann
+BraghettoChieko,Kelly Braghetto,Chieko Asakawa
+GoldwasserAda,Shafi Goldwasser,Ada Lovelace
+KobayashiRenata,Nami Kobayashi,Renata Wassermann
+BorgAnaCristina,Anita Borg,Ana Cristina Viera de Melo
+GebruGoldwasser,Timnit Gebru,Shafi Goldwasser
+KellyDaphne,Kelly Braghetto,Daphne Koller
+FeiFeiPerlman,Fei-Fei Li,Radia Perlman
+LiHopper,Fei-Fei Li,Grace Hopper
+AnnieMaryJane,Annie Easley,Mary Jane Irwin
+WassermannBarbara,Renata Wassermann,Barbara Liskov
+VieradeMeloJennifer,Ana Cristina Viera de Melo,Jennifer Klawe
+SisterMaryKennethTimnit,Sister Mary Kenneth Keller,Timnit Gebru
+SaujaniMargaret,Reshma Saujani,Margaret Hamilton
+GebruSaujani,Timnit Gebru,Reshma Saujani
+GebruBraghetto,Timnit Gebru,Kelly Braghetto
+MaryJaneGoldwasser,Mary Jane Irwin,Shafi Goldwasser
+AllenIrwin,Frances Allen,Mary Jane Irwin
+LynnAllen,Lynn Conway,Frances Allen
+AdaSisterMaryKenneth,Ada Lovelace,Sister Mary Kenneth Keller
+KellerTimnit,Sister Mary Kenneth Keller,Timnit Gebru
+LiCristina,Fei-Fei Li,Cristina Fernandes
+LelianeEasley,Leliane Nunes de Barros,Annie Easley
+TomitaHirataWassermann,Nina Sumiko Tomita Hirata,Renata Wassermann
+BraghettoAnaCristina,Kelly Braghetto,Ana Cristina Viera de Melo
+MarissaMary,Marissa Mayer,Mary Sieckenius
+WassermannHamilton,Renata Wassermann,Margaret Hamilton
+AnaCristinaVaughan,Ana Cristina Viera de Melo,Dorothy Vaughan
+NamiShafi,Nami Kobayashi,Shafi Goldwasser
+AllenRenata,Frances Allen,Renata Wassermann
+FernandesEasley,Cristina Fernandes,Annie Easley
+GebruKelly,Timnit Gebru,Kelly Braghetto
+MargaretAnaCristina,Margaret Hamilton,Ana Cristina Viera de Melo
+LiAsakawa,Fei-Fei Li,Chieko Asakawa
+MaryJaneLiskov,Mary Jane Irwin,Barbara Liskov
+JenniferKobayashi,Jennifer Klawe,Nami Kobayashi
+SieckeniusLi,Mary Sieckenius,Fei-Fei Li
+LiKeller,Fei-Fei Li,Sister Mary Kenneth Keller
+ConwayLovelace,Lynn Conway,Ada Lovelace
+ConwayEasley,Lynn Conway,Annie Easley
+BarbaraRadia,Barbara Liskov,Radia Perlman
+HamiltonWakabayashi,Margaret Hamilton,Yoshiko Wakabayashi
+RadiaKeller,Radia Perlman,Sister Mary Kenneth Keller
+AdaChieko,Ada Lovelace,Chieko Asakawa
+TimnitNami,Timnit Gebru,Nami Kobayashi
+LovelaceMargaret,Ada Lovelace,Margaret Hamilton
+FeiFeiBorg,Fei-Fei Li,Anita Borg
+KellerMargaret,Sister Mary Kenneth Keller,Margaret Hamilton
+WakabayashiAnita,Yoshiko Wakabayashi,Anita Borg
+PerlmanMaryJane,Radia Perlman,Mary Jane Irwin
+DorothyEasley,Dorothy Vaughan,Annie Easley
+VaughanMaryJane,Dorothy Vaughan,Mary Jane Irwin
+GoldwasserKobayashi,Shafi Goldwasser,Nami Kobayashi
+LovelaceLeliane,Ada Lovelace,Leliane Nunes de Barros
+ConwayAda,Lynn Conway,Ada Lovelace
+YoshikoLeliane,Yoshiko Wakabayashi,Leliane Nunes de Barros
+WakabayashiTimnit,Yoshiko Wakabayashi,Timnit Gebru
+ConwayJennifer,Lynn Conway,Jennifer Klawe
+MargaretAnnie,Margaret Hamilton,Annie Easley
+ReshmaSisterMaryKenneth,Reshma Saujani,Sister Mary Kenneth Keller
+LovelaceFernandes,Ada Lovelace,Cristina Fernandes
+KollerRadia,Daphne Koller,Radia Perlman
+KellerGrace,Sister Mary Kenneth Keller,Grace Hopper
+CristinaAnita,Cristina Fernandes,Anita Borg
+VaughanBraghetto,Dorothy Vaughan,Kelly Braghetto
+VieradeMeloTomitaHirata,Ana Cristina Viera de Melo,Nina Sumiko Tomita Hirata
+AnitaRadia,Anita Borg,Radia Perlman
+LovelaceWassermann,Ada Lovelace,Renata Wassermann
+NinaSumikoRadia,Nina Sumiko Tomita Hirata,Radia Perlman
+SieckeniusFrances,Mary Sieckenius,Frances Allen
+RadiaTomitaHirata,Radia Perlman,Nina Sumiko Tomita Hirata
+CristinaLovelace,Cristina Fernandes,Ada Lovelace
+AdaGoldwasser,Ada Lovelace,Shafi Goldwasser
+NunesdeBarrosMayer,Leliane Nunes de Barros,Marissa Mayer
+MayerFeiFei,Marissa Mayer,Fei-Fei Li
+VaughanLi,Dorothy Vaughan,Fei-Fei Li
+HopperMary,Grace Hopper,Mary Sieckenius
+HamiltonRenata,Margaret Hamilton,Renata Wassermann
+MayerGoldwasser,Marissa Mayer,Shafi Goldwasser
+MaryMayer,Mary Sieckenius,Marissa Mayer
+LiFrances,Fei-Fei Li,Frances Allen
+FrancesAnnie,Frances Allen,Annie Easley
+AnaCristinaSieckenius,Ana Cristina Viera de Melo,Mary Sieckenius
+JenniferReshma,Jennifer Klawe,Reshma Saujani
+HamiltonHopper,Margaret Hamilton,Grace Hopper
+AdaIrwin,Ada Lovelace,Mary Jane Irwin
+HopperMaryJane,Grace Hopper,Mary Jane Irwin
+LelianeMargaret,Leliane Nunes de Barros,Margaret Hamilton
+KellerAda,Sister Mary Kenneth Keller,Ada Lovelace
+KellyGebru,Kelly Braghetto,Timnit Gebru
+NinaSumikoPerlman,Nina Sumiko Tomita Hirata,Radia Perlman
+ReshmaShafi,Reshma Saujani,Shafi Goldwasser
+VieradeMeloBorg,Ana Cristina Viera de Melo,Anita Borg
+FrancesNunesdeBarros,Frances Allen,Leliane Nunes de Barros
+RadiaHamilton,Radia Perlman,Margaret Hamilton
+KobayashiChieko,Nami Kobayashi,Chieko Asakawa
+MaryJaneConway,Mary Jane Irwin,Lynn Conway
+AnitaLiskov,Anita Borg,Barbara Liskov
+EasleyKobayashi,Annie Easley,Nami Kobayashi
+AsakawaKobayashi,Chieko Asakawa,Nami Kobayashi
+LovelaceTomitaHirata,Ada Lovelace,Nina Sumiko Tomita Hirata
+BraghettoHopper,Kelly Braghetto,Grace Hopper
+BarbaraVieradeMelo,Barbara Liskov,Ana Cristina Viera de Melo
+FrancesSieckenius,Frances Allen,Mary Sieckenius
+WassermannYoshiko,Renata Wassermann,Yoshiko Wakabayashi
+LiKoller,Fei-Fei Li,Daphne Koller
+ConwayKlawe,Lynn Conway,Jennifer Klawe
+GraceMaryJane,Grace Hopper,Mary Jane Irwin
+KellyKlawe,Kelly Braghetto,Jennifer Klawe
+LiMarissa,Fei-Fei Li,Marissa Mayer
+AnaCristinaKelly,Ana Cristina Viera de Melo,Kelly Braghetto
+AdaDaphne,Ada Lovelace,Daphne Koller
+ConwayAllen,Lynn Conway,Frances Allen
+GraceMary,Grace Hopper,Mary Sieckenius
+VaughanLovelace,Dorothy Vaughan,Ada Lovelace
+FeiFeiWassermann,Fei-Fei Li,Renata Wassermann
+ReshmaJennifer,Reshma Saujani,Jennifer Klawe
+RadiaFrances,Radia Perlman,Frances Allen
+KobayashiWakabayashi,Nami Kobayashi,Yoshiko Wakabayashi
+LynnHopper,Lynn Conway,Grace Hopper
+IrwinKlawe,Mary Jane Irwin,Jennifer Klawe
+SaujaniTomitaHirata,Reshma Saujani,Nina Sumiko Tomita Hirata
+TomitaHirataSisterMaryKenneth,Nina Sumiko Tomita Hirata,Sister Mary Kenneth Keller
+MarissaGoldwasser,Marissa Mayer,Shafi Goldwasser
+GoldwasserAllen,Shafi Goldwasser,Frances Allen
+JenniferWakabayashi,Jennifer Klawe,Yoshiko Wakabayashi
+PerlmanAsakawa,Radia Perlman,Chieko Asakawa
+VieradeMeloVaughan,Ana Cristina Viera de Melo,Dorothy Vaughan
+RadiaVieradeMelo,Radia Perlman,Ana Cristina Viera de Melo
+NunesdeBarrosFeiFei,Leliane Nunes de Barros,Fei-Fei Li
+ShafiVaughan,Shafi Goldwasser,Dorothy Vaughan
+WakabayashiReshma,Yoshiko Wakabayashi,Reshma Saujani
+KobayashiRadia,Nami Kobayashi,Radia Perlman
+IrwinKobayashi,Mary Jane Irwin,Nami Kobayashi
+GraceNunesdeBarros,Grace Hopper,Leliane Nunes de Barros
+SieckeniusFeiFei,Mary Sieckenius,Fei-Fei Li
+TimnitKeller,Timnit Gebru,Sister Mary Kenneth Keller
+LelianeLynn,Leliane Nunes de Barros,Lynn Conway
+BorgYoshiko,Anita Borg,Yoshiko Wakabayashi
+TimnitVaughan,Timnit Gebru,Dorothy Vaughan
+FernandesMayer,Cristina Fernandes,Marissa Mayer
+KellerAnita,Sister Mary Kenneth Keller,Anita Borg
+AllenKlawe,Frances Allen,Jennifer Klawe
+CristinaKlawe,Cristina Fernandes,Jennifer Klawe
+JenniferPerlman,Jennifer Klawe,Radia Perlman
+FernandesAnaCristina,Cristina Fernandes,Ana Cristina Viera de Melo
+FeiFeiSisterMaryKenneth,Fei-Fei Li,Sister Mary Kenneth Keller
+WassermannBraghetto,Renata Wassermann,Kelly Braghetto
+MaryJaneChieko,Mary Jane Irwin,Chieko Asakawa
+LynnLovelace,Lynn Conway,Ada Lovelace
+AnitaKeller,Anita Borg,Sister Mary Kenneth Keller
+GraceAnita,Grace Hopper,Anita Borg
+WassermannSisterMaryKenneth,Renata Wassermann,Sister Mary Kenneth Keller
+TimnitAllen,Timnit Gebru,Frances Allen
+MargaretYoshiko,Margaret Hamilton,Yoshiko Wakabayashi
+KellerKlawe,Sister Mary Kenneth Keller,Jennifer Klawe
+ConwayLeliane,Lynn Conway,Leliane Nunes de Barros
+TomitaHirataLeliane,Nina Sumiko Tomita Hirata,Leliane Nunes de Barros
+AllenTimnit,Frances Allen,Timnit Gebru
+ReshmaSieckenius,Reshma Saujani,Mary Sieckenius
+FernandesHopper,Cristina Fernandes,Grace Hopper
+KobayashiReshma,Nami Kobayashi,Reshma Saujani
+AnnieSisterMaryKenneth,Annie Easley,Sister Mary Kenneth Keller
+HamiltonTomitaHirata,Margaret Hamilton,Nina Sumiko Tomita Hirata
+ChiekoWakabayashi,Chieko Asakawa,Yoshiko Wakabayashi
+DaphneShafi,Daphne Koller,Shafi Goldwasser
+FeiFeiAda,Fei-Fei Li,Ada Lovelace
+DorothyYoshiko,Dorothy Vaughan,Yoshiko Wakabayashi
+HopperSisterMaryKenneth,Grace Hopper,Sister Mary Kenneth Keller
+GoldwasserAnaCristina,Shafi Goldwasser,Ana Cristina Viera de Melo
+LiDorothy,Fei-Fei Li,Dorothy Vaughan
+BarbaraAllen,Barbara Liskov,Frances Allen
+MaryJaneShafi,Mary Jane Irwin,Shafi Goldwasser
+VaughanGoldwasser,Dorothy Vaughan,Shafi Goldwasser
+RadiaGebru,Radia Perlman,Timnit Gebru
+AdaNunesdeBarros,Ada Lovelace,Leliane Nunes de Barros
+FernandesGoldwasser,Cristina Fernandes,Shafi Goldwasser
+WakabayashiVieradeMelo,Yoshiko Wakabayashi,Ana Cristina Viera de Melo
+LovelaceKobayashi,Ada Lovelace,Nami Kobayashi
+SieckeniusGoldwasser,Mary Sieckenius,Shafi Goldwasser
+KollerSieckenius,Daphne Koller,Mary Sieckenius
+TimnitSieckenius,Timnit Gebru,Mary Sieckenius
+KlaweLeliane,Jennifer Klawe,Leliane Nunes de Barros
+PerlmanAnnie,Radia Perlman,Annie Easley
+ConwayPerlman,Lynn Conway,Radia Perlman
+MayerAllen,Marissa Mayer,Frances Allen
+TimnitRadia,Timnit Gebru,Radia Perlman
+VieradeMeloCristina,Ana Cristina Viera de Melo,Cristina Fernandes
+MayerCristina,Marissa Mayer,Cristina Fernandes
+FeiFeiFernandes,Fei-Fei Li,Cristina Fernandes
+PerlmanFrances,Radia Perlman,Frances Allen
+FernandesMargaret,Cristina Fernandes,Margaret Hamilton
+DaphneJennifer,Daphne Koller,Jennifer Klawe
+WakabayashiEasley,Yoshiko Wakabayashi,Annie Easley
+YoshikoLynn,Yoshiko Wakabayashi,Lynn Conway
+GoldwasserWakabayashi,Shafi Goldwasser,Yoshiko Wakabayashi
+KobayashiBarbara,Nami Kobayashi,Barbara Liskov
+MaryFrances,Mary Sieckenius,Frances Allen
+YoshikoChieko,Yoshiko Wakabayashi,Chieko Asakawa
+RenataHamilton,Renata Wassermann,Margaret Hamilton
+HamiltonFrances,Margaret Hamilton,Frances Allen
+FeiFeiKlawe,Fei-Fei Li,Jennifer Klawe
+KollerFeiFei,Daphne Koller,Fei-Fei Li
+AllenVaughan,Frances Allen,Dorothy Vaughan
+FernandesNami,Cristina Fernandes,Nami Kobayashi
+LiskovConway,Barbara Liskov,Lynn Conway
+AdaSieckenius,Ada Lovelace,Mary Sieckenius
+MargaretAllen,Margaret Hamilton,Frances Allen
+DorothyAda,Dorothy Vaughan,Ada Lovelace
+CristinaRenata,Cristina Fernandes,Renata Wassermann
+RadiaTimnit,Radia Perlman,Timnit Gebru
+LelianeNami,Leliane Nunes de Barros,Nami Kobayashi
+DorothyMaryJane,Dorothy Vaughan,Mary Jane Irwin
+EasleyNami,Annie Easley,Nami Kobayashi
+IrwinJennifer,Mary Jane Irwin,Jennifer Klawe
+IrwinPerlman,Mary Jane Irwin,Radia Perlman
+RadiaMary,Radia Perlman,Mary Sieckenius
+EasleyPerlman,Annie Easley,Radia Perlman
+KobayashiSaujani,Nami Kobayashi,Reshma Saujani
+FrancesEasley,Frances Allen,Annie Easley
+LelianeSisterMaryKenneth,Leliane Nunes de Barros,Sister Mary Kenneth Keller
+VieradeMeloKoller,Ana Cristina Viera de Melo,Daphne Koller
+KellerFeiFei,Sister Mary Kenneth Keller,Fei-Fei Li
+CristinaPerlman,Cristina Fernandes,Radia Perlman
+AllenSisterMaryKenneth,Frances Allen,Sister Mary Kenneth Keller
+LynnTomitaHirata,Lynn Conway,Nina Sumiko Tomita Hirata
+MarissaChieko,Marissa Mayer,Chieko Asakawa
+RadiaMayer,Radia Perlman,Marissa Mayer
+HamiltonSieckenius,Margaret Hamilton,Mary Sieckenius
+BorgMary,Anita Borg,Mary Sieckenius
+HamiltonIrwin,Margaret Hamilton,Mary Jane Irwin
+MaryAnita,Mary Sieckenius,Anita Borg
+ReshmaLynn,Reshma Saujani,Lynn Conway
+VieradeMeloKobayashi,Ana Cristina Viera de Melo,Nami Kobayashi
+NamiLeliane,Nami Kobayashi,Leliane Nunes de Barros
+SieckeniusMayer,Mary Sieckenius,Marissa Mayer
+PerlmanAllen,Radia Perlman,Frances Allen
+VieradeMeloGebru,Ana Cristina Viera de Melo,Timnit Gebru
+WakabayashiBraghetto,Yoshiko Wakabayashi,Kelly Braghetto
+MayerNunesdeBarros,Marissa Mayer,Leliane Nunes de Barros
+MarissaFeiFei,Marissa Mayer,Fei-Fei Li
+SisterMaryKennethHamilton,Sister Mary Kenneth Keller,Margaret Hamilton
+MaryJaneLynn,Mary Jane Irwin,Lynn Conway
+DorothyLovelace,Dorothy Vaughan,Ada Lovelace
+DaphneLovelace,Daphne Koller,Ada Lovelace
+FeiFeiMayer,Fei-Fei Li,Marissa Mayer
+YoshikoLovelace,Yoshiko Wakabayashi,Ada Lovelace
+IrwinLi,Mary Jane Irwin,Fei-Fei Li
+SieckeniusBraghetto,Mary Sieckenius,Kelly Braghetto
+KlaweIrwin,Jennifer Klawe,Mary Jane Irwin
+MaryJaneRenata,Mary Jane Irwin,Renata Wassermann
+ShafiKelly,Shafi Goldwasser,Kelly Braghetto
+TimnitMaryJane,Timnit Gebru,Mary Jane Irwin
+NunesdeBarrosDaphne,Leliane Nunes de Barros,Daphne Koller
+SisterMaryKennethVieradeMelo,Sister Mary Kenneth Keller,Ana Cristina Viera de Melo
+AsakawaBarbara,Chieko Asakawa,Barbara Liskov
+ConwaySieckenius,Lynn Conway,Mary Sieckenius
+DaphneRenata,Daphne Koller,Renata Wassermann
+JenniferDaphne,Jennifer Klawe,Daphne Koller
+GoldwasserTimnit,Shafi Goldwasser,Timnit Gebru
+JenniferLiskov,Jennifer Klawe,Barbara Liskov
+MargaretAsakawa,Margaret Hamilton,Chieko Asakawa
+MarissaVieradeMelo,Marissa Mayer,Ana Cristina Viera de Melo
+DaphneYoshiko,Daphne Koller,Yoshiko Wakabayashi
+GraceSieckenius,Grace Hopper,Mary Sieckenius
+BarbaraGoldwasser,Barbara Liskov,Shafi Goldwasser
+ReshmaNami,Reshma Saujani,Nami Kobayashi
+GebruReshma,Timnit Gebru,Reshma Saujani
+AdaWassermann,Ada Lovelace,Renata Wassermann
+IrwinWakabayashi,Mary Jane Irwin,Yoshiko Wakabayashi
+SisterMaryKennethAda,Sister Mary Kenneth Keller,Ada Lovelace
+RadiaCristina,Radia Perlman,Cristina Fernandes
+MaryJaneMarissa,Mary Jane Irwin,Marissa Mayer
+TimnitAnnie,Timnit Gebru,Annie Easley
+BorgGoldwasser,Anita Borg,Shafi Goldwasser
+LovelaceIrwin,Ada Lovelace,Mary Jane Irwin
+LelianeKeller,Leliane Nunes de Barros,Sister Mary Kenneth Keller
+FrancesKeller,Frances Allen,Sister Mary Kenneth Keller
+GraceMargaret,Grace Hopper,Margaret Hamilton
+MaryJaneDaphne,Mary Jane Irwin,Daphne Koller
+PerlmanBorg,Radia Perlman,Anita Borg
+KlaweSaujani,Jennifer Klawe,Reshma Saujani
+KlaweKoller,Jennifer Klawe,Daphne Koller
+GraceKobayashi,Grace Hopper,Nami Kobayashi
+VaughanLeliane,Dorothy Vaughan,Leliane Nunes de Barros
+EasleyHopper,Annie Easley,Grace Hopper
+KellyMayer,Kelly Braghetto,Marissa Mayer
+RadiaEasley,Radia Perlman,Annie Easley
+ConwayHopper,Lynn Conway,Grace Hopper
+LovelaceMary,Ada Lovelace,Mary Sieckenius
+IrwinDaphne,Mary Jane Irwin,Daphne Koller
+RenataDorothy,Renata Wassermann,Dorothy Vaughan
+BraghettoDorothy,Kelly Braghetto,Dorothy Vaughan
+LovelaceBorg,Ada Lovelace,Anita Borg
+PerlmanHopper,Radia Perlman,Grace Hopper
+NunesdeBarrosLovelace,Leliane Nunes de Barros,Ada Lovelace
+MarissaLeliane,Marissa Mayer,Leliane Nunes de Barros
+SaujaniWassermann,Reshma Saujani,Renata Wassermann
+HamiltonBarbara,Margaret Hamilton,Barbara Liskov
+AsakawaWakabayashi,Chieko Asakawa,Yoshiko Wakabayashi
+AnaCristinaDorothy,Ana Cristina Viera de Melo,Dorothy Vaughan
+DaphnePerlman,Daphne Koller,Radia Perlman
+MarissaShafi,Marissa Mayer,Shafi Goldwasser
+KellerReshma,Sister Mary Kenneth Keller,Reshma Saujani
+RadiaSisterMaryKenneth,Radia Perlman,Sister Mary Kenneth Keller
+KellyShafi,Kelly Braghetto,Shafi Goldwasser
+MargaretSieckenius,Margaret Hamilton,Mary Sieckenius
+KollerKlawe,Daphne Koller,Jennifer Klawe
+DaphneDorothy,Daphne Koller,Dorothy Vaughan
+FeiFeiMaryJane,Fei-Fei Li,Mary Jane Irwin
+GebruSisterMaryKenneth,Timnit Gebru,Sister Mary Kenneth Keller
+LiskovIrwin,Barbara Liskov,Mary Jane Irwin
+SieckeniusAnnie,Mary Sieckenius,Annie Easley
+NunesdeBarrosKoller,Leliane Nunes de Barros,Daphne Koller
+DorothyAllen,Dorothy Vaughan,Frances Allen
+TimnitNunesdeBarros,Timnit Gebru,Leliane Nunes de Barros
+LelianeWakabayashi,Leliane Nunes de Barros,Yoshiko Wakabayashi
+DaphneSaujani,Daphne Koller,Reshma Saujani
+LiKelly,Fei-Fei Li,Kelly Braghetto
+AnaCristinaEasley,Ana Cristina Viera de Melo,Annie Easley
+MaryJennifer,Mary Sieckenius,Jennifer Klawe
+LiskovKobayashi,Barbara Liskov,Nami Kobayashi
+AnitaLeliane,Anita Borg,Leliane Nunes de Barros
+VaughanFrances,Dorothy Vaughan,Frances Allen
+SisterMaryKennethEasley,Sister Mary Kenneth Keller,Annie Easley
+KobayashiAsakawa,Nami Kobayashi,Chieko Asakawa
+KlawePerlman,Jennifer Klawe,Radia Perlman
+NinaSumikoLynn,Nina Sumiko Tomita Hirata,Lynn Conway
+KlaweBarbara,Jennifer Klawe,Barbara Liskov
+WakabayashiTomitaHirata,Yoshiko Wakabayashi,Nina Sumiko Tomita Hirata
+AnaCristinaShafi,Ana Cristina Viera de Melo,Shafi Goldwasser
+ReshmaKelly,Reshma Saujani,Kelly Braghetto
+BarbaraLynn,Barbara Liskov,Lynn Conway
+MayerWakabayashi,Marissa Mayer,Yoshiko Wakabayashi
+MaryJaneWassermann,Mary Jane Irwin,Renata Wassermann
+LiskovPerlman,Barbara Liskov,Radia Perlman
+SieckeniusTimnit,Mary Sieckenius,Timnit Gebru
+GoldwasserDaphne,Shafi Goldwasser,Daphne Koller
+ShafiChieko,Shafi Goldwasser,Chieko Asakawa
+HopperAllen,Grace Hopper,Frances Allen
+MayerKoller,Marissa Mayer,Daphne Koller
+GoldwasserMayer,Shafi Goldwasser,Marissa Mayer
+SisterMaryKennethAnita,Sister Mary Kenneth Keller,Anita Borg
+BarbaraAnita,Barbara Liskov,Anita Borg
+MaryConway,Mary Sieckenius,Lynn Conway
+ShafiWakabayashi,Shafi Goldwasser,Yoshiko Wakabayashi
+MaryGebru,Mary Sieckenius,Timnit Gebru
+JenniferWassermann,Jennifer Klawe,Renata Wassermann
+FernandesPerlman,Cristina Fernandes,Radia Perlman
+AsakawaMayer,Chieko Asakawa,Marissa Mayer
+DorothyBraghetto,Dorothy Vaughan,Kelly Braghetto
+AllenNunesdeBarros,Frances Allen,Leliane Nunes de Barros
+NunesdeBarrosGoldwasser,Leliane Nunes de Barros,Shafi Goldwasser
+HamiltonDaphne,Margaret Hamilton,Daphne Koller
+NinaSumikoFeiFei,Nina Sumiko Tomita Hirata,Fei-Fei Li
+AllenGoldwasser,Frances Allen,Shafi Goldwasser
+FernandesLeliane,Cristina Fernandes,Leliane Nunes de Barros
+AnaCristinaFrances,Ana Cristina Viera de Melo,Frances Allen
+FeiFeiKoller,Fei-Fei Li,Daphne Koller
+KellyMaryJane,Kelly Braghetto,Mary Jane Irwin
+AdaKeller,Ada Lovelace,Sister Mary Kenneth Keller
+LiskovRadia,Barbara Liskov,Radia Perlman
+AnitaLynn,Anita Borg,Lynn Conway
+MargaretLynn,Margaret Hamilton,Lynn Conway
+AnnieConway,Annie Easley,Lynn Conway
+AnnieDorothy,Annie Easley,Dorothy Vaughan
+AnnieBarbara,Annie Easley,Barbara Liskov
+AsakawaMarissa,Chieko Asakawa,Marissa Mayer
+AllenWassermann,Frances Allen,Renata Wassermann
+KellyAnaCristina,Kelly Braghetto,Ana Cristina Viera de Melo
+TimnitEasley,Timnit Gebru,Annie Easley
+FrancesKobayashi,Frances Allen,Nami Kobayashi
+AdaAllen,Ada Lovelace,Frances Allen
+DorothyRadia,Dorothy Vaughan,Radia Perlman
+LovelaceHopper,Ada Lovelace,Grace Hopper
+VieradeMeloNami,Ana Cristina Viera de Melo,Nami Kobayashi
+TimnitFrances,Timnit Gebru,Frances Allen
+NamiPerlman,Nami Kobayashi,Radia Perlman
+KollerBorg,Daphne Koller,Anita Borg
+JenniferHopper,Jennifer Klawe,Grace Hopper
+DaphneBarbara,Daphne Koller,Barbara Liskov
+IrwinEasley,Mary Jane Irwin,Annie Easley
+KobayashiVaughan,Nami Kobayashi,Dorothy Vaughan
+MargaretIrwin,Margaret Hamilton,Mary Jane Irwin
+RadiaLiskov,Radia Perlman,Barbara Liskov
+TomitaHirataMarissa,Nina Sumiko Tomita Hirata,Marissa Mayer
+KollerVaughan,Daphne Koller,Dorothy Vaughan
+SieckeniusHamilton,Mary Sieckenius,Margaret Hamilton
+NamiLi,Nami Kobayashi,Fei-Fei Li
+KlaweDorothy,Jennifer Klawe,Dorothy Vaughan
+HopperLeliane,Grace Hopper,Leliane Nunes de Barros
+SaujaniJennifer,Reshma Saujani,Jennifer Klawe
+TimnitMarissa,Timnit Gebru,Marissa Mayer
+AnitaFeiFei,Anita Borg,Fei-Fei Li
+FeiFeiLovelace,Fei-Fei Li,Ada Lovelace
+JenniferConway,Jennifer Klawe,Lynn Conway
+SaujaniVieradeMelo,Reshma Saujani,Ana Cristina Viera de Melo
+NamiVaughan,Nami Kobayashi,Dorothy Vaughan
+HopperGebru,Grace Hopper,Timnit Gebru
+TimnitAda,Timnit Gebru,Ada Lovelace
+EasleySisterMaryKenneth,Annie Easley,Sister Mary Kenneth Keller
+FernandesChieko,Cristina Fernandes,Chieko Asakawa
+SisterMaryKennethBorg,Sister Mary Kenneth Keller,Anita Borg
+MaryHopper,Mary Sieckenius,Grace Hopper
+AllenJennifer,Frances Allen,Jennifer Klawe
+ShafiKoller,Shafi Goldwasser,Daphne Koller
+DaphneKeller,Daphne Koller,Sister Mary Kenneth Keller
+LiskovLovelace,Barbara Liskov,Ada Lovelace
+EasleyLiskov,Annie Easley,Barbara Liskov
+WakabayashiAnaCristina,Yoshiko Wakabayashi,Ana Cristina Viera de Melo
+WakabayashiHopper,Yoshiko Wakabayashi,Grace Hopper
+LelianeAda,Leliane Nunes de Barros,Ada Lovelace
+VieradeMeloWassermann,Ana Cristina Viera de Melo,Renata Wassermann
+LovelaceBraghetto,Ada Lovelace,Kelly Braghetto
+ConwayRenata,Lynn Conway,Renata Wassermann
+CristinaBraghetto,Cristina Fernandes,Kelly Braghetto
+GoldwasserNami,Shafi Goldwasser,Nami Kobayashi
+MaryJaneHopper,Mary Jane Irwin,Grace Hopper
+NunesdeBarrosMaryJane,Leliane Nunes de Barros,Mary Jane Irwin
+KellerHopper,Sister Mary Kenneth Keller,Grace Hopper
+YoshikoNunesdeBarros,Yoshiko Wakabayashi,Leliane Nunes de Barros
+NamiLynn,Nami Kobayashi,Lynn Conway
+ChiekoVieradeMelo,Chieko Asakawa,Ana Cristina Viera de Melo
+HopperKelly,Grace Hopper,Kelly Braghetto
+PerlmanVaughan,Radia Perlman,Dorothy Vaughan
+LiBarbara,Fei-Fei Li,Barbara Liskov
+DorothyAnaCristina,Dorothy Vaughan,Ana Cristina Viera de Melo
+AdaMary,Ada Lovelace,Mary Sieckenius
+YoshikoRenata,Yoshiko Wakabayashi,Renata Wassermann
+NunesdeBarrosAnaCristina,Leliane Nunes de Barros,Ana Cristina Viera de Melo
+LovelaceBarbara,Ada Lovelace,Barbara Liskov
+RenataKoller,Renata Wassermann,Daphne Koller
+BraghettoAnita,Kelly Braghetto,Anita Borg
+NinaSumikoGrace,Nina Sumiko Tomita Hirata,Grace Hopper
+ChiekoAllen,Chieko Asakawa,Frances Allen
+FrancesChieko,Frances Allen,Chieko Asakawa
+LiLovelace,Fei-Fei Li,Ada Lovelace
+DorothyAnnie,Dorothy Vaughan,Annie Easley
+AnnieCristina,Annie Easley,Cristina Fernandes
+FrancesKelly,Frances Allen,Kelly Braghetto
+AdaYoshiko,Ada Lovelace,Yoshiko Wakabayashi
+AnitaIrwin,Anita Borg,Mary Jane Irwin
+RadiaKelly,Radia Perlman,Kelly Braghetto
+HamiltonKelly,Margaret Hamilton,Kelly Braghetto
+AnitaKelly,Anita Borg,Kelly Braghetto
+PerlmanLynn,Radia Perlman,Lynn Conway
+NunesdeBarrosHopper,Leliane Nunes de Barros,Grace Hopper
+ReshmaNinaSumiko,Reshma Saujani,Nina Sumiko Tomita Hirata
+LiWakabayashi,Fei-Fei Li,Yoshiko Wakabayashi
+KlaweCristina,Jennifer Klawe,Cristina Fernandes
+LiPerlman,Fei-Fei Li,Radia Perlman
+KollerNunesdeBarros,Daphne Koller,Leliane Nunes de Barros
+NunesdeBarrosSisterMaryKenneth,Leliane Nunes de Barros,Sister Mary Kenneth Keller
+SaujaniMarissa,Reshma Saujani,Marissa Mayer
+GebruSieckenius,Timnit Gebru,Mary Sieckenius
+RenataHopper,Renata Wassermann,Grace Hopper
+LiskovYoshiko,Barbara Liskov,Yoshiko Wakabayashi
+RadiaJennifer,Radia Perlman,Jennifer Klawe
+NinaSumikoGebru,Nina Sumiko Tomita Hirata,Timnit Gebru
+WassermannShafi,Renata Wassermann,Shafi Goldwasser
+AnitaMaryJane,Anita Borg,Mary Jane Irwin
+EasleyBraghetto,Annie Easley,Kelly Braghetto
+AnaCristinaBorg,Ana Cristina Viera de Melo,Anita Borg
+IrwinNinaSumiko,Mary Jane Irwin,Nina Sumiko Tomita Hirata
+BorgGrace,Anita Borg,Grace Hopper
+LiRadia,Fei-Fei Li,Radia Perlman
+IrwinMargaret,Mary Jane Irwin,Margaret Hamilton
+MaryNunesdeBarros,Mary Sieckenius,Leliane Nunes de Barros
+SaujaniGebru,Reshma Saujani,Timnit Gebru
+BarbaraBorg,Barbara Liskov,Anita Borg
+FernandesKeller,Cristina Fernandes,Sister Mary Kenneth Keller
+FernandesWakabayashi,Cristina Fernandes,Yoshiko Wakabayashi
+ReshmaYoshiko,Reshma Saujani,Yoshiko Wakabayashi
+FeiFeiFrances,Fei-Fei Li,Frances Allen
+MaryShafi,Mary Sieckenius,Shafi Goldwasser
+PerlmanReshma,Radia Perlman,Reshma Saujani
+TomitaHirataKelly,Nina Sumiko Tomita Hirata,Kelly Braghetto
+MaryJaneFeiFei,Mary Jane Irwin,Fei-Fei Li
+ReshmaBorg,Reshma Saujani,Anita Borg
+FeiFeiIrwin,Fei-Fei Li,Mary Jane Irwin
+HamiltonLeliane,Margaret Hamilton,Leliane Nunes de Barros
+MaryTimnit,Mary Sieckenius,Timnit Gebru
+LynnRadia,Lynn Conway,Radia Perlman
+MaryKoller,Mary Sieckenius,Daphne Koller
+AnnieAnaCristina,Annie Easley,Ana Cristina Viera de Melo
+FrancesWakabayashi,Frances Allen,Yoshiko Wakabayashi
+GraceDaphne,Grace Hopper,Daphne Koller
+HamiltonMayer,Margaret Hamilton,Marissa Mayer
+MayerAnita,Marissa Mayer,Anita Borg
+YoshikoMarissa,Yoshiko Wakabayashi,Marissa Mayer
+JenniferChieko,Jennifer Klawe,Chieko Asakawa
+DorothyGrace,Dorothy Vaughan,Grace Hopper
+KobayashiDorothy,Nami Kobayashi,Dorothy Vaughan
+TomitaHirataGebru,Nina Sumiko Tomita Hirata,Timnit Gebru
+LiskovCristina,Barbara Liskov,Cristina Fernandes
+AnaCristinaFeiFei,Ana Cristina Viera de Melo,Fei-Fei Li
+SaujaniKoller,Reshma Saujani,Daphne Koller
+EasleyWassermann,Annie Easley,Renata Wassermann
+LiChieko,Fei-Fei Li,Chieko Asakawa
+MargaretMayer,Margaret Hamilton,Marissa Mayer
+AnaCristinaMary,Ana Cristina Viera de Melo,Mary Sieckenius
+LiShafi,Fei-Fei Li,Shafi Goldwasser
+AdaAnita,Ada Lovelace,Anita Borg
+LynnBorg,Lynn Conway,Anita Borg
+AdaFernandes,Ada Lovelace,Cristina Fernandes
+FernandesBorg,Cristina Fernandes,Anita Borg
+MarissaLynn,Marissa Mayer,Lynn Conway
+IrwinShafi,Mary Jane Irwin,Shafi Goldwasser
+NamiChieko,Nami Kobayashi,Chieko Asakawa
+FrancesNinaSumiko,Frances Allen,Nina Sumiko Tomita Hirata
+NunesdeBarrosFrances,Leliane Nunes de Barros,Frances Allen
+BraghettoKlawe,Kelly Braghetto,Jennifer Klawe
+CristinaFeiFei,Cristina Fernandes,Fei-Fei Li
+NinaSumikoAnita,Nina Sumiko Tomita Hirata,Anita Borg
+KellerRadia,Sister Mary Kenneth Keller,Radia Perlman
+JenniferGebru,Jennifer Klawe,Timnit Gebru
+LelianeSaujani,Leliane Nunes de Barros,Reshma Saujani
+WassermannTimnit,Renata Wassermann,Timnit Gebru
+FeiFeiNami,Fei-Fei Li,Nami Kobayashi
+ShafiBraghetto,Shafi Goldwasser,Kelly Braghetto
+RenataJennifer,Renata Wassermann,Jennifer Klawe
+MargaretNami,Margaret Hamilton,Nami Kobayashi
+ShafiJennifer,Shafi Goldwasser,Jennifer Klawe
+LelianeMarissa,Leliane Nunes de Barros,Marissa Mayer
+AdaAnnie,Ada Lovelace,Annie Easley
+FrancesSaujani,Frances Allen,Reshma Saujani
+RenataNinaSumiko,Renata Wassermann,Nina Sumiko Tomita Hirata
+KellyVieradeMelo,Kelly Braghetto,Ana Cristina Viera de Melo
+AllenWakabayashi,Frances Allen,Yoshiko Wakabayashi
+MayerFernandes,Marissa Mayer,Cristina Fernandes
+LelianeKoller,Leliane Nunes de Barros,Daphne Koller
+KellerAllen,Sister Mary Kenneth Keller,Frances Allen
+MarissaBraghetto,Marissa Mayer,Kelly Braghetto
+PerlmanLiskov,Radia Perlman,Barbara Liskov
+FrancesNami,Frances Allen,Nami Kobayashi
+HopperRadia,Grace Hopper,Radia Perlman
+KellerNami,Sister Mary Kenneth Keller,Nami Kobayashi
+NunesdeBarrosPerlman,Leliane Nunes de Barros,Radia Perlman
+ReshmaGebru,Reshma Saujani,Timnit Gebru
+NunesdeBarrosYoshiko,Leliane Nunes de Barros,Yoshiko Wakabayashi
+AnitaJennifer,Anita Borg,Jennifer Klawe
+KellerCristina,Sister Mary Kenneth Keller,Cristina Fernandes
+WakabayashiKoller,Yoshiko Wakabayashi,Daphne Koller
+YoshikoKeller,Yoshiko Wakabayashi,Sister Mary Kenneth Keller
+CristinaAllen,Cristina Fernandes,Frances Allen
+MaryJaneSieckenius,Mary Jane Irwin,Mary Sieckenius
+AnitaGrace,Anita Borg,Grace Hopper
+AnniePerlman,Annie Easley,Radia Perlman
+MaryAsakawa,Mary Sieckenius,Chieko Asakawa
+WakabayashiDaphne,Yoshiko Wakabayashi,Daphne Koller
+JenniferRenata,Jennifer Klawe,Renata Wassermann
+NamiKlawe,Nami Kobayashi,Jennifer Klawe
+EasleyChieko,Annie Easley,Chieko Asakawa
+LelianeBorg,Leliane Nunes de Barros,Anita Borg
+MarissaKlawe,Marissa Mayer,Jennifer Klawe
+GraceAsakawa,Grace Hopper,Chieko Asakawa
+YoshikoHamilton,Yoshiko Wakabayashi,Margaret Hamilton
+FeiFeiMary,Fei-Fei Li,Mary Sieckenius
+MargaretLi,Margaret Hamilton,Fei-Fei Li
+BraghettoAda,Kelly Braghetto,Ada Lovelace
+HopperFeiFei,Grace Hopper,Fei-Fei Li
+AnnieKlawe,Annie Easley,Jennifer Klawe
+LynnBarbara,Lynn Conway,Barbara Liskov
+MayerKobayashi,Marissa Mayer,Nami Kobayashi
+WakabayashiAsakawa,Yoshiko Wakabayashi,Chieko Asakawa
+KellerIrwin,Sister Mary Kenneth Keller,Mary Jane Irwin
+KlaweTomitaHirata,Jennifer Klawe,Nina Sumiko Tomita Hirata
+TimnitYoshiko,Timnit Gebru,Yoshiko Wakabayashi
+AllenSaujani,Frances Allen,Reshma Saujani
+NunesdeBarrosDorothy,Leliane Nunes de Barros,Dorothy Vaughan
+IrwinKelly,Mary Jane Irwin,Kelly Braghetto
+WakabayashiMayer,Yoshiko Wakabayashi,Marissa Mayer
+YoshikoMaryJane,Yoshiko Wakabayashi,Mary Jane Irwin
+KobayashiEasley,Nami Kobayashi,Annie Easley
+SaujaniAnita,Reshma Saujani,Anita Borg
+BraghettoMarissa,Kelly Braghetto,Marissa Mayer
+AnitaKlawe,Anita Borg,Jennifer Klawe
+FernandesBarbara,Cristina Fernandes,Barbara Liskov
+WakabayashiKobayashi,Yoshiko Wakabayashi,Nami Kobayashi
+DaphneNami,Daphne Koller,Nami Kobayashi
+AnaCristinaAllen,Ana Cristina Viera de Melo,Frances Allen
+ShafiAllen,Shafi Goldwasser,Frances Allen
+DorothyIrwin,Dorothy Vaughan,Mary Jane Irwin
+TomitaHirataChieko,Nina Sumiko Tomita Hirata,Chieko Asakawa
+KellyTomitaHirata,Kelly Braghetto,Nina Sumiko Tomita Hirata
+VieradeMeloMargaret,Ana Cristina Viera de Melo,Margaret Hamilton
+TimnitGoldwasser,Timnit Gebru,Shafi Goldwasser
+AnnieVaughan,Annie Easley,Dorothy Vaughan
+MaryJaneEasley,Mary Jane Irwin,Annie Easley
+KollerMarissa,Daphne Koller,Marissa Mayer
+KollerLovelace,Daphne Koller,Ada Lovelace
+VieradeMeloMary,Ana Cristina Viera de Melo,Mary Sieckenius
+IrwinDorothy,Mary Jane Irwin,Dorothy Vaughan
+FeiFeiDaphne,Fei-Fei Li,Daphne Koller
+ReshmaNunesdeBarros,Reshma Saujani,Leliane Nunes de Barros
+ChiekoCristina,Chieko Asakawa,Cristina Fernandes
+AnnieSaujani,Annie Easley,Reshma Saujani
+KlaweGrace,Jennifer Klawe,Grace Hopper
+FrancesGrace,Frances Allen,Grace Hopper
+AnaCristinaJennifer,Ana Cristina Viera de Melo,Jennifer Klawe
+BraghettoJennifer,Kelly Braghetto,Jennifer Klawe
+TomitaHirataAnita,Nina Sumiko Tomita Hirata,Anita Borg
+KellyAllen,Kelly Braghetto,Frances Allen
+RenataLeliane,Renata Wassermann,Leliane Nunes de Barros
+ConwayLiskov,Lynn Conway,Barbara Liskov
+LiLiskov,Fei-Fei Li,Barbara Liskov
+LynnPerlman,Lynn Conway,Radia Perlman
+DaphneReshma,Daphne Koller,Reshma Saujani
+FrancesGoldwasser,Frances Allen,Shafi Goldwasser
+NinaSumikoNunesdeBarros,Nina Sumiko Tomita Hirata,Leliane Nunes de Barros
+DaphneAnnie,Daphne Koller,Annie Easley
+ChiekoMargaret,Chieko Asakawa,Margaret Hamilton
+MaryJaneBarbara,Mary Jane Irwin,Barbara Liskov
+ConwayKeller,Lynn Conway,Sister Mary Kenneth Keller
+TomitaHirataAnaCristina,Nina Sumiko Tomita Hirata,Ana Cristina Viera de Melo
+BraghettoReshma,Kelly Braghetto,Reshma Saujani
+MayerMargaret,Marissa Mayer,Margaret Hamilton
+VieradeMeloDaphne,Ana Cristina Viera de Melo,Daphne Koller
+BraghettoLiskov,Kelly Braghetto,Barbara Liskov
+FeiFeiCristina,Fei-Fei Li,Cristina Fernandes
+NinaSumikoVaughan,Nina Sumiko Tomita Hirata,Dorothy Vaughan
+TomitaHirataHopper,Nina Sumiko Tomita Hirata,Grace Hopper
+ChiekoNami,Chieko Asakawa,Nami Kobayashi
+KellyMary,Kelly Braghetto,Mary Sieckenius
+SisterMaryKennethConway,Sister Mary Kenneth Keller,Lynn Conway
+AllenVieradeMelo,Frances Allen,Ana Cristina Viera de Melo
+KlaweFernandes,Jennifer Klawe,Cristina Fernandes
+YoshikoPerlman,Yoshiko Wakabayashi,Radia Perlman
+CristinaReshma,Cristina Fernandes,Reshma Saujani
+JenniferFrances,Jennifer Klawe,Frances Allen
+SisterMaryKennethAsakawa,Sister Mary Kenneth Keller,Chieko Asakawa
+AnaCristinaKobayashi,Ana Cristina Viera de Melo,Nami Kobayashi
+AsakawaRenata,Chieko Asakawa,Renata Wassermann
+NamiDorothy,Nami Kobayashi,Dorothy Vaughan
+AsakawaKlawe,Chieko Asakawa,Jennifer Klawe
+LiMayer,Fei-Fei Li,Marissa Mayer
+LelianeSieckenius,Leliane Nunes de Barros,Mary Sieckenius
+GebruVaughan,Timnit Gebru,Dorothy Vaughan
+RadiaMaryJane,Radia Perlman,Mary Jane Irwin
+PerlmanEasley,Radia Perlman,Annie Easley
+EasleyLynn,Annie Easley,Lynn Conway
+VaughanAnnie,Dorothy Vaughan,Annie Easley
+BorgBarbara,Anita Borg,Barbara Liskov
+FeiFeiAnnie,Fei-Fei Li,Annie Easley
+ChiekoTimnit,Chieko Asakawa,Timnit Gebru
+TomitaHirataBarbara,Nina Sumiko Tomita Hirata,Barbara Liskov
+RadiaAllen,Radia Perlman,Frances Allen
+FrancesShafi,Frances Allen,Shafi Goldwasser
+FeiFeiReshma,Fei-Fei Li,Reshma Saujani
+AnnieReshma,Annie Easley,Reshma Saujani
+SieckeniusLovelace,Mary Sieckenius,Ada Lovelace
+RenataLynn,Renata Wassermann,Lynn Conway
+SieckeniusKoller,Mary Sieckenius,Daphne Koller
+WassermannEasley,Renata Wassermann,Annie Easley
+AdaFrances,Ada Lovelace,Frances Allen
+AnitaGebru,Anita Borg,Timnit Gebru
+BorgAllen,Anita Borg,Frances Allen
+MayerKelly,Marissa Mayer,Kelly Braghetto
+VaughanIrwin,Dorothy Vaughan,Mary Jane Irwin
+PerlmanRenata,Radia Perlman,Renata Wassermann
+FernandesReshma,Cristina Fernandes,Reshma Saujani
+AsakawaBraghetto,Chieko Asakawa,Kelly Braghetto
+DaphneNinaSumiko,Daphne Koller,Nina Sumiko Tomita Hirata
+MayerBarbara,Marissa Mayer,Barbara Liskov
+AnaCristinaAnnie,Ana Cristina Viera de Melo,Annie Easley
+BraghettoEasley,Kelly Braghetto,Annie Easley
+LovelaceKlawe,Ada Lovelace,Jennifer Klawe
+NunesdeBarrosTomitaHirata,Leliane Nunes de Barros,Nina Sumiko Tomita Hirata
+KellyWassermann,Kelly Braghetto,Renata Wassermann
+BorgNunesdeBarros,Anita Borg,Leliane Nunes de Barros
+AdaBorg,Ada Lovelace,Anita Borg
+TomitaHirataJennifer,Nina Sumiko Tomita Hirata,Jennifer Klawe
+RadiaVaughan,Radia Perlman,Dorothy Vaughan
+WakabayashiCristina,Yoshiko Wakabayashi,Cristina Fernandes
+ChiekoBorg,Chieko Asakawa,Anita Borg
+SisterMaryKennethSieckenius,Sister Mary Kenneth Keller,Mary Sieckenius
+EasleyLi,Annie Easley,Fei-Fei Li
+CristinaWakabayashi,Cristina Fernandes,Yoshiko Wakabayashi
+MayerKeller,Marissa Mayer,Sister Mary Kenneth Keller
+AnnieKoller,Annie Easley,Daphne Koller
+ConwayFrances,Lynn Conway,Frances Allen
+SieckeniusMarissa,Mary Sieckenius,Marissa Mayer
+TomitaHirataAsakawa,Nina Sumiko Tomita Hirata,Chieko Asakawa
+NinaSumikoAllen,Nina Sumiko Tomita Hirata,Frances Allen
+AsakawaReshma,Chieko Asakawa,Reshma Saujani
+AllenAnita,Frances Allen,Anita Borg
+LynnVieradeMelo,Lynn Conway,Ana Cristina Viera de Melo
+NunesdeBarrosConway,Leliane Nunes de Barros,Lynn Conway
+MaryGrace,Mary Sieckenius,Grace Hopper
+SaujaniDorothy,Reshma Saujani,Dorothy Vaughan
+MayerEasley,Marissa Mayer,Annie Easley
+WakabayashiGoldwasser,Yoshiko Wakabayashi,Shafi Goldwasser
+LelianeShafi,Leliane Nunes de Barros,Shafi Goldwasser
+JenniferAsakawa,Jennifer Klawe,Chieko Asakawa
+VieradeMeloKelly,Ana Cristina Viera de Melo,Kelly Braghetto
+BorgMaryJane,Anita Borg,Mary Jane Irwin
+LiskovBorg,Barbara Liskov,Anita Borg
+PerlmanBarbara,Radia Perlman,Barbara Liskov
+KellerMaryJane,Sister Mary Kenneth Keller,Mary Jane Irwin
+AnnieSieckenius,Annie Easley,Mary Sieckenius
+ConwayBorg,Lynn Conway,Anita Borg
+AnaCristinaMargaret,Ana Cristina Viera de Melo,Margaret Hamilton
+ReshmaBraghetto,Reshma Saujani,Kelly Braghetto
+AnnieVieradeMelo,Annie Easley,Ana Cristina Viera de Melo
+LelianeVaughan,Leliane Nunes de Barros,Dorothy Vaughan
+NamiHopper,Nami Kobayashi,Grace Hopper
+RadiaIrwin,Radia Perlman,Mary Jane Irwin
+WakabayashiGrace,Yoshiko Wakabayashi,Grace Hopper
+TomitaHirataCristina,Nina Sumiko Tomita Hirata,Cristina Fernandes
+WakabayashiVaughan,Yoshiko Wakabayashi,Dorothy Vaughan
+VieradeMeloSaujani,Ana Cristina Viera de Melo,Reshma Saujani
+NunesdeBarrosNinaSumiko,Leliane Nunes de Barros,Nina Sumiko Tomita Hirata
+HamiltonAda,Margaret Hamilton,Ada Lovelace
+AllenMayer,Frances Allen,Marissa Mayer
+AdaMayer,Ada Lovelace,Marissa Mayer
+CristinaMaryJane,Cristina Fernandes,Mary Jane Irwin
+RadiaSaujani,Radia Perlman,Reshma Saujani
+DaphneSieckenius,Daphne Koller,Mary Sieckenius
+GraceReshma,Grace Hopper,Reshma Saujani
+VieradeMeloEasley,Ana Cristina Viera de Melo,Annie Easley
+KollerLeliane,Daphne Koller,Leliane Nunes de Barros
+SaujaniGrace,Reshma Saujani,Grace Hopper
+DaphneKobayashi,Daphne Koller,Nami Kobayashi
+AnnieKeller,Annie Easley,Sister Mary Kenneth Keller
+AnnieTomitaHirata,Annie Easley,Nina Sumiko Tomita Hirata
+IrwinConway,Mary Jane Irwin,Lynn Conway
+MargaretShafi,Margaret Hamilton,Shafi Goldwasser
+AdaLynn,Ada Lovelace,Lynn Conway
+KellerDaphne,Sister Mary Kenneth Keller,Daphne Koller
+NunesdeBarrosMary,Leliane Nunes de Barros,Mary Sieckenius
+LovelaceRenata,Ada Lovelace,Renata Wassermann
+RenataBraghetto,Renata Wassermann,Kelly Braghetto
+SieckeniusKelly,Mary Sieckenius,Kelly Braghetto
+BraghettoWassermann,Kelly Braghetto,Renata Wassermann
+HopperFernandes,Grace Hopper,Cristina Fernandes
+KollerNami,Daphne Koller,Nami Kobayashi
+HamiltonNunesdeBarros,Margaret Hamilton,Leliane Nunes de Barros
+SisterMaryKennethBarbara,Sister Mary Kenneth Keller,Barbara Liskov
+BarbaraKlawe,Barbara Liskov,Jennifer Klawe
+VieradeMeloWakabayashi,Ana Cristina Viera de Melo,Yoshiko Wakabayashi
+SieckeniusVieradeMelo,Mary Sieckenius,Ana Cristina Viera de Melo
+NamiWassermann,Nami Kobayashi,Renata Wassermann
+FernandesRadia,Cristina Fernandes,Radia Perlman
+KlaweFrances,Jennifer Klawe,Frances Allen
+SaujaniShafi,Reshma Saujani,Shafi Goldwasser
+GoldwasserCristina,Shafi Goldwasser,Cristina Fernandes
+DorothyTomitaHirata,Dorothy Vaughan,Nina Sumiko Tomita Hirata
+KlaweRadia,Jennifer Klawe,Radia Perlman
+MayerAnaCristina,Marissa Mayer,Ana Cristina Viera de Melo
+BorgFeiFei,Anita Borg,Fei-Fei Li
+AdaVieradeMelo,Ada Lovelace,Ana Cristina Viera de Melo
+YoshikoAnita,Yoshiko Wakabayashi,Anita Borg
+AllenKelly,Frances Allen,Kelly Braghetto
+TomitaHirataYoshiko,Nina Sumiko Tomita Hirata,Yoshiko Wakabayashi
+SaujaniEasley,Reshma Saujani,Annie Easley
+AnitaNami,Anita Borg,Nami Kobayashi
+CristinaYoshiko,Cristina Fernandes,Yoshiko Wakabayashi
+IrwinTimnit,Mary Jane Irwin,Timnit Gebru
+LiSaujani,Fei-Fei Li,Reshma Saujani
+FrancesKoller,Frances Allen,Daphne Koller
+PerlmanWakabayashi,Radia Perlman,Yoshiko Wakabayashi
+WassermannWakabayashi,Renata Wassermann,Yoshiko Wakabayashi
+SaujaniGoldwasser,Reshma Saujani,Shafi Goldwasser
+AnaCristinaGrace,Ana Cristina Viera de Melo,Grace Hopper
+BarbaraNinaSumiko,Barbara Liskov,Nina Sumiko Tomita Hirata
+ReshmaMary,Reshma Saujani,Mary Sieckenius
+GoldwasserLovelace,Shafi Goldwasser,Ada Lovelace
+CristinaMargaret,Cristina Fernandes,Margaret Hamilton
+AnnieLynn,Annie Easley,Lynn Conway
+WakabayashiAllen,Yoshiko Wakabayashi,Frances Allen
+RenataLovelace,Renata Wassermann,Ada Lovelace
+KellyJennifer,Kelly Braghetto,Jennifer Klawe
+WakabayashiHamilton,Yoshiko Wakabayashi,Margaret Hamilton
+MargaretSisterMaryKenneth,Margaret Hamilton,Sister Mary Kenneth Keller
+KobayashiBorg,Nami Kobayashi,Anita Borg
+HopperKoller,Grace Hopper,Daphne Koller
+LiskovKeller,Barbara Liskov,Sister Mary Kenneth Keller
+SisterMaryKennethDorothy,Sister Mary Kenneth Keller,Dorothy Vaughan
+YoshikoFeiFei,Yoshiko Wakabayashi,Fei-Fei Li
+TimnitNinaSumiko,Timnit Gebru,Nina Sumiko Tomita Hirata
+WakabayashiBarbara,Yoshiko Wakabayashi,Barbara Liskov
+IrwinAsakawa,Mary Jane Irwin,Chieko Asakawa
+DorothyWassermann,Dorothy Vaughan,Renata Wassermann
+CristinaBarbara,Cristina Fernandes,Barbara Liskov
+BorgKelly,Anita Borg,Kelly Braghetto
+MaryJaneNinaSumiko,Mary Jane Irwin,Nina Sumiko Tomita Hirata
+BarbaraNami,Barbara Liskov,Nami Kobayashi
+VieradeMeloHopper,Ana Cristina Viera de Melo,Grace Hopper
+LiIrwin,Fei-Fei Li,Mary Jane Irwin
+KellerKobayashi,Sister Mary Kenneth Keller,Nami Kobayashi
+MaryAnaCristina,Mary Sieckenius,Ana Cristina Viera de Melo
+HopperAsakawa,Grace Hopper,Chieko Asakawa
+MayerLynn,Marissa Mayer,Lynn Conway
+GoldwasserHopper,Shafi Goldwasser,Grace Hopper
+SieckeniusNinaSumiko,Mary Sieckenius,Nina Sumiko Tomita Hirata
+LelianeLi,Leliane Nunes de Barros,Fei-Fei Li
+AnitaLi,Anita Borg,Fei-Fei Li
+AnitaMary,Anita Borg,Mary Sieckenius
+JenniferVieradeMelo,Jennifer Klawe,Ana Cristina Viera de Melo
+JenniferCristina,Jennifer Klawe,Cristina Fernandes
+VaughanWassermann,Dorothy Vaughan,Renata Wassermann
+GoldwasserBarbara,Shafi Goldwasser,Barbara Liskov
+DorothyReshma,Dorothy Vaughan,Reshma Saujani
+WassermannRadia,Renata Wassermann,Radia Perlman
+BarbaraRenata,Barbara Liskov,Renata Wassermann
+VaughanLynn,Dorothy Vaughan,Lynn Conway
+TimnitHopper,Timnit Gebru,Grace Hopper
+HamiltonKobayashi,Margaret Hamilton,Nami Kobayashi
+GracePerlman,Grace Hopper,Radia Perlman
+KollerIrwin,Daphne Koller,Mary Jane Irwin
+LynnKeller,Lynn Conway,Sister Mary Kenneth Keller
+GoldwasserLi,Shafi Goldwasser,Fei-Fei Li
+VieradeMeloGoldwasser,Ana Cristina Viera de Melo,Shafi Goldwasser
+IrwinChieko,Mary Jane Irwin,Chieko Asakawa
+BarbaraKeller,Barbara Liskov,Sister Mary Kenneth Keller
+SisterMaryKennethKoller,Sister Mary Kenneth Keller,Daphne Koller
+EasleyBarbara,Annie Easley,Barbara Liskov
+VaughanWakabayashi,Dorothy Vaughan,Yoshiko Wakabayashi
+BarbaraGrace,Barbara Liskov,Grace Hopper
+SaujaniBarbara,Reshma Saujani,Barbara Liskov
+AnaCristinaHamilton,Ana Cristina Viera de Melo,Margaret Hamilton
+KobayashiFernandes,Nami Kobayashi,Cristina Fernandes
+KellerNunesdeBarros,Sister Mary Kenneth Keller,Leliane Nunes de Barros
+JenniferEasley,Jennifer Klawe,Annie Easley
+CristinaHamilton,Cristina Fernandes,Margaret Hamilton
+LelianeChieko,Leliane Nunes de Barros,Chieko Asakawa
+KollerChieko,Daphne Koller,Chieko Asakawa
+IrwinKeller,Mary Jane Irwin,Sister Mary Kenneth Keller
+JenniferKeller,Jennifer Klawe,Sister Mary Kenneth Keller
+GebruNunesdeBarros,Timnit Gebru,Leliane Nunes de Barros
+GebruWassermann,Timnit Gebru,Renata Wassermann
+AdaCristina,Ada Lovelace,Cristina Fernandes
+FernandesMaryJane,Cristina Fernandes,Mary Jane Irwin
+BorgSaujani,Anita Borg,Reshma Saujani
+NamiYoshiko,Nami Kobayashi,Yoshiko Wakabayashi
+LiskovReshma,Barbara Liskov,Reshma Saujani
+MargaretAda,Margaret Hamilton,Ada Lovelace
+BraghettoNinaSumiko,Kelly Braghetto,Nina Sumiko Tomita Hirata
+BraghettoCristina,Kelly Braghetto,Cristina Fernandes
+MargaretChieko,Margaret Hamilton,Chieko Asakawa
+LiFernandes,Fei-Fei Li,Cristina Fernandes
+TomitaHirataDaphne,Nina Sumiko Tomita Hirata,Daphne Koller
+TimnitDaphne,Timnit Gebru,Daphne Koller
+BarbaraTomitaHirata,Barbara Liskov,Nina Sumiko Tomita Hirata
+NamiAnaCristina,Nami Kobayashi,Ana Cristina Viera de Melo
+ReshmaBarbara,Reshma Saujani,Barbara Liskov
+DorothyCristina,Dorothy Vaughan,Cristina Fernandes
+NinaSumikoSieckenius,Nina Sumiko Tomita Hirata,Mary Sieckenius
+KlaweNunesdeBarros,Jennifer Klawe,Leliane Nunes de Barros
+MaryJaneGrace,Mary Jane Irwin,Grace Hopper
+RenataLiskov,Renata Wassermann,Barbara Liskov
+PerlmanYoshiko,Radia Perlman,Yoshiko Wakabayashi
+ShafiWassermann,Shafi Goldwasser,Renata Wassermann
+NinaSumikoLovelace,Nina Sumiko Tomita Hirata,Ada Lovelace
+NunesdeBarrosAnnie,Leliane Nunes de Barros,Annie Easley
+KlaweMary,Jennifer Klawe,Mary Sieckenius
+KobayashiGoldwasser,Nami Kobayashi,Shafi Goldwasser
+FrancesFeiFei,Frances Allen,Fei-Fei Li
+SisterMaryKennethSaujani,Sister Mary Kenneth Keller,Reshma Saujani
+TomitaHirataWakabayashi,Nina Sumiko Tomita Hirata,Yoshiko Wakabayashi
+TomitaHirataEasley,Nina Sumiko Tomita Hirata,Annie Easley
+KellerMary,Sister Mary Kenneth Keller,Mary Sieckenius
+BarbaraKoller,Barbara Liskov,Daphne Koller
+GraceDorothy,Grace Hopper,Dorothy Vaughan
+KellerMayer,Sister Mary Kenneth Keller,Marissa Mayer
+HopperTimnit,Grace Hopper,Timnit Gebru
+CristinaMayer,Cristina Fernandes,Marissa Mayer
+EasleyLovelace,Annie Easley,Ada Lovelace
+DorothyKoller,Dorothy Vaughan,Daphne Koller
+TomitaHirataReshma,Nina Sumiko Tomita Hirata,Reshma Saujani
+IrwinRadia,Mary Jane Irwin,Radia Perlman
+ConwayWassermann,Lynn Conway,Renata Wassermann
+ChiekoMarissa,Chieko Asakawa,Marissa Mayer
+NinaSumikoMary,Nina Sumiko Tomita Hirata,Mary Sieckenius
+AnnieLiskov,Annie Easley,Barbara Liskov
+ShafiIrwin,Shafi Goldwasser,Mary Jane Irwin
+NinaSumikoWakabayashi,Nina Sumiko Tomita Hirata,Yoshiko Wakabayashi
+ChiekoYoshiko,Chieko Asakawa,Yoshiko Wakabayashi
+RenataFernandes,Renata Wassermann,Cristina Fernandes
+HopperMargaret,Grace Hopper,Margaret Hamilton
+WassermannAda,Renata Wassermann,Ada Lovelace
+DaphneVieradeMelo,Daphne Koller,Ana Cristina Viera de Melo
+EasleyKlawe,Annie Easley,Jennifer Klawe
+ShafiMarissa,Shafi Goldwasser,Marissa Mayer
+RenataKeller,Renata Wassermann,Sister Mary Kenneth Keller
+ShafiNinaSumiko,Shafi Goldwasser,Nina Sumiko Tomita Hirata
+WakabayashiFrances,Yoshiko Wakabayashi,Frances Allen
+VaughanKelly,Dorothy Vaughan,Kelly Braghetto
+BorgWassermann,Anita Borg,Renata Wassermann
+KellerBorg,Sister Mary Kenneth Keller,Anita Borg
+JenniferKelly,Jennifer Klawe,Kelly Braghetto
+EasleyGoldwasser,Annie Easley,Shafi Goldwasser
+JenniferAnaCristina,Jennifer Klawe,Ana Cristina Viera de Melo
+EasleyDorothy,Annie Easley,Dorothy Vaughan
+VaughanVieradeMelo,Dorothy Vaughan,Ana Cristina Viera de Melo
+LynnKoller,Lynn Conway,Daphne Koller
+HopperIrwin,Grace Hopper,Mary Jane Irwin
+JenniferBraghetto,Jennifer Klawe,Kelly Braghetto
+LynnJennifer,Lynn Conway,Jennifer Klawe
+GebruBarbara,Timnit Gebru,Barbara Liskov
+KlaweAsakawa,Jennifer Klawe,Chieko Asakawa
+LiYoshiko,Fei-Fei Li,Yoshiko Wakabayashi
+NinaSumikoWassermann,Nina Sumiko Tomita Hirata,Renata Wassermann
+NamiHamilton,Nami Kobayashi,Margaret Hamilton
+KellerVieradeMelo,Sister Mary Kenneth Keller,Ana Cristina Viera de Melo
+LelianeYoshiko,Leliane Nunes de Barros,Yoshiko Wakabayashi
+DaphneLynn,Daphne Koller,Lynn Conway
+KobayashiKeller,Nami Kobayashi,Sister Mary Kenneth Keller
+LelianeFrances,Leliane Nunes de Barros,Frances Allen
+FrancesAnita,Frances Allen,Anita Borg
+DorothyShafi,Dorothy Vaughan,Shafi Goldwasser
+IrwinBraghetto,Mary Jane Irwin,Kelly Braghetto
+LovelaceAllen,Ada Lovelace,Frances Allen
+VaughanDaphne,Dorothy Vaughan,Daphne Koller
+LiEasley,Fei-Fei Li,Annie Easley
+ConwayGrace,Lynn Conway,Grace Hopper
+KellySieckenius,Kelly Braghetto,Mary Sieckenius
+KellerShafi,Sister Mary Kenneth Keller,Shafi Goldwasser
+VieradeMeloFrances,Ana Cristina Viera de Melo,Frances Allen
+FrancesSisterMaryKenneth,Frances Allen,Sister Mary Kenneth Keller
+KollerBarbara,Daphne Koller,Barbara Liskov
+KobayashiBraghetto,Nami Kobayashi,Kelly Braghetto
+CristinaLeliane,Cristina Fernandes,Leliane Nunes de Barros
+NunesdeBarrosHamilton,Leliane Nunes de Barros,Margaret Hamilton
+NunesdeBarrosKobayashi,Leliane Nunes de Barros,Nami Kobayashi
+MargaretKlawe,Margaret Hamilton,Jennifer Klawe
+BraghettoYoshiko,Kelly Braghetto,Yoshiko Wakabayashi
+BraghettoDaphne,Kelly Braghetto,Daphne Koller
+ConwayMargaret,Lynn Conway,Margaret Hamilton
+ShafiHamilton,Shafi Goldwasser,Margaret Hamilton
+GebruMaryJane,Timnit Gebru,Mary Jane Irwin
+MarissaNunesdeBarros,Marissa Mayer,Leliane Nunes de Barros
+EasleyMargaret,Annie Easley,Margaret Hamilton
+KellyVaughan,Kelly Braghetto,Dorothy Vaughan
+LynnMarissa,Lynn Conway,Marissa Mayer
+LelianeFernandes,Leliane Nunes de Barros,Cristina Fernandes
+NamiSaujani,Nami Kobayashi,Reshma Saujani
+LelianeFeiFei,Leliane Nunes de Barros,Fei-Fei Li
+NamiMayer,Nami Kobayashi,Marissa Mayer
+ShafiCristina,Shafi Goldwasser,Cristina Fernandes
+VieradeMeloIrwin,Ana Cristina Viera de Melo,Mary Jane Irwin
+RenataGebru,Renata Wassermann,Timnit Gebru
+PerlmanMargaret,Radia Perlman,Margaret Hamilton
+GoldwasserReshma,Shafi Goldwasser,Reshma Saujani
+LiKlawe,Fei-Fei Li,Jennifer Klawe
+WassermannHopper,Renata Wassermann,Grace Hopper
+VieradeMeloBraghetto,Ana Cristina Viera de Melo,Kelly Braghetto
+MayerBraghetto,Marissa Mayer,Kelly Braghetto
+HopperSieckenius,Grace Hopper,Mary Sieckenius
+TimnitPerlman,Timnit Gebru,Radia Perlman
+KobayashiMaryJane,Nami Kobayashi,Mary Jane Irwin
+LynnVaughan,Lynn Conway,Dorothy Vaughan
+NunesdeBarrosIrwin,Leliane Nunes de Barros,Mary Jane Irwin
+FernandesFrances,Cristina Fernandes,Frances Allen
+KellyNinaSumiko,Kelly Braghetto,Nina Sumiko Tomita Hirata
+FrancesGebru,Frances Allen,Timnit Gebru
+CristinaGrace,Cristina Fernandes,Grace Hopper
+DorothyMayer,Dorothy Vaughan,Marissa Mayer
+AllenLovelace,Frances Allen,Ada Lovelace
+KlaweSieckenius,Jennifer Klawe,Mary Sieckenius
+AllenFeiFei,Frances Allen,Fei-Fei Li
+NinaSumikoChieko,Nina Sumiko Tomita Hirata,Chieko Asakawa
+KellyAnnie,Kelly Braghetto,Annie Easley
+PerlmanNunesdeBarros,Radia Perlman,Leliane Nunes de Barros
+KlaweKeller,Jennifer Klawe,Sister Mary Kenneth Keller
+CristinaDorothy,Cristina Fernandes,Dorothy Vaughan
+KobayashiMarissa,Nami Kobayashi,Marissa Mayer
+KollerWakabayashi,Daphne Koller,Yoshiko Wakabayashi
+AsakawaHopper,Chieko Asakawa,Grace Hopper
+FrancesHopper,Frances Allen,Grace Hopper
+AsakawaGrace,Chieko Asakawa,Grace Hopper
+IrwinHopper,Mary Jane Irwin,Grace Hopper
+SieckeniusAnaCristina,Mary Sieckenius,Ana Cristina Viera de Melo
+TomitaHirataBorg,Nina Sumiko Tomita Hirata,Anita Borg
+ChiekoAnnie,Chieko Asakawa,Annie Easley
+LynnAnaCristina,Lynn Conway,Ana Cristina Viera de Melo
+SaujaniNunesdeBarros,Reshma Saujani,Leliane Nunes de Barros
+NinaSumikoJennifer,Nina Sumiko Tomita Hirata,Jennifer Klawe
+AsakawaTomitaHirata,Chieko Asakawa,Nina Sumiko Tomita Hirata
+CristinaVieradeMelo,Cristina Fernandes,Ana Cristina Viera de Melo
+AnitaMargaret,Anita Borg,Margaret Hamilton
+LynnMargaret,Lynn Conway,Margaret Hamilton
+TomitaHirataKlawe,Nina Sumiko Tomita Hirata,Jennifer Klawe
+GoldwasserMary,Shafi Goldwasser,Mary Sieckenius
+BorgMayer,Anita Borg,Marissa Mayer
+SaujaniConway,Reshma Saujani,Lynn Conway
+ChiekoFrances,Chieko Asakawa,Frances Allen
+CristinaConway,Cristina Fernandes,Lynn Conway
+MaryLiskov,Mary Sieckenius,Barbara Liskov
+AnaCristinaLovelace,Ana Cristina Viera de Melo,Ada Lovelace
+AdaKlawe,Ada Lovelace,Jennifer Klawe
+NamiMaryJane,Nami Kobayashi,Mary Jane Irwin
+HamiltonTimnit,Margaret Hamilton,Timnit Gebru
+NunesdeBarrosTimnit,Leliane Nunes de Barros,Timnit Gebru
+NamiLiskov,Nami Kobayashi,Barbara Liskov
+AllenSieckenius,Frances Allen,Mary Sieckenius
+BraghettoMayer,Kelly Braghetto,Marissa Mayer
+KellerWakabayashi,Sister Mary Kenneth Keller,Yoshiko Wakabayashi
+MarissaNinaSumiko,Marissa Mayer,Nina Sumiko Tomita Hirata
+BraghettoKoller,Kelly Braghetto,Daphne Koller
+GraceChieko,Grace Hopper,Chieko Asakawa
+ConwayReshma,Lynn Conway,Reshma Saujani
+RenataGoldwasser,Renata Wassermann,Shafi Goldwasser
+IrwinAnaCristina,Mary Jane Irwin,Ana Cristina Viera de Melo
+BorgHamilton,Anita Borg,Margaret Hamilton
+ConwayFernandes,Lynn Conway,Cristina Fernandes
+FernandesAsakawa,Cristina Fernandes,Chieko Asakawa
+KellyConway,Kelly Braghetto,Lynn Conway
+TimnitConway,Timnit Gebru,Lynn Conway
+FernandesHamilton,Cristina Fernandes,Margaret Hamilton
+FeiFeiAnaCristina,Fei-Fei Li,Ana Cristina Viera de Melo
+SaujaniAsakawa,Reshma Saujani,Chieko Asakawa
+SisterMaryKennethLi,Sister Mary Kenneth Keller,Fei-Fei Li
+VieradeMeloConway,Ana Cristina Viera de Melo,Lynn Conway
+PerlmanDaphne,Radia Perlman,Daphne Koller
+RadiaFeiFei,Radia Perlman,Fei-Fei Li
+YoshikoAnnie,Yoshiko Wakabayashi,Annie Easley
+KollerNinaSumiko,Daphne Koller,Nina Sumiko Tomita Hirata
+BorgHopper,Anita Borg,Grace Hopper
+TimnitVieradeMelo,Timnit Gebru,Ana Cristina Viera de Melo
+HamiltonBraghetto,Margaret Hamilton,Kelly Braghetto
+RadiaBraghetto,Radia Perlman,Kelly Braghetto
+PerlmanJennifer,Radia Perlman,Jennifer Klawe
+KellerKelly,Sister Mary Kenneth Keller,Kelly Braghetto
+KobayashiYoshiko,Nami Kobayashi,Yoshiko Wakabayashi

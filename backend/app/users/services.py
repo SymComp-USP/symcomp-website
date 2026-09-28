@@ -4,29 +4,13 @@ from datetime import UTC, datetime
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.auth.security import hash_password
+from app.users.exceptions import UserAlreadyDeletedError, UserAlreadyExistsError
 from app.users.models import User
 from app.users.schemas import UserCreate, UserUpdate
-
-
-# --- classes de erro ---
-class UserAlreadyDeletedError(Exception):
-    """Levantado ao tentar deletar (soft delete) um usuário que já está
-    marcado como deletado."""
-
-    def __init__(self, user_id: uuid.UUID) -> None:
-        self.user_id = user_id
-        super().__init__(f"User with id {user_id!r} is already deleted")
-
-
-class UserAlreadyExistsError(Exception):
-    """Levantado ao tentar criar um usuário com um e-mail já cadastrado
-    e ainda ativo (não deletado)."""
-
-    def __init__(self, email: str) -> None:
-        self.email = email
-        super().__init__(f"User with email {email!r} already exists")
+from app.users.username.models import Username
 
 
 # --- buscas "normais": ignoram usuários soft-deletados ---
@@ -37,10 +21,28 @@ async def get_user_by_id(session: AsyncSession, user_id: uuid.UUID) -> User | No
     return result.scalar_one_or_none()
 
 
+async def get_user_profile_by_id(
+    session: AsyncSession, user_id: uuid.UUID
+) -> User | None:
+    result = await session.execute(
+        select(User)
+        .where(User.id == user_id, User.deleted_at.is_(None))
+        .options(
+            selectinload(User.username).selectinload(Username.first_mother),
+            selectinload(User.username).selectinload(Username.last_mother),
+        )
+        .execution_options(populate_existing=True)
+    )
+    return result.scalar_one_or_none()
+
+
 async def get_user_by_email(session: AsyncSession, email: str) -> User | None:
     result = await session.execute(
         select(User).where(User.email == email, User.deleted_at.is_(None))
     )
+
+    print(result)
+
     return result.scalar_one_or_none()
 
 
