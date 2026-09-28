@@ -36,10 +36,26 @@ async def test_returns_existing_username_if_already_assigned(
 
 
 async def test_username_cannot_be_assigned_to_multiple_users(
-    db_session: AsyncSession, user_factory, username_catalog
+    db_session: AsyncSession, username_catalog
 ):
-    user = await user_factory(email="username-owner@example.com")
-    other_user = await user_factory(email="username-other@example.com")
+    import uuid
+
+    from app.users.models import User
+
+    user = User(
+        id=uuid.uuid4(),
+        email="username-owner@example.com",
+        name="Username Owner",
+        password_hash="x",
+    )
+    other_user = User(
+        id=uuid.uuid4(),
+        email="username-other@example.com",
+        name="Username Other",
+        password_hash="x",
+    )
+    db_session.add_all([user, other_user])
+    await db_session.flush()
     user.username_id = username_catalog[0].id
     await db_session.flush()
 
