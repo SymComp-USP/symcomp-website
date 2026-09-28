@@ -15,7 +15,6 @@ from app.core.database import get_session
 from app.core.exceptions.app_errors import BadRequestError, NotFoundError
 from app.core.pagination import Page, PaginationParams
 from app.users.models import User
-from app.users.username import services as username_service
 
 router = APIRouter(tags=["challenges"])
 
@@ -43,8 +42,6 @@ async def join_challenge(
     new_participant = await participant_service.create_challenge_participant(
         session, current_user.id, challenge_id
     )
-    await username_service.assign_username(current_user.id, session)
-
     await session.refresh(new_participant)
 
     result = await participant_service.get_challenge_participant_by_id(

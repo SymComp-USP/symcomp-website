@@ -13,6 +13,7 @@ from app.auth.dependencies import get_current_admin_user, get_current_user
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.models.question import Question
 from app.users.models import User
+from app.users.username import services as username_service
 
 # ---------------------------------------------------------------------------
 # Factories
@@ -37,26 +38,29 @@ def _make_user(*, is_admin: bool = False) -> User:
 
 
 @pytest.fixture
-async def user(db_session: AsyncSession) -> User:
+async def user(db_session: AsyncSession, username_catalog) -> User:
     u = _make_user()
     db_session.add(u)
     await db_session.flush()
+    await username_service.assign_username(u.id, db_session)
     return u
 
 
 @pytest.fixture
-async def other_user(db_session: AsyncSession) -> User:
+async def other_user(db_session: AsyncSession, username_catalog) -> User:
     u = _make_user()
     db_session.add(u)
     await db_session.flush()
+    await username_service.assign_username(u.id, db_session)
     return u
 
 
 @pytest.fixture
-async def admin(db_session: AsyncSession) -> User:
+async def admin(db_session: AsyncSession, username_catalog) -> User:
     u = _make_user(is_admin=True)
     db_session.add(u)
     await db_session.flush()
+    await username_service.assign_username(u.id, db_session)
     return u
 
 

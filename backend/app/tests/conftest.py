@@ -71,7 +71,7 @@ async def db_client(db_session: AsyncSession, test_settings: Settings):
 
 
 @pytest.fixture
-def user_factory(db_session: AsyncSession):
+def user_factory(db_session: AsyncSession, username_catalog):
     async def _make(
         email: str = "factory-user@example.com",
         name: str = "Factory User",

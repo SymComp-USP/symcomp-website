@@ -50,13 +50,20 @@ async def test_username_cannot_be_assigned_to_multiple_users(
 
 
 async def test_raises_when_no_username_available(
-    db_session: AsyncSession, user_factory, username_catalog
+    db_session: AsyncSession, username_catalog
 ):
     import uuid
 
     from app.users.models import User
 
-    user = await user_factory(email="username-catalog-exhausted@example.com")
+    user = User(
+        id=uuid.uuid4(),
+        email="username-catalog-exhausted@example.com",
+        name="Catalog Exhausted",
+        password_hash="x",
+    )
+    db_session.add(user)
+    await db_session.flush()
 
     # Assigns every catalog entry to a different user.
     for i, u in enumerate(username_catalog):

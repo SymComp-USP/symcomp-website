@@ -10,6 +10,7 @@ from app.auth.security import hash_password
 from app.users.exceptions import UserAlreadyDeletedError, UserAlreadyExistsError
 from app.users.models import User
 from app.users.schemas import UserCreate, UserUpdate
+from app.users.username import services as username_services
 from app.users.username.models import Username
 
 
@@ -96,6 +97,7 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
         deleted_user.is_verified = False
 
         await session.flush()
+        await username_services.assign_username(deleted_user.id, session)
         await session.refresh(deleted_user)
 
         return deleted_user
@@ -108,6 +110,7 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
 
     session.add(user)
     await session.flush()
+    await username_services.assign_username(user.id, session)
     await session.refresh(user)
 
     return user

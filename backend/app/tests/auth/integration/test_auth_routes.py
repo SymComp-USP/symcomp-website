@@ -112,7 +112,8 @@ async def test_me_returns_current_user(db_client: AsyncClient, user_factory):
     body = response.json()
     assert body["email"] == user.email
     assert body["name"] == "Me User"
-    assert body["username"] is None
+    assert body["username"]["id"] == str(user.username_id)
+    assert body["username"]["nickname"]
 
 
 @pytest.mark.asyncio
