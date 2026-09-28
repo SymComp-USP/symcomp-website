@@ -15,7 +15,15 @@ from app.auth.security import (
     verify_password,
 )
 from app.core.config import get_settings
-from app.core.exceptions.app_errors import UnauthorizedError
+from app.core.exceptions.app_errors import ForbiddenError, UnauthorizedError
+from app.users.models import User
+
+
+def get_grantable_scopes(user: User) -> set[str]:
+    scopes = {Scope.OPENID, Scope.PROFILE, Scope.EMAIL}
+    if user.is_admin:
+        scopes.add(Scope.ADMIN)
+    return scopes
 
 
 async def authenticate(db_session: AsyncSession, email: str, password: str):
@@ -131,6 +139,11 @@ async def refresh_access_token(
 
     old = await _validate_old_refresh_token(session, old_token_str)
     scopes = _narrow_scopes(old.scopes.split(" "), requested_scopes)
+
+    user = await user_services.get_user_by_id(session, old.user_id)
+    not_allowed = set(scopes) - get_grantable_scopes(user)
+    if not_allowed:
+        raise ForbiddenError(detail=f"Scopes not allowed: {sorted(not_allowed)}")
 
     old.revoked_at = datetime.now(UTC)
     await session.flush()

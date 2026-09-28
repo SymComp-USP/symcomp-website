@@ -6,12 +6,14 @@ class Scope(StrEnum):
     OPENID = "openid"
     PROFILE = "profile"
     EMAIL = "email"
+    ADMIN = "admin"
 
 
 SCOPE_DESCRIPTIONS: dict[str, str] = {
     Scope.OPENID: "Indica o uso do protocolo OpenID Connect",
     Scope.PROFILE: "Permite ler dados básicos do usuário (nome, id)",
     Scope.EMAIL: "Permite ler o endereço de e-mail do usuário",
+    Scope.ADMIN: "Exclusivo para usuários admins",
 }
 
 DEFAULT_SCOPES: list[str] = [Scope.OPENID, Scope.PROFILE, Scope.EMAIL]

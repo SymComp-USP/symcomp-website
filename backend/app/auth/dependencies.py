@@ -88,3 +88,15 @@ async def get_current_user(
         raise UnauthorizedError(detail="Inexistent or inactive user")
 
     return current_user
+
+
+async def get_current_admin_user(
+    current_user: Annotated[User, Depends(get_current_user)],
+    security_scopes: SecurityScopes,
+) -> User:
+    """Use esta dependência para rotas de admin"""
+
+    if not current_user.is_admin:
+        raise UnauthorizedError(detail="Admin-only route.")
+
+    return current_user
