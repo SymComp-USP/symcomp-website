@@ -1,8 +1,15 @@
 import './styles/globals.css'
 
-import { Inter } from 'next/font/google'
+import { Inter, Silkscreen } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+export const inter = Inter({ subsets: ['latin'] })
+
+export const silkscreen = Silkscreen({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-silkscreen',
+  display: 'swap',
+})
 
 export default function RootLayout({
   children,
