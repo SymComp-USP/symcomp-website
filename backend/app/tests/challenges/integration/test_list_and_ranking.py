@@ -51,6 +51,10 @@ async def test_ranking_orders_by_score_desc(
 ):
     from app.users.models import User
 
+    ranking_username = next(
+        username for username in username_catalog if username.id != user.username_id
+    )
+
     # 15 participantes com scores variados
     for i in range(15):
         u = User(
@@ -63,7 +67,7 @@ async def test_ranking_orders_by_score_desc(
         db_session.add(u)
         await db_session.flush()
         if i == 14:
-            u.username_id = username_catalog[0].id
+            u.username_id = ranking_username.id
         db_session.add(
             ChallengeParticipant(user_id=u.id, challenge_id=challenge.id, score=i * 10)
         )
@@ -77,4 +81,4 @@ async def test_ranking_orders_by_score_desc(
     scores = [p["score"] for p in ranking]
     assert scores == sorted(scores, reverse=True)
     assert scores[0] == 140
-    assert ranking[0]["nickname"] == username_catalog[0].nickname
+    assert ranking[0]["nickname"] == ranking_username.nickname
