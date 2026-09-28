@@ -36,5 +36,8 @@ jobs:
       - name: Lint
         run: pnpm run lint
 
-      - name: Build production frontend
+      - name: Check types
+        run: pnpm exec tsc --noEmit
+
+      - name: Build
         run: pnpm run build
