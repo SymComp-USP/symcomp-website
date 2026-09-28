@@ -7,7 +7,6 @@ from httpx import AsyncClient
 
 from app.challenges.services.image import MAX_IMAGE_BYTES
 
-
 JPEG_BYTES = b"\xff\xd8\xff\xe0" + b"\x00" * 100
 
 
@@ -233,8 +232,6 @@ async def test_upload_cleans_up_new_file_on_db_failure(
 ):
     """Se o flush falhar, o arquivo novo é apagado para não deixar órfão."""
     from sqlalchemy.ext.asyncio import AsyncSession
-
-    original_flush = AsyncSession.flush
 
     async def failing_flush(self, *args, **kwargs):
         # Permite flush nas queries de leitura; quebra só no commit da escrita

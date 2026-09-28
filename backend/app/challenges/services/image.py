@@ -1,6 +1,7 @@
+from fastapi import UploadFile
+
 from app.core.exceptions.app_errors import BadRequestError
 from app.core.storage import build_url, delete_file, save_bytes
-from fastapi import UploadFile
 
 CHALLENGE_IMAGE_SUBDIR = "challenges"
 ALLOWED_IMAGE_TYPES: dict[str, str] = {

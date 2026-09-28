@@ -13,7 +13,6 @@ from app.challenges.services.image import (
 )
 from app.core.exceptions.app_errors import BadRequestError
 
-
 JPEG_BYTES = b"\xff\xd8\xff\xe0" + b"\x00" * 100
 PNG_BYTES = b"\x89PNG\r\n\x1a\n" + b"\x00" * 100
 
@@ -66,9 +65,7 @@ async def test_save_accepts_all_allowed_types(
 
 async def test_save_rejects_unsupported_content_type(media_root):
     with pytest.raises(BadRequestError, match="Unsupported image type"):
-        await save_challenge_image(
-            _upload(JPEG_BYTES, content_type="application/pdf")
-        )
+        await save_challenge_image(_upload(JPEG_BYTES, content_type="application/pdf"))
     # Não deve ter sobrado nada em disco
     assert not any(media_root.rglob("*")) or all(
         p.is_dir() for p in media_root.rglob("*")

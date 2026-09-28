@@ -1,7 +1,7 @@
-from pathlib import Path
 import secrets
 from enum import StrEnum
 from functools import lru_cache
+from pathlib import Path
 from typing import TypeAlias
 
 from pydantic import AnyHttpUrl, Field, HttpUrl, PostgresDsn, SecretStr

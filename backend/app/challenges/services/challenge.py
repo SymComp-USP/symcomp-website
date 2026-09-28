@@ -117,7 +117,9 @@ async def list_challenges_paginated(
     ).all()
 
     return Page[challenge_schemas.ChallengePublicResponse](
-        items=[challenge_schemas.ChallengePublicResponse.model_validate(c) for c in rows],
+        items=[
+            challenge_schemas.ChallengePublicResponse.model_validate(c) for c in rows
+        ],
         total=total or 0,
         limit=pagination.limit,
         offset=pagination.offset,
