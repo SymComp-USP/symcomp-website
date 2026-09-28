@@ -22,6 +22,10 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./backend/media:/app/media
+    environment:
+      MEDIA_ROOT: /app/media
     entrypoint: ["/bin/sh", "/app/entrypoint.sh"]
   
   frontend:
