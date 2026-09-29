@@ -10,6 +10,7 @@ from app.core import config, database
 from app.core.exceptions.app_errors import AppError
 from app.core.exceptions.handlers import app_error_handler, exception_handler
 from app.core.health import router as health_router
+from app.users.admin_router import router as user_admin_router
 from app.users.routes import router as user_router
 
 
@@ -35,6 +36,7 @@ app = FastAPI(title="SymComp API", version="0.1.0", lifespan=lifespan)
 app.include_router(health_router, prefix="/api/v1")
 app.include_router(auth_router, prefix="/api/v1/auth")
 app.include_router(user_router, prefix="/api/v1/user")
+app.include_router(user_admin_router, prefix="/api/v1/admin/users")
 app.include_router(challenge_router, prefix="/api/v1/challenge")
 app.include_router(challenge_admin_router, prefix="/api/v1/admin/challenge")
 

@@ -30,6 +30,19 @@ class UserUpdate(BaseModel):
     password: Password | None = None
 
 
+class AdminUserCreate(UserCreate):
+    # criação feita por um admin: pode definir os privilégios já na criação
+    is_admin: bool = False
+    is_verified: bool = False
+
+
+class AdminUserUpdate(UserUpdate):
+    # override de admin: além dos campos comuns, pode alterar privilégios.
+    # Valores nulos são ignorados (nenhum desses campos aceita NULL no banco).
+    is_admin: bool | None = None
+    is_verified: bool | None = None
+
+
 class UserRead(UserBase):
     # Representação pública de um usuário.
     model_config = ConfigDict(from_attributes=True)
