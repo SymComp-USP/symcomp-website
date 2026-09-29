@@ -1,8 +1,7 @@
 import pytest
-from httpx2 import AsyncClient
-
 from app.auth import services as auth_services
 from app.auth.scopes import DEFAULT_SCOPES, Scope
+from httpx2 import AsyncClient
 
 # ===========================================================================
 # POST /api/v1/auth/login
@@ -112,40 +111,14 @@ async def test_me_returns_current_user(db_client: AsyncClient, user_factory):
     body = response.json()
     assert body["email"] == user.email
     assert body["name"] == "Me User"
-    assert body["username"]["id"] == str(user.username_id)
-    assert body["username"]["nickname"]
+    assert "username" not in body
 
 
 @pytest.mark.asyncio
-async def test_me_returns_username_and_mother_details(
-    db_client: AsyncClient, user_factory, db_session
+async def test_me_does_not_return_semana_username(
+    db_client: AsyncClient, user_factory
 ):
-    from app.users.username.models import Username, UsernameMother
-
     user = await user_factory(email="me-username@example.com", name="Me Username")
-    first_mother = UsernameMother(
-        first_name="Ada",
-        last_name="Lovelace",
-        full_name="Ada Lovelace",
-        description="Mathematician",
-    )
-    last_mother = UsernameMother(
-        first_name="Grace",
-        last_name="Hopper",
-        full_name="Grace Hopper",
-        description="Computer scientist",
-    )
-    db_session.add_all([first_mother, last_mother])
-    await db_session.flush()
-    username = Username(
-        nickname="AdaHopper",
-        first_mother_id=first_mother.id,
-        last_mother_id=last_mother.id,
-    )
-    db_session.add(username)
-    await db_session.flush()
-    user.username_id = username.id
-    await db_session.flush()
 
     token = auth_services.create_access_token(user.id, [Scope.PROFILE, Scope.EMAIL])
     response = await db_client.get(
@@ -154,24 +127,7 @@ async def test_me_returns_username_and_mother_details(
     )
 
     assert response.status_code == 200
-    assert response.json()["username"] == {
-        "id": str(username.id),
-        "nickname": "AdaHopper",
-        "first_mother": {
-            "id": str(first_mother.id),
-            "first_name": "Ada",
-            "last_name": "Lovelace",
-            "full_name": "Ada Lovelace",
-            "description": "Mathematician",
-        },
-        "last_mother": {
-            "id": str(last_mother.id),
-            "first_name": "Grace",
-            "last_name": "Hopper",
-            "full_name": "Grace Hopper",
-            "description": "Computer scientist",
-        },
-    }
+    assert "username" not in response.json()
 
 
 @pytest.mark.asyncio
@@ -541,9 +497,8 @@ async def test_refresh_does_not_store_plaintext_token(
     db_client: AsyncClient, db_session, refresh_token_factory, user_factory
 ):
     """O novo token NUNCA deve estar em claro no banco (só hash)."""
-    from sqlalchemy import select
-
     from app.auth.models import RefreshToken
+    from sqlalchemy import select
 
     user = await user_factory(email="rot-no-plaintext@example.com")
     token = await refresh_token_factory(user.id)

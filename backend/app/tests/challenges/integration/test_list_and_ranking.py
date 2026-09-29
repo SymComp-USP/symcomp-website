@@ -4,11 +4,11 @@ from __future__ import annotations
 
 import uuid
 
-from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.models.challenge_participant import ChallengeParticipant
+from app.semana.models import SemanaParticipant
+from httpx import AsyncClient
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def test_list_challenges_paginated(
@@ -47,13 +47,12 @@ async def test_ranking_orders_by_score_desc(
     user,
     challenge,
     db_session: AsyncSession,
+    semana,
     username_catalog,
 ):
     from app.users.models import User
 
-    ranking_username = next(
-        username for username in username_catalog if username.id != user.username_id
-    )
+    ranking_username = username_catalog[0]
 
     # 15 participantes com scores variados
     for i in range(15):
@@ -67,9 +66,24 @@ async def test_ranking_orders_by_score_desc(
         db_session.add(u)
         await db_session.flush()
         if i == 14:
-            u.username_id = ranking_username.id
+            semana_participant = SemanaParticipant(
+                user_id=u.id,
+                semana_id=semana.id,
+                username_id=ranking_username.id,
+            )
+            db_session.add(semana_participant)
+            await db_session.flush()
+        else:
+            semana_participant = None
         db_session.add(
-            ChallengeParticipant(user_id=u.id, challenge_id=challenge.id, score=i * 10)
+            ChallengeParticipant(
+                user_id=u.id,
+                challenge_id=challenge.id,
+                score=i * 10,
+                semana_participant_id=(
+                    semana_participant.id if semana_participant is not None else None
+                ),
+            )
         )
     await db_session.flush()
 

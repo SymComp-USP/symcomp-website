@@ -10,7 +10,7 @@ from app.core.mixins import UUIDPKMixin
 from app.core.models import Base
 
 if TYPE_CHECKING:
-    from app.users.models import User
+    from app.semana.models import SemanaParticipant
 
 
 class UsernameMother(Base, UUIDPKMixin):
@@ -36,4 +36,6 @@ class Username(Base, UUIDPKMixin):
 
     first_mother: Mapped[UsernameMother] = relationship(foreign_keys=[first_mother_id])
     last_mother: Mapped[UsernameMother] = relationship(foreign_keys=[last_mother_id])
-    user: Mapped[User | None] = relationship("User", back_populates="username")
+    participants: Mapped[list[SemanaParticipant]] = relationship(
+        "SemanaParticipant", back_populates="username"
+    )

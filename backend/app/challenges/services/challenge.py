@@ -1,10 +1,6 @@
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
-
 from app.challenges import exceptions as challenge_exceptions
 from app.challenges import schemas as challenge_schemas
 from app.challenges.models.answer import Answer
@@ -13,6 +9,9 @@ from app.challenges.models.challenge_participant import ChallengeParticipant
 from app.challenges.models.question import Question
 from app.core.exceptions.app_errors import NotFoundError
 from app.core.pagination import Page, PaginationParams
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 
 def ensure_challenge_open(finishes_at: datetime) -> None:
@@ -159,6 +158,7 @@ async def update_challenge(
     *,
     title: str | None = None,
     finishes_at: datetime | None = None,
+    semana_id: int | None = None,
     prompt: str | None = None,
     points_value: int | None = None,
     input_answer: str | None = None,
@@ -168,6 +168,8 @@ async def update_challenge(
         challenge.title = title
     if finishes_at is not None:
         challenge.finishes_at = finishes_at
+    if semana_id is not None:
+        challenge.semana_id = semana_id
     if prompt is not None:
         challenge.prompt = prompt
     if points_value is not None:

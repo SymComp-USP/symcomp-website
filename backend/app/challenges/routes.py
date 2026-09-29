@@ -34,6 +34,8 @@ async def join_challenge(
     challenge = await challenge_service.get_challenge_by_id(session, challenge_id)
     if challenge is None:
         raise NotFoundError("Challenge with given ID not found.")
+    if challenge.semana_id is None:
+        raise BadRequestError("Challenge must belong to a Semana.")
 
     current_participant = await participant_service.get_challenge_participant(
         session, current_user.id, challenge_id, for_update=True
@@ -41,15 +43,13 @@ async def join_challenge(
     if current_participant is not None:
         raise BadRequestError("You are subscribed to this challenge already.")
 
-    semana_participant_id = None
-    if challenge.semana_id is not None:
-        semana = await semana_service.get_semana(session, challenge.semana_id)
-        if semana is None:
-            raise NotFoundError("Semana not found.")
-        semana_participant = await semana_service.get_or_create_participant(
-            session, semana, current_user
-        )
-        semana_participant_id = semana_participant.id
+    semana = await semana_service.get_semana(session, challenge.semana_id)
+    if semana is None:
+        raise NotFoundError("Semana not found.")
+    semana_participant = await semana_service.get_or_create_participant(
+        session, semana, current_user
+    )
+    semana_participant_id = semana_participant.id
 
     new_participant = await participant_service.create_challenge_participant(
         session, current_user.id, challenge_id, semana_participant_id=semana_participant_id
@@ -59,7 +59,7 @@ async def join_challenge(
     result = await participant_service.get_challenge_participant_by_id(
         session, new_participant.id
     )
-    if result is None or result.user.username is None:
+    if result is None or result.semana_participant is None:
         raise BadRequestError("Username assignment failed.")
 
     return challenge_schemas.ParticipantResponse(
@@ -68,9 +68,9 @@ async def join_challenge(
         challenge_id=result.challenge_id,
         name=result.user.name,
         nickname=(
-            result.semana_participant.nickname
+            result.semana_participant.username.nickname
             if result.semana_participant is not None
-            else result.user.username.nickname
+            else ""
         ),
         score=result.score,
         submitted_at=result.submitted_at,
@@ -301,9 +301,9 @@ async def get_ranking(
             score=p.score,
             name=p.user.name,
             nickname=(
-                p.semana_participant.nickname
+                p.semana_participant.username.nickname
                 if p.semana_participant is not None
-                else (p.user.username.nickname if p.user.username else "")
+                else ""
             ),
         )
         for p in participants

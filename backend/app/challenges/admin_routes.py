@@ -79,12 +79,15 @@ async def update_challenge_endpoint(
         raise BadRequestError("Manual challenges cannot have questions.")
     if challenge.scoring_type == ChallengeScoringType.INPUT and data.input_answer == "":
         raise BadRequestError("Input challenges require an expected answer.")
+    if data.semana_id is not None and await semana_service.get_semana(session, data.semana_id) is None:
+        raise NotFoundError("Semana not found.")
 
     await challenge_service.update_challenge(
         session,
         challenge,
         title=data.title,
         finishes_at=data.finishes_at,
+        semana_id=data.semana_id,
         prompt=data.prompt,
         points_value=data.points_value,
         input_answer=data.input_answer,

@@ -89,6 +89,7 @@ class ChallengeUpdate(BaseModel):
     prompt: str | None = None
     questions: list[QuestionCreate] | None = None
     finishes_at: datetime | None = None
+    semana_id: int | None = None
     points_value: int | None = None
     input_answer: str | None = None
     resource_urls: list[str] | None = None

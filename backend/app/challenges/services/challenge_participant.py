@@ -1,11 +1,10 @@
 import uuid
 
+from app.challenges.models.challenge_participant import ChallengeParticipant
+from app.semana.models import SemanaParticipant
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
-
-from app.challenges.models.challenge_participant import ChallengeParticipant
-from app.users.models import User
 
 
 async def get_challenge_ranking(
@@ -18,8 +17,10 @@ async def get_challenge_ranking(
             ChallengeParticipant.deleted_at.is_(None),
         )
         .options(
-            selectinload(ChallengeParticipant.user).selectinload(User.username),
-            selectinload(ChallengeParticipant.semana_participant),
+            selectinload(ChallengeParticipant.user),
+            selectinload(ChallengeParticipant.semana_participant).selectinload(
+                SemanaParticipant.username
+            ),
         )
         .order_by(desc(ChallengeParticipant.score))
         .limit(10)
@@ -38,8 +39,10 @@ async def get_challenge_participant_by_id(
             ChallengeParticipant.deleted_at.is_(None),
         )
         .options(
-            selectinload(ChallengeParticipant.user).selectinload(User.username),
-            selectinload(ChallengeParticipant.semana_participant),
+            selectinload(ChallengeParticipant.user),
+            selectinload(ChallengeParticipant.semana_participant).selectinload(
+                SemanaParticipant.username
+            ),
         )
     )
     return result.scalar_one_or_none()
@@ -60,8 +63,10 @@ async def get_challenge_participant(
             ChallengeParticipant.deleted_at.is_(None),
         )
         .options(
-            selectinload(ChallengeParticipant.user).selectinload(User.username),
-            selectinload(ChallengeParticipant.semana_participant),
+            selectinload(ChallengeParticipant.user),
+            selectinload(ChallengeParticipant.semana_participant).selectinload(
+                SemanaParticipant.username
+            ),
         )
     )
 
@@ -135,7 +140,11 @@ async def add_challenge_participant_score(
             ChallengeParticipant.challenge_id == challenge_id,
             ChallengeParticipant.deleted_at.is_(None),
         )
-        .options(selectinload(ChallengeParticipant.semana_participant))
+        .options(
+            selectinload(ChallengeParticipant.semana_participant).selectinload(
+                SemanaParticipant.username
+            )
+        )
         .with_for_update()
     )
     if participant is None:

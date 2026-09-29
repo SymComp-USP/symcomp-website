@@ -75,4 +75,4 @@ class UsernameRead(BaseModel):
 
 
 class UserMe(UserRead):
-    username: UsernameRead | None = None
+    pass

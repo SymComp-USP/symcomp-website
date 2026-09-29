@@ -34,7 +34,15 @@ async def join_semana(
     semana = await services.get_semana(session, semana_id)
     if semana is None:
         raise NotFoundError("Semana not found.")
-    return await services.get_or_create_participant(session, semana, current_user)
+    participant = await services.get_or_create_participant(
+        session, semana, current_user
+    )
+    return schemas.SemanaParticipantResponse(
+        id=participant.id,
+        semana_id=participant.semana_id,
+        user_id=participant.user_id,
+        nickname=participant.username.nickname,
+    )
 
 
 @router.get("/{semana_id}/ranking", response_model=list[schemas.SemanaRankingEntry])
@@ -45,7 +53,9 @@ async def get_semana_ranking(
     if await services.get_semana(session, semana_id) is None:
         raise NotFoundError("Semana not found.")
     return [
-        schemas.SemanaRankingEntry(participant_id=row[0], nickname=row[1], points=row[2])
+            schemas.SemanaRankingEntry(
+                participant_id=row[0], nickname=row[1], points=row[2]
+            )
         for row in await services.list_ranking(session, semana_id)
     ]
 

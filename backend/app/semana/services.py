@@ -1,8 +1,11 @@
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.semana.models import PointEvent, SemanaEvent, SemanaParticipant
 from app.users.models import User
+from app.users.username import services as username_services
+from app.users.username.models import Username
 
 
 async def get_semana(session: AsyncSession, semana_id: int) -> SemanaEvent | None:
@@ -19,22 +22,25 @@ async def get_or_create_participant(
     session: AsyncSession, semana: SemanaEvent, user: User
 ) -> SemanaParticipant:
     participant = await session.scalar(
-        select(SemanaParticipant).where(
+        select(SemanaParticipant)
+        .where(
             SemanaParticipant.semana_id == semana.id,
             SemanaParticipant.user_id == user.id,
         )
+        .options(selectinload(SemanaParticipant.username))
     )
     if participant is not None:
+        if participant.username is None:
+            await username_services.assign_username(participant.id, session)
         return participant
 
-    nickname = user.username.nickname if user.username is not None else str(user.id)[:8]
     participant = SemanaParticipant(
         semana_id=semana.id,
         user_id=user.id,
-        nickname=nickname,
     )
     session.add(participant)
     await session.flush()
+    await username_services.assign_username(participant.id, session)
     return participant
 
 
@@ -63,12 +69,13 @@ async def list_ranking(session: AsyncSession, semana_id: int):
     rows = await session.execute(
         select(
             SemanaParticipant.id,
-            SemanaParticipant.nickname,
+            Username.nickname,
             func.coalesce(func.sum(PointEvent.amount), 0).label("points"),
         )
         .outerjoin(PointEvent)
+        .join(Username, Username.id == SemanaParticipant.username_id)
         .where(SemanaParticipant.semana_id == semana_id)
-        .group_by(SemanaParticipant.id, SemanaParticipant.nickname)
+        .group_by(SemanaParticipant.id, Username.nickname)
         .order_by(func.coalesce(func.sum(PointEvent.amount), 0).desc())
     )
     return rows.all()
