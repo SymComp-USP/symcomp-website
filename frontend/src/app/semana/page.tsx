@@ -62,7 +62,10 @@ export default function Semana() {
     <main
       className={`${semanaBody.variable} ${semanaDisplay.variable} relative min-h-svh overflow-hidden bg-[#110f0f] px-4 text-white sm:px-8 xl:px-12`}
     >
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
         {dots.map((dot) => (
           <span
             className={`absolute -translate-x-1/2 -translate-y-1/2 bg-[#ffffff] opacity-80 animate-[pulse_4.2s_ease-in-out_infinite] ${dot.size}`}
@@ -135,8 +138,13 @@ export default function Semana() {
           </button>
           */}
           {isLoading ? (
-            <div className={`flex w-full ${!isLoading ? 'animate-[pulse_500ms_ease-out_1]' : ''} flex-col items-center`}>
-              <p aria-live="polite" className="mb-2 font-[family-name:var(--font-semana-display)] text-[clamp(10px,1.2vw,16px)] text-white">
+            <div
+              className={`flex w-full ${!isLoading ? 'animate-[pulse_500ms_ease-out_1]' : ''} flex-col items-center`}
+            >
+              <p
+                aria-live="polite"
+                className="mb-2 font-[family-name:var(--font-semana-display)] text-[clamp(10px,1.2vw,16px)] text-white"
+              >
                 CARREGANDO...
               </p>
               <div
