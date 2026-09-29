@@ -17,6 +17,10 @@ class SubmissionResponse(BaseModel):
     score: int
 
 
+class InputSubmission(BaseModel):
+    answer: str
+
+
 class QuestionResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 
@@ -62,8 +66,13 @@ class QuestionUpdate(BaseModel):
 
 class ChallengeCreate(BaseModel):
     title: str
+    prompt: str = ""
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ
     finishes_at: datetime | None = None
+    semana_id: int | None = None
+    points_value: int = 0
+    input_answer: str | None = None
+    resource_urls: list[str] = Field(default_factory=list)
 
     questions: list[QuestionCreate] = Field(default_factory=list)
 
@@ -77,8 +86,12 @@ class ChallengeCreate(BaseModel):
 
 class ChallengeUpdate(BaseModel):
     title: str | None = None
+    prompt: str | None = None
     questions: list[QuestionCreate] | None = None
     finishes_at: datetime | None = None
+    points_value: int | None = None
+    input_answer: str | None = None
+    resource_urls: list[str] | None = None
 
     @field_validator("finishes_at")
     @classmethod
@@ -131,8 +144,10 @@ class ChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
+    resource_urls: list[str] = Field(default_factory=list)
     questions: list[QuestionResponse] = Field(default_factory=list)
     is_participant: bool = False
     submitted_at: datetime | None = None
@@ -143,8 +158,10 @@ class ChallengePublicResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
+    resource_urls: list[str] = Field(default_factory=list)
 
 
 class AdminChallengeResponse(ChallengeImageMixin):
@@ -154,6 +171,11 @@ class AdminChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
+    semana_id: int | None = None
+    points_value: int = 0
+    input_answer: str | None = None
+    resource_urls: list[str] = Field(default_factory=list)
     questions: list[AdminQuestionResponse] = Field(default_factory=list)

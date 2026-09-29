@@ -4,7 +4,7 @@ from datetime import UTC, datetime, timedelta
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, String, text
+from sqlalchemy import JSON, DateTime, ForeignKey, String, text
 from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -13,10 +13,12 @@ from app.core.models import Base
 
 if TYPE_CHECKING:
     from app.challenges.models.question import Question
+    from app.semana.models import SemanaEvent
 
 
 class ChallengeScoringType(StrEnum):
     QUIZ = "quiz"
+    INPUT = "input"
     MANUAL = "manual"
 
 
@@ -24,6 +26,7 @@ class Challenge(Base, UUIDPKMixin, TimestampsMixin):
     __tablename__ = "challenges"
 
     title: Mapped[str] = mapped_column(String(255))
+    prompt: Mapped[str] = mapped_column(String(5000), default="")
 
     scoring_type: Mapped[ChallengeScoringType] = mapped_column(
         SQLEnum(ChallengeScoringType, native_enum=False, length=20),
@@ -40,5 +43,13 @@ class Challenge(Base, UUIDPKMixin, TimestampsMixin):
     )
 
     image_path: Mapped[str | None] = mapped_column(String(512), nullable=True)
+    resource_urls: Mapped[list[str]] = mapped_column(JSON, default=list)
+    points_value: Mapped[int] = mapped_column(default=0)
+    input_answer: Mapped[str | None] = mapped_column(String(255), nullable=True)
+
+    semana_id: Mapped[int | None] = mapped_column(
+        ForeignKey("semana_event.id"), nullable=True
+    )
 
     questions: Mapped[list[Question]] = relationship(back_populates="challenge")
+    semana: Mapped[SemanaEvent | None] = relationship(back_populates="challenges")

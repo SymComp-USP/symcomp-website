@@ -17,7 +17,10 @@ async def get_challenge_ranking(
             ChallengeParticipant.challenge_id == challenge_id,
             ChallengeParticipant.deleted_at.is_(None),
         )
-        .options(selectinload(ChallengeParticipant.user).selectinload(User.username))
+        .options(
+            selectinload(ChallengeParticipant.user).selectinload(User.username),
+            selectinload(ChallengeParticipant.semana_participant),
+        )
         .order_by(desc(ChallengeParticipant.score))
         .limit(10)
     )
@@ -34,7 +37,10 @@ async def get_challenge_participant_by_id(
             ChallengeParticipant.id == participant_id,
             ChallengeParticipant.deleted_at.is_(None),
         )
-        .options(selectinload(ChallengeParticipant.user).selectinload(User.username))
+        .options(
+            selectinload(ChallengeParticipant.user).selectinload(User.username),
+            selectinload(ChallengeParticipant.semana_participant),
+        )
     )
     return result.scalar_one_or_none()
 
@@ -53,7 +59,10 @@ async def get_challenge_participant(
             ChallengeParticipant.challenge_id == challenge_id,
             ChallengeParticipant.deleted_at.is_(None),
         )
-        .options(selectinload(ChallengeParticipant.user).selectinload(User.username))
+        .options(
+            selectinload(ChallengeParticipant.user).selectinload(User.username),
+            selectinload(ChallengeParticipant.semana_participant),
+        )
     )
 
     if for_update:
@@ -88,11 +97,13 @@ async def create_challenge_participant(
     user_id: uuid.UUID,
     challenge_id: uuid.UUID,
     score: int = 0,
+    semana_participant_id: uuid.UUID | None = None,
 ) -> ChallengeParticipant:
     participant = ChallengeParticipant(
         user_id=user_id,
         challenge_id=challenge_id,
         score=score,
+        semana_participant_id=semana_participant_id,
     )
     session.add(participant)
     await session.flush()
@@ -124,6 +135,7 @@ async def add_challenge_participant_score(
             ChallengeParticipant.challenge_id == challenge_id,
             ChallengeParticipant.deleted_at.is_(None),
         )
+        .options(selectinload(ChallengeParticipant.semana_participant))
         .with_for_update()
     )
     if participant is None:

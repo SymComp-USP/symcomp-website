@@ -16,6 +16,7 @@ from app.auth import models as auth_models  # noqa: F401 noqa
 from app.users import models as user_models  # noqa: F401 noqa
 from app.challenges import models as challenges_models  # noqa: F401 noqa
 from app.users.username import models as usernames_user_models  # noqa: F401 noqa
+from app.semana import models as semana_models  # noqa: F401 noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

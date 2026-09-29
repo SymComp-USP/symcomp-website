@@ -131,8 +131,21 @@ async def create_challenge(
     title: str,
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ,
     finishes_at: datetime | None = None,
+    prompt: str = "",
+    semana_id: int | None = None,
+    points_value: int = 0,
+    input_answer: str | None = None,
+    resource_urls: list[str] | None = None,
 ) -> Challenge:
-    challenge = Challenge(title=title, scoring_type=scoring_type)
+    challenge = Challenge(
+        title=title,
+        prompt=prompt,
+        scoring_type=scoring_type,
+        semana_id=semana_id,
+        points_value=points_value,
+        input_answer=input_answer,
+        resource_urls=resource_urls or [],
+    )
     if finishes_at is not None:
         challenge.finishes_at = finishes_at
     session.add(challenge)
@@ -146,11 +159,23 @@ async def update_challenge(
     *,
     title: str | None = None,
     finishes_at: datetime | None = None,
+    prompt: str | None = None,
+    points_value: int | None = None,
+    input_answer: str | None = None,
+    resource_urls: list[str] | None = None,
 ) -> Challenge:
     if title is not None:
         challenge.title = title
     if finishes_at is not None:
         challenge.finishes_at = finishes_at
+    if prompt is not None:
+        challenge.prompt = prompt
+    if points_value is not None:
+        challenge.points_value = points_value
+    if input_answer is not None:
+        challenge.input_answer = input_answer
+    if resource_urls is not None:
+        challenge.resource_urls = resource_urls
 
     await session.flush()
     return challenge

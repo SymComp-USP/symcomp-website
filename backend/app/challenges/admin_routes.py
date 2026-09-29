@@ -14,6 +14,7 @@ from app.challenges.services import challenge_participant as participant_service
 from app.challenges.services import question as question_service
 from app.core.database import get_session
 from app.core.exceptions.app_errors import BadRequestError, NotFoundError
+from app.semana import services as semana_service
 from app.users.models import User
 
 router = APIRouter(tags=["admin", "challenges"])
@@ -36,12 +37,21 @@ async def create_challenge_endpoint(
 
     if len(data.questions) != 0 and data.scoring_type == ChallengeScoringType.MANUAL:
         raise BadRequestError("Manual challenges cannot have questions.")
+    if data.scoring_type == ChallengeScoringType.INPUT and not data.input_answer:
+        raise BadRequestError("Input challenges require an expected answer.")
+    if data.semana_id is not None and await semana_service.get_semana(session, data.semana_id) is None:
+        raise NotFoundError("Semana not found.")
 
     challenge = await challenge_service.create_challenge(
         session,
         title=data.title,
         scoring_type=data.scoring_type,
         finishes_at=data.finishes_at,
+        prompt=data.prompt,
+        semana_id=data.semana_id,
+        points_value=data.points_value,
+        input_answer=data.input_answer,
+        resource_urls=data.resource_urls,
     )
 
     if data.questions:
@@ -67,12 +77,18 @@ async def update_challenge_endpoint(
 
     if data.questions and challenge.scoring_type == ChallengeScoringType.MANUAL:
         raise BadRequestError("Manual challenges cannot have questions.")
+    if challenge.scoring_type == ChallengeScoringType.INPUT and data.input_answer == "":
+        raise BadRequestError("Input challenges require an expected answer.")
 
     await challenge_service.update_challenge(
         session,
         challenge,
         title=data.title,
         finishes_at=data.finishes_at,
+        prompt=data.prompt,
+        points_value=data.points_value,
+        input_answer=data.input_answer,
+        resource_urls=data.resource_urls,
     )
     if data.questions is not None:
         await question_service.replace_challenge_questions(
@@ -124,6 +140,15 @@ async def adjust_participant_score(
     )
     if participant is None:
         raise NotFoundError("Challenge participant not found.")
+
+    if participant.semana_participant is not None:
+        await semana_service.add_points(
+            session,
+            participant.semana_participant,
+            data.amount,
+            source_type="manual_adjustment",
+            reason="Admin score adjustment",
+        )
 
     return challenge_schemas.ParticipantScoreResponse(
         id=participant.id,
