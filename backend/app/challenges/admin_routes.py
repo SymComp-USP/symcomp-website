@@ -159,8 +159,10 @@ async def upload_challenge_image(
 
     try:
         await session.flush()
+        await session.commit()
     except Exception:
         cover_image_service.delete_challenge_image(new_path)
+        await session.rollback()
         raise
 
     # Só depois do banco estar consistente apagamos o antigo
@@ -181,6 +183,11 @@ async def delete_challenge_image_endpoint(
 
     old_path = challenge.image_path
     challenge.image_path = None
-    await session.flush()
+    try:
+        await session.flush()
+        await session.commit()
+    except Exception:
+        await session.rollback()
+        raise
 
     cover_image_service.delete_challenge_image(old_path)

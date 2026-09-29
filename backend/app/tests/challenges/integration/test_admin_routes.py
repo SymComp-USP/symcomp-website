@@ -15,7 +15,7 @@ from app.challenges.models.question import Question
 async def test_non_admin_is_forbidden(client: AsyncClient, as_user, user):
     c = as_user(user)
     r = await c.post("/api/v1/admin/challenge/", json={"title": "X"})
-    assert r.status_code in (401, 403)
+    assert r.status_code == 403
 
 
 async def test_admin_can_create_challenge(client: AsyncClient, as_user, admin):

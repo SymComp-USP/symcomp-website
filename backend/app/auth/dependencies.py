@@ -11,7 +11,7 @@ from app.auth.schemas import TokenData
 from app.auth.scopes import SCOPE_DESCRIPTIONS
 from app.core.config import Settings, get_settings
 from app.core.database import get_session
-from app.core.exceptions.app_errors import UnauthorizedError
+from app.core.exceptions.app_errors import ForbiddenError, UnauthorizedError
 from app.users.models import User
 from app.users.services import get_deleted_user_by_id, get_user_by_id
 
@@ -97,6 +97,6 @@ async def get_current_admin_user(
     """Use esta dependência para rotas de admin"""
 
     if not current_user.is_admin:
-        raise UnauthorizedError(detail="Admin-only route.")
+        raise ForbiddenError(detail="Admin-only route.")
 
     return current_user

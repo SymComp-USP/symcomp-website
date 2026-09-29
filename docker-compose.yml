@@ -52,13 +52,12 @@ services:
       ISSUER: https://${SITE_DOMAIN:?Set SITE_DOMAIN}
       AUDIENCE: symcomp-frontend
       FORWARDED_ALLOW_IPS: ${COMPOSE_SUBNET:-172.30.0.0/24}
+      MEDIA_ROOT: /app/media
     depends_on:
       postgres:
         condition: service_healthy
     volumes:
-      - ./backend/media:/app/media
-    environment:
-      MEDIA_ROOT: /app/media
+      - media_data:/app/media
     entrypoint: ["/bin/sh", "/app/entrypoint.sh"]
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers"]
     healthcheck:
@@ -90,5 +89,6 @@ networks:
 
 volumes:
   postgres_data:
+  media_data:
   caddy_data:
   caddy_config:

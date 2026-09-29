@@ -74,7 +74,7 @@ async def test_upload_non_admin_is_rejected(
         f"/api/v1/admin/challenge/{challenge.id}/image",
         files={"file": _jpeg()},
     )
-    assert r.status_code in (401, 403)
+    assert r.status_code == 403
 
 
 async def test_upload_challenge_not_found(
@@ -161,7 +161,7 @@ async def test_delete_non_admin_is_rejected(
 ):
     c = as_user(user)
     r = await c.delete(f"/api/v1/admin/challenge/{challenge.id}/image")
-    assert r.status_code in (401, 403)
+    assert r.status_code == 403
 
 
 async def test_delete_challenge_not_found(db_client: AsyncClient, as_user, admin):
