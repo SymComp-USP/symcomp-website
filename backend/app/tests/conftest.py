@@ -1,4 +1,6 @@
+import uuid
 from datetime import UTC, datetime
+from shutil import rmtree
 
 import pytest
 import pytest_asyncio
@@ -10,6 +12,7 @@ from app.core.database import get_session
 from app.main import app
 from app.users import services as user_services
 from app.users.schemas import UserCreate
+from app.users.username.models import Username, UsernameMother
 
 
 @pytest.fixture
@@ -69,7 +72,7 @@ async def db_client(db_session: AsyncSession, test_settings: Settings):
 
 
 @pytest.fixture
-def user_factory(db_session: AsyncSession):
+def user_factory(db_session: AsyncSession, username_catalog):
     async def _make(
         email: str = "factory-user@example.com",
         name: str = "Factory User",
@@ -95,3 +98,57 @@ def deleted_user_factory(db_session: AsyncSession, user_factory):
         return user
 
     return _make
+
+
+def _make_username_mother() -> UsernameMother:
+    return UsernameMother(
+        first_name="Maria",
+        last_name="Silva",
+        full_name=f"Maria Silva {uuid.uuid4().hex[:6]}",
+        description="Mãe de teste",
+    )
+
+
+def _make_username(
+    first_mother: UsernameMother, last_mother: UsernameMother
+) -> Username:
+    return Username(
+        nickname=f"nick-{uuid.uuid4().hex[:10]}",
+        first_mother_id=first_mother.id,
+        last_mother_id=last_mother.id,
+    )
+
+
+@pytest.fixture
+async def username_catalog(db_session: AsyncSession) -> list[Username]:
+    first_mother = _make_username_mother()
+    last_mother = _make_username_mother()
+    db_session.add_all([first_mother, last_mother])
+    await db_session.flush()
+
+    usernames = [_make_username(first_mother, last_mother) for _ in range(5)]
+    db_session.add_all(usernames)
+    await db_session.flush()
+    return usernames
+
+
+@pytest.fixture(autouse=True)
+def cleanup_generated_challenge_images():
+    settings = get_settings()
+    yield
+    rmtree(settings.media_root / "challenges", ignore_errors=True)
+
+
+@pytest.fixture
+def media_root(tmp_path, monkeypatch):
+    """Redireciona media_root para um tmp_path durante o teste.
+
+    Como get_settings() é cacheado, mutamos o singleton e o monkeypatch
+    restaura ao fim do teste.
+    """
+    settings = get_settings()
+    monkeypatch.setattr(settings, "media_root", tmp_path)
+    try:
+        yield tmp_path
+    finally:
+        rmtree(tmp_path, ignore_errors=True)

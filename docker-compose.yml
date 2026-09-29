@@ -55,6 +55,10 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    volumes:
+      - ./backend/media:/app/media
+    environment:
+      MEDIA_ROOT: /app/media
     entrypoint: ["/bin/sh", "/app/entrypoint.sh"]
     command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--proxy-headers"]
     healthcheck:

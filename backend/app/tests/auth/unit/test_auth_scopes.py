@@ -16,8 +16,8 @@ def test_scope_descriptions_covers_all_scope_values():
     assert set(SCOPE_DESCRIPTIONS.keys()) == set(Scope)
 
 
-def test_default_scopes_contains_all_scopes():
-    assert set(DEFAULT_SCOPES) == set(Scope)
+def test_default_scopes_contains_right_scopes():
+    assert set(DEFAULT_SCOPES) == set(Scope) - {Scope.ADMIN}
 
 
 def test_known_scopes_matches_scope_descriptions():

@@ -1,6 +1,7 @@
 import secrets
 from enum import StrEnum
 from functools import lru_cache
+from pathlib import Path
 from typing import TypeAlias
 
 from pydantic import AnyHttpUrl, Field, HttpUrl, PostgresDsn, SecretStr
@@ -81,6 +82,16 @@ class Settings(BaseSettings):
         title="Audience (client_id)",
         description="Identificador do cliente que consome o id_token (claim 'aud')",
     )
+
+    media_root: Path = Field(
+        # o default aqui assume /backend/app/core/config.py como caminho deste arquivo
+        # se isso mudar, é bom atualizar
+        default=Path(__file__).resolve().parents[2] / "media",
+        title="Media directory relative path",
+        description="Caminho relativo para armazenamento de imagens, como as capas dos Challenges, no servidor",
+    )
+
+    media_url_prefix: str = Field(default="/media", title="Media directory path prefix")
 
 
 @lru_cache

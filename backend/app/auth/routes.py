@@ -9,8 +9,10 @@ from app.auth.dependencies import get_current_user
 from app.auth.schemas import RequestedScopesBody, Token
 from app.auth.scopes import DEFAULT_SCOPES, KNOWN_SCOPES, Scope
 from app.core.database import get_session
-from app.core.exceptions.app_errors import UnauthorizedError
+from app.core.exceptions.app_errors import ForbiddenError, UnauthorizedError
+from app.users import services as user_services
 from app.users.models import User
+from app.users.schemas import UserMe
 
 router = APIRouter(tags=["auth"])
 
@@ -29,10 +31,19 @@ async def login_with_password(
         raise UnauthorizedError(detail="Invalid username or password")
 
     requested_scopes = form_data.scopes if form_data.scopes else DEFAULT_SCOPES
+    requested_set = set(requested_scopes)
 
-    unknown = set(requested_scopes) - KNOWN_SCOPES
+    unknown = requested_set - KNOWN_SCOPES
     if unknown:
         raise UnauthorizedError(detail=f"Unknown scopes: {sorted(unknown)}")
+
+    grantable = services.get_grantable_scopes(user)
+    not_allowed = requested_set - grantable
+    if not_allowed:
+        raise ForbiddenError(detail=f"Scopes not allowed: {sorted(not_allowed)}")
+
+    if user.is_admin and Scope.ADMIN not in requested_set:
+        requested_scopes = list(requested_scopes) + [Scope.ADMIN]
 
     # Access Token: contém a identificação do usuário ("data.sub")
     # e os escopos de acesso ("data.scopes")
@@ -50,13 +61,17 @@ async def login_with_password(
     return Token(access_token=access_token, id_token=id_token, token_type="bearer")
 
 
-@router.get("/me")
+@router.get("/me", response_model=UserMe)
 async def get_my_info(
+    db_session: Annotated[AsyncSession, Depends(get_session)],
     current_user: Annotated[
         User, Security(get_current_user, scopes=[Scope.PROFILE, Scope.EMAIL])
     ],
 ):
-    return current_user
+    user = await user_services.get_user_profile_by_id(db_session, current_user.id)
+    if user is None:
+        raise UnauthorizedError(detail="Inexistent or inactive user")
+    return user
 
 
 @router.post("/refresh")

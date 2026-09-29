@@ -40,3 +40,26 @@ class UserRead(UserBase):
     created_at: datetime
     updated_at: datetime
     deleted_at: datetime | None = None
+
+
+class UsernameMotherRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    first_name: str
+    last_name: str
+    full_name: str
+    description: str
+
+
+class UsernameRead(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: uuid.UUID
+    nickname: str
+    first_mother: UsernameMotherRead
+    last_mother: UsernameMotherRead
+
+
+class UserMe(UserRead):
+    username: UsernameRead | None = None

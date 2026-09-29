@@ -14,6 +14,8 @@ from app.core.models import Base
 # and picked up by `alembic revision --autogenerate`.
 from app.auth import models as auth_models  # noqa: F401 noqa
 from app.users import models as user_models  # noqa: F401 noqa
+from app.challenges import models as challenges_models  # noqa: F401 noqa
+from app.users.username import models as usernames_user_models  # noqa: F401 noqa
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

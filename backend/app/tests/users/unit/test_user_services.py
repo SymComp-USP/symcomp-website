@@ -51,7 +51,7 @@ def test_verify_password_is_case_sensitive():
 
 
 @pytest.mark.asyncio
-async def test_create_user_service(db_session: AsyncSession):
+async def test_create_user_service(db_session: AsyncSession, username_catalog):
     user_in = UserCreate(
         email="service_test@example.com", name="Service User", password="password123"
     )
@@ -63,7 +63,7 @@ async def test_create_user_service(db_session: AsyncSession):
 
 
 @pytest.mark.asyncio
-async def test_get_user_by_id(db_session: AsyncSession):
+async def test_get_user_by_id(db_session: AsyncSession, username_catalog):
     user_in = UserCreate(
         email="get_id@example.com", name="Get By ID", password="password123"
     )
@@ -75,7 +75,7 @@ async def test_get_user_by_id(db_session: AsyncSession):
 
 
 @pytest.mark.asyncio
-async def test_get_user_by_email(db_session: AsyncSession):
+async def test_get_user_by_email(db_session: AsyncSession, username_catalog):
     user_in = UserCreate(
         email="get_email@example.com", name="Get By Email", password="password123"
     )
@@ -89,7 +89,7 @@ async def test_get_user_by_email(db_session: AsyncSession):
 
 
 @pytest.mark.asyncio
-async def test_update_user_service(db_session: AsyncSession):
+async def test_update_user_service(db_session: AsyncSession, username_catalog):
     user_in = UserCreate(
         email="update@example.com", name="Old Name", password="password123"
     )
@@ -102,7 +102,7 @@ async def test_update_user_service(db_session: AsyncSession):
 
 
 @pytest.mark.asyncio
-async def test_soft_delete_user_service(db_session: AsyncSession):
+async def test_soft_delete_user_service(db_session: AsyncSession, username_catalog):
     user_in = UserCreate(
         email="delete@example.com", name="Delete Me", password="password123"
     )
@@ -115,7 +115,9 @@ async def test_soft_delete_user_service(db_session: AsyncSession):
 
 
 @pytest.mark.asyncio
-async def test_create_user_with_existing_active_email_raises(db_session: AsyncSession):
+async def test_create_user_with_existing_active_email_raises(
+    db_session: AsyncSession, username_catalog
+):
     user_in = UserCreate(
         email="duplicate@example.com", name="First", password="password123"
     )
@@ -129,7 +131,9 @@ async def test_create_user_with_existing_active_email_raises(db_session: AsyncSe
 
 
 @pytest.mark.asyncio
-async def test_delete_already_deleted_user_raises(db_session: AsyncSession):
+async def test_delete_already_deleted_user_raises(
+    db_session: AsyncSession, username_catalog
+):
     user_in = UserCreate(
         email="double_delete@example.com", name="Delete Twice", password="password123"
     )
@@ -142,7 +146,9 @@ async def test_delete_already_deleted_user_raises(db_session: AsyncSession):
 
 
 @pytest.mark.asyncio
-async def test_create_user_reactivates_soft_deleted_account(db_session: AsyncSession):
+async def test_create_user_reactivates_soft_deleted_account(
+    db_session: AsyncSession, username_catalog
+):
     # Cria, soft-deleta e depois recria com o mesmo e-mail: deve reativar a
     # conta antiga (mesmo id) em vez de criar um registro novo.
     user_in = UserCreate(
