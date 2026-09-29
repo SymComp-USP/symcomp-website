@@ -196,25 +196,25 @@ export default function Semana() {
             className="mt-5 grid min-h-12 w-full grid-cols-3 items-center gap-3 sm:mt-7 sm:min-h-16"
           >
             <Image
-              alt="Wild Life"
-              className="h-auto w-[clamp(64px,8vw,120px)] justify-self-start"
-              height={37}
-              src="/logo/wild_life.svg"
-              width={77}
+              alt="Incognia"
+              className="h-auto w-[clamp(90px,13vw,200px)] justify-self-start"
+              height={158}
+              src="/company-logos/incognia.webp"
+              width={848}
             />
             <Image
-              alt="Thomson Reuters"
-              className="h-auto w-[clamp(110px,13vw,190px)] justify-self-center"
-              height={57}
-              src="/logo/rhomsom_reuters.svg"
-              width={152}
+              alt="Tako"
+              className="h-auto w-[clamp(82px,12vw,180px)] justify-self-center brightness-0 invert"
+              height={207}
+              src="/company-logos/tako_logotipo.svg"
+              width={791}
             />
             <Image
-              alt="nic.br"
-              className="h-auto w-[clamp(78px,9vw,130px)] justify-self-end"
-              height={50}
-              src="/logo/nicbr.svg"
-              width={92}
+              alt="Asper"
+              className="h-auto w-[clamp(82px,12vw,180px)] justify-self-end"
+              height={592}
+              src="/company-logos/colored-1.webp"
+              width={2500}
             />
           </div>
         </footer>
