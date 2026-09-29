@@ -2,14 +2,20 @@ import asyncio
 import uuid
 from datetime import UTC, datetime
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.auth.security import hash_password
+from app.core.pagination import Page, PaginationParams
 from app.users.exceptions import UserAlreadyDeletedError, UserAlreadyExistsError
 from app.users.models import User
-from app.users.schemas import UserCreate, UserUpdate
+from app.users.schemas import (
+    AdminUserCreate,
+    UserCreate,
+    UserRead,
+    UserUpdate,
+)
 from app.users.username import services as username_services
 from app.users.username.models import Username
 
@@ -116,10 +122,69 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
     return user
 
 
+async def admin_create_user(session: AsyncSession, user_in: AdminUserCreate) -> User:
+    """Cria um usuário como admin, podendo definir `is_admin` e `is_verified`.
+
+    Reaproveita `create_user` (mesmas regras de e-mail duplicado, reativação de
+    conta deletada e atribuição de username) e aplica os privilégios em seguida.
+
+    Não faz commit.
+    """
+    user = await create_user(session, user_in)
+
+    user.is_admin = user_in.is_admin
+    user.is_verified = user_in.is_verified
+
+    await session.flush()
+    await session.refresh(user)
+
+    return user
+
+
+async def list_users_paginated(
+    session: AsyncSession,
+    pagination: PaginationParams,
+    include_deleted: bool = False,
+) -> Page[UserRead]:
+    # Lista usuários paginados; por padrão ignora os soft-deletados
+    filters = [] if include_deleted else [User.deleted_at.is_(None)]
+
+    total = await session.scalar(select(func.count(User.id)).where(*filters))
+
+    rows = (
+        await session.scalars(
+            select(User)
+            .where(*filters)
+            .order_by(User.created_at.desc(), User.id)
+            .limit(pagination.limit)
+            .offset(pagination.offset)
+        )
+    ).all()
+
+    return Page[UserRead](
+        items=[UserRead.model_validate(u) for u in rows],
+        total=total or 0,
+        limit=pagination.limit,
+        offset=pagination.offset,
+    )
+
+
 async def update_user(session: AsyncSession, user: User, user_in: UserUpdate) -> User:
     # Atualiza o usuario a partir da classe UserUpdate, modifica apenas campos explicitamente enviados
+    # (campos enviados como null são ignorados: nenhum deles aceita NULL no banco)
+    # Levanta UserAlreadyExistsError se o novo e-mail já pertence a outra conta
+    # (ativa ou soft-deletada, pois a unicidade do e-mail vale para ambas).
     # Não faz commit
-    update_data = user_in.model_dump(exclude_unset=True, exclude={"password"})
+    if user_in.email is not None and user_in.email != user.email:
+        email_taken = await session.scalar(
+            select(User.id).where(User.email == user_in.email, User.id != user.id)
+        )
+        if email_taken is not None:
+            raise UserAlreadyExistsError(user_in.email)
+
+    update_data = user_in.model_dump(
+        exclude_unset=True, exclude_none=True, exclude={"password"}
+    )
     for field, value in update_data.items():
         setattr(user, field, value)
 
