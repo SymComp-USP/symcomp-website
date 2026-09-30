@@ -104,28 +104,21 @@
   );
 }
 
-.semana-pixel-notch {
+/* Single square notch cut out of each corner (set the size with --notch). */
+.semana-notch {
   clip-path: polygon(
-    12px 0,
-    calc(100% - 12px) 0,
-    calc(100% - 12px) 6px,
-    calc(100% - 6px) 6px,
-    calc(100% - 6px) 12px,
-    100% 12px,
-    100% calc(100% - 12px),
-    calc(100% - 6px) calc(100% - 12px),
-    calc(100% - 6px) calc(100% - 6px),
-    calc(100% - 12px) calc(100% - 6px),
-    calc(100% - 12px) 100%,
-    12px 100%,
-    12px calc(100% - 6px),
-    6px calc(100% - 6px),
-    6px calc(100% - 12px),
-    0 calc(100% - 12px),
-    0 12px,
-    6px 12px,
-    6px 6px,
-    12px 6px
+    var(--notch, 16px) 0,
+    calc(100% - var(--notch, 16px)) 0,
+    calc(100% - var(--notch, 16px)) var(--notch, 16px),
+    100% var(--notch, 16px),
+    100% calc(100% - var(--notch, 16px)),
+    calc(100% - var(--notch, 16px)) calc(100% - var(--notch, 16px)),
+    calc(100% - var(--notch, 16px)) 100%,
+    var(--notch, 16px) 100%,
+    var(--notch, 16px) calc(100% - var(--notch, 16px)),
+    0 calc(100% - var(--notch, 16px)),
+    0 var(--notch, 16px),
+    var(--notch, 16px) var(--notch, 16px)
   );
 }
 

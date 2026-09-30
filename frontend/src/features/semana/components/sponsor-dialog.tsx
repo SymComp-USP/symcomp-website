@@ -65,10 +65,10 @@ function SponsorDetails({ sponsor }: { sponsor: Sponsor }) {
 
   return (
     <>
-      <div className="flex items-center gap-4 p-5 pr-12">
-        <SponsorLogo className="size-24" sponsor={sponsor} />
+      <div className="flex items-center gap-4 px-6 pb-6 pt-16">
+        <SponsorLogo className="size-24 lg:size-28" sponsor={sponsor} />
         <div className="min-w-0 space-y-2">
-          <DialogTitle className="text-xl font-bold uppercase leading-tight">
+          <DialogTitle className="text-xl font-bold uppercase leading-tight lg:text-2xl">
             {sponsor.nome}
           </DialogTitle>
           <DialogDescription
@@ -92,11 +92,11 @@ function SponsorDetails({ sponsor }: { sponsor: Sponsor }) {
       </div>
 
       {talk && schedule && (
-        <Tabs defaultValue="palestra">
-          <TabsList className="grid h-auto w-full grid-cols-2 gap-1 rounded-none bg-transparent p-0 px-1">
+        <Tabs className="flex flex-1 flex-col" defaultValue="palestra">
+          <TabsList className="grid h-auto w-full grid-cols-2 gap-0 rounded-none border-t-[3px] border-white bg-transparent p-0">
             {['palestra', 'palestrante'].map((value) => (
               <TabsTrigger
-                className="rounded-none border-2 border-white py-2 text-sm font-bold uppercase text-white data-[state=active]:bg-[hsl(var(--semana-sponsor-soft))] data-[state=active]:text-white data-[state=active]:shadow-none"
+                className="rounded-none border-0 bg-transparent py-2.5 text-base font-bold uppercase text-[hsl(var(--semana-sponsor-soft))] [&+&]:border-l-[3px] [&+&]:border-white data-[state=active]:bg-[hsl(var(--semana-sponsor-soft))] data-[state=active]:text-white data-[state=active]:shadow-none"
                 key={value}
                 value={value}
               >
@@ -106,20 +106,22 @@ function SponsorDetails({ sponsor }: { sponsor: Sponsor }) {
           </TabsList>
 
           <TabsContent
-            className="mt-1 space-y-3 border-t-2 border-white p-5"
+            className="mt-0 hidden flex-1 flex-col gap-3 data-[state=active]:flex border-t-[3px] border-white p-5 lg:p-7"
             value="palestra"
           >
-            <h3 className="text-lg font-bold uppercase leading-tight">{talk.titulo}</h3>
+            <h3 className="text-lg font-bold uppercase leading-tight lg:text-xl">
+              {talk.titulo}
+            </h3>
             <p className="font-bold uppercase text-primary">{schedule.label}</p>
-            <p className="text-white/90">{talk.descricao}</p>
-            <div className="flex justify-center pt-3">
+            <p className="text-white/90 lg:text-lg">{talk.descricao}</p>
+            <div className="mt-auto flex justify-center pt-6">
               <a
-                className="semana-pixel-notch block bg-[hsl(var(--semana-sponsor-soft))] p-1 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring"
+                className="semana-notch block bg-[hsl(var(--semana-sponsor-soft))] p-1 [--notch:10px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring"
                 href={schedule.calendarUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <span className="semana-pixel-notch block bg-[hsl(var(--semana-contrast))] px-6 py-2 text-sm font-bold uppercase text-white">
+                <span className="semana-notch block bg-black [--notch:10px] px-6 py-2 text-sm font-bold uppercase text-white">
                   Salvar na agenda
                   <span className="sr-only"> (abre em nova aba)</span>
                 </span>
@@ -128,7 +130,7 @@ function SponsorDetails({ sponsor }: { sponsor: Sponsor }) {
           </TabsContent>
 
           <TabsContent
-            className="mt-1 space-y-4 border-t-2 border-white p-5"
+            className="mt-0 flex-1 space-y-4 border-t-[3px] border-white p-5 lg:p-7"
             value="palestrante"
           >
             <div className="flex items-center gap-4">
@@ -201,7 +203,7 @@ export function SponsorDialog({
     >
       <DialogContent
         className={cn(
-          'semana-theme flex w-[calc(100%-1rem)] max-w-xl flex-col items-center gap-4 border-0 bg-transparent p-0 font-[family-name:var(--font-semana-body)] text-white shadow-none sm:rounded-none [&>button:last-child]:hidden',
+          'semana-theme flex w-[calc(100%-1rem)] max-w-xl flex-col lg:max-w-[38rem] items-center gap-4 border-0 bg-transparent p-0 font-[family-name:var(--font-semana-body)] text-white shadow-none sm:rounded-none [&>button:last-child]:hidden',
           semanaBody.variable,
           semanaDisplay.variable,
         )}
@@ -219,9 +221,9 @@ export function SponsorDialog({
                 <PixelChevron className="h-8 w-auto" direction="left" />
               </button>
 
-              <div className="semana-pixel-notch min-w-0 flex-1 bg-white p-1">
-                <div className="semana-pixel-notch relative max-h-[80svh] overflow-y-auto bg-[hsl(var(--semana-contrast))]">
-                  <DialogClose className="absolute right-3 top-3 z-10 flex size-8 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
+              <div className="semana-notch min-w-0 flex-1 bg-white p-[3px] [--notch:20px]">
+                <div className="semana-notch relative flex max-h-[80svh] flex-col overflow-y-auto bg-black [--notch:20px] lg:min-h-[37.5rem]">
+                  <DialogClose className="absolute right-7 top-7 z-10 flex size-8 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring">
                     <X aria-hidden="true" />
                     <span className="sr-only">Fechar</span>
                   </DialogClose>
