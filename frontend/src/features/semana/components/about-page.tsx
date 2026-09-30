@@ -1,116 +1,76 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import { BsFacebook, BsInstagram, BsLinkedin } from 'react-icons/bs'
 
-const projects = [
+import { SemanaButton } from './semana-button'
+
+// TODO: substituir pelas URLs oficiais do Facebook e do formulário de entrada.
+const FACEBOOK_URL = '#'
+const JOIN_URL = '#'
+
+const socialLinks = [
   {
-    label: 'Semana da Computação',
-    href: '/semana',
-    imageUrl: '/logo/sc.png',
-    imageWidth: 1080,
-    imageHeight: 1080,
-    description:
-      'Anualmente reunimos alunos da graduação e visitantes para participar de uma semana de palestras, competições, brindes, networking e coffee breaks.',
+    label: 'Instagram da SymComp',
+    href: 'https://www.instagram.com/symcomp.imeusp/',
+    icon: BsInstagram,
   },
   {
-    label: 'ByteCafé',
-    href: '/bytecafe',
-    imageUrl: '/logo/bc.png',
-    imageWidth: 477,
-    imageHeight: 592,
-    description:
-      'Duas vezes por semestre convidamos alunos do Ensino Médio para conhecer a USP e o curso de Ciência da Computação.',
+    label: 'LinkedIn da SymComp',
+    href: 'https://www.linkedin.com/company/symcompimeusp',
+    icon: BsLinkedin,
   },
+  { label: 'Facebook da SymComp', href: FACEBOOK_URL, icon: BsFacebook },
 ]
-
-const sectionTitle =
-  'mb-5 border-b-[6px] border-[hsl(var(--semana-contrast))] pb-3 font-[family-name:var(--font-semana-display)] text-2xl font-bold uppercase'
 
 export function AboutPage() {
   return (
     <main className="mx-auto min-h-[calc(100svh-65px)] max-w-4xl px-6 py-16">
-      <div className="mb-12 max-w-2xl space-y-3">
-        <p className="font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase tracking-[0.2em] text-primary">
-          Semana da Computação
-        </p>
+      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-5xl">
-          Sobre nós
+          Quem somos?
         </h1>
-        <p className="text-xl text-white/80">
-          Organizando eventos sobre computação, aproximando a comunidade interna e externa
-          do curso de Bacharelado em Ciência da Computação da USP Butantã.
+        <p className="mt-4 text-xl text-white/80">
+          Conheça o grupo de extensão SymComp, responsável pela 16ª Semana da Computação.
         </p>
-      </div>
 
-      <div className="space-y-12">
-        <section aria-labelledby="quem-somos">
-          <h2 className={sectionTitle} id="quem-somos">
-            Quem somos
-          </h2>
-          <p className="text-lg text-white/80">
-            A SymComp, Simpósio da Computação, é um grupo de extensão originado em 2023 a
-            partir da comissão responsável pela Semana da Computação do Instituto de
-            Matemática e Estatística da Universidade de São Paulo (IME USP). O grupo
-            surgiu com o propósito de fortalecer a presença do curso de Ciência da
-            Computação não apenas dentro da comunidade uspiana, mas também na comunidade
-            externa, promovendo eventos e atividades relacionadas a essa ciência tão
-            essencial e relevante na atualidade.
-          </p>
-        </section>
+        <Image
+          alt="16ª Semana da Computação"
+          className="mt-10 h-auto w-64 sm:w-80"
+          height={47}
+          priority
+          src="/semana/2026/logo-horizontal.svg"
+          width={196}
+        />
 
-        <section aria-labelledby="a-semana">
-          <h2 className={sectionTitle} id="a-semana">
-            A Semana da Computação
-          </h2>
-          <div className="space-y-4 text-lg text-white/80">
-            <p>
-              A Semana da Computação do IME USP é um dos maiores eventos estudantis de
-              tecnologia e inovação do Brasil. Organizada por alunos do Instituto de
-              Matemática e Estatística da Universidade de São Paulo, reúne palestras,
-              workshops, minicursos e painéis sobre ciência da computação, inteligência
-              artificial, segurança da informação, desenvolvimento de software, design de
-              sistemas e carreira em tecnologia.
-            </p>
-            <p>
-              O evento conecta estudantes, pesquisadores e profissionais da área,
-              promovendo troca de conhecimento, networking e contato direto com as
-              tendências mais atuais do mercado.
-            </p>
-          </div>
-        </section>
+        <h2 className="mt-10 font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase text-primary">
+          SymComp
+        </h2>
+        <p className="mt-4 text-lg text-white/80 sm:text-xl">
+          Somos um grupo de extensão do Instituto de Matemática e Estatística da USP
+          formado por alunos da graduação. Nossa missão é disseminar a computação para a
+          comunidade externa e interna da universidade. Venha fazer parte do grupo também!
+        </p>
 
-        <section aria-labelledby="nossos-projetos">
-          <h2 className={sectionTitle} id="nossos-projetos">
-            Nossos projetos
-          </h2>
-          <div className="grid gap-6 md:grid-cols-2">
-            {projects.map((project) => (
-              <article
-                className="flex flex-col gap-4 rounded-none border-[7px] border-white bg-card p-5 text-card-foreground shadow-[0_8px_0_hsl(var(--semana-contrast))]"
-                key={project.href}
+        <ul aria-label="Redes sociais da SymComp" className="mt-8 flex gap-4">
+          {socialLinks.map(({ label, href, icon: Icon }) => (
+            <li key={label}>
+              <a
+                aria-label={label}
+                className="flex size-12 items-center justify-center rounded-full border-4 border-[hsl(var(--semana-contrast))] bg-white text-[hsl(var(--semana-contrast))] shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 hover:bg-[hsl(var(--semana-accent))] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))]"
+                href={href}
+                rel="noopener noreferrer"
+                target="_blank"
               >
-                <div className="flex h-32 items-center justify-center bg-[hsl(var(--semana-accent))] p-4">
-                  <Image
-                    alt={`Logo ${project.label}`}
-                    className="h-full w-auto object-contain"
-                    height={project.imageHeight}
-                    src={project.imageUrl}
-                    width={project.imageWidth}
-                  />
-                </div>
-                <h3 className="font-[family-name:var(--font-semana-display)] text-xl font-bold uppercase">
-                  {project.label}
-                </h3>
-                <p className="flex-1 text-muted-foreground">{project.description}</p>
-                <Link
-                  className="w-fit border-4 border-[hsl(var(--semana-contrast))] bg-primary px-4 py-2 font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase text-primary-foreground shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))]"
-                  href={project.href}
-                >
-                  Conhecer
-                </Link>
-              </article>
-            ))}
-          </div>
-        </section>
+                <Icon aria-hidden="true" size={22} />
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <SemanaButton asChild className="mt-10 text-lg sm:text-xl">
+          <a href={JOIN_URL} rel="noopener noreferrer" target="_blank">
+            Venha fazer parte
+          </a>
+        </SemanaButton>
       </div>
     </main>
   )
