@@ -1,4 +1,4 @@
-import { ChevronLeft, ChevronRight, Link as LinkIcon, X } from 'lucide-react'
+import { Link as LinkIcon, X } from 'lucide-react'
 import Image from 'next/image'
 import { BsInstagram, BsLinkedin, BsYoutube } from 'react-icons/bs'
 
@@ -14,6 +14,7 @@ import { cn } from '@/lib/utils'
 
 import { semanaBody, semanaDisplay } from '../fonts'
 import type { Sponsor, SponsorTalk } from '../sponsors'
+import { PixelChevron } from './pixel-chevron'
 import { SponsorLogo } from './sponsor-logo'
 
 // Brazil has no daylight saving time, so event times are always UTC-3.
@@ -215,7 +216,7 @@ export function SponsorDialog({
                 onClick={() => onIndexChange(index - 1)}
                 type="button"
               >
-                <ChevronLeft aria-hidden="true" className="size-9" strokeWidth={4} />
+                <PixelChevron className="h-8 w-auto" direction="left" />
               </button>
 
               <div className="semana-pixel-notch min-w-0 flex-1 bg-white p-1">
@@ -235,7 +236,7 @@ export function SponsorDialog({
                 onClick={() => onIndexChange(index + 1)}
                 type="button"
               >
-                <ChevronRight aria-hidden="true" className="size-9" strokeWidth={4} />
+                <PixelChevron className="h-8 w-auto" />
               </button>
             </div>
 

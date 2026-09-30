@@ -12,7 +12,7 @@ export function SponsorsShowcase({ sponsors }: { sponsors: Sponsor[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <div className="grid grid-cols-[minmax(0,1fr)] gap-14 lg:grid-cols-2 lg:items-start lg:gap-10">
+    <div className="grid grid-cols-[minmax(0,1fr)] gap-14 [container-type:inline-size] lg:grid-cols-2 lg:items-start lg:gap-10">
       <SponsorsCarousel>
         {sponsors.map((sponsor, index) => (
           <SponsorCard
@@ -25,12 +25,12 @@ export function SponsorsShowcase({ sponsors }: { sponsors: Sponsor[] }) {
 
       <section aria-labelledby="lista-completa">
         <h2
-          className="mb-6 text-center text-3xl font-bold uppercase lg:text-left lg:text-4xl"
+          className="mb-6 text-center text-3xl font-bold uppercase lg:text-4xl"
           id="lista-completa"
         >
           Lista completa
         </h2>
-        <ul className="mx-auto grid max-w-md grid-cols-3 gap-4 sm:gap-6 lg:max-w-none">
+        <ul className="mx-auto grid max-w-md grid-cols-3 gap-6 sm:gap-10">
           {sponsors.map((sponsor, index) => (
             <li key={sponsor.nome}>
               <button
