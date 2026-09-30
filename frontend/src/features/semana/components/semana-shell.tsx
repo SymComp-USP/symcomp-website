@@ -23,6 +23,7 @@ import { SemanaButton } from './semana-button'
 const links = [
   { href: '/semana/inicio', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
+  { href: '/semana/ranking', label: 'Ranking' },
   { href: '/semana/perfil', label: 'Perfil' },
 ]
 
