@@ -27,6 +27,19 @@ export type AdminSemana = {
   participant_count: number
 }
 
+export type AdminAtividade = {
+  id: string
+  semana_id: number
+  tipo: 'palestra' | 'workshop' | 'encerramento' | 'conversa' | 'coffee_break'
+  titulo: string
+  status: 'provisoria' | 'confirmada'
+  comeca_as: string
+  termina_as: string
+  codigo: string
+  pontos: number
+  horas: number
+}
+
 type Page<T> = { items: T[]; total: number; limit: number; offset: number }
 
 export function listAdminUsers() {
@@ -112,4 +125,31 @@ export function updateAdminSemana(
 
 export function deleteAdminSemana(id: number) {
   return requestApi<void>(`/admin/semanas/${id}`, { method: 'DELETE' })
+}
+
+export function listAdminAtividades(semanaId: number) {
+  return requestApi<AdminAtividade[]>(`/admin/semanas/${semanaId}/atividades`)
+}
+
+export function createAdminAtividade(
+  semanaId: number,
+  input: Omit<AdminAtividade, 'id' | 'semana_id' | 'codigo'>,
+) {
+  return requestApi<AdminAtividade>(`/admin/semanas/${semanaId}/atividades`, {
+    method: 'POST',
+    body: JSON.stringify(input),
+  })
+}
+
+export function deleteAdminAtividade(semanaId: number, id: string) {
+  return requestApi<void>(`/admin/semanas/${semanaId}/atividades/${id}`, {
+    method: 'DELETE',
+  })
+}
+
+export function regenerateAdminAtividadeCode(semanaId: number, id: string) {
+  return requestApi<AdminAtividade>(
+    `/admin/semanas/${semanaId}/atividades/${id}/regenerar-codigo`,
+    { method: 'POST' },
+  )
 }

@@ -19,3 +19,19 @@ export function listSemanas() {
 export function getSemanaRanking(semanaId: number) {
   return requestApi<SemanaRankingEntry[]>(`/semanas/${semanaId}/ranking`)
 }
+
+export function registerAttendance(
+  semanaId: number,
+  codigo: string,
+  input: { nome?: string; email?: string },
+) {
+  return requestApi<{
+    atividade_id: string
+    registrada: boolean
+    pontos_adicionados: number
+    horas: number
+  }>(`/semanas/${semanaId}/atividades/registrar/${codigo}`, {
+    method: 'POST',
+    body: JSON.stringify(input),
+  })
+}

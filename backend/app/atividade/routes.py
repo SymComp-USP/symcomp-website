@@ -90,6 +90,21 @@ async def delete_admin_atividade(
     await session.delete(atividade)
 
 
+@admin_router.post(
+    "/{atividade_id}/regenerar-codigo", response_model=schemas.AtividadeResponse
+)
+async def regenerate_admin_atividade_code(
+    semana_id: int,
+    atividade_id: UUID,
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: Annotated[User, Security(get_current_admin_user, scopes=[Scope.ADMIN])],
+):
+    atividade = await services.get_atividade(session, semana_id, atividade_id)
+    if atividade is None:
+        raise NotFoundError("Activity not found.")
+    return await services.regenerate_codigo(session, atividade)
+
+
 @attendance_router.post(
     "/registrar/{codigo}",
     response_model=schemas.PresencaResponse,

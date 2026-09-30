@@ -45,12 +45,16 @@ def _new_codigo() -> str:
     return f"{secrets.randbelow(10_000):04d}"
 
 
-async def _unique_codigo(session: AsyncSession, semana_id: int) -> str:
+async def _unique_codigo(
+    session: AsyncSession, semana_id: int, exclude_id: UUID | None = None
+) -> str:
     for _ in range(10_000):
         codigo = _new_codigo()
         exists = await session.scalar(
             select(Atividade.id).where(
-                Atividade.semana_id == semana_id, Atividade.codigo == codigo
+                Atividade.semana_id == semana_id,
+                Atividade.codigo == codigo,
+                Atividade.id != exclude_id if exclude_id else True,
             )
         )
         if exists is None:
@@ -67,6 +71,12 @@ async def create_atividade(
         **fields,
     )
     session.add(atividade)
+    await session.flush()
+    return atividade
+
+
+async def regenerate_codigo(session: AsyncSession, atividade: Atividade) -> Atividade:
+    atividade.codigo = await _unique_codigo(session, atividade.semana_id, atividade.id)
     await session.flush()
     return atividade
 

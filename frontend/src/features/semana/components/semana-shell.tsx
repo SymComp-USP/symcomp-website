@@ -29,6 +29,7 @@ import { SemanaButton } from './semana-button'
 const links = [
   { href: '/semana/inicio', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
+  { href: '/semana/presenca', label: 'Presença' },
 ]
 
 export function SemanaShell({ children }: { children: ReactNode }) {

@@ -20,18 +20,23 @@ import { Input } from '@/components/ui/input'
 import { useAuth } from '@/features/auth/auth-provider'
 
 import {
+  createAdminAtividade,
   createAdminChallenge,
   createAdminSemana,
   createAdminUser,
+  deleteAdminAtividade,
   deleteAdminChallenge,
   deleteAdminSemana,
   deleteAdminUser,
+  listAdminAtividades,
   listAdminChallenges,
   listAdminSemanas,
   listAdminUsers,
   uploadAdminChallengeImage,
+  regenerateAdminAtividadeCode,
   updateAdminSemana,
   updateAdminUser,
+  type AdminAtividade,
   type AdminChallenge,
   type AdminSemana,
   type AdminUser,
@@ -54,6 +59,7 @@ export function AdminPanel() {
   const [users, setUsers] = useState<AdminUser[]>([])
   const [challenges, setChallenges] = useState<AdminChallenge[]>([])
   const [semanas, setSemanas] = useState<AdminSemana[]>([])
+  const [atividades, setAtividades] = useState<Record<number, AdminAtividade[]>>({})
   const [error, setError] = useState('')
   const [refresh, setRefresh] = useState(0)
 
@@ -68,6 +74,14 @@ export function AdminPanel() {
         setUsers(userPage.items)
         setChallenges(challengePage.items)
         setSemanas(semanaList)
+        return Promise.all(
+          semanaList.map(
+            async (semana) => [semana.id, await listAdminAtividades(semana.id)] as const,
+          ),
+        )
+      })
+      .then((activityLists) => {
+        if (activityLists) setAtividades(Object.fromEntries(activityLists))
       })
       .catch((reason: Error) => setError(reason.message))
   }, [refresh, user])
@@ -189,7 +203,9 @@ export function AdminPanel() {
           )}
           {tab === 'activities' && (
             <SemanasSection
+              atividades={atividades}
               semanas={semanas}
+              onActivityChanged={() => setRefresh((value) => value + 1)}
               onChanged={() => setRefresh((value) => value + 1)}
             />
           )}
@@ -570,14 +586,19 @@ function ChallengeForm({
 }
 
 function SemanasSection({
+  atividades,
   semanas,
+  onActivityChanged,
   onChanged,
 }: {
+  atividades: Record<number, AdminAtividade[]>
   semanas: AdminSemana[]
+  onActivityChanged: () => void
   onChanged: () => void
 }) {
   const [form, setForm] = useState({ nome: '', ano: new Date().getFullYear() })
   const [error, setError] = useState('')
+  const [openActivityForm, setOpenActivityForm] = useState<number>()
 
   async function create(event: React.FormEvent) {
     event.preventDefault()
@@ -680,10 +701,239 @@ function SemanasSection({
             <p className="mt-4 text-sm text-slate-500">
               {semana.challenge_count} desafios · {semana.participant_count} participantes
             </p>
+            <div className="mt-5 border-t border-slate-100 pt-5">
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="text-sm font-bold">Atividades</h3>
+                <Button
+                  onClick={() => setOpenActivityForm(semana.id)}
+                  size="sm"
+                  type="button"
+                >
+                  <Plus size={14} /> Nova atividade
+                </Button>
+              </div>
+              {openActivityForm === semana.id && (
+                <ActivityForm
+                  onDone={() => {
+                    setOpenActivityForm(undefined)
+                    onActivityChanged()
+                  }}
+                  semanaId={semana.id}
+                />
+              )}
+              <div className="mt-4 space-y-3">
+                {(atividades[semana.id] ?? []).map((atividade) => (
+                  <ActivityCard
+                    atividade={atividade}
+                    key={atividade.id}
+                    onChanged={onActivityChanged}
+                    onError={(message) => setError(message)}
+                    onDelete={async () => {
+                      if (
+                        !window.confirm(
+                          `Remover ${atividade.titulo || 'esta atividade'}?`,
+                        )
+                      )
+                        return
+                      try {
+                        await deleteAdminAtividade(semana.id, atividade.id)
+                        onActivityChanged()
+                      } catch (reason) {
+                        setError(
+                          reason instanceof Error
+                            ? reason.message
+                            : 'Não foi possível remover a atividade.',
+                        )
+                      }
+                    }}
+                    semanaId={semana.id}
+                  />
+                ))}
+                {!atividades[semana.id]?.length && (
+                  <p className="text-sm text-slate-500">Nenhuma atividade cadastrada.</p>
+                )}
+              </div>
+            </div>
           </article>
         ))}
       </div>
     </section>
+  )
+}
+
+function ActivityForm({ semanaId, onDone }: { semanaId: number; onDone: () => void }) {
+  const [form, setForm] = useState({
+    tipo: 'palestra' as AdminAtividade['tipo'],
+    titulo: '',
+    comeca_as: '',
+    termina_as: '',
+    status: 'provisoria' as AdminAtividade['status'],
+    pontos: 0,
+    horas: 1,
+  })
+  const [error, setError] = useState('')
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault()
+    setError('')
+    try {
+      await createAdminAtividade(semanaId, {
+        ...form,
+        comeca_as: new Date(form.comeca_as).toISOString(),
+        termina_as: new Date(form.termina_as).toISOString(),
+      })
+      onDone()
+    } catch (reason) {
+      setError(
+        reason instanceof Error ? reason.message : 'Não foi possível criar a atividade.',
+      )
+    }
+  }
+
+  return (
+    <form
+      className="mt-4 grid gap-3 rounded-lg border border-indigo-100 bg-indigo-50 p-4 sm:grid-cols-2"
+      onSubmit={submit}
+    >
+      <Input
+        className="sm:col-span-2"
+        placeholder="Título"
+        required
+        value={form.titulo}
+        onChange={(event) => setForm({ ...form, titulo: event.target.value })}
+      />
+      <select
+        className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+        value={form.tipo}
+        onChange={(event) =>
+          setForm({ ...form, tipo: event.target.value as AdminAtividade['tipo'] })
+        }
+      >
+        <option value="palestra">Palestra</option>
+        <option value="workshop">Workshop</option>
+        <option value="conversa">Conversa</option>
+        <option value="encerramento">Encerramento</option>
+        <option value="coffee_break">Coffee break</option>
+      </select>
+      <select
+        className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+        value={form.status}
+        onChange={(event) =>
+          setForm({ ...form, status: event.target.value as AdminAtividade['status'] })
+        }
+      >
+        <option value="provisoria">Provisória</option>
+        <option value="confirmada">Confirmada</option>
+      </select>
+      <label className="text-sm">
+        Início
+        <Input
+          className="mt-1"
+          required
+          type="datetime-local"
+          value={form.comeca_as}
+          onChange={(event) => setForm({ ...form, comeca_as: event.target.value })}
+        />
+      </label>
+      <label className="text-sm">
+        Fim
+        <Input
+          className="mt-1"
+          required
+          type="datetime-local"
+          value={form.termina_as}
+          onChange={(event) => setForm({ ...form, termina_as: event.target.value })}
+        />
+      </label>
+      <label className="text-sm">
+        Pontos
+        <Input
+          className="mt-1"
+          min={0}
+          type="number"
+          value={form.pontos}
+          onChange={(event) => setForm({ ...form, pontos: Number(event.target.value) })}
+        />
+      </label>
+      <label className="text-sm">
+        Horas
+        <Input
+          className="mt-1"
+          min={1}
+          type="number"
+          value={form.horas}
+          onChange={(event) => setForm({ ...form, horas: Number(event.target.value) })}
+        />
+      </label>
+      {error && <p className="text-sm text-red-700 sm:col-span-2">{error}</p>}
+      <Button className="sm:col-span-2" type="submit">
+        <Check size={16} /> Criar atividade
+      </Button>
+    </form>
+  )
+}
+
+function ActivityCard({
+  atividade,
+  semanaId,
+  onChanged,
+  onError,
+  onDelete,
+}: {
+  atividade: AdminAtividade
+  semanaId: number
+  onChanged: () => void
+  onError: (message: string) => void
+  onDelete: () => void
+}) {
+  async function regenerate() {
+    if (!window.confirm('O código anterior deixará de funcionar. Continuar?')) return
+    try {
+      await regenerateAdminAtividadeCode(semanaId, atividade.id)
+      onChanged()
+    } catch (reason) {
+      onError(
+        reason instanceof Error ? reason.message : 'Não foi possível regenerar o código.',
+      )
+    }
+  }
+
+  return (
+    <article className="rounded-lg border border-slate-200 bg-slate-50 p-4">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">
+            {atividade.tipo} · {atividade.status}
+          </p>
+          <h4 className="mt-1 font-semibold">{atividade.titulo || 'Sem título'}</h4>
+          <p className="mt-1 text-xs text-slate-500">
+            {new Date(atividade.comeca_as).toLocaleString('pt-BR')} · {atividade.horas}h ·{' '}
+            {atividade.pontos} pontos
+          </p>
+        </div>
+        <button
+          aria-label={`Remover ${atividade.titulo || 'atividade'}`}
+          className="text-slate-400 hover:text-red-600"
+          onClick={onDelete}
+          type="button"
+        >
+          <Trash2 size={16} />
+        </button>
+      </div>
+      <div className="mt-3 flex items-center justify-between gap-3 rounded-md bg-white p-3">
+        <div>
+          <p className="text-xs uppercase tracking-wider text-slate-500">
+            Código presença
+          </p>
+          <p className="font-mono text-2xl font-bold tracking-[0.3em]">
+            {atividade.codigo}
+          </p>
+        </div>
+        <Button onClick={regenerate} size="sm" type="button" variant="outline">
+          Regenerar código
+        </Button>
+      </div>
+    </article>
   )
 }
 
