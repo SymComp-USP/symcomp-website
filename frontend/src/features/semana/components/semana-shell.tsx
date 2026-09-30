@@ -1,17 +1,11 @@
 'use client'
 
-import { Menu, UserRound } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
 import { AuthProvider, useAuth } from '@/features/auth/auth-provider'
 import {
   Sheet,
@@ -30,6 +24,7 @@ const links = [
   { href: '/semana/inicio', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
   { href: '/semana/presenca', label: 'Presença' },
+  { href: '/semana/sobre-nos', label: 'Sobre nós' },
 ]
 
 export function SemanaShell({ children }: { children: ReactNode }) {
@@ -76,64 +71,11 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
             </Link>
           </div>
 
-          <nav
-            aria-label="Navegação principal"
-            className="col-start-3 row-start-1 hidden items-center justify-end gap-1 md:flex"
-          >
-            {links.map((link) => (
-              <Button
-                asChild
-                className="font-[family-name:var(--font-semana-display)] text-xs uppercase"
-                key={link.href}
-                variant="ghost"
-              >
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
-            ))}
-            {user && (
-              <Button
-                asChild
-                className="font-[family-name:var(--font-semana-display)] text-xs uppercase"
-                variant="ghost"
-              >
-                <Link href="/semana/ranking">Ranking</Link>
-              </Button>
-            )}
-            {!loading &&
-              (user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      aria-label="Abrir menu do perfil"
-                      className="ml-2"
-                      size="icon"
-                      variant="outline"
-                    >
-                      <UserRound aria-hidden="true" size={18} />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="semana-theme">
-                    <DropdownMenuItem asChild>
-                      <Link href="/semana/perfil">Perfil</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={logout}>Sair</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <SemanaButton
-                  asChild
-                  className="ml-2 border-4 px-4 py-2 text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
-                >
-                  <Link href="/semana/login">Entrar</Link>
-                </SemanaButton>
-              ))}
-          </nav>
-
           <Sheet>
             <SheetTrigger asChild>
               <Button
                 aria-label="Abrir menu"
-                className="col-start-3 row-start-1 ml-auto md:hidden"
+                className="col-start-3 row-start-1 ml-auto"
                 size="icon"
                 variant="ghost"
               >
@@ -146,7 +88,7 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                   Semana da Computação
                 </SheetTitle>
               </SheetHeader>
-              <nav aria-label="Navegação móvel" className="mt-8 flex flex-col gap-2">
+              <nav aria-label="Navegação principal" className="mt-8 flex flex-col gap-2">
                 {links.map((link) => (
                   <SheetClose asChild key={link.href}>
                     <Button
