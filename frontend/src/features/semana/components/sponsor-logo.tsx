@@ -4,8 +4,7 @@ import { cn } from '@/lib/utils'
 
 import type { Sponsor } from '../sponsors'
 
-// The logos come in different colors, so they are rendered white on the
-// sponsor tone, like in the shell footer.
+// Sponsor icon inside the white pixel-art octagon from the design.
 export function SponsorLogo({
   sponsor,
   className,
@@ -16,13 +15,13 @@ export function SponsorLogo({
   return (
     <div
       className={cn(
-        'flex h-32 w-full items-center justify-center border-4 border-[hsl(var(--semana-contrast))] bg-[hsl(var(--semana-sponsor-soft))] px-6 py-8',
+        'semana-pixel-octagon flex size-32 shrink-0 items-center justify-center bg-white',
         className,
       )}
     >
       <Image
         alt={sponsor.nome}
-        className="h-full w-auto max-w-full object-contain brightness-0 invert"
+        className="size-[64%] object-contain"
         height={sponsor.logo.height}
         src={sponsor.logo.src}
         width={sponsor.logo.width}

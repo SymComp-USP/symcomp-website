@@ -4,10 +4,13 @@
 // - Para adicionar um patrocinador, copie um item da lista e ajuste os campos.
 //   Para remover, apague o item. Com a lista vazia, a página mostra
 //   "Patrocinadores em breve.".
-// - As logos ficam em public/company-logos/. Informe o caminho e as dimensões
-//   reais do arquivo (width e height, em pixels).
+// - As logos ficam em public/semana/2026/sponsors/. Prefira ícones quadrados:
+//   eles aparecem dentro de um selo branco. Informe as dimensões reais do
+//   arquivo (width e height, em pixels).
 // - `palestra` é opcional. Sem ela, o "Saber mais +" mostra só a empresa, sem
 //   as abas Palestra e Palestrante.
+// - Na palestra, `palestranteFoto` (caminho em public/) e `redes` também são
+//   opcionais. Sem foto, aparecem as iniciais; sem redes, os botões somem.
 // - Datas no formato AAAA-MM-DD e horários no formato "HH:MM - HH:MM", no
 //   horário de Brasília.
 
@@ -18,6 +21,8 @@ export type SponsorTalk = {
   descricao: string
   palestrante: string
   sobre: string
+  palestranteFoto?: string
+  redes?: { linkedin?: string; youtube?: string; instagram?: string }
 }
 
 export type Sponsor = {
@@ -32,7 +37,7 @@ export type Sponsor = {
 export const sponsors: Sponsor[] = [
   {
     nome: 'Incognia',
-    logo: { src: '/company-logos/incognia.webp', width: 848, height: 158 },
+    logo: { src: '/semana/2026/sponsors/incognia.png', width: 268, height: 268 },
     site: 'https://www.incognia.com/pt/',
     cota: 'GIGA+',
     // TODO: dados provisórios
@@ -47,7 +52,7 @@ export const sponsors: Sponsor[] = [
   },
   {
     nome: 'Tako',
-    logo: { src: '/company-logos/tako_logotipo.svg', width: 791, height: 207 },
+    logo: { src: '/semana/2026/sponsors/tako.jpeg', width: 200, height: 200 },
     site: 'https://tako.ai/pt/',
     cota: 'GIGA+',
     // TODO: dados provisórios
@@ -62,7 +67,7 @@ export const sponsors: Sponsor[] = [
   },
   {
     nome: 'Asper',
-    logo: { src: '/company-logos/colored-1.webp', width: 2500, height: 592 },
+    logo: { src: '/semana/2026/sponsors/asper.jpeg', width: 200, height: 200 },
     site: 'https://www.asper.tec.br/',
     cota: 'GIGA+',
     // TODO: dados provisórios

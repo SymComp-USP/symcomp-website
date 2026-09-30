@@ -6,7 +6,7 @@ import { Children, type KeyboardEvent, type ReactNode, useRef, useState } from '
 import { cn } from '@/lib/utils'
 
 const arrowClassName =
-  'flex size-10 shrink-0 items-center justify-center border-4 border-[hsl(var(--semana-contrast))] bg-white text-[hsl(var(--semana-contrast))] shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))] disabled:pointer-events-none disabled:opacity-40 sm:size-12'
+  'relative z-10 flex size-11 shrink-0 items-center justify-center text-[hsl(var(--semana-contrast))] transition-transform hover:scale-110 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-40'
 
 export function SponsorsCarousel({ children }: { children: ReactNode }) {
   const slides = Children.toArray(children)
@@ -44,14 +44,14 @@ export function SponsorsCarousel({ children }: { children: ReactNode }) {
       role="region"
     >
       {slides.length > 1 && (
-        <div className="flex gap-2">
+        <div className="flex gap-2 lg:order-last">
           {slides.map((_, index) => (
             <button
               aria-current={current === index ? 'true' : undefined}
               aria-label={`Ir para o patrocinador ${index + 1} de ${slides.length}`}
               className={cn(
-                'size-4 border-2 border-[hsl(var(--semana-contrast))] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring',
-                current === index ? 'bg-white' : 'bg-[hsl(var(--semana-sponsor-soft))]',
+                'size-3 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring',
+                current === index ? 'bg-white' : 'bg-[hsl(var(--semana-contrast))]',
               )}
               key={index}
               onClick={() => goTo(index)}
@@ -61,7 +61,12 @@ export function SponsorsCarousel({ children }: { children: ReactNode }) {
         </div>
       )}
 
-      <div className="flex w-full flex-wrap items-center justify-center gap-4 sm:flex-nowrap">
+      <div className="relative mx-auto flex w-full max-w-md items-center gap-1 sm:gap-4">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-[62%] h-2 w-screen -translate-x-1/2 bg-[hsl(var(--semana-contrast))] lg:left-auto lg:right-0 lg:translate-x-0"
+        />
+
         {slides.length > 1 && (
           <button
             aria-label="Patrocinador anterior"
@@ -70,12 +75,12 @@ export function SponsorsCarousel({ children }: { children: ReactNode }) {
             onClick={() => goTo(current - 1)}
             type="button"
           >
-            <ChevronLeft aria-hidden="true" />
+            <ChevronLeft aria-hidden="true" className="size-9" strokeWidth={4} />
           </button>
         )}
 
         <div
-          className="order-first flex w-full min-w-0 snap-x sm:order-none sm:w-auto sm:flex-1 snap-mandatory overflow-x-auto py-4 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring [&::-webkit-scrollbar]:hidden"
+          className="relative flex min-w-0 flex-1 snap-x snap-mandatory overflow-x-auto py-4 [scrollbar-width:none] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring [&::-webkit-scrollbar]:hidden"
           onKeyDown={handleKeyDown}
           onScroll={handleScroll}
           ref={trackRef}
@@ -102,7 +107,7 @@ export function SponsorsCarousel({ children }: { children: ReactNode }) {
             onClick={() => goTo(current + 1)}
             type="button"
           >
-            <ChevronRight aria-hidden="true" />
+            <ChevronRight aria-hidden="true" className="size-9" strokeWidth={4} />
           </button>
         )}
       </div>

@@ -62,6 +62,73 @@
   animation: semana-sheet-overlay-out 140ms ease-in;
 }
 
+/* Pixel-art shapes used by the Semana sponsors page. */
+.semana-pixel-octagon {
+  clip-path: polygon(
+    30% 0,
+    70% 0,
+    70% 5%,
+    80% 5%,
+    80% 10%,
+    90% 10%,
+    90% 20%,
+    95% 20%,
+    95% 30%,
+    100% 30%,
+    100% 70%,
+    95% 70%,
+    95% 80%,
+    90% 80%,
+    90% 90%,
+    80% 90%,
+    80% 95%,
+    70% 95%,
+    70% 100%,
+    30% 100%,
+    30% 95%,
+    20% 95%,
+    20% 90%,
+    10% 90%,
+    10% 80%,
+    5% 80%,
+    5% 70%,
+    0 70%,
+    0 30%,
+    5% 30%,
+    5% 20%,
+    10% 20%,
+    10% 10%,
+    20% 10%,
+    20% 5%,
+    30% 5%
+  );
+}
+
+.semana-pixel-notch {
+  clip-path: polygon(
+    12px 0,
+    calc(100% - 12px) 0,
+    calc(100% - 12px) 6px,
+    calc(100% - 6px) 6px,
+    calc(100% - 6px) 12px,
+    100% 12px,
+    100% calc(100% - 12px),
+    calc(100% - 6px) calc(100% - 12px),
+    calc(100% - 6px) calc(100% - 6px),
+    calc(100% - 12px) calc(100% - 6px),
+    calc(100% - 12px) 100%,
+    12px 100%,
+    12px calc(100% - 6px),
+    6px calc(100% - 6px),
+    6px calc(100% - 12px),
+    0 calc(100% - 12px),
+    0 12px,
+    6px 12px,
+    6px 6px,
+    12px 6px
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .semana-sheet-content,
   .semana-sheet-overlay {
