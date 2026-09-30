@@ -1,83 +1,81 @@
-from datetime import UTC, datetime
-from enum import Enum
-from uuid import UUID, uuid4
+from __future__ import annotations
 
-import jwt
-from core.models import Base
-from presenca import Presenca
-from sqlalchemy import DateTime, ForeignKey, LargeBinary, String, UUIDType
-from sqlalchemy.orm import Mapped, SQLEnum, mapped_column, relationship
+import uuid
+from datetime import datetime
+from enum import StrEnum
+from typing import TYPE_CHECKING
 
-from app.core.config import settings
+from sqlalchemy import DateTime, ForeignKey, Index, Integer, String, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.core.mixins import TimestampsMixin, UUIDPKMixin
+from app.core.models import Base
+
+if TYPE_CHECKING:
+    from app.semana.models import Semana
+    from app.users.models import User
 
 
-class StatusAtividade(str, Enum):
+class StatusAtividade(StrEnum):
     PROVISORIA = "provisoria"
     CONFIRMADA = "confirmada"
 
 
-class TipoAtividade(str, Enum):
+class TipoAtividade(StrEnum):
     PALESTRA = "palestra"
+    WORKSHOP = "workshop"
     ENCERRAMENTO = "encerramento"
     CONVERSA = "conversa"
     COFFEE_BREAK = "coffee_break"
 
 
-class SemanaEvent(Base):
-    __tablename__ = "semana_event"
+class Atividade(Base, UUIDPKMixin, TimestampsMixin):
+    __tablename__ = "atividades"
 
-    id: Mapped[int] = mapped_column(primary_key=True)
-    nome: Mapped[str] = mapped_column(String(255))
-    ano: Mapped[int] = mapped_column()
-    atividades: Mapped[list["Atividade"]] = relationship(back_populates="semana")
-
-
-class Atividade(Base):
-    __tablename__ = "atividade"
-
-    id: Mapped[int] = mapped_column(primary_key=True)
-    semana_event_id: Mapped[int] = mapped_column(ForeignKey("semana_event.id"))
-
-    tipo: Mapped[TipoAtividade] = mapped_column(SQLEnum(TipoAtividade))
-    titulo: Mapped[str] = mapped_column(String(255), default="")
-    status: Mapped[StatusAtividade] = mapped_column(
-        SQLEnum(StatusAtividade), default=StatusAtividade.PROVISORIA
+    semana_id: Mapped[int] = mapped_column(
+        ForeignKey("semana_event.id", ondelete="CASCADE"), index=True
     )
-    comeca_as: Mapped[datetime] = mapped_column(DateTime, unique=True)
-    termina_as: Mapped[datetime] = mapped_column(DateTime, unique=True)
-    qr_code: Mapped[bytes | None] = mapped_column(LargeBinary, nullable=True)
-    uid: Mapped[UUID] = mapped_column(UUIDType, default=uuid4, unique=True)
-    token: Mapped[str | None] = mapped_column(String(512), default="", nullable=True)
+    tipo: Mapped[TipoAtividade] = mapped_column(nullable=False)
+    titulo: Mapped[str] = mapped_column(String(255), default="", nullable=False)
+    status: Mapped[StatusAtividade] = mapped_column(
+        default=StatusAtividade.PROVISORIA, nullable=False
+    )
+    comeca_as: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    termina_as: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False
+    )
+    codigo: Mapped[str] = mapped_column(String(4), nullable=False)
+    pontos: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    horas: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
 
-    semana_id: Mapped[int] = mapped_column(ForeignKey("semana_event.id"))
-    semana: Mapped["SemanaEvent"] = mapped_column(ForeignKey("semana_event"))
-
-    registro_presenca: Mapped[list["Presenca"]] = relationship(
+    semana: Mapped[Semana] = relationship(back_populates="atividades")
+    presencas: Mapped[list[Presenca]] = relationship(
         back_populates="atividade", cascade="all, delete-orphan"
     )
 
-    def _generate_signed_token(self) -> str:
-        payload = {
-            "uid": str(self.uid),
-            "type": "qr_presence",
-            "iat": int(datetime.now(UTC).timestamp()),
-        }
+    __table_args__ = (
+        UniqueConstraint("semana_id", "codigo", name="uq_atividade_semana_codigo"),
+        Index("ix_atividade_semana_schedule", "semana_id", "comeca_as"),
+    )
 
-        token = jwt.encode(
-            payload, settings.secret_key.get_secret_value(), algorithm="HS256"
-        )
 
-        self.token = token
-        return token
+class Presenca(Base, UUIDPKMixin, TimestampsMixin):
+    __tablename__ = "presencas"
 
-    def generate_qr_data(self) -> str:
-        return self._generate_signed_token()
+    atividade_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("atividades.id", ondelete="CASCADE"), index=True
+    )
+    user_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True
+    )
+    nome: Mapped[str] = mapped_column(String(255), nullable=False)
+    email: Mapped[str] = mapped_column(String(255), nullable=False)
+    horas: Mapped[int] = mapped_column(Integer, nullable=False)
 
-    def generate_qr_code(self):
-        pass
+    atividade: Mapped[Atividade] = relationship(back_populates="presencas")
+    user: Mapped[User | None] = relationship()
 
-    def save(self):
-        pass
-
-    def __str__(self):
-        return f"{self.titulo} - {self.comeca_as.strftime('%d/%m/%Y %H:%M')}"
+    __table_args__ = (
+        UniqueConstraint("atividade_id", "user_id", name="uq_presenca_atividade_user"),
+        UniqueConstraint("atividade_id", "email", name="uq_presenca_atividade_email"),
+    )

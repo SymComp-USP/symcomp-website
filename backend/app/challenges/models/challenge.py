@@ -13,7 +13,7 @@ from app.core.models import Base
 
 if TYPE_CHECKING:
     from app.challenges.models.question import Question
-    from app.semana.models import SemanaEvent
+    from app.semana.models import Semana
 
 
 class ChallengeScoringType(StrEnum):
@@ -52,4 +52,4 @@ class Challenge(Base, UUIDPKMixin, TimestampsMixin):
     )
 
     questions: Mapped[list[Question]] = relationship(back_populates="challenge")
-    semana: Mapped[SemanaEvent | None] = relationship(back_populates="challenges")
+    semana: Mapped[Semana | None] = relationship(back_populates="challenges")

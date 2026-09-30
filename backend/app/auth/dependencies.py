@@ -18,6 +18,38 @@ from app.users.services import get_deleted_user_by_id, get_user_by_id
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="api/v1/auth/login", scopes=SCOPE_DESCRIPTIONS
 )
+optional_oauth2_scheme = OAuth2PasswordBearer(
+    tokenUrl="api/v1/auth/login", scopes=SCOPE_DESCRIPTIONS, auto_error=False
+)
+
+
+async def get_optional_current_user(
+    db_session: Annotated[AsyncSession, Depends(get_session)],
+    token: Annotated[str | None, Depends(optional_oauth2_scheme)],
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> User | None:
+    if token is None:
+        return None
+    try:
+        payload = jwt.decode(
+            token,
+            settings.secret_key.get_secret_value(),
+            algorithms=[settings.token_algorithm],
+        )
+        user_id = payload.get("sub")
+        scopes = payload.get("scopes")
+        token_data = TokenData(
+            user_id=user_id,
+            scopes=scopes.split(" ") if isinstance(scopes, str) else [],
+        )
+        if token_data.user_id is None or not token_data.scopes:
+            raise UnauthorizedError(detail="Could not validate credentials")
+        user = await get_user_by_id(db_session, token_data.user_id)
+    except (InvalidTokenError, ValidationError):
+        raise UnauthorizedError(detail="Could not validate credentials")
+    if user is None or user.deleted_at is not None:
+        raise UnauthorizedError(detail="Inexistent or inactive user")
+    return user
 
 
 async def get_current_user_including_deleted(

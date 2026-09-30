@@ -11,8 +11,8 @@ from app.core.exceptions.app_errors import BadRequestError, NotFoundError
 from app.semana import schemas, services
 from app.users.models import User
 
-router = APIRouter(prefix="/semana", tags=["semana"])
-admin_router = APIRouter(prefix="/admin/semana", tags=["admin", "semana"])
+router = APIRouter(prefix="/semanas", tags=["semana"])
+admin_router = APIRouter(prefix="/admin/semanas", tags=["admin", "semana"])
 
 
 @admin_router.get("", response_model=list[schemas.AdminSemanaResponse])

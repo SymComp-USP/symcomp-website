@@ -90,11 +90,11 @@ export function deleteAdminChallenge(id: string) {
 }
 
 export function listAdminSemanas() {
-  return requestApi<AdminSemana[]>('/admin/semana')
+  return requestApi<AdminSemana[]>('/admin/semanas')
 }
 
 export function createAdminSemana(input: { nome: string; ano: number }) {
-  return requestApi<AdminSemana>('/admin/semana', {
+  return requestApi<AdminSemana>('/admin/semanas', {
     method: 'POST',
     body: JSON.stringify(input),
   })
@@ -104,12 +104,12 @@ export function updateAdminSemana(
   id: number,
   input: Partial<Pick<AdminSemana, 'nome' | 'ano'>>,
 ) {
-  return requestApi<AdminSemana>(`/admin/semana/${id}`, {
+  return requestApi<AdminSemana>(`/admin/semanas/${id}`, {
     method: 'PATCH',
     body: JSON.stringify(input),
   })
 }
 
 export function deleteAdminSemana(id: number) {
-  return requestApi<void>(`/admin/semana/${id}`, { method: 'DELETE' })
+  return requestApi<void>(`/admin/semanas/${id}`, { method: 'DELETE' })
 }

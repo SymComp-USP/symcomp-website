@@ -4,6 +4,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+from app.atividade.routes import admin_router as atividade_admin_router
+from app.atividade.routes import attendance_router as atividade_attendance_router
+from app.atividade.routes import router as atividade_router
 from app.auth.routes import router as auth_router
 from app.challenges.admin_routes import router as challenge_admin_router
 from app.challenges.routes import router as challenge_router
@@ -51,6 +54,9 @@ app.include_router(auth_router, prefix="/api/v1/auth")
 app.include_router(user_router, prefix="/api/v1/user")
 app.include_router(semana_router, prefix="/api/v1")
 app.include_router(semana_admin_router, prefix="/api/v1")
+app.include_router(atividade_router, prefix="/api/v1")
+app.include_router(atividade_admin_router, prefix="/api/v1")
+app.include_router(atividade_attendance_router, prefix="/api/v1")
 app.include_router(user_admin_router, prefix="/api/v1/admin/users")
 app.include_router(challenge_router, prefix="/api/v1/challenge")
 app.include_router(challenge_admin_router, prefix="/api/v1/admin/challenge")

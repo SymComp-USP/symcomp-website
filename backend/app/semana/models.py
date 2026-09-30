@@ -10,12 +10,13 @@ from app.core.mixins import TimestampsMixin, UUIDPKMixin
 from app.core.models import Base
 
 if TYPE_CHECKING:
+    from app.atividade.models import Atividade
     from app.challenges.models.challenge import Challenge
     from app.challenges.models.challenge_participant import ChallengeParticipant
     from app.users.models import User
 
 
-class SemanaEvent(Base):
+class Semana(Base):
     __tablename__ = "semana_event"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
@@ -23,6 +24,9 @@ class SemanaEvent(Base):
     ano: Mapped[int] = mapped_column()
 
     challenges: Mapped[list[Challenge]] = relationship(back_populates="semana")
+    atividades: Mapped[list[Atividade]] = relationship(
+        back_populates="semana", cascade="all, delete-orphan"
+    )
     participants: Mapped[list[SemanaParticipant]] = relationship(
         back_populates="semana", cascade="all, delete-orphan"
     )
@@ -38,7 +42,7 @@ class SemanaParticipant(Base, UUIDPKMixin, TimestampsMixin):
         ForeignKey("users.id", ondelete="CASCADE")
     )
     nickname: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    semana: Mapped[SemanaEvent] = relationship(back_populates="participants")
+    semana: Mapped[Semana] = relationship(back_populates="participants")
     user: Mapped[User] = relationship()
     challenge_attempts: Mapped[list[ChallengeParticipant]] = relationship(
         back_populates="semana_participant"
@@ -55,6 +59,9 @@ class SemanaParticipant(Base, UUIDPKMixin, TimestampsMixin):
             "semana_id", "nickname", name="uq_semana_participant_nickname"
         ),
     )
+
+
+SemanaEvent = Semana
 
 
 class PointEvent(Base, UUIDPKMixin, TimestampsMixin):

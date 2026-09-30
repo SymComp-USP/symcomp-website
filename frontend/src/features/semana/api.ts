@@ -1,6 +1,6 @@
 import { requestApi } from '@/features/auth/api'
 
-export type SemanaEvent = {
+export type Semana = {
   id: number
   nome: string
   ano: number
@@ -13,9 +13,9 @@ export type SemanaRankingEntry = {
 }
 
 export function listSemanas() {
-  return requestApi<SemanaEvent[]>('/semana')
+  return requestApi<Semana[]>('/semanas')
 }
 
 export function getSemanaRanking(semanaId: number) {
-  return requestApi<SemanaRankingEntry[]>(`/semana/${semanaId}/ranking`)
+  return requestApi<SemanaRankingEntry[]>(`/semanas/${semanaId}/ranking`)
 }

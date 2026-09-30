@@ -2,29 +2,29 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from app.semana.models import PointEvent, SemanaEvent, SemanaParticipant
+from app.semana.models import PointEvent, Semana, SemanaParticipant
 from app.semana.nicknames import generate_nickname
 from app.users.models import User
 
 
-async def get_semana(session: AsyncSession, semana_id: int) -> SemanaEvent | None:
-    return await session.get(SemanaEvent, semana_id)
+async def get_semana(session: AsyncSession, semana_id: int) -> Semana | None:
+    return await session.get(Semana, semana_id)
 
 
 async def list_semanas(
     session: AsyncSession, *, include_admin_relations: bool = False
-) -> list[SemanaEvent]:
-    statement = select(SemanaEvent).order_by(SemanaEvent.ano.desc())
+) -> list[Semana]:
+    statement = select(Semana).order_by(Semana.ano.desc())
     if include_admin_relations:
         statement = statement.options(
-            selectinload(SemanaEvent.challenges),
-            selectinload(SemanaEvent.participants),
+            selectinload(Semana.challenges),
+            selectinload(Semana.participants),
         )
     return list((await session.scalars(statement)).all())
 
 
-async def create_semana(session: AsyncSession, nome: str, ano: int) -> SemanaEvent:
-    semana = SemanaEvent(nome=nome, ano=ano)
+async def create_semana(session: AsyncSession, nome: str, ano: int) -> Semana:
+    semana = Semana(nome=nome, ano=ano)
     session.add(semana)
     await session.flush()
     return semana
@@ -32,11 +32,11 @@ async def create_semana(session: AsyncSession, nome: str, ano: int) -> SemanaEve
 
 async def update_semana(
     session: AsyncSession,
-    semana: SemanaEvent,
+    semana: Semana,
     *,
     nome: str | None = None,
     ano: int | None = None,
-) -> SemanaEvent:
+) -> Semana:
     if nome is not None:
         semana.nome = nome
     if ano is not None:
@@ -46,7 +46,7 @@ async def update_semana(
 
 
 async def get_or_create_participant(
-    session: AsyncSession, semana: SemanaEvent, user: User
+    session: AsyncSession, semana: Semana, user: User
 ) -> SemanaParticipant:
     participant = await session.scalar(
         select(SemanaParticipant).where(
