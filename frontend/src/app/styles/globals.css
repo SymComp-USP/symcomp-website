@@ -147,6 +147,8 @@
     --semana-tertiary: 17 97% 51%;
     --semana-contrast: 244 75% 16%;
     --semana-accent: 221 100% 92%;
+    --semana-sponsor: 336 52% 40%;
+    --semana-sponsor-soft: 336 32% 47%;
     --radius: 0.125rem;
   }
 
