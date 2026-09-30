@@ -990,10 +990,12 @@ function ManualPresenceForm({
       <p className="text-xs font-semibold text-amber-900">Presença manual</p>
       <Input
         placeholder="Nome"
-        required
         value={form.nome}
         onChange={(event) => setForm({ ...form, nome: event.target.value })}
       />
+      <p className="text-xs text-amber-800">
+        Para usuário cadastrado, e-mail basta. Visitante precisa de nome.
+      </p>
       <Input
         placeholder="E-mail"
         required

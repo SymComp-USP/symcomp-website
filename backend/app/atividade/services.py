@@ -92,7 +92,7 @@ async def list_presencas(session: AsyncSession, atividade_id: UUID) -> list[Pres
 
 
 async def register_manual_presence(
-    session: AsyncSession, atividade: Atividade, nome: str, email: str
+    session: AsyncSession, atividade: Atividade, nome: str | None, email: str
 ) -> Presenca:
     email = email.strip().lower()
     existing = await session.scalar(
@@ -104,6 +104,10 @@ async def register_manual_presence(
         return existing
 
     user = await get_user_by_email(session, email)
+    if user is not None:
+        nome = user.name
+    elif not nome:
+        raise BadRequestError("nome is required for visitors.")
     presence = Presenca(
         atividade_id=atividade.id,
         user_id=user.id if user else None,

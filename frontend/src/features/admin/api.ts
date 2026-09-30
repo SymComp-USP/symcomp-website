@@ -172,7 +172,7 @@ export function listAdminPresencas(semanaId: number, atividadeId: string) {
 export function createAdminPresenca(
   semanaId: number,
   atividadeId: string,
-  input: { nome: string; email: string },
+  input: { nome?: string; email: string },
 ) {
   return requestApi<AdminPresenca>(
     `/admin/semanas/${semanaId}/atividades/${atividadeId}/presencas`,

@@ -60,7 +60,7 @@ class PresencaResponse(BaseModel):
 
 
 class AdminPresencaCreate(BaseModel):
-    nome: str = Field(min_length=1, max_length=255)
+    nome: str | None = Field(default=None, min_length=1, max_length=255)
     email: EmailStr
 
 
