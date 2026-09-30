@@ -32,6 +32,10 @@ export type AdminAtividade = {
   semana_id: number
   tipo: 'palestra' | 'workshop' | 'encerramento' | 'conversa' | 'coffee_break'
   titulo: string
+  descricao: string | null
+  local: string | null
+  palestrantes: { nome: string; sobre?: string; foto?: string }[]
+  link_live: string | null
   status: 'provisoria' | 'confirmada'
   comeca_as: string
   termina_as: string
@@ -150,6 +154,17 @@ export function createAdminAtividade(
   })
 }
 
+export function updateAdminAtividade(
+  semanaId: number,
+  id: string,
+  input: Omit<AdminAtividade, 'id' | 'semana_id' | 'codigo'>,
+) {
+  return requestApi<AdminAtividade>(`/admin/semanas/${semanaId}/atividades/${id}`, {
+    method: 'PATCH',
+    body: JSON.stringify(input),
+  })
+}
+
 export function deleteAdminAtividade(semanaId: number, id: string) {
   return requestApi<void>(`/admin/semanas/${semanaId}/atividades/${id}`, {
     method: 'DELETE',
@@ -160,6 +175,20 @@ export function regenerateAdminAtividadeCode(semanaId: number, id: string) {
   return requestApi<AdminAtividade>(
     `/admin/semanas/${semanaId}/atividades/${id}/regenerar-codigo`,
     { method: 'POST' },
+  )
+}
+
+export function uploadAdminPalestrantePhoto(
+  semanaId: number,
+  atividadeId: string,
+  palestranteIndex: number,
+  file: File,
+) {
+  const formData = new FormData()
+  formData.append('file', file)
+  return requestApi<AdminAtividade>(
+    `/admin/semanas/${semanaId}/atividades/${atividadeId}/palestrantes/${palestranteIndex}/foto`,
+    { method: 'PUT', body: formData },
   )
 }
 

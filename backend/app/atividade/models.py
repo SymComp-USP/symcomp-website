@@ -5,7 +5,15 @@ from datetime import datetime
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, ForeignKey, Index, Integer, String, UniqueConstraint
+from sqlalchemy import (
+    JSON,
+    DateTime,
+    ForeignKey,
+    Index,
+    Integer,
+    String,
+    UniqueConstraint,
+)
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.mixins import TimestampsMixin, UUIDPKMixin
@@ -37,6 +45,12 @@ class Atividade(Base, UUIDPKMixin, TimestampsMixin):
     )
     tipo: Mapped[TipoAtividade] = mapped_column(nullable=False)
     titulo: Mapped[str] = mapped_column(String(255), default="", nullable=False)
+    descricao: Mapped[str | None] = mapped_column(String(5000), nullable=True)
+    local: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    palestrantes: Mapped[list[dict[str, str]]] = mapped_column(
+        JSON, default=list, nullable=False
+    )
+    link_live: Mapped[str | None] = mapped_column(String(500), nullable=True)
     status: Mapped[StatusAtividade] = mapped_column(
         default=StatusAtividade.PROVISORIA, nullable=False
     )

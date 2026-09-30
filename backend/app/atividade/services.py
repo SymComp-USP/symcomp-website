@@ -13,11 +13,14 @@ from app.users.models import User
 from app.users.services import get_user_by_email
 
 
-async def list_atividades(session: AsyncSession, semana_id: int) -> list[Atividade]:
+async def list_atividades(
+    session: AsyncSession, semana_id: int, confirmed_only: bool = False
+) -> list[Atividade]:
+    filters = [Atividade.semana_id == semana_id]
+    if confirmed_only:
+        filters.append(Atividade.status == StatusAtividade.CONFIRMADA)
     result = await session.scalars(
-        select(Atividade)
-        .where(Atividade.semana_id == semana_id)
-        .order_by(Atividade.comeca_as)
+        select(Atividade).where(*filters).order_by(Atividade.comeca_as)
     )
     return list(result.all())
 
@@ -155,7 +158,7 @@ async def delete_presence(session: AsyncSession, presence: Presenca) -> None:
 async def update_atividade(
     session: AsyncSession, atividade: Atividade, fields: dict
 ) -> Atividade:
-    values = {key: value for key, value in fields.items() if value is not None}
+    values = fields
     starts = values.get("comeca_as", atividade.comeca_as)
     ends = values.get("termina_as", atividade.termina_as)
     if ends <= starts:

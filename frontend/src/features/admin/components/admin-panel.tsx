@@ -35,10 +35,12 @@ import {
   listAdminSemanas,
   listAdminUsers,
   uploadAdminChallengeImage,
+  uploadAdminPalestrantePhoto,
   regenerateAdminAtividadeCode,
   deleteAdminPresenca,
   updateAdminSemana,
   updateAdminUser,
+  updateAdminAtividade,
   type AdminAtividade,
   type AdminChallenge,
   type AdminPresenca,
@@ -939,27 +941,98 @@ function ActivityCodeAction({
   )
 }
 
-function ActivityForm({ semanaId, onDone }: { semanaId: number; onDone: () => void }) {
-  const [form, setForm] = useState({
-    tipo: 'palestra' as AdminAtividade['tipo'],
-    titulo: '',
-    comeca_as: '',
-    termina_as: '',
-    status: 'provisoria' as AdminAtividade['status'],
-    pontos: 0,
-    horas: 1,
-  })
+type ActivityFormSpeaker = {
+  nome: string
+  sobre: string
+  foto: File | null
+  fotoUrl?: string
+}
+
+type ActivityFormState = {
+  tipo: AdminAtividade['tipo']
+  titulo: string
+  descricao: string
+  local: string
+  palestrantes: ActivityFormSpeaker[]
+  link_live: string
+  comeca_as: string
+  termina_as: string
+  status: AdminAtividade['status']
+  pontos: number
+  horas: number
+}
+
+function localDateTime(value: string) {
+  const date = new Date(value)
+  const pad = (part: number) => String(part).padStart(2, '0')
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`
+}
+
+function activityFormState(atividade?: AdminAtividade): ActivityFormState {
+  return {
+    tipo: atividade?.tipo ?? 'palestra',
+    titulo: atividade?.titulo ?? '',
+    descricao: atividade?.descricao ?? '',
+    local: atividade?.local ?? '',
+    palestrantes: atividade?.palestrantes.length
+      ? atividade.palestrantes.map((speaker) => ({
+          nome: speaker.nome,
+          sobre: speaker.sobre ?? '',
+          foto: null,
+          fotoUrl: speaker.foto,
+        }))
+      : [{ nome: '', sobre: '', foto: null }],
+    link_live: atividade?.link_live ?? '',
+    comeca_as: atividade ? localDateTime(atividade.comeca_as) : '',
+    termina_as: atividade ? localDateTime(atividade.termina_as) : '',
+    status: atividade?.status ?? 'provisoria',
+    pontos: atividade?.pontos ?? 0,
+    horas: atividade?.horas ?? 1,
+  }
+}
+
+function ActivityForm({
+  semanaId,
+  atividade,
+  onDone,
+}: {
+  semanaId: number
+  atividade?: AdminAtividade
+  onDone: () => void
+}) {
+  const [form, setForm] = useState(() => activityFormState(atividade))
   const [error, setError] = useState('')
 
   async function submit(event: React.FormEvent) {
     event.preventDefault()
     setError('')
     try {
-      await createAdminAtividade(semanaId, {
-        ...form,
+      const speakers = form.palestrantes.filter((speaker) => speaker.nome.trim())
+      const input = {
+        tipo: form.tipo,
+        titulo: form.titulo,
+        descricao: form.descricao || null,
+        local: form.local || null,
+        palestrantes: speakers.map(({ nome, sobre, fotoUrl }) => ({
+          nome,
+          sobre,
+          ...(fotoUrl ? { foto: fotoUrl } : {}),
+        })),
+        link_live: form.link_live || null,
+        status: form.status,
+        pontos: form.pontos,
+        horas: form.horas,
         comeca_as: new Date(form.comeca_as).toISOString(),
         termina_as: new Date(form.termina_as).toISOString(),
-      })
+      }
+      const saved = atividade
+        ? await updateAdminAtividade(semanaId, atividade.id, input)
+        : await createAdminAtividade(semanaId, input)
+      for (const [index, speaker] of speakers.entries()) {
+        if (speaker.foto) {
+          await uploadAdminPalestrantePhoto(semanaId, saved.id, index, speaker.foto)
+        }
+      }
       onDone()
     } catch (reason) {
       setError(
@@ -980,6 +1053,94 @@ function ActivityForm({ semanaId, onDone }: { semanaId: number; onDone: () => vo
         value={form.titulo}
         onChange={(event) => setForm({ ...form, titulo: event.target.value })}
       />
+      <textarea
+        className="min-h-24 rounded-md border border-input bg-background px-3 py-2 text-sm sm:col-span-2"
+        placeholder="Descrição"
+        value={form.descricao}
+        onChange={(event) => setForm({ ...form, descricao: event.target.value })}
+      />
+      <Input
+        placeholder="Local"
+        value={form.local}
+        onChange={(event) => setForm({ ...form, local: event.target.value })}
+      />
+      <Input
+        placeholder="Link da transmissão"
+        type="url"
+        value={form.link_live}
+        onChange={(event) => setForm({ ...form, link_live: event.target.value })}
+      />
+      <div className="space-y-3 sm:col-span-2">
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-semibold">Palestrantes</p>
+          <Button
+            onClick={() =>
+              setForm({
+                ...form,
+                palestrantes: [...form.palestrantes, { nome: '', sobre: '', foto: null }],
+              })
+            }
+            size="sm"
+            type="button"
+            variant="outline"
+          >
+            <Plus size={14} /> Adicionar
+          </Button>
+        </div>
+        {form.palestrantes.map((speaker, index) => (
+          <div
+            className="grid gap-2 rounded-md border border-indigo-100 bg-white p-3 sm:grid-cols-2"
+            key={index}
+          >
+            <Input
+              placeholder="Nome"
+              value={speaker.nome}
+              onChange={(event) => {
+                const palestrantes = [...form.palestrantes]
+                palestrantes[index] = { ...speaker, nome: event.target.value }
+                setForm({ ...form, palestrantes })
+              }}
+            />
+            <Input
+              accept="image/jpeg,image/png,image/webp"
+              type="file"
+              onChange={(event) => {
+                const palestrantes = [...form.palestrantes]
+                palestrantes[index] = {
+                  ...speaker,
+                  foto: event.target.files?.[0] ?? null,
+                }
+                setForm({ ...form, palestrantes })
+              }}
+            />
+            <textarea
+              className="min-h-20 rounded-md border border-input bg-background px-3 py-2 text-sm sm:col-span-2"
+              placeholder="Sobre o palestrante"
+              value={speaker.sobre}
+              onChange={(event) => {
+                const palestrantes = [...form.palestrantes]
+                palestrantes[index] = { ...speaker, sobre: event.target.value }
+                setForm({ ...form, palestrantes })
+              }}
+            />
+            {form.palestrantes.length > 1 && (
+              <Button
+                className="sm:col-span-2"
+                onClick={() =>
+                  setForm({
+                    ...form,
+                    palestrantes: form.palestrantes.filter((_, item) => item !== index),
+                  })
+                }
+                type="button"
+                variant="ghost"
+              >
+                Remover palestrante
+              </Button>
+            )}
+          </div>
+        ))}
+      </div>
       <select
         className="h-10 rounded-md border border-input bg-background px-3 text-sm"
         value={form.tipo}
@@ -1045,7 +1206,7 @@ function ActivityForm({ semanaId, onDone }: { semanaId: number; onDone: () => vo
       </label>
       {error && <p className="text-sm text-red-700 sm:col-span-2">{error}</p>}
       <Button className="sm:col-span-2" type="submit">
-        <Check size={16} /> Criar atividade
+        <Check size={16} /> {atividade ? 'Salvar alterações' : 'Criar atividade'}
       </Button>
     </form>
   )
@@ -1064,6 +1225,8 @@ function ActivityCard({
   onError: (message: string) => void
   onDelete: () => void
 }) {
+  const [editing, setEditing] = useState(false)
+
   async function regenerate() {
     if (!window.confirm('O código anterior deixará de funcionar. Continuar?')) return
     try {
@@ -1089,15 +1252,35 @@ function ActivityCard({
             {atividade.pontos} pontos
           </p>
         </div>
-        <button
-          aria-label={`Remover ${atividade.titulo || 'atividade'}`}
-          className="text-slate-400 hover:text-red-600"
-          onClick={onDelete}
-          type="button"
-        >
-          <Trash2 size={16} />
-        </button>
+        <div className="flex items-center gap-3">
+          <Button
+            onClick={() => setEditing((value) => !value)}
+            size="sm"
+            type="button"
+            variant="outline"
+          >
+            {editing ? 'Cancelar' : 'Editar'}
+          </Button>
+          <button
+            aria-label={`Remover ${atividade.titulo || 'atividade'}`}
+            className="text-slate-400 hover:text-red-600"
+            onClick={onDelete}
+            type="button"
+          >
+            <Trash2 size={16} />
+          </button>
+        </div>
       </div>
+      {editing && (
+        <ActivityForm
+          atividade={atividade}
+          onDone={() => {
+            setEditing(false)
+            onChanged()
+          }}
+          semanaId={semanaId}
+        />
+      )}
       <div className="mt-3 flex items-center justify-between gap-3 rounded-md bg-white p-3">
         <div>
           <p className="text-xs uppercase tracking-wider text-slate-500">

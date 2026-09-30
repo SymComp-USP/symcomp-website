@@ -6,9 +6,18 @@ import {
   MessageCircle,
   Presentation,
   Users,
+  Youtube,
 } from 'lucide-react'
 
 import { SemanaButton } from '@/features/semana/components/semana-button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 
 import { googleCalendarUrl } from '../calendar'
 import type { Activity, ActivityType } from '../types'
@@ -69,15 +78,72 @@ export function ActivityCard({ activity }: { activity: Activity }) {
               {activity.description}
             </p>
           )}
-          <SemanaButton
-            asChild
-            className="border-4 px-3 py-2 text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
-          >
-            <a href={googleCalendarUrl(activity)} rel="noreferrer" target="_blank">
-              <CalendarPlus aria-hidden="true" className="mr-2" size={16} /> Adicionar à
-              agenda
+          {activity.liveUrl && (
+            <a
+              className="inline-flex items-center gap-2 text-sm font-semibold underline"
+              href={activity.liveUrl}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Youtube aria-hidden="true" size={16} /> Assistir transmissão
             </a>
-          </SemanaButton>
+          )}
+          <div className="flex flex-wrap gap-3">
+            <SemanaButton
+              asChild
+              className="border-4 px-3 py-2 text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
+            >
+              <a href={googleCalendarUrl(activity)} rel="noreferrer" target="_blank">
+                <CalendarPlus aria-hidden="true" className="mr-2" size={16} /> Adicionar à
+                agenda
+              </a>
+            </SemanaButton>
+            {(activity.description ||
+              activity.speakers.some((speaker) => speaker.bio || speaker.photo)) && (
+              <Dialog>
+                <DialogTrigger asChild>
+                  <SemanaButton className="border-4 px-3 py-2 text-xs" variant="outline">
+                    Saber mais
+                  </SemanaButton>
+                </DialogTrigger>
+                <DialogContent className="semana-theme">
+                  <DialogHeader>
+                    <DialogTitle>{activity.title}</DialogTitle>
+                    <DialogDescription>
+                      {activity.speakers.map((speaker) => speaker.name).join(', ')}
+                    </DialogDescription>
+                  </DialogHeader>
+                  {activity.description && (
+                    <p className="text-sm leading-6">{activity.description}</p>
+                  )}
+                  <div className="space-y-3">
+                    {activity.speakers.map(
+                      (speaker) =>
+                        (speaker.bio || speaker.photo) && (
+                          <div className="flex gap-3" key={speaker.name}>
+                            {speaker.photo && (
+                              <img
+                                alt=""
+                                className="size-12 rounded-full object-cover"
+                                src={speaker.photo}
+                              />
+                            )}
+                            <div>
+                              <h3 className="font-semibold">{speaker.name}</h3>
+                              {speaker.bio && (
+                                <p className="text-sm text-muted-foreground">
+                                  {speaker.bio}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        ),
+                    )}
+                  </div>
+                </DialogContent>
+              </Dialog>
+            )}
+          </div>
         </div>
       </div>
     </article>

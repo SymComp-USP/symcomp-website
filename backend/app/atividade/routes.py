@@ -1,10 +1,11 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, Path, Security
+from fastapi import APIRouter, Depends, File, Path, Security, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.atividade import schemas, services
+from app.atividade.image import save_palestrante_photo
 from app.atividade.models import Presenca
 from app.auth.dependencies import get_current_admin_user, get_optional_current_user
 from app.auth.scopes import Scope
@@ -37,7 +38,7 @@ async def list_atividades(
     semana_id: int, session: Annotated[AsyncSession, Depends(get_session)]
 ):
     await _require_semana(session, semana_id)
-    return await services.list_atividades(session, semana_id)
+    return await services.list_atividades(session, semana_id, confirmed_only=True)
 
 
 @admin_router.get("", response_model=list[schemas.AtividadeResponse])
@@ -75,7 +76,36 @@ async def update_admin_atividade(
     atividade = await services.get_atividade(session, semana_id, atividade_id)
     if atividade is None:
         raise NotFoundError("Activity not found.")
-    return await services.update_atividade(session, atividade, data.model_dump())
+    return await services.update_atividade(
+        session, atividade, data.model_dump(exclude_unset=True)
+    )
+
+
+@admin_router.put(
+    "/{atividade_id}/palestrantes/{palestrante_index}/foto",
+    response_model=schemas.AtividadeResponse,
+)
+async def upload_palestrante_photo(
+    semana_id: int,
+    atividade_id: UUID,
+    palestrante_index: int,
+    file: Annotated[UploadFile, File()],
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: Annotated[User, Security(get_current_admin_user, scopes=[Scope.ADMIN])],
+):
+    atividade = await services.get_atividade(session, semana_id, atividade_id)
+    if atividade is None:
+        raise NotFoundError("Activity not found.")
+    if not 0 <= palestrante_index < len(atividade.palestrantes):
+        raise NotFoundError("Speaker not found.")
+
+    photo_url = await save_palestrante_photo(file)
+    speakers = [speaker.copy() for speaker in atividade.palestrantes]
+    speakers[palestrante_index]["foto"] = photo_url
+    atividade.palestrantes = speakers
+    await session.commit()
+    await session.refresh(atividade)
+    return atividade
 
 
 @admin_router.delete("/{atividade_id}", status_code=204)

@@ -9,6 +9,10 @@ from app.atividade.models import StatusAtividade, TipoAtividade
 class AtividadeCreate(BaseModel):
     tipo: TipoAtividade
     titulo: str = ""
+    descricao: str | None = None
+    local: str | None = None
+    palestrantes: list[dict[str, str]] = Field(default_factory=list)
+    link_live: str | None = None
     comeca_as: datetime
     termina_as: datetime
     status: StatusAtividade = StatusAtividade.PROVISORIA
@@ -25,6 +29,10 @@ class AtividadeCreate(BaseModel):
 class AtividadeUpdate(BaseModel):
     tipo: TipoAtividade | None = None
     titulo: str | None = None
+    descricao: str | None = None
+    local: str | None = None
+    palestrantes: list[dict[str, str]] | None = None
+    link_live: str | None = None
     comeca_as: datetime | None = None
     termina_as: datetime | None = None
     status: StatusAtividade | None = None
@@ -39,6 +47,10 @@ class AtividadeResponse(BaseModel):
     semana_id: int
     tipo: TipoAtividade
     titulo: str
+    descricao: str | None
+    local: str | None
+    palestrantes: list[dict[str, str]]
+    link_live: str | None
     status: StatusAtividade
     comeca_as: datetime
     termina_as: datetime
