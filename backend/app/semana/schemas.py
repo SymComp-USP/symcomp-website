@@ -27,6 +27,21 @@ class SemanaResponse(BaseModel):
     ano: int
 
 
+class AdminSemanaCreate(BaseModel):
+    nome: str
+    ano: int
+
+
+class AdminSemanaUpdate(BaseModel):
+    nome: str | None = None
+    ano: int | None = None
+
+
+class AdminSemanaResponse(SemanaResponse):
+    challenge_count: int = 0
+    participant_count: int = 0
+
+
 class PointEventResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True)
 

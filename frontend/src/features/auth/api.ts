@@ -3,6 +3,7 @@ import type { LoginInput, RegisterInput, User } from './types'
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 let accessToken: string | undefined
+let refreshPromise: Promise<void> | undefined
 
 type ApiUser = {
   id: string
@@ -32,7 +33,7 @@ export async function requestApi<T>(
   retry = true,
 ): Promise<T> {
   const headers = new Headers(init.headers)
-  if (init.body && !headers.has('Content-Type'))
+  if (init.body && !(init.body instanceof FormData) && !headers.has('Content-Type'))
     headers.set('Content-Type', 'application/json')
   if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`)
 
@@ -61,12 +62,16 @@ export async function requestApi<T>(
 }
 
 async function refresh() {
-  const token = await requestApi<TokenResponse>(
-    '/auth/refresh',
-    { method: 'POST' },
-    false,
-  )
-  accessToken = token.access_token
+  if (!refreshPromise) {
+    refreshPromise = requestApi<TokenResponse>('/auth/refresh', { method: 'POST' }, false)
+      .then((token) => {
+        accessToken = token.access_token
+      })
+      .finally(() => {
+        refreshPromise = undefined
+      })
+  }
+  return refreshPromise
 }
 
 export async function login(input: LoginInput): Promise<User> {

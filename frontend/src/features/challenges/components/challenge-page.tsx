@@ -1,5 +1,6 @@
 'use client'
 
+import { Download } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -75,6 +76,17 @@ export function ChallengePage() {
     }
   }
 
+  async function downloadImage() {
+    if (!challenge?.image_url) return
+    const response = await fetch(mediaUrl(challenge.image_url))
+    const blob = await response.blob()
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `${challenge.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.jpg`
+    link.click()
+    URL.revokeObjectURL(link.href)
+  }
+
   if (authLoading || !user || (!challenge && !error)) {
     return <main className="mx-auto max-w-4xl px-6 py-16">Carregando desafio…</main>
   }
@@ -96,14 +108,23 @@ export function ChallengePage() {
         </h1>
         <p className="text-xl text-white/80">{challenge.prompt}</p>
         {challenge.image_url && (
-          <Image
-            alt="Imagem do desafio"
-            className="max-h-96 w-full object-contain"
-            height={600}
-            src={mediaUrl(challenge.image_url)}
-            unoptimized
-            width={900}
-          />
+          <div className="space-y-3">
+            <Image
+              alt="Imagem do desafio"
+              className="max-h-96 w-full object-contain"
+              height={600}
+              src={mediaUrl(challenge.image_url)}
+              unoptimized
+              width={900}
+            />
+            <button
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary underline-offset-4 hover:underline"
+              onClick={downloadImage}
+              type="button"
+            >
+              <Download size={16} /> Baixar imagem
+            </button>
+          </div>
         )}
       </div>
 

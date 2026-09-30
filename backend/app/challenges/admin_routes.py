@@ -1,7 +1,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, File, Security, UploadFile
+from fastapi import APIRouter, Depends, File, Query, Security, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import app.challenges.services.image as cover_image_service
@@ -14,6 +14,7 @@ from app.challenges.services import challenge_participant as participant_service
 from app.challenges.services import question as question_service
 from app.core.database import get_session
 from app.core.exceptions.app_errors import BadRequestError, NotFoundError
+from app.core.pagination import Page, PaginationParams
 from app.semana import services as semana_service
 from app.users.models import User
 
@@ -25,8 +26,31 @@ AdminUser = Annotated[User, Security(get_current_admin_user, scopes=[Scope.ADMIN
 # ---------- Challenge ----------
 
 
+@router.get("", response_model=Page[challenge_schemas.AdminChallengeResponse])
+@router.get(
+    "/",
+    response_model=Page[challenge_schemas.AdminChallengeResponse],
+    include_in_schema=False,
+)
+async def list_challenges_admin(
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: AdminUser,
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+):
+    return await challenge_service.list_admin_challenges_paginated(
+        session, PaginationParams(limit=limit, offset=offset)
+    )
+
+
 @router.post(
-    "/", response_model=challenge_schemas.AdminChallengeResponse, status_code=201
+    "", response_model=challenge_schemas.AdminChallengeResponse, status_code=201
+)
+@router.post(
+    "/",
+    response_model=challenge_schemas.AdminChallengeResponse,
+    include_in_schema=False,
+    status_code=201,
 )
 async def create_challenge_endpoint(
     session: Annotated[AsyncSession, Depends(get_session)],
@@ -39,7 +63,10 @@ async def create_challenge_endpoint(
         raise BadRequestError("Manual challenges cannot have questions.")
     if data.scoring_type == ChallengeScoringType.INPUT and not data.input_answer:
         raise BadRequestError("Input challenges require an expected answer.")
-    if data.semana_id is not None and await semana_service.get_semana(session, data.semana_id) is None:
+    if (
+        data.semana_id is not None
+        and await semana_service.get_semana(session, data.semana_id) is None
+    ):
         raise NotFoundError("Semana not found.")
 
     challenge = await challenge_service.create_challenge(
@@ -79,7 +106,10 @@ async def update_challenge_endpoint(
         raise BadRequestError("Manual challenges cannot have questions.")
     if challenge.scoring_type == ChallengeScoringType.INPUT and data.input_answer == "":
         raise BadRequestError("Input challenges require an expected answer.")
-    if data.semana_id is not None and await semana_service.get_semana(session, data.semana_id) is None:
+    if (
+        data.semana_id is not None
+        and await semana_service.get_semana(session, data.semana_id) is None
+    ):
         raise NotFoundError("Semana not found.")
 
     await challenge_service.update_challenge(

@@ -1,6 +1,10 @@
 import uuid
 from datetime import UTC, datetime
 
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
+
 from app.challenges import exceptions as challenge_exceptions
 from app.challenges import schemas as challenge_schemas
 from app.challenges.models.answer import Answer
@@ -9,9 +13,6 @@ from app.challenges.models.challenge_participant import ChallengeParticipant
 from app.challenges.models.question import Question
 from app.core.exceptions.app_errors import NotFoundError
 from app.core.pagination import Page, PaginationParams
-from sqlalchemy import func, select
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
 
 def ensure_challenge_open(finishes_at: datetime) -> None:
@@ -119,6 +120,31 @@ async def list_challenges_paginated(
         items=[
             challenge_schemas.ChallengePublicResponse.model_validate(c) for c in rows
         ],
+        total=total or 0,
+        limit=pagination.limit,
+        offset=pagination.offset,
+    )
+
+
+async def list_admin_challenges_paginated(
+    session: AsyncSession,
+    pagination: PaginationParams,
+) -> Page[challenge_schemas.AdminChallengeResponse]:
+    total = await session.scalar(
+        select(func.count(Challenge.id)).where(Challenge.deleted_at.is_(None))
+    )
+    rows = (
+        await session.scalars(
+            select(Challenge)
+            .where(Challenge.deleted_at.is_(None))
+            .options(selectinload(Challenge.questions))
+            .order_by(Challenge.created_at.desc(), Challenge.id)
+            .limit(pagination.limit)
+            .offset(pagination.offset)
+        )
+    ).all()
+    return Page[challenge_schemas.AdminChallengeResponse](
+        items=[challenge_schemas.AdminChallengeResponse.model_validate(c) for c in rows],
         total=total or 0,
         limit=pagination.limit,
         offset=pagination.offset,

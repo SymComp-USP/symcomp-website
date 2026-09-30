@@ -141,6 +141,8 @@ async def refresh_access_token(
     scopes = _narrow_scopes(old.scopes.split(" "), requested_scopes)
 
     user = await user_services.get_user_by_id(session, old.user_id)
+    if requested_scopes is None and user.is_admin and Scope.ADMIN not in scopes:
+        scopes.append(Scope.ADMIN)
     not_allowed = set(scopes) - get_grantable_scopes(user)
     if not_allowed:
         raise ForbiddenError(detail=f"Scopes not allowed: {sorted(not_allowed)}")

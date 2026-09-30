@@ -12,10 +12,38 @@ async def get_semana(session: AsyncSession, semana_id: int) -> SemanaEvent | Non
     return await session.get(SemanaEvent, semana_id)
 
 
-async def list_semanas(session: AsyncSession) -> list[SemanaEvent]:
-    return list(
-        (await session.scalars(select(SemanaEvent).order_by(SemanaEvent.ano.desc()))).all()
-    )
+async def list_semanas(
+    session: AsyncSession, *, include_admin_relations: bool = False
+) -> list[SemanaEvent]:
+    statement = select(SemanaEvent).order_by(SemanaEvent.ano.desc())
+    if include_admin_relations:
+        statement = statement.options(
+            selectinload(SemanaEvent.challenges),
+            selectinload(SemanaEvent.participants),
+        )
+    return list((await session.scalars(statement)).all())
+
+
+async def create_semana(session: AsyncSession, nome: str, ano: int) -> SemanaEvent:
+    semana = SemanaEvent(nome=nome, ano=ano)
+    session.add(semana)
+    await session.flush()
+    return semana
+
+
+async def update_semana(
+    session: AsyncSession,
+    semana: SemanaEvent,
+    *,
+    nome: str | None = None,
+    ano: int | None = None,
+) -> SemanaEvent:
+    if nome is not None:
+        semana.nome = nome
+    if ano is not None:
+        semana.ano = ano
+    await session.flush()
+    return semana
 
 
 async def get_or_create_participant(
