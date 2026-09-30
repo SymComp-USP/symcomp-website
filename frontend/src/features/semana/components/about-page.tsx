@@ -2,6 +2,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { BsInstagram, BsLinkedin, BsYoutube } from 'react-icons/bs'
 
+import { SymcompLogo } from './symcomp-logo'
+
 const socialLinks = [
   {
     label: 'Instagram da SymComp',
@@ -52,13 +54,10 @@ export function AboutPage() {
           Conheça o grupo de extensão SymComp, responsável pela 16ª Semana da Computação.
         </p>
 
-        <Image
-          alt="16ª Semana da Computação"
-          className="mt-10 h-auto w-64 sm:w-80"
-          height={47}
-          priority
-          src="/semana/2026/logo-horizontal.svg"
-          width={196}
+        <SymcompLogo
+          aria-label="Identidade visual da SymComp"
+          className="mt-10 size-40 text-white sm:size-48"
+          role="img"
         />
 
         <h2 className="mt-10 font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase text-primary">
