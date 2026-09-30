@@ -254,6 +254,7 @@ async def get_challenge(
     ) = await challenge_service.get_challenge_with_context(
         session, challenge_id, current_user.id
     )
+    challenge_service.ensure_challenge_open(challenge.finishes_at)
 
     question_responses = [
         challenge_schemas.QuestionResponse(

@@ -26,7 +26,7 @@ function mapUser(user: ApiUser): User {
   }
 }
 
-async function request<T>(
+export async function requestApi<T>(
   path: string,
   init: RequestInit = {},
   retry = true,
@@ -45,7 +45,7 @@ async function request<T>(
   if (response.status === 401 && retry && path !== '/auth/refresh') {
     try {
       await refresh()
-      return request<T>(path, init, false)
+      return requestApi<T>(path, init, false)
     } catch {
       accessToken = undefined
     }
@@ -61,13 +61,17 @@ async function request<T>(
 }
 
 async function refresh() {
-  const token = await request<TokenResponse>('/auth/refresh', { method: 'POST' }, false)
+  const token = await requestApi<TokenResponse>(
+    '/auth/refresh',
+    { method: 'POST' },
+    false,
+  )
   accessToken = token.access_token
 }
 
 export async function login(input: LoginInput): Promise<User> {
   const body = new URLSearchParams({ username: input.email, password: input.password })
-  const token = await request<TokenResponse>('/auth/login', {
+  const token = await requestApi<TokenResponse>('/auth/login', {
     method: 'POST',
     body,
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -77,11 +81,11 @@ export async function login(input: LoginInput): Promise<User> {
 }
 
 export async function register(input: RegisterInput): Promise<void> {
-  await request('/user/', { method: 'POST', body: JSON.stringify(input) })
+  await requestApi('/user/', { method: 'POST', body: JSON.stringify(input) })
 }
 
 export async function getCurrentUser(): Promise<User> {
-  return mapUser(await request<ApiUser>('/auth/me'))
+  return mapUser(await requestApi<ApiUser>('/auth/me'))
 }
 
 export async function restoreSession(): Promise<User | null> {
@@ -96,7 +100,7 @@ export async function restoreSession(): Promise<User | null> {
 
 export async function logout() {
   try {
-    await request<void>('/auth/logout', { method: 'POST' }, false)
+    await requestApi<void>('/auth/logout', { method: 'POST' }, false)
   } finally {
     accessToken = undefined
   }
