@@ -1,15 +1,26 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+
+import { useAuth } from '@/features/auth/auth-provider'
 
 import { getSemanaRanking, listSemanas, type SemanaRankingEntry } from '../api'
 
 export function RankingPage() {
+  const router = useRouter()
+  const { loading: authLoading, user } = useAuth()
   const [eventName, setEventName] = useState<string>()
   const [ranking, setRanking] = useState<SemanaRankingEntry[]>([])
   const [error, setError] = useState<string>()
 
   useEffect(() => {
+    if (authLoading) return
+    if (!user) {
+      router.replace('/semana/login')
+      return
+    }
+
     async function loadRanking() {
       try {
         const events = await listSemanas()
@@ -27,7 +38,15 @@ export function RankingPage() {
     }
 
     loadRanking()
-  }, [])
+  }, [authLoading, router, user])
+
+  if (authLoading || !user) {
+    return (
+      <main className="mx-auto min-h-[calc(100svh-65px)] max-w-4xl px-6 py-16">
+        Carregando…
+      </main>
+    )
+  }
 
   return (
     <main className="mx-auto min-h-[calc(100svh-65px)] max-w-4xl px-6 py-16">

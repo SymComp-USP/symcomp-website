@@ -6,6 +6,69 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes semana-sheet-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes semana-sheet-out {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes semana-sheet-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes semana-sheet-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.semana-sheet-content[data-state='open'] {
+  animation: semana-sheet-in 220ms ease-out;
+}
+
+.semana-sheet-content[data-state='closed'] {
+  animation: semana-sheet-out 160ms ease-in;
+}
+
+.semana-sheet-overlay[data-state='open'] {
+  animation: semana-sheet-overlay-in 180ms ease-out;
+}
+
+.semana-sheet-overlay[data-state='closed'] {
+  animation: semana-sheet-overlay-out 140ms ease-in;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .semana-sheet-content,
+  .semana-sheet-overlay {
+    animation-duration: 1ms !important;
+  }
+}
+
 /* Variáveis e estilos base */
 @layer base {
   :root {

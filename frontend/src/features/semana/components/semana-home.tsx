@@ -9,7 +9,7 @@ export function SemanaHome() {
   return (
     <main className="min-h-[calc(100svh-65px)] bg-background text-foreground">
       <section className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
-        <p className="font-[family-name:var(--font-semana-display)] text-6xl font-bold uppercase tracking-[0.25em] text-primary">
+        <p className="max-w-full font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase leading-tight tracking-[0.1em] text-primary sm:text-6xl sm:tracking-[0.25em]">
           Semana da Computação 2026
         </p>
         <div className="mt-6 space-y-4">

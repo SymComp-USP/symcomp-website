@@ -1,11 +1,17 @@
 'use client'
 
-import { Menu } from 'lucide-react'
+import { Menu, UserRound } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import { AuthProvider, useAuth } from '@/features/auth/auth-provider'
 import {
   Sheet,
@@ -23,8 +29,6 @@ import { SemanaButton } from './semana-button'
 const links = [
   { href: '/semana/inicio', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
-  { href: '/semana/ranking', label: 'Ranking' },
-  { href: '/semana/perfil', label: 'Perfil' },
 ]
 
 export function SemanaShell({ children }: { children: ReactNode }) {
@@ -85,11 +89,35 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                 <Link href={link.href}>{link.label}</Link>
               </Button>
             ))}
+            {user && (
+              <Button
+                asChild
+                className="font-[family-name:var(--font-semana-display)] text-xs uppercase"
+                variant="ghost"
+              >
+                <Link href="/semana/ranking">Ranking</Link>
+              </Button>
+            )}
             {!loading &&
               (user ? (
-                <Button className="ml-2" onClick={logout} variant="outline">
-                  Sair
-                </Button>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      aria-label="Abrir menu do perfil"
+                      className="ml-2"
+                      size="icon"
+                      variant="outline"
+                    >
+                      <UserRound aria-hidden="true" size={18} />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="semana-theme">
+                    <DropdownMenuItem asChild>
+                      <Link href="/semana/perfil">Perfil</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={logout}>Sair</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               ) : (
                 <SemanaButton
                   asChild
@@ -129,6 +157,28 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                     </Button>
                   </SheetClose>
                 ))}
+                {user && (
+                  <>
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
+                        variant="ghost"
+                      >
+                        <Link href="/semana/ranking">Ranking</Link>
+                      </Button>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
+                        variant="ghost"
+                      >
+                        <Link href="/semana/perfil">Perfil</Link>
+                      </Button>
+                    </SheetClose>
+                  </>
+                )}
                 {!loading &&
                   (user ? (
                     <SheetClose asChild>
