@@ -1,26 +1,46 @@
 import Link from 'next/link'
 
-import { SemanaButton } from './semana-button'
-
 export function SemanaHome() {
+  const links = [
+    { href: '/semana/cronograma', label: 'Programação' },
+    { href: '/semana/cadastro', label: 'Se inscrever' },
+  ]
+
   return (
     <main className="min-h-[calc(100svh-65px)] bg-background text-foreground">
-      <section className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl flex-col justify-center gap-8 px-6 py-20">
-        <p className="font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase tracking-[0.2em] text-primary">
-          Próxima edição
+      <section className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
+        <p className="font-[family-name:var(--font-semana-display)] text-6xl font-bold uppercase tracking-[0.25em] text-primary">
+          Semana da Computação 2026
         </p>
-        <div className="max-w-3xl space-y-6">
-          <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-6xl">
-            Semana da Computação 2026
+        <div className="mt-6 space-y-4">
+          <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-7xl">
+            Outubro
           </h1>
-          <p className="max-w-2xl text-xl leading-8 text-white/80 sm:text-2xl">
-            Uma nova edição da Semana da Computação está em construção. Em breve,
-            divulgaremos as datas, a programação e as inscrições do evento.
+          <p className="font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase text-primary sm:text-5xl">
+            05 à 09
+          </p>
+          <p className="font-[family-name:var(--font-semana-display)] text-2xl font-bold uppercase sm:text-4xl">
+            12h - 18h
           </p>
         </div>
-        <SemanaButton asChild>
-          <Link href="/semana/login">Entrar</Link>
-        </SemanaButton>
+        <p className="mt-8 max-w-xl text-lg text-white/75 sm:text-xl">
+          Um encontro de estudantes, pesquisadores e profissionais para celebrar a
+          computação no IME-USP.
+        </p>
+        <nav
+          aria-label="Páginas da Semana da Computação"
+          className="mt-10 flex flex-wrap justify-center gap-3"
+        >
+          {links.map((link) => (
+            <Link
+              className="rounded-full border-4 border-[hsl(var(--semana-contrast))] bg-white px-5 py-3 font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase text-[hsl(var(--semana-contrast))] shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 hover:bg-[hsl(var(--semana-accent))] active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))]"
+              href={link.href}
+              key={link.href}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
       </section>
     </main>
   )
