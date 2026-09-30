@@ -17,7 +17,6 @@ async def test_deleted_answer_does_not_appear_in_get_challenge(
     user,
     challenge,
     questions,
-    username_catalog,
     db_session: AsyncSession,
 ):
     c = as_user(user)
@@ -55,7 +54,6 @@ async def test_deleted_answer_not_counted_on_submit(
     user,
     challenge,
     questions,
-    username_catalog,
     db_session: AsyncSession,
 ):
     c = as_user(user)

@@ -52,7 +52,10 @@ async def join_challenge(
     semana_participant_id = semana_participant.id
 
     new_participant = await participant_service.create_challenge_participant(
-        session, current_user.id, challenge_id, semana_participant_id=semana_participant_id
+        session,
+        current_user.id,
+        challenge_id,
+        semana_participant_id=semana_participant_id,
     )
     await session.refresh(new_participant)
 
@@ -60,7 +63,7 @@ async def join_challenge(
         session, new_participant.id
     )
     if result is None or result.semana_participant is None:
-        raise BadRequestError("Username assignment failed.")
+        raise BadRequestError("Nickname assignment failed.")
 
     return challenge_schemas.ParticipantResponse(
         id=result.id,
@@ -68,9 +71,7 @@ async def join_challenge(
         challenge_id=result.challenge_id,
         name=result.user.name,
         nickname=(
-            result.semana_participant.username.nickname
-            if result.semana_participant is not None
-            else ""
+            result.semana_participant.nickname if result.semana_participant else ""
         ),
         score=result.score,
         submitted_at=result.submitted_at,
@@ -301,11 +302,7 @@ async def get_ranking(
             user_id=p.user_id,
             score=p.score,
             name=p.user.name,
-            nickname=(
-                p.semana_participant.username.nickname
-                if p.semana_participant is not None
-                else ""
-            ),
+            nickname=(p.semana_participant.nickname if p.semana_participant else ""),
         )
         for p in participants
     ]

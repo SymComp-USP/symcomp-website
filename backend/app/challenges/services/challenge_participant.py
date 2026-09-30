@@ -1,10 +1,10 @@
 import uuid
 
-from app.challenges.models.challenge_participant import ChallengeParticipant
-from app.semana.models import SemanaParticipant
 from sqlalchemy import desc, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
+
+from app.challenges.models.challenge_participant import ChallengeParticipant
 
 
 async def get_challenge_ranking(
@@ -18,9 +18,7 @@ async def get_challenge_ranking(
         )
         .options(
             selectinload(ChallengeParticipant.user),
-            selectinload(ChallengeParticipant.semana_participant).selectinload(
-                SemanaParticipant.username
-            ),
+            selectinload(ChallengeParticipant.semana_participant),
         )
         .order_by(desc(ChallengeParticipant.score))
         .limit(10)
@@ -40,9 +38,7 @@ async def get_challenge_participant_by_id(
         )
         .options(
             selectinload(ChallengeParticipant.user),
-            selectinload(ChallengeParticipant.semana_participant).selectinload(
-                SemanaParticipant.username
-            ),
+            selectinload(ChallengeParticipant.semana_participant),
         )
     )
     return result.scalar_one_or_none()
@@ -64,9 +60,7 @@ async def get_challenge_participant(
         )
         .options(
             selectinload(ChallengeParticipant.user),
-            selectinload(ChallengeParticipant.semana_participant).selectinload(
-                SemanaParticipant.username
-            ),
+            selectinload(ChallengeParticipant.semana_participant),
         )
     )
 
@@ -140,11 +134,7 @@ async def add_challenge_participant_score(
             ChallengeParticipant.challenge_id == challenge_id,
             ChallengeParticipant.deleted_at.is_(None),
         )
-        .options(
-            selectinload(ChallengeParticipant.semana_participant).selectinload(
-                SemanaParticipant.username
-            )
-        )
+        .options(selectinload(ChallengeParticipant.semana_participant))
         .with_for_update()
     )
     if participant is None:

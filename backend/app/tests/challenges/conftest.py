@@ -6,13 +6,14 @@ import uuid
 from collections.abc import Callable
 
 import pytest
+from httpx import AsyncClient
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.auth.dependencies import get_current_admin_user, get_current_user
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.models.question import Question
 from app.semana.models import SemanaEvent
 from app.users.models import User
-from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession
 
 # ---------------------------------------------------------------------------
 # Factories
@@ -108,9 +109,7 @@ async def challenge(db_session: AsyncSession, semana: SemanaEvent) -> Challenge:
 
 
 @pytest.fixture
-async def manual_challenge(
-    db_session: AsyncSession, semana: SemanaEvent
-) -> Challenge:
+async def manual_challenge(db_session: AsyncSession, semana: SemanaEvent) -> Challenge:
     c = Challenge(
         title="Manual Teste",
         scoring_type=ChallengeScoringType.MANUAL,

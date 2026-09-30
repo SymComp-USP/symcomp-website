@@ -110,7 +110,7 @@ async def join_semana(
         id=participant.id,
         semana_id=participant.semana_id,
         user_id=participant.user_id,
-        nickname=participant.username.nickname,
+        nickname=participant.nickname,
     )
 
 

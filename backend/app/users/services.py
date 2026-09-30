@@ -116,8 +116,8 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
 async def admin_create_user(session: AsyncSession, user_in: AdminUserCreate) -> User:
     """Cria um usuário como admin, podendo definir `is_admin` e `is_verified`.
 
-    Reaproveita `create_user` (mesmas regras de e-mail duplicado, reativação de
-    conta deletada e atribuição de username) e aplica os privilégios em seguida.
+    Reaproveita `create_user` (mesmas regras de e-mail duplicado e reativação de
+    conta deletada) e aplica os privilégios em seguida.
 
     Não faz commit.
     """

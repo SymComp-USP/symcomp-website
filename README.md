@@ -14,7 +14,7 @@ Development uses its own Compose project and database volume; it requires no
 `.env` file. Existing volumes from the old default development stack are not
 migrated automatically.
 
-Seed the local Semana event, username catalog, and an input challenge:
+Seed the local Semana event and an input challenge:
 
 ```bash
 docker compose -f docker-compose.dev.yml exec backend python -m scripts.seed_dev

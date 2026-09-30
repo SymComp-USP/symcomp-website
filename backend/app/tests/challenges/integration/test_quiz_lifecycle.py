@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from datetime import UTC, datetime, timedelta
 
 from httpx import AsyncClient
@@ -13,7 +14,6 @@ async def test_full_quiz_lifecycle(
     user,
     challenge,
     questions,
-    username_catalog,
 ):
     c = as_user(user)
 
@@ -90,13 +90,12 @@ async def test_answering_without_joining_returns_400(
     assert r.status_code == 400
 
 
-async def test_username_is_reused_across_challenge_joins(
+async def test_nickname_is_reused_across_challenge_joins(
     client: AsyncClient,
     as_user,
     user,
     challenge,
     manual_challenge,
-    username_catalog,
 ):
     c = as_user(user)
 
@@ -105,9 +104,8 @@ async def test_username_is_reused_across_challenge_joins(
 
     assert first_join.status_code == 200, first_join.text
     assert second_join.status_code == 200, second_join.text
-    assert first_join.json()["nickname"] in {
-        username.nickname for username in username_catalog
-    }
+    assert len(first_join.json()["nickname"]) > 0
+    assert re.fullmatch(r"[A-Za-z]+\d{4}", first_join.json()["nickname"])
     assert second_join.json()["nickname"] == first_join.json()["nickname"]
 
 
@@ -125,7 +123,6 @@ async def test_submitting_question_from_other_challenge_returns_404(
     user,
     challenge,
     manual_challenge,
-    username_catalog,
     db_session,
 ):
     from app.challenges.models.question import Question
@@ -147,7 +144,7 @@ async def test_submitting_question_from_other_challenge_returns_404(
 
 
 async def test_bulk_save_answers(
-    client: AsyncClient, as_user, user, challenge, questions, username_catalog
+    client: AsyncClient, as_user, user, challenge, questions
 ):
     c = as_user(user)
     await c.post(f"api/v1/challenge/{challenge.id}/join")
@@ -169,7 +166,6 @@ async def test_expired_challenge_rejects_single_and_bulk_answers(
     user,
     challenge,
     questions,
-    username_catalog,
     db_session,
 ):
     c = as_user(user)
@@ -200,7 +196,6 @@ async def test_expired_challenge_rejects_new_submission(
     as_user,
     user,
     challenge,
-    username_catalog,
     db_session,
 ):
     c = as_user(user)
@@ -222,7 +217,6 @@ async def test_existing_submission_remains_idempotent_after_deadline(
     as_user,
     user,
     challenge,
-    username_catalog,
     db_session,
 ):
     c = as_user(user)

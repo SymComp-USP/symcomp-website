@@ -13,7 +13,6 @@ if TYPE_CHECKING:
     from app.challenges.models.challenge import Challenge
     from app.challenges.models.challenge_participant import ChallengeParticipant
     from app.users.models import User
-    from app.users.username.models import Username
 
 
 class SemanaEvent(Base):
@@ -38,13 +37,9 @@ class SemanaParticipant(Base, UUIDPKMixin, TimestampsMixin):
     user_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE")
     )
-    username_id: Mapped[uuid.UUID | None] = mapped_column(
-        ForeignKey("usernames.id"), nullable=True
-    )
-
+    nickname: Mapped[str | None] = mapped_column(String(255), nullable=True)
     semana: Mapped[SemanaEvent] = relationship(back_populates="participants")
     user: Mapped[User] = relationship()
-    username: Mapped[Username | None] = relationship(back_populates="participants")
     challenge_attempts: Mapped[list[ChallengeParticipant]] = relationship(
         back_populates="semana_participant"
     )
@@ -57,7 +52,7 @@ class SemanaParticipant(Base, UUIDPKMixin, TimestampsMixin):
             "semana_id", "user_id", name="uq_semana_participant_event_user"
         ),
         UniqueConstraint(
-            "semana_id", "username_id", name="uq_semana_participant_username"
+            "semana_id", "nickname", name="uq_semana_participant_nickname"
         ),
     )
 

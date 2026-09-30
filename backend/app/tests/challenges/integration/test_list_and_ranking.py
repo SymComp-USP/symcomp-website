@@ -4,11 +4,12 @@ from __future__ import annotations
 
 import uuid
 
+from httpx import AsyncClient
+from sqlalchemy.ext.asyncio import AsyncSession
+
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.models.challenge_participant import ChallengeParticipant
 from app.semana.models import SemanaParticipant
-from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession
 
 
 async def test_list_challenges_paginated(
@@ -48,11 +49,10 @@ async def test_ranking_orders_by_score_desc(
     challenge,
     db_session: AsyncSession,
     semana,
-    username_catalog,
 ):
     from app.users.models import User
 
-    ranking_username = username_catalog[0]
+    ranking_nickname = "AdaLovelace4821"
 
     # 15 participantes com scores variados
     for i in range(15):
@@ -69,7 +69,7 @@ async def test_ranking_orders_by_score_desc(
             semana_participant = SemanaParticipant(
                 user_id=u.id,
                 semana_id=semana.id,
-                username_id=ranking_username.id,
+                nickname=ranking_nickname,
             )
             db_session.add(semana_participant)
             await db_session.flush()
@@ -95,4 +95,4 @@ async def test_ranking_orders_by_score_desc(
     scores = [p["score"] for p in ranking]
     assert scores == sorted(scores, reverse=True)
     assert scores[0] == 140
-    assert ranking[0]["nickname"] == ranking_username.nickname
+    assert ranking[0]["nickname"] == ranking_nickname

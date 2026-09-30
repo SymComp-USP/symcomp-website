@@ -10,7 +10,6 @@ async def test_manual_challenge_cannot_be_submitted(
     as_user,
     user,
     manual_challenge,
-    username_catalog,
 ):
     c = as_user(user)
     r = await c.post(f"api/v1/challenge/{manual_challenge.id}/join")

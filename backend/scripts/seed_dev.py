@@ -4,17 +4,14 @@ import asyncio
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime, timedelta
-from pathlib import Path
+
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.core.config import get_settings
 from app.core.database import create_database
 from app.semana.models import SemanaEvent
-from app.users.username.seed import seed_from_csv_files
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-DATA_DIR = Path(__file__).parent / "data"
 
 
 @asynccontextmanager
@@ -35,12 +32,6 @@ async def session_scope() -> AsyncIterator[AsyncSession]:
 
 async def main() -> None:
     async with session_scope() as session:
-        await seed_from_csv_files(
-            session,
-            DATA_DIR / "mothers.csv",
-            DATA_DIR / "usernames.csv",
-        )
-
         event = await session.scalar(select(SemanaEvent).where(SemanaEvent.ano == 2026))
         if event is None:
             event = SemanaEvent(nome="Semana da Computação", ano=2026)

@@ -21,23 +21,3 @@ class UserAlreadyExistsError(AppError):
             detail=f"User with email {email!r} already exists.",
             headers=headers,
         )
-
-
-class NoAvailableUsername(AppError):
-    def __init__(self) -> None:
-        super().__init__(
-            status_code=409,
-            type="no_available_username",
-            title="No available username",
-            detail="No usernames available for the user.",
-        )
-
-
-class CouldNotAssignUsernameError(AppError):
-    def __init__(self) -> None:
-        super().__init__(
-            status_code=500,
-            type="could_not_assign_username",
-            title="Could not assign username",
-            detail="Could not assign a username. Try again later.",
-        )
