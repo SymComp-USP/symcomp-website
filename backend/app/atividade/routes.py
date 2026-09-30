@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, Path, Security
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.atividade import schemas, services
+from app.atividade.models import Presenca
 from app.auth.dependencies import get_current_admin_user, get_optional_current_user
 from app.auth.scopes import Scope
 from app.core.database import get_session
@@ -103,6 +104,57 @@ async def regenerate_admin_atividade_code(
     if atividade is None:
         raise NotFoundError("Activity not found.")
     return await services.regenerate_codigo(session, atividade)
+
+
+@admin_router.get(
+    "/{atividade_id}/presencas",
+    response_model=list[schemas.AdminPresencaResponse],
+)
+async def list_admin_presencas(
+    semana_id: int,
+    atividade_id: UUID,
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: Annotated[User, Security(get_current_admin_user, scopes=[Scope.ADMIN])],
+):
+    if await services.get_atividade(session, semana_id, atividade_id) is None:
+        raise NotFoundError("Activity not found.")
+    return await services.list_presencas(session, atividade_id)
+
+
+@admin_router.post(
+    "/{atividade_id}/presencas",
+    response_model=schemas.AdminPresencaResponse,
+    status_code=201,
+)
+async def create_admin_presenca(
+    semana_id: int,
+    atividade_id: UUID,
+    data: schemas.AdminPresencaCreate,
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: Annotated[User, Security(get_current_admin_user, scopes=[Scope.ADMIN])],
+):
+    atividade = await services.get_atividade(session, semana_id, atividade_id)
+    if atividade is None:
+        raise NotFoundError("Activity not found.")
+    return await services.register_manual_presence(
+        session, atividade, data.nome, str(data.email)
+    )
+
+
+@admin_router.delete("/{atividade_id}/presencas/{presenca_id}", status_code=204)
+async def delete_admin_presenca(
+    semana_id: int,
+    atividade_id: UUID,
+    presenca_id: UUID,
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: Annotated[User, Security(get_current_admin_user, scopes=[Scope.ADMIN])],
+):
+    if await services.get_atividade(session, semana_id, atividade_id) is None:
+        raise NotFoundError("Activity not found.")
+    presence = await session.get(Presenca, presenca_id)
+    if presence is None or presence.atividade_id != atividade_id:
+        raise NotFoundError("Attendance not found.")
+    await services.delete_presence(session, presence)
 
 
 @attendance_router.post(

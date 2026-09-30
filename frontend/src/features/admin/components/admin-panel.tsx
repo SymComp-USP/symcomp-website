@@ -22,6 +22,7 @@ import { useAuth } from '@/features/auth/auth-provider'
 import {
   createAdminAtividade,
   createAdminChallenge,
+  createAdminPresenca,
   createAdminSemana,
   createAdminUser,
   deleteAdminAtividade,
@@ -933,7 +934,81 @@ function ActivityCard({
           Regenerar código
         </Button>
       </div>
+      <ManualPresenceForm
+        atividadeId={atividade.id}
+        onDone={onChanged}
+        semanaId={semanaId}
+      />
     </article>
+  )
+}
+
+function ManualPresenceForm({
+  semanaId,
+  atividadeId,
+  onDone,
+}: {
+  semanaId: number
+  atividadeId: string
+  onDone: () => void
+}) {
+  const [open, setOpen] = useState(false)
+  const [form, setForm] = useState({ nome: '', email: '' })
+  const [error, setError] = useState('')
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault()
+    setError('')
+    try {
+      await createAdminPresenca(semanaId, atividadeId, form)
+      setForm({ nome: '', email: '' })
+      setOpen(false)
+      onDone()
+    } catch (reason) {
+      setError(reason instanceof Error ? reason.message : 'Não foi possível registrar.')
+    }
+  }
+
+  if (!open) {
+    return (
+      <Button
+        className="mt-3 w-full"
+        onClick={() => setOpen(true)}
+        type="button"
+        variant="ghost"
+      >
+        Registrar presença manual
+      </Button>
+    )
+  }
+
+  return (
+    <form
+      className="mt-3 space-y-2 rounded-md border border-amber-200 bg-amber-50 p-3"
+      onSubmit={submit}
+    >
+      <p className="text-xs font-semibold text-amber-900">Presença manual</p>
+      <Input
+        placeholder="Nome"
+        required
+        value={form.nome}
+        onChange={(event) => setForm({ ...form, nome: event.target.value })}
+      />
+      <Input
+        placeholder="E-mail"
+        required
+        type="email"
+        value={form.email}
+        onChange={(event) => setForm({ ...form, email: event.target.value })}
+      />
+      {error && <p className="text-xs text-red-700">{error}</p>}
+      <div className="flex gap-2">
+        <Button type="submit">Registrar</Button>
+        <Button onClick={() => setOpen(false)} type="button" variant="outline">
+          Cancelar
+        </Button>
+      </div>
+    </form>
   )
 }
 

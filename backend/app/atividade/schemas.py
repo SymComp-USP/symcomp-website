@@ -57,3 +57,19 @@ class PresencaResponse(BaseModel):
     registrada: bool = True
     pontos_adicionados: int
     horas: int
+
+
+class AdminPresencaCreate(BaseModel):
+    nome: str = Field(min_length=1, max_length=255)
+    email: EmailStr
+
+
+class AdminPresencaResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    atividade_id: UUID
+    user_id: UUID | None
+    nome: str
+    email: EmailStr
+    horas: int

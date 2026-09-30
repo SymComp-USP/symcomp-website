@@ -40,6 +40,15 @@ export type AdminAtividade = {
   horas: number
 }
 
+export type AdminPresenca = {
+  id: string
+  atividade_id: string
+  user_id: string | null
+  nome: string
+  email: string
+  horas: number
+}
+
 type Page<T> = { items: T[]; total: number; limit: number; offset: number }
 
 export function listAdminUsers() {
@@ -151,5 +160,33 @@ export function regenerateAdminAtividadeCode(semanaId: number, id: string) {
   return requestApi<AdminAtividade>(
     `/admin/semanas/${semanaId}/atividades/${id}/regenerar-codigo`,
     { method: 'POST' },
+  )
+}
+
+export function listAdminPresencas(semanaId: number, atividadeId: string) {
+  return requestApi<AdminPresenca[]>(
+    `/admin/semanas/${semanaId}/atividades/${atividadeId}/presencas`,
+  )
+}
+
+export function createAdminPresenca(
+  semanaId: number,
+  atividadeId: string,
+  input: { nome: string; email: string },
+) {
+  return requestApi<AdminPresenca>(
+    `/admin/semanas/${semanaId}/atividades/${atividadeId}/presencas`,
+    { method: 'POST', body: JSON.stringify(input) },
+  )
+}
+
+export function deleteAdminPresenca(
+  semanaId: number,
+  atividadeId: string,
+  presencaId: string,
+) {
+  return requestApi<void>(
+    `/admin/semanas/${semanaId}/atividades/${atividadeId}/presencas/${presencaId}`,
+    { method: 'DELETE' },
   )
 }

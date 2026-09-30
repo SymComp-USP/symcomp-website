@@ -7,9 +7,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.atividade.models import Atividade, Presenca, StatusAtividade
 from app.core.exceptions.app_errors import BadRequestError
-from app.semana.models import Semana
+from app.semana.models import PointEvent, Semana, SemanaParticipant
 from app.semana.services import add_points, get_or_create_participant
 from app.users.models import User
+from app.users.services import get_user_by_email
 
 
 async def list_atividades(session: AsyncSession, semana_id: int) -> list[Atividade]:
@@ -79,6 +80,72 @@ async def regenerate_codigo(session: AsyncSession, atividade: Atividade) -> Ativ
     atividade.codigo = await _unique_codigo(session, atividade.semana_id, atividade.id)
     await session.flush()
     return atividade
+
+
+async def list_presencas(session: AsyncSession, atividade_id: UUID) -> list[Presenca]:
+    result = await session.scalars(
+        select(Presenca)
+        .where(Presenca.atividade_id == atividade_id)
+        .order_by(Presenca.created_at.desc())
+    )
+    return list(result.all())
+
+
+async def register_manual_presence(
+    session: AsyncSession, atividade: Atividade, nome: str, email: str
+) -> Presenca:
+    email = email.strip().lower()
+    existing = await session.scalar(
+        select(Presenca).where(
+            Presenca.atividade_id == atividade.id, Presenca.email == email
+        )
+    )
+    if existing is not None:
+        return existing
+
+    user = await get_user_by_email(session, email)
+    presence = Presenca(
+        atividade_id=atividade.id,
+        user_id=user.id if user else None,
+        nome=nome.strip(),
+        email=email,
+        horas=atividade.horas,
+    )
+    session.add(presence)
+    await session.flush()
+
+    if user is not None and atividade.pontos:
+        participant = await get_or_create_participant(
+            session, await session.get(Semana, atividade.semana_id), user
+        )
+        await add_points(
+            session,
+            participant,
+            atividade.pontos,
+            source_type="atividade",
+            source_id=atividade.id,
+            reason=atividade.titulo or "Atividade",
+        )
+    return presence
+
+
+async def delete_presence(session: AsyncSession, presence: Presenca) -> None:
+    if presence.user_id is not None:
+        point_event = await session.scalar(
+            select(PointEvent).where(
+                PointEvent.semana_participant_id.in_(
+                    select(SemanaParticipant.id).where(
+                        SemanaParticipant.user_id == presence.user_id,
+                        SemanaParticipant.semana_id == presence.atividade.semana_id,
+                    )
+                ),
+                PointEvent.source_type == "atividade",
+                PointEvent.source_id == presence.atividade_id,
+            )
+        )
+        if point_event is not None:
+            await session.delete(point_event)
+    await session.delete(presence)
 
 
 async def update_atividade(
