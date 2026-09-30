@@ -53,8 +53,12 @@ class SemanaParticipant(Base, UUIDPKMixin, TimestampsMixin):
     )
 
     __table_args__ = (
-        UniqueConstraint("semana_id", "user_id"),
-        UniqueConstraint("semana_id", "username_id"),
+        UniqueConstraint(
+            "semana_id", "user_id", name="uq_semana_participant_event_user"
+        ),
+        UniqueConstraint(
+            "semana_id", "username_id", name="uq_semana_participant_username"
+        ),
     )
 
 
@@ -75,7 +79,9 @@ class PointEvent(Base, UUIDPKMixin, TimestampsMixin):
 
     __table_args__ = (
         UniqueConstraint(
-            "semana_participant_id", "source_type", "source_id",
+            "semana_participant_id",
+            "source_type",
+            "source_id",
             name="uq_point_event_source",
         ),
     )

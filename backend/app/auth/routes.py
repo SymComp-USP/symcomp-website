@@ -111,5 +111,8 @@ async def logout(
         await services.revoke_refresh_token(db_session, token_str)
 
     response.delete_cookie(
-        key="refresh_token", httponly=True, secure=True, samesite="lax"
+        key="refresh_token",
+        httponly=True,
+        secure=services.get_settings().app_env.value == "prod",
+        samesite="lax",
     )

@@ -13,7 +13,7 @@ export type SemanaRankingEntry = {
 }
 
 export function listSemanas() {
-  return requestApi<SemanaEvent[]>('/semana/')
+  return requestApi<SemanaEvent[]>('/semana')
 }
 
 export function getSemanaRanking(semanaId: number) {

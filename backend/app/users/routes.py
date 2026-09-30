@@ -10,7 +10,8 @@ from app.users.schemas import UserCreate
 router = APIRouter(tags=["user"])
 
 
-@router.post("/", status_code=status.HTTP_201_CREATED)
+@router.post("", status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED, include_in_schema=False)
 async def signup_with_password(
     db_session: Annotated[AsyncSession, Depends(get_session)], user_info: UserCreate
 ):

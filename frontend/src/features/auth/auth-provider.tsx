@@ -41,6 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
       async register(input) {
         await register(input)
+        setUser(await login(input))
       },
       async logout() {
         await logout()

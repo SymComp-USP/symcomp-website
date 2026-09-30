@@ -39,7 +39,7 @@ export function RegisterForm() {
     setError(undefined)
     try {
       await register(values)
-      router.push('/semana/login')
+      router.push('/semana/perfil')
     } catch {
       setError('Não foi possível criar sua conta. Tente novamente.')
     }

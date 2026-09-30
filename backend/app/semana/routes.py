@@ -15,7 +15,8 @@ router = APIRouter(prefix="/semana", tags=["semana"])
 admin_router = APIRouter(prefix="/admin/semana", tags=["admin", "semana"])
 
 
-@router.get("/", response_model=list[schemas.SemanaResponse])
+@router.get("", response_model=list[schemas.SemanaResponse])
+@router.get("/", response_model=list[schemas.SemanaResponse], include_in_schema=False)
 async def list_semanas(session: Annotated[AsyncSession, Depends(get_session)]):
     return await services.list_semanas(session)
 
@@ -53,9 +54,9 @@ async def get_semana_ranking(
     if await services.get_semana(session, semana_id) is None:
         raise NotFoundError("Semana not found.")
     return [
-            schemas.SemanaRankingEntry(
-                participant_id=row[0], nickname=row[1], points=row[2]
-            )
+        schemas.SemanaRankingEntry(
+            participant_id=row[0], nickname=row[1], points=row[2]
+        )
         for row in await services.list_ranking(session, semana_id)
     ]
 

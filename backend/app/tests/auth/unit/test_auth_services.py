@@ -2,15 +2,14 @@ from datetime import UTC, datetime
 
 import jwt
 import pytest
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
 from app.auth import services as auth_services
 from app.auth.models import RefreshToken
 from app.auth.scopes import DEFAULT_SCOPES, Scope
 from app.auth.security import hash_token
 from app.core.config import Settings
 from app.core.exceptions.app_errors import UnauthorizedError
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 def _decode_access(token: str, settings: Settings) -> dict:
@@ -374,6 +373,6 @@ def test_build_refresh_token_cookie_shape(jwt_settings: Settings):
     assert cookie["key"] == "refresh_token"
     assert cookie["value"] == "my-token"
     assert cookie["httponly"] is True
-    assert cookie["secure"] is True
+    assert cookie["secure"] is False
     assert cookie["samesite"] == "lax"
     assert cookie["max_age"] == jwt_settings.refresh_token_expire_days * 24 * 60 * 60

@@ -14,7 +14,7 @@ from app.auth.security import (
     hash_token,
     verify_password,
 )
-from app.core.config import get_settings
+from app.core.config import AppEnv, get_settings
 from app.core.exceptions.app_errors import ForbiddenError, UnauthorizedError
 from app.users.models import User
 
@@ -124,7 +124,7 @@ def build_refresh_token_cookie(refresh_token: str) -> dict:
         "key": "refresh_token",
         "value": refresh_token,
         "httponly": True,
-        "secure": True,
+        "secure": get_settings().app_env == AppEnv.production,
         "samesite": "lax",
         "max_age": REFRESH_EXPIRE_TIME_SECONDS,
     }

@@ -33,5 +33,5 @@ export function submitInput(id: string, answer: string) {
 
 export function mediaUrl(path: string) {
   if (path.startsWith('http')) return path
-  return `${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'}${path}`
+  return `${process.env.NEXT_PUBLIC_API_URL ?? ''}${path}`
 }

@@ -1,6 +1,6 @@
 import type { LoginInput, RegisterInput, User } from './types'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 let accessToken: string | undefined
 
@@ -81,7 +81,7 @@ export async function login(input: LoginInput): Promise<User> {
 }
 
 export async function register(input: RegisterInput): Promise<void> {
-  await requestApi('/user/', { method: 'POST', body: JSON.stringify(input) })
+  await requestApi('/user', { method: 'POST', body: JSON.stringify(input) })
 }
 
 export async function getCurrentUser(): Promise<User> {
