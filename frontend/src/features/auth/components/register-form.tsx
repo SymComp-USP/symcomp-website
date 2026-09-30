@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { register } from '@/features/auth/mock-auth'
+import { useAuth } from '@/features/auth/auth-provider'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
 
@@ -28,6 +28,7 @@ type Values = z.infer<typeof schema>
 
 export function RegisterForm() {
   const router = useRouter()
+  const { register } = useAuth()
   const [error, setError] = useState<string>()
   const form = useForm<Values>({
     resolver: zodResolver(schema),
@@ -38,7 +39,7 @@ export function RegisterForm() {
     setError(undefined)
     try {
       await register(values)
-      router.push('/semana/perfil')
+      router.push('/semana/login')
     } catch {
       setError('Não foi possível criar sua conta. Tente novamente.')
     }

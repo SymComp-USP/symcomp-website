@@ -1,7 +1,11 @@
+'use client'
+
 import { CalendarCheck, CheckCircle2, Mail, ShieldCheck } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { mockUser } from '@/features/auth/mock-auth'
+import { useAuth } from '@/features/auth/auth-provider'
 
 function initials(name: string) {
   return name
@@ -13,7 +17,20 @@ function initials(name: string) {
 }
 
 export function ProfilePage() {
-  const user = mockUser
+  const router = useRouter()
+  const { user, loading } = useAuth()
+
+  useEffect(() => {
+    if (!loading && !user) router.replace('/semana/login')
+  }, [loading, router, user])
+
+  if (loading || !user) {
+    return (
+      <main className="mx-auto min-h-[calc(100svh-65px)] max-w-4xl px-6 py-16">
+        Carregando…
+      </main>
+    )
+  }
 
   return (
     <main className="mx-auto min-h-[calc(100svh-65px)] max-w-4xl px-6 py-16">
@@ -41,7 +58,8 @@ export function ProfilePage() {
             </p>
           </div>
           <span className="inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium">
-            <CheckCircle2 aria-hidden="true" size={16} /> Conta verificada
+            <CheckCircle2 aria-hidden="true" size={16} />
+            {user.isVerified ? 'Conta verificada' : 'Verificação pendente'}
           </span>
         </div>
       </section>

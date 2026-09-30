@@ -14,7 +14,7 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
-import { login } from '@/features/auth/mock-auth'
+import { useAuth } from '@/features/auth/auth-provider'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
 
@@ -27,6 +27,7 @@ type Values = z.infer<typeof schema>
 
 export function LoginForm() {
   const router = useRouter()
+  const { login } = useAuth()
   const [error, setError] = useState<string>()
   const form = useForm<Values>({
     resolver: zodResolver(schema),
