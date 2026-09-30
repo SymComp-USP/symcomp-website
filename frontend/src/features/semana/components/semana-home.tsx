@@ -11,21 +11,16 @@ export function SemanaHome() {
         </p>
         <div className="max-w-3xl space-y-6">
           <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-6xl">
-            Semana da Computação
+            Semana da Computação 2026
           </h1>
           <p className="max-w-2xl text-xl leading-8 text-white/80 sm:text-2xl">
-            Uma nova experiência da SymComp está em construção. Datas, programação e
-            inscrições serão divulgadas em breve.
+            Uma nova edição da Semana da Computação está em construção. Em breve,
+            divulgaremos as datas, a programação e as inscrições do evento.
           </p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <SemanaButton asChild>
-            <Link href="/semana/cronograma">Ver programação</Link>
-          </SemanaButton>
-          <SemanaButton asChild className="bg-primary">
-            <Link href="/semana/cadastro">Criar conta</Link>
-          </SemanaButton>
-        </div>
+        <SemanaButton asChild>
+          <Link href="/semana/login">Entrar</Link>
+        </SemanaButton>
       </section>
     </main>
   )
