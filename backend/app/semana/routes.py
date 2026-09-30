@@ -89,6 +89,16 @@ async def list_semanas(session: Annotated[AsyncSession, Depends(get_session)]):
     return await services.list_semanas(session)
 
 
+@router.get("/participacao", response_model=schemas.ParticipationResponse)
+async def get_my_participation(
+    session: Annotated[AsyncSession, Depends(get_session)],
+    current_user: Annotated[
+        User, Security(get_current_user, scopes=[Scope.PROFILE, Scope.EMAIL])
+    ],
+):
+    return await services.get_user_participation(session, current_user.id)
+
+
 @router.post(
     "/{semana_id}/join",
     response_model=schemas.SemanaParticipantResponse,

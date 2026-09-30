@@ -56,3 +56,17 @@ class PointEventResponse(BaseModel):
 class PointAdjustment(BaseModel):
     amount: int
     reason: str
+
+
+class ParticipationWeek(BaseModel):
+    semana_id: int
+    nome: str
+    ano: int
+    pontos: int
+    horas: int
+
+
+class ParticipationResponse(BaseModel):
+    pontos: int
+    horas: int
+    semanas: list[ParticipationWeek]

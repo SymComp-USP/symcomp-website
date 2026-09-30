@@ -12,12 +12,28 @@ export type SemanaRankingEntry = {
   points: number
 }
 
+export type Participation = {
+  pontos: number
+  horas: number
+  semanas: {
+    semana_id: number
+    nome: string
+    ano: number
+    pontos: number
+    horas: number
+  }[]
+}
+
 export function listSemanas() {
   return requestApi<Semana[]>('/semanas')
 }
 
 export function getSemanaRanking(semanaId: number) {
   return requestApi<SemanaRankingEntry[]>(`/semanas/${semanaId}/ranking`)
+}
+
+export function getMyParticipation() {
+  return requestApi<Participation>('/semanas/participacao')
 }
 
 export function registerAttendance(
