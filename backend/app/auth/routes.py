@@ -8,6 +8,7 @@ from app.auth import services
 from app.auth.dependencies import get_current_user
 from app.auth.schemas import RequestedScopesBody, Token
 from app.auth.scopes import DEFAULT_SCOPES, KNOWN_SCOPES, Scope
+from app.core.config import AppEnv
 from app.core.database import get_session
 from app.core.exceptions.app_errors import ForbiddenError, UnauthorizedError
 from app.users import services as user_services
@@ -113,6 +114,6 @@ async def logout(
     response.delete_cookie(
         key="refresh_token",
         httponly=True,
-        secure=services.get_settings().app_env.value == "prod",
+        secure=services.get_settings().app_env == AppEnv.production,
         samesite="lax",
     )

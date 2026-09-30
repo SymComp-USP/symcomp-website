@@ -1,7 +1,8 @@
 import pytest
+from httpx2 import AsyncClient
+
 from app.auth import services as auth_services
 from app.auth.scopes import DEFAULT_SCOPES, Scope
-from httpx2 import AsyncClient
 
 # ===========================================================================
 # POST /api/v1/auth/login
@@ -115,9 +116,7 @@ async def test_me_returns_current_user(db_client: AsyncClient, user_factory):
 
 
 @pytest.mark.asyncio
-async def test_me_does_not_return_semana_username(
-    db_client: AsyncClient, user_factory
-):
+async def test_me_does_not_return_semana_username(db_client: AsyncClient, user_factory):
     user = await user_factory(email="me-username@example.com", name="Me Username")
 
     token = auth_services.create_access_token(user.id, [Scope.PROFILE, Scope.EMAIL])
@@ -325,6 +324,7 @@ async def test_refresh_old_token_rejected_after_rotation(
     assert first.status_code == 200
 
     # 2º refresh com o MESMO cookie antigo — deve falhar
+    db_client.cookies.clear()
     db_client.cookies.set("refresh_token", old_token)
     second = await db_client.post("/api/v1/auth/refresh")
     assert second.status_code == 401
@@ -497,8 +497,9 @@ async def test_refresh_does_not_store_plaintext_token(
     db_client: AsyncClient, db_session, refresh_token_factory, user_factory
 ):
     """O novo token NUNCA deve estar em claro no banco (só hash)."""
-    from app.auth.models import RefreshToken
     from sqlalchemy import select
+
+    from app.auth.models import RefreshToken
 
     user = await user_factory(email="rot-no-plaintext@example.com")
     token = await refresh_token_factory(user.id)
