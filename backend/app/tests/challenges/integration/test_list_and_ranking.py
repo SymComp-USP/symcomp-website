@@ -21,7 +21,7 @@ async def test_list_challenges_paginated(
 
     c = as_user(user)
 
-    r = await c.get("api/v1/challenge/", params={"limit": 2, "offset": 0})
+    r = await c.get("api/v1/challenge", params={"limit": 2, "offset": 0})
     assert r.status_code == 200
     body = r.json()
     assert body["total"] == 5

@@ -62,6 +62,7 @@ class ParticipationWeek(BaseModel):
     semana_id: int
     nome: str
     ano: int
+    nickname: str | None
     pontos: int
     horas: int
 

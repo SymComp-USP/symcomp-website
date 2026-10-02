@@ -57,7 +57,7 @@ async def test_process_submission_sums_only_correct_answers(
 
     assert score == 150
     assert participant.score == 150
-    assert participant.submitted_at is not None
+    assert participant.submitted_at is None
 
 
 async def test_process_submission_ignores_deleted_answers(

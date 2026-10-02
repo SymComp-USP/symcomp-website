@@ -25,6 +25,7 @@ const links = [
   { href: '/semana', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
   { href: '/semana/presenca', label: 'Presença' },
+  { href: '/semana/desafios', label: 'Desafios' },
   { href: '/semana/patrocinadores', label: 'Patrocinadores' },
   { href: '/semana/sobre-nos', label: 'Sobre nós' },
 ]

@@ -103,9 +103,16 @@ export function ProfilePage() {
                     key={semana.semana_id}
                   >
                     <div className="flex items-center justify-between gap-3 text-sm">
-                      <span className="font-semibold">
-                        {semana.nome} ({semana.ano})
-                      </span>
+                      <div>
+                        <p className="font-semibold">
+                          {semana.nome} ({semana.ano})
+                        </p>
+                        {semana.nickname && (
+                          <p className="text-xs text-muted-foreground">
+                            Apelido: {semana.nickname}
+                          </p>
+                        )}
+                      </div>
                       <span>
                         {semana.pontos} pts · {semana.horas}h
                       </span>

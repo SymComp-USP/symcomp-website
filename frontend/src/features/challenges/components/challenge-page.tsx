@@ -9,6 +9,8 @@ import { useAuth } from '@/features/auth/auth-provider'
 import {
   getChallenge,
   joinChallenge,
+  saveChallengeAnswers,
+  submitChallenge,
   submitInput,
   type ChallengeDetails,
   mediaUrl,
@@ -22,9 +24,13 @@ export function ChallengePage() {
   const { user, loading: authLoading } = useAuth()
   const [challenge, setChallenge] = useState<ChallengeDetails>()
   const [inputAnswer, setInputAnswer] = useState('')
+  const [answers, setAnswers] = useState<Record<string, string>>({})
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string>()
-  const [result, setResult] = useState<{ score: number }>()
+  const [result, setResult] = useState<{
+    submitted_at: string | null
+    score: number
+  }>()
 
   useEffect(() => {
     if (!authLoading && !user) router.replace('/semana/login')
@@ -36,6 +42,14 @@ export function ChallengePage() {
       .then((data) => {
         setChallenge(data)
         setInputAnswer('')
+        setAnswers(
+          Object.fromEntries(
+            data.questions.map((question) => [
+              question.id,
+              question.current_answer ?? '',
+            ]),
+          ),
+        )
       })
       .catch((err: Error) => {
         if (err.message.includes('challenge has ended')) {
@@ -50,8 +64,17 @@ export function ChallengePage() {
     setBusy(true)
     setError(undefined)
     try {
-      await joinChallenge(params.id)
-      setChallenge(await getChallenge(params.id))
+      const participant = await joinChallenge(params.id)
+      setChallenge((current) =>
+        current
+          ? {
+              ...current,
+              is_participant: true,
+              submitted_at: participant.submitted_at,
+              score: participant.score,
+            }
+          : current,
+      )
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Não foi possível aceitar o desafio.')
     } finally {
@@ -60,12 +83,35 @@ export function ChallengePage() {
   }
 
   async function submit() {
+    if (!challenge) return
     setBusy(true)
     setError(undefined)
+    setResult(undefined)
     try {
-      setResult(await submitInput(params.id, inputAnswer))
+      let submission
+      if (challenge.scoring_type === 'input') {
+        submission = await submitInput(params.id, inputAnswer)
+      } else if (challenge.scoring_type === 'quiz') {
+        await saveChallengeAnswers(
+          params.id,
+          challenge.questions.map((question) => ({
+            question_id: question.id,
+            answer: answers[question.id] ?? '',
+          })),
+        )
+        submission = await submitChallenge(params.id)
+      } else {
+        throw new Error('Este formato de desafio não está disponível.')
+      }
+      setResult(submission)
       setChallenge((current) =>
-        current ? { ...current, submitted_at: new Date().toISOString() } : current,
+        current
+          ? {
+              ...current,
+              submitted_at: submission.submitted_at,
+              score: submission.score,
+            }
+          : current,
       )
     } catch (err) {
       setError(
@@ -96,6 +142,13 @@ export function ChallengePage() {
   }
 
   if (!challenge) return null
+
+  const hasQuizAttempt =
+    challenge.scoring_type === 'quiz' &&
+    challenge.questions.some((question) => question.current_answer !== null)
+  const showRetryFeedback =
+    (result !== undefined && result.submitted_at === null) ||
+    (challenge.scoring_type === 'quiz' && !challenge.submitted_at && hasQuizAttempt)
 
   return (
     <main className="mx-auto min-h-[calc(100svh-65px)] max-w-3xl px-6 py-16">
@@ -140,35 +193,76 @@ export function ChallengePage() {
             {busy ? 'Entrando…' : 'Aceitar desafio'}
           </SemanaButton>
         </section>
-      ) : challenge.submitted_at || result ? (
+      ) : challenge.submitted_at || result?.submitted_at ? (
         <section className="mt-10 border-[6px] border-white bg-card p-6 text-card-foreground">
           <h2 className="font-[family-name:var(--font-semana-display)] text-2xl uppercase">
-            Respostas enviadas
+            {challenge.scoring_type === 'input'
+              ? 'Resposta correta'
+              : challenge.scoring_type === 'quiz'
+                ? 'Quiz concluído'
+                : 'Respostas enviadas'}
           </h2>
-          {result && <p className="mt-4 text-xl">Pontuação: {result.score}</p>}
+          <p className="mt-4 text-xl">
+            Pontuação: {result?.score ?? challenge.score ?? 0}
+          </p>
         </section>
       ) : (
         <section className="mt-10 space-y-6 border-[6px] border-white bg-card p-6 text-card-foreground">
-          {challenge.scoring_type !== 'input' ? (
-            <p className="text-muted-foreground">
-              Este formato de desafio ainda não está disponível.
+          {showRetryFeedback && (
+            <div className="text-destructive" role="status">
+              <p>
+                {challenge.scoring_type === 'quiz'
+                  ? 'Ainda há respostas incorretas. Tente novamente.'
+                  : 'Resposta incorreta. Tente novamente.'}
+              </p>
+              {challenge.scoring_type === 'quiz' && (
+                <p className="mt-1">
+                  Pontuação parcial: {result?.score ?? challenge.score ?? 0}
+                </p>
+              )}
+            </div>
+          )}
+          {challenge.scoring_type === 'manual' ? (
+            <p className="text-lg font-semibold">
+              Complete o desafio e reporte à equipe para ganhar os seus pontos!
             </p>
-          ) : (
+          ) : challenge.scoring_type === 'input' ? (
             <label className="block space-y-2">
               <span className="font-semibold">Sua resposta</span>
               <SemanaInput
-                onChange={(event) => setInputAnswer(event.target.value)}
+                onChange={(event) => {
+                  setInputAnswer(event.target.value)
+                  setResult(undefined)
+                }}
                 value={inputAnswer}
               />
             </label>
+          ) : challenge.scoring_type === 'quiz' ? (
+            <div className="space-y-5">
+              {challenge.questions.map((question, index) => (
+                <label className="block space-y-2" key={question.id}>
+                  <span className="font-semibold">
+                    {index + 1}. {question.prompt}
+                  </span>
+                  <SemanaInput
+                    onChange={(event) => {
+                      setAnswers((current) => ({
+                        ...current,
+                        [question.id]: event.target.value,
+                      }))
+                      setResult(undefined)
+                    }}
+                    value={answers[question.id] ?? ''}
+                  />
+                </label>
+              ))}
+            </div>
+          ) : null}
+          {challenge.scoring_type !== 'manual' && (
+            <SemanaButton disabled={busy} onClick={submit} type="button">
+              {busy ? 'Enviando…' : 'Enviar resposta'}
+            </SemanaButton>
           )}
-          <SemanaButton
-            disabled={busy || challenge.scoring_type !== 'input'}
-            onClick={submit}
-            type="button"
-          >
-            {busy ? 'Enviando…' : 'Enviar resposta'}
-          </SemanaButton>
         </section>
       )}
     </main>

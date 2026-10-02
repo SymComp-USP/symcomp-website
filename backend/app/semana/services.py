@@ -116,6 +116,7 @@ async def get_user_participation(session: AsyncSession, user_id):
             Semana.id,
             Semana.nome,
             Semana.ano,
+            SemanaParticipant.nickname,
             func.coalesce(func.sum(PointEvent.amount), 0).label("pontos"),
         )
         .join(SemanaParticipant, SemanaParticipant.semana_id == Semana.id)
@@ -125,7 +126,12 @@ async def get_user_participation(session: AsyncSession, user_id):
             SemanaParticipant.deleted_at.is_(None),
             PointEvent.deleted_at.is_(None) | (PointEvent.id.is_(None)),
         )
-        .group_by(Semana.id, Semana.nome, Semana.ano)
+        .group_by(
+            Semana.id,
+            Semana.nome,
+            Semana.ano,
+            SemanaParticipant.nickname,
+        )
     )
     hours_rows = await session.execute(
         select(
@@ -155,6 +161,7 @@ async def get_user_participation(session: AsyncSession, user_id):
                 "ano": point_row.ano
                 if point_row
                 else (await get_semana(session, semana_id)).ano,
+                "nickname": point_row.nickname if point_row else None,
                 "pontos": int(point_row.pontos) if point_row else 0,
                 "horas": int(hours.get(semana_id, 0)),
             }

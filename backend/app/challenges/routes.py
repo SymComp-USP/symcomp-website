@@ -95,6 +95,8 @@ async def save_answer(
 
     if participant is None:
         raise BadRequestError("You are not subscribed to this challenge.")
+    if participant.submitted_at is not None:
+        raise BadRequestError("Challenge submission is already complete.")
 
     await answer_service.upsert_answer(
         session, participant.id, data.question_id, data.answer
@@ -123,24 +125,24 @@ async def submit_input(
         raise NotFoundError("Challenge not found.")
     if challenge.scoring_type != ChallengeScoringType.INPUT:
         raise BadRequestError("Challenge does not accept input submissions.")
-    challenge_service.ensure_challenge_open(challenge.finishes_at)
     if participant.submitted_at is not None:
         return challenge_schemas.SubmissionResponse(
             submitted_at=participant.submitted_at, score=participant.score
         )
+    challenge_service.ensure_challenge_open(challenge.finishes_at)
 
     participant.submission = data.answer
-    participant.submitted_at = datetime.now(UTC)
     input_data = challenge.input
-    participant.score = (
-        challenge.points_value
-        if input_data is not None
+    is_correct = (
+        input_data is not None
         and input_data.input_answer is not None
         and data.answer.strip().lower() == input_data.input_answer.strip().lower()
-        else 0
     )
+    participant.score = challenge.points_value if is_correct else 0
+    if is_correct:
+        participant.submitted_at = datetime.now(UTC)
     await session.flush()
-    if participant.semana_participant is not None:
+    if is_correct and participant.semana_participant is not None:
         await semana_service.add_points(
             session,
             participant.semana_participant,
@@ -180,6 +182,8 @@ async def save_many_answers(
 
     if participant is None:
         raise BadRequestError("You are not subscribed to this challenge.")
+    if participant.submitted_at is not None:
+        raise BadRequestError("Challenge submission is already complete.")
 
     for answer_body in data:
         await answer_service.upsert_answer(
@@ -224,7 +228,10 @@ async def submit_challenge(
 
     challenge_service.ensure_challenge_open(challenge.finishes_at)
     score = await challenge_service.process_submission(session, participant, challenge)
-    if participant.semana_participant is not None:
+    if (
+        participant.submitted_at is not None
+        and participant.semana_participant is not None
+    ):
         await semana_service.add_points(
             session,
             participant.semana_participant,
@@ -280,6 +287,7 @@ async def get_challenge(
         questions=question_responses,
         is_participant=participant is not None,
         submitted_at=participant.submitted_at if participant else None,
+        score=participant.score if participant else None,
     )
 
 
@@ -310,6 +318,11 @@ async def get_ranking(
     ]
 
 
+@router.get(
+    "",
+    response_model=Page[challenge_schemas.ChallengePublicResponse],
+    include_in_schema=False,
+)
 @router.get("/", response_model=Page[challenge_schemas.ChallengePublicResponse])
 async def list_challenges(
     session: Annotated[AsyncSession, Depends(get_session)],

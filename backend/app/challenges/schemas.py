@@ -13,7 +13,7 @@ class AnswerBody(BaseModel):
 
 
 class SubmissionResponse(BaseModel):
-    submitted_at: datetime
+    submitted_at: datetime | None
     score: int
 
 
@@ -185,6 +185,7 @@ class ChallengeResponse(ChallengeImageMixin):
     questions: list[QuestionResponse] = Field(default_factory=list)
     is_participant: bool = False
     submitted_at: datetime | None = None
+    score: int | None = None
 
 
 class ChallengePublicResponse(ChallengeImageMixin):

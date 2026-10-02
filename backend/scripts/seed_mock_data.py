@@ -518,7 +518,7 @@ async def seed() -> None:
             await get_or_create_activity(
                 session,
                 weeks[2026],
-                code="M001",
+                code="1001",
                 kind=TipoAtividade.PALESTRA,
                 title="Mock: Abertura e computação",
                 start=now + timedelta(days=1),
@@ -529,7 +529,7 @@ async def seed() -> None:
             await get_or_create_activity(
                 session,
                 weeks[2026],
-                code="M002",
+                code="1002",
                 kind=TipoAtividade.WORKSHOP,
                 title="Mock: Laboratório de programação",
                 start=now + timedelta(days=1, hours=2),
@@ -541,7 +541,7 @@ async def seed() -> None:
             await get_or_create_activity(
                 session,
                 weeks[2025],
-                code="M003",
+                code="1003",
                 kind=TipoAtividade.COFFEE_BREAK,
                 title="Mock: Intervalo arquivado",
                 start=now - timedelta(days=300),
