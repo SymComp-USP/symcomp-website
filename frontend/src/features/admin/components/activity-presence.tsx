@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -10,6 +10,7 @@ import {
   createAdminPresenca,
   regenerateAdminAtividadeCode,
   type AdminAtividade,
+  type AdminPresenca,
 } from '../api'
 
 import { ActivityForm } from './activity-form'
@@ -26,6 +27,10 @@ export function ActivityCodeAction({
   onError: (message: string) => void
 }) {
   const [code, setCode] = useState(atividade.codigo)
+
+  useEffect(() => {
+    setCode(atividade.codigo)
+  }, [atividade.codigo])
 
   async function regenerate() {
     if (!window.confirm('O código anterior deixará de funcionar. Continuar?')) return
@@ -111,6 +116,7 @@ export function ActivityCard({
         />
       )}
       <ActivityCodeAction
+        key={atividade.id}
         atividade={atividade}
         onChanged={onChanged}
         onError={onError}
@@ -132,7 +138,7 @@ export function ManualPresenceForm({
 }: {
   semanaId: number
   atividadeId: string
-  onDone: () => void
+  onDone: (presenca: AdminPresenca) => void
 }) {
   const [open, setOpen] = useState(false)
   const [form, setForm] = useState({ nome: '', email: '' })
@@ -142,10 +148,10 @@ export function ManualPresenceForm({
     event.preventDefault()
     setError('')
     try {
-      await createAdminPresenca(semanaId, atividadeId, form)
+      const presenca = await createAdminPresenca(semanaId, atividadeId, form)
       setForm({ nome: '', email: '' })
       setOpen(false)
-      onDone()
+      onDone(presenca)
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Não foi possível registrar.')
     }

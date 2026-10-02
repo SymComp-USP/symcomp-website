@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -34,19 +34,42 @@ export function ActivitiesSection({
   const [error, setError] = useState('')
   const [refresh, setRefresh] = useState(0)
   const [editing, setEditing] = useState(false)
+  const listRequestId = useRef(0)
+  const selectedIdRef = useRef(selectedId)
   const selected = allActivities.find(({ atividade }) => atividade.id === selectedId)
   const selectedSemanaId = selected?.semana.id
 
   useEffect(() => {
+    selectedIdRef.current = selectedId
+  }, [selectedId])
+
+  useEffect(() => {
     if (!selectedId || selectedSemanaId === undefined) {
       setPresencas([])
+      setError('')
       return
     }
+
+    const requestId = ++listRequestId.current
     setLoading(true)
+    setError('')
+
     listAdminPresencas(selectedSemanaId, selectedId)
-      .then(setPresencas)
-      .catch((reason: Error) => setError(reason.message))
-      .finally(() => setLoading(false))
+      .then((result) => {
+        if (requestId === listRequestId.current) {
+          setPresencas(result)
+        }
+      })
+      .catch((reason: Error) => {
+        if (requestId === listRequestId.current) {
+          setError(reason.message)
+        }
+      })
+      .finally(() => {
+        if (requestId === listRequestId.current) {
+          setLoading(false)
+        }
+      })
   }, [refresh, selectedId, selectedSemanaId])
 
   async function removePresence(presenca: AdminPresenca) {
@@ -124,6 +147,7 @@ export function ActivitiesSection({
               />
             )}
             <ActivityCodeAction
+              key={selected.atividade.id}
               atividade={selected.atividade}
               onChanged={() => setRefresh((value) => value + 1)}
               onError={setError}
@@ -161,7 +185,22 @@ export function ActivitiesSection({
             </div>
             <ManualPresenceForm
               atividadeId={selected.atividade.id}
-              onDone={() => setRefresh((value) => value + 1)}
+              onDone={(presence) => {
+                if (presence.atividade_id !== selectedIdRef.current) return
+                listRequestId.current += 1
+                setLoading(false)
+                setPresencas((current) => {
+                  const existingIndex = current.findIndex(
+                    (item) => item.id === presence.id,
+                  )
+                  if (existingIndex >= 0) {
+                    return current.map((item) =>
+                      item.id === presence.id ? presence : item,
+                    )
+                  }
+                  return [presence, ...current]
+                })
+              }}
               semanaId={selected.semana.id}
             />
           </div>

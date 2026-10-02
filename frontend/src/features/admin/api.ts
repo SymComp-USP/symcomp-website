@@ -238,6 +238,7 @@ export function uploadAdminPalestrantePhoto(
 export function listAdminPresencas(semanaId: number, atividadeId: string) {
   return requestApi<AdminPresenca[]>(
     `/admin/semanas/${semanaId}/atividades/${atividadeId}/presencas`,
+    { cache: 'no-store' },
   )
 }
 

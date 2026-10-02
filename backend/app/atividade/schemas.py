@@ -1,7 +1,14 @@
 from datetime import datetime
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    EmailStr,
+    Field,
+    field_validator,
+    model_validator,
+)
 
 from app.atividade.models import StatusAtividade, TipoAtividade
 
@@ -72,8 +79,16 @@ class PresencaResponse(BaseModel):
 
 
 class AdminPresencaCreate(BaseModel):
-    nome: str | None = Field(default=None, min_length=1, max_length=255)
+    nome: str | None = Field(default=None, max_length=255)
     email: EmailStr
+
+    @field_validator("nome", mode="before")
+    @classmethod
+    def empty_name_is_none(cls, value: str | None) -> str | None:
+        if isinstance(value, str):
+            value = value.strip()
+            return value or None
+        return value
 
 
 class AdminPresencaResponse(BaseModel):
