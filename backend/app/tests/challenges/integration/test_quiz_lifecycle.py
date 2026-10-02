@@ -45,12 +45,15 @@ async def test_input_challenge_scores_using_challenge_points(
         )
     )
     assert participant is not None
-    assert await db_session.scalar(
-        select(func.count(PointEvent.id)).where(
-            PointEvent.source_type == "challenge",
-            PointEvent.source_id == participant.id,
+    assert (
+        await db_session.scalar(
+            select(func.count(PointEvent.id)).where(
+                PointEvent.source_type == "challenge",
+                PointEvent.source_id == participant.id,
+            )
         )
-    ) == 0
+        == 0
+    )
 
     correct_response = await c.post(
         f"api/v1/challenge/{challenge.id}/input", json={"answer": "correct"}
@@ -60,9 +63,10 @@ async def test_input_challenge_scores_using_challenge_points(
     assert correct_response.json()["submitted_at"] is not None
 
     challenge_state = await c.get(f"api/v1/challenge/{challenge.id}")
-    assert challenge_state.json()["submitted_at"] == correct_response.json()[
-        "submitted_at"
-    ]
+    assert (
+        challenge_state.json()["submitted_at"]
+        == correct_response.json()["submitted_at"]
+    )
     assert challenge_state.json()["score"] == 40
 
     repeated_response = await c.post(
@@ -70,12 +74,15 @@ async def test_input_challenge_scores_using_challenge_points(
     )
     assert repeated_response.status_code == 200, repeated_response.text
     assert repeated_response.json() == correct_response.json()
-    assert await db_session.scalar(
-        select(func.count(PointEvent.id)).where(
-            PointEvent.source_type == "challenge",
-            PointEvent.source_id == participant.id,
+    assert (
+        await db_session.scalar(
+            select(func.count(PointEvent.id)).where(
+                PointEvent.source_type == "challenge",
+                PointEvent.source_id == participant.id,
+            )
         )
-    ) == 1
+        == 1
+    )
 
     challenge.finishes_at = datetime.now(UTC) - timedelta(seconds=1)
     await db_session.flush()
@@ -173,12 +180,15 @@ async def test_full_quiz_lifecycle(
         )
     )
     assert participant is not None
-    assert await db_session.scalar(
-        select(func.count(PointEvent.id)).where(
-            PointEvent.source_type == "challenge",
-            PointEvent.source_id == participant.id,
+    assert (
+        await db_session.scalar(
+            select(func.count(PointEvent.id)).where(
+                PointEvent.source_type == "challenge",
+                PointEvent.source_id == participant.id,
+            )
         )
-    ) == 0
+        == 0
+    )
 
     retry = await c.post(
         f"api/v1/challenge/{challenge.id}/answer",
@@ -206,12 +216,15 @@ async def test_full_quiz_lifecycle(
     r2 = await c.post(f"api/v1/challenge/{challenge.id}/submit")
     assert r2.status_code == 200
     assert r2.json() == body
-    assert await db_session.scalar(
-        select(func.count(PointEvent.id)).where(
-            PointEvent.source_type == "challenge",
-            PointEvent.source_id == participant.id,
+    assert (
+        await db_session.scalar(
+            select(func.count(PointEvent.id)).where(
+                PointEvent.source_type == "challenge",
+                PointEvent.source_id == participant.id,
+            )
         )
-    ) == 1
+        == 1
+    )
 
     # 7. Ranking
     r = await c.get(f"api/v1/challenge/{challenge.id}/ranking")
