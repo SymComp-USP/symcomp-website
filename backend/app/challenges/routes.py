@@ -318,6 +318,11 @@ async def get_ranking(
     ]
 
 
+@router.get(
+    "",
+    response_model=Page[challenge_schemas.ChallengePublicResponse],
+    include_in_schema=False,
+)
 @router.get("/", response_model=Page[challenge_schemas.ChallengePublicResponse])
 async def list_challenges(
     session: Annotated[AsyncSession, Depends(get_session)],
