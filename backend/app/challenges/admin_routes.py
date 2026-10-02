@@ -176,6 +176,21 @@ async def delete_challenge_endpoint(
     await challenge_service.delete_challenge(session, challenge)
 
 
+@router.get(
+    "/participants",
+    response_model=Page[challenge_schemas.AdminChallengeParticipantResponse],
+)
+async def list_challenge_participants_admin(
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: AdminUser,
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+):
+    return await participant_service.list_admin_challenge_participants_paginated(
+        session, PaginationParams(limit=limit, offset=offset)
+    )
+
+
 @router.get("/{challenge_id}", response_model=challenge_schemas.AdminChallengeResponse)
 async def get_challenge_admin(
     session: Annotated[AsyncSession, Depends(get_session)],
@@ -215,11 +230,13 @@ async def adjust_participant_score(
             reason="Admin score adjustment",
         )
 
-    return challenge_schemas.ParticipantScoreResponse(
+    response = challenge_schemas.ParticipantScoreResponse(
         id=participant.id,
         challenge_id=participant.challenge_id,
         score=participant.score,
     )
+    await session.commit()
+    return response
 
 
 # ---------- Challenge Cover Image -----------

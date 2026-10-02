@@ -31,6 +31,7 @@ import {
 import { ActivitiesSection } from './activities-section'
 import { ChallengesSection } from './challenges-section'
 import { OverviewSection } from './overview-section'
+import { PointsSection } from './points-section'
 import { SemanasSection } from './semanas-section'
 import { UsersSection } from './users-section'
 
@@ -219,24 +220,9 @@ export function AdminPanel() {
               onActivityChanged={() => setRefresh((value) => value + 1)}
             />
           )}
-          {tab === 'points' && (
-            <Unavailable
-              title="Pontuação manual"
-              text="O backend já possui o endpoint de ajuste por participante, mas falta uma consulta administrativa de participantes por usuário para tornar este fluxo seguro no painel."
-            />
-          )}
+          {tab === 'points' && <PointsSection />}
         </div>
       </main>
     </div>
-  )
-}
-
-function Unavailable({ title, text }: { title: string; text: string }) {
-  return (
-    <section className="max-w-2xl rounded-xl border border-amber-200 bg-amber-50 p-6">
-      <CircleAlert className="text-amber-700" size={24} />
-      <h2 className="mt-4 text-xl font-bold">{title}</h2>
-      <p className="mt-2 text-sm leading-6 text-amber-900">{text}</p>
-    </section>
   )
 }

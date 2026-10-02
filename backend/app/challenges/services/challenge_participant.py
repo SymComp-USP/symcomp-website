@@ -1,10 +1,66 @@
 import uuid
 
-from sqlalchemy import desc, select
+from sqlalchemy import desc, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
+from app.challenges import schemas as challenge_schemas
+from app.challenges.models.challenge import Challenge
 from app.challenges.models.challenge_participant import ChallengeParticipant
+from app.core.pagination import Page, PaginationParams
+from app.users.models import User
+
+
+async def list_admin_challenge_participants_paginated(
+    session: AsyncSession,
+    pagination: PaginationParams,
+) -> Page[challenge_schemas.AdminChallengeParticipantResponse]:
+    conditions = (
+        ChallengeParticipant.deleted_at.is_(None),
+        Challenge.deleted_at.is_(None),
+        User.deleted_at.is_(None),
+    )
+    total = await session.scalar(
+        select(func.count(ChallengeParticipant.id))
+        .join(Challenge, Challenge.id == ChallengeParticipant.challenge_id)
+        .join(User, User.id == ChallengeParticipant.user_id)
+        .where(*conditions)
+    )
+    rows = (
+        await session.execute(
+            select(ChallengeParticipant, User.name, User.email, Challenge.title)
+            .join(Challenge, Challenge.id == ChallengeParticipant.challenge_id)
+            .join(User, User.id == ChallengeParticipant.user_id)
+            .where(*conditions)
+            .order_by(
+                Challenge.title.asc(),
+                ChallengeParticipant.score.desc(),
+                User.name.asc(),
+                ChallengeParticipant.id,
+            )
+            .limit(pagination.limit)
+            .offset(pagination.offset)
+        )
+    ).all()
+
+    return Page[challenge_schemas.AdminChallengeParticipantResponse](
+        items=[
+            challenge_schemas.AdminChallengeParticipantResponse(
+                id=participant.id,
+                user_id=participant.user_id,
+                user_name=user_name,
+                user_email=user_email,
+                challenge_id=participant.challenge_id,
+                challenge_title=challenge_title,
+                score=participant.score,
+                submitted_at=participant.submitted_at,
+            )
+            for participant, user_name, user_email, challenge_title in rows
+        ],
+        total=total or 0,
+        limit=pagination.limit,
+        offset=pagination.offset,
+    )
 
 
 async def get_challenge_ranking(

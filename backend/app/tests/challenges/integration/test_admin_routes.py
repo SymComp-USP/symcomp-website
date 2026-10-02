@@ -64,6 +64,48 @@ async def test_admin_can_create_challenge_with_questions(
     assert r.json()["points_value"] == 60
 
 
+async def test_admin_can_list_participants_ordered_by_challenge_and_score(
+    client: AsyncClient,
+    as_user,
+    admin,
+    user,
+    other_user,
+    challenge,
+    manual_challenge,
+    db_session: AsyncSession,
+):
+    challenge.title = "Alpha Challenge"
+    manual_challenge.title = "Beta Challenge"
+    db_session.add_all(
+        [
+            ChallengeParticipant(user_id=user.id, challenge_id=challenge.id, score=10),
+            ChallengeParticipant(
+                user_id=other_user.id, challenge_id=challenge.id, score=25
+            ),
+            ChallengeParticipant(
+                user_id=user.id, challenge_id=manual_challenge.id, score=100
+            ),
+        ]
+    )
+    await db_session.flush()
+
+    response = await as_user(admin).get("/api/v1/admin/challenge/participants")
+
+    assert response.status_code == 200, response.text
+    body = response.json()
+    assert [item["challenge_title"] for item in body["items"]] == [
+        "Alpha Challenge",
+        "Alpha Challenge",
+        "Beta Challenge",
+    ]
+    assert [item["score"] for item in body["items"]] == [25, 10, 100]
+    assert body["items"][0]["user_id"] == str(other_user.id)
+    assert body["items"][0]["user_name"] == other_user.name
+    assert body["items"][0]["user_email"] == other_user.email
+    assert body["items"][0]["challenge_id"] == str(challenge.id)
+    assert body["total"] == 3
+
+
 async def test_admin_can_create_input_challenge(
     client: AsyncClient, as_user, admin, db_session: AsyncSession
 ):
@@ -283,6 +325,13 @@ async def test_admin_can_add_and_subtract_participant_score(
         "challenge_id": str(challenge.id),
         "score": 55,
     }
+    added_participants = await c.get("/api/v1/admin/challenge/participants")
+    listed_after_add = next(
+        item
+        for item in added_participants.json()["items"]
+        if item["id"] == str(participant.id)
+    )
+    assert listed_after_add["score"] == 55
 
     subtract_response = await c.patch(
         f"/api/v1/admin/challenge/{challenge.id}/participants/{participant.id}/score",
@@ -290,6 +339,13 @@ async def test_admin_can_add_and_subtract_participant_score(
     )
     assert subtract_response.status_code == 200, subtract_response.text
     assert subtract_response.json()["score"] == -15
+    subtracted_participants = await c.get("/api/v1/admin/challenge/participants")
+    listed_after_subtract = next(
+        item
+        for item in subtracted_participants.json()["items"]
+        if item["id"] == str(participant.id)
+    )
+    assert listed_after_subtract["score"] == -15
 
 
 async def test_admin_score_adjustment_requires_matching_challenge(

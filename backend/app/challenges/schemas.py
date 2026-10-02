@@ -51,6 +51,17 @@ class ParticipantScoreResponse(BaseModel):
     score: int
 
 
+class AdminChallengeParticipantResponse(BaseModel):
+    id: UUID
+    user_id: UUID
+    user_name: str
+    user_email: str
+    challenge_id: UUID
+    challenge_title: str
+    score: int
+    submitted_at: datetime | None
+
+
 class QuestionCreate(BaseModel):
     prompt: str
     answer: str

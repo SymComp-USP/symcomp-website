@@ -68,6 +68,17 @@ export type AdminPresenca = {
   horas: number
 }
 
+export type AdminChallengeParticipant = {
+  id: string
+  user_id: string
+  user_name: string
+  user_email: string
+  challenge_id: string
+  challenge_title: string
+  score: number
+  submitted_at: string | null
+}
+
 type Page<T> = { items: T[]; total: number; limit: number; offset: number }
 
 export function listAdminUsers() {
@@ -100,6 +111,24 @@ export function deleteAdminUser(id: string) {
 
 export function listAdminChallenges() {
   return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100')
+}
+
+export function listAdminChallengeParticipants(limit = 50, offset = 0) {
+  return requestApi<Page<AdminChallengeParticipant>>(
+    `/admin/challenge/participants?limit=${limit}&offset=${offset}`,
+    { cache: 'no-store' },
+  )
+}
+
+export function adjustAdminChallengeParticipantScore(
+  challengeId: string,
+  participantId: string,
+  amount: number,
+) {
+  return requestApi<{ id: string; challenge_id: string; score: number }>(
+    `/admin/challenge/${challengeId}/participants/${participantId}/score`,
+    { method: 'PATCH', body: JSON.stringify({ amount }) },
+  )
 }
 
 export function createAdminChallenge(input: AdminChallengeInput) {
