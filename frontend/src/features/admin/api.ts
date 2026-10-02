@@ -13,10 +13,23 @@ export type AdminChallenge = {
   id: string
   title: string
   prompt: string
+  input_answer?: string | null
   scoring_type: 'input' | 'quiz' | 'manual'
   finishes_at: string
   semana_id: number | null
   points_value: number
+  questions?: { id?: string; prompt: string; answer: string }[]
+}
+
+type AdminChallengeInput = {
+  title: string
+  scoring_type: AdminChallenge['scoring_type']
+  finishes_at: string
+  points_value?: number
+  prompt?: string
+  input_answer?: string
+  questions?: { prompt: string; answer: string }[]
+  semana_id?: number
 }
 
 export type AdminSemana = {
@@ -87,17 +100,16 @@ export function listAdminChallenges() {
   return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100')
 }
 
-export function createAdminChallenge(input: {
-  title: string
-  prompt: string
-  scoring_type: AdminChallenge['scoring_type']
-  finishes_at: string
-  points_value: number
-  input_answer: string
-  semana_id?: number
-}) {
+export function createAdminChallenge(input: AdminChallengeInput) {
   return requestApi<AdminChallenge>('/admin/challenge', {
     method: 'POST',
+    body: JSON.stringify(input),
+  })
+}
+
+export function updateAdminChallenge(id: string, input: Partial<AdminChallengeInput>) {
+  return requestApi<AdminChallenge>(`/admin/challenge/${id}`, {
+    method: 'PATCH',
     body: JSON.stringify(input),
   })
 }
