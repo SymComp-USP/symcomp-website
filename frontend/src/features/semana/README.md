@@ -65,11 +65,13 @@ Set all of these semantic variables on `.semana-theme`:
 
 The current design also has Semana-specific variables:
 
-| Variable            | Used for                         |
-| ------------------- | -------------------------------- |
-| `--semana-contrast` | Heavy borders and offset shadows |
-| `--semana-accent`   | Branded hover surfaces           |
-| `--semana-tertiary` | Optional third decorative color  |
+| Variable                | Used for                                     |
+| ----------------------- | -------------------------------------------- |
+| `--semana-contrast`     | Heavy borders and offset shadows             |
+| `--semana-accent`       | Branded hover surfaces                       |
+| `--semana-tertiary`     | Optional third decorative color              |
+| `--semana-sponsor`      | Sponsors page background and dialog          |
+| `--semana-sponsor-soft` | Sponsor logo frames, card footers, tabs, CTA |
 
 Prefer the semantic variables first. Add a `--semana-*` variable only when a
 visual role has no semantic equivalent and is reused in more than one place.

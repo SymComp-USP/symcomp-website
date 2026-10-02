@@ -62,6 +62,82 @@
   animation: semana-sheet-overlay-out 140ms ease-in;
 }
 
+/* Pixel-art shapes used by the Semana sponsors page. */
+.semana-pixel-octagon {
+  clip-path: polygon(
+    70.8333% 0,
+    70.8333% 4.1667%,
+    75% 4.1667%,
+    75% 8.3333%,
+    83.3333% 8.3333%,
+    83.3333% 12.5%,
+    87.5% 12.5%,
+    87.5% 16.6667%,
+    91.6667% 16.6667%,
+    91.6667% 25%,
+    95.8333% 25%,
+    95.8333% 29.1667%,
+    100% 29.1667%,
+    100% 70.8333%,
+    95.8333% 70.8333%,
+    95.8333% 75%,
+    91.6667% 75%,
+    91.6667% 83.3333%,
+    87.5% 83.3333%,
+    87.5% 87.5%,
+    83.3333% 87.5%,
+    83.3333% 91.6667%,
+    75% 91.6667%,
+    75% 95.8333%,
+    70.8333% 95.8333%,
+    70.8333% 100%,
+    29.1667% 100%,
+    29.1667% 95.8333%,
+    25% 95.8333%,
+    25% 91.6667%,
+    16.6667% 91.6667%,
+    16.6667% 87.5%,
+    12.5% 87.5%,
+    12.5% 83.3333%,
+    8.3333% 83.3333%,
+    8.3333% 75%,
+    4.1667% 75%,
+    4.1667% 70.8333%,
+    0 70.8333%,
+    0 29.1667%,
+    4.1667% 29.1667%,
+    4.1667% 25%,
+    8.3333% 25%,
+    8.3333% 16.6667%,
+    12.5% 16.6667%,
+    12.5% 12.5%,
+    16.6667% 12.5%,
+    16.6667% 8.3333%,
+    25% 8.3333%,
+    25% 4.1667%,
+    29.1667% 4.1667%,
+    29.1667% 0
+  );
+}
+
+/* Single square notch cut out of each corner (set the size with --notch). */
+.semana-notch {
+  clip-path: polygon(
+    var(--notch, 16px) 0,
+    calc(100% - var(--notch, 16px)) 0,
+    calc(100% - var(--notch, 16px)) var(--notch, 16px),
+    100% var(--notch, 16px),
+    100% calc(100% - var(--notch, 16px)),
+    calc(100% - var(--notch, 16px)) calc(100% - var(--notch, 16px)),
+    calc(100% - var(--notch, 16px)) 100%,
+    var(--notch, 16px) 100%,
+    var(--notch, 16px) calc(100% - var(--notch, 16px)),
+    0 calc(100% - var(--notch, 16px)),
+    0 var(--notch, 16px),
+    var(--notch, 16px) var(--notch, 16px)
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .semana-sheet-content,
   .semana-sheet-overlay {
@@ -147,6 +223,8 @@
     --semana-tertiary: 17 97% 51%;
     --semana-contrast: 244 75% 16%;
     --semana-accent: 221 100% 92%;
+    --semana-sponsor: 336 52% 40%;
+    --semana-sponsor-soft: 336 32% 47%;
     --radius: 0.125rem;
   }
 

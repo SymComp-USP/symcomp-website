@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: 'https://symcomp.ime.usp.br/semana/patrocinadores',
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: 'https://symcomp.ime.usp.br/semana/sobre-nos',
       lastModified: new Date(),
       changeFrequency: 'monthly',

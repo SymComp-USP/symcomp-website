@@ -3,6 +3,7 @@
 import { Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'
@@ -24,6 +25,7 @@ const links = [
   { href: '/semana', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
   { href: '/semana/presenca', label: 'Presença' },
+  { href: '/semana/patrocinadores', label: 'Patrocinadores' },
   { href: '/semana/sobre-nos', label: 'Sobre nós' },
 ]
 
@@ -37,16 +39,22 @@ export function SemanaShell({ children }: { children: ReactNode }) {
 
 function SemanaShellContent({ children }: { children: ReactNode }) {
   const { user, loading, logout } = useAuth()
+  const isSponsorsPage = usePathname() === '/semana/patrocinadores'
 
   return (
     <div
       className={cn(
-        'semana-theme min-h-svh bg-background font-[family-name:var(--font-semana-body)] text-foreground',
+        'semana-theme grid min-h-svh grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] bg-background font-[family-name:var(--font-semana-body)] text-foreground',
         semanaBody.variable,
         semanaDisplay.variable,
       )}
     >
-      <header className="sticky top-0 z-40 border-b-[6px] border-[hsl(var(--semana-contrast))] bg-background/95 backdrop-blur">
+      <header
+        className={cn(
+          'sticky top-0 z-40 border-b-[6px] border-[hsl(var(--semana-contrast))] backdrop-blur',
+          isSponsorsPage ? 'bg-[hsl(var(--semana-sponsor))]' : 'bg-background/95',
+        )}
+      >
         <div className="mx-auto grid h-20 max-w-6xl grid-cols-3 items-center px-6">
           <Link className="flex items-center" href="/semana">
             <Image
@@ -146,7 +154,7 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
         </div>
       </header>
 
-      {children}
+      <div>{children}</div>
 
       <footer className="border-t-[6px] border-[hsl(var(--semana-contrast))] bg-[hsl(var(--semana-contrast))] text-white">
         <div className="mx-auto grid max-w-6xl gap-10 px-6 py-10 text-sm text-white/80 md:grid-cols-2">
