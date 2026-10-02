@@ -21,7 +21,7 @@ import { semanaBody, semanaDisplay } from '../fonts'
 import { SemanaButton } from './semana-button'
 
 const links = [
-  { href: '/semana/inicio', label: 'Início' },
+  { href: '/semana', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
   { href: '/semana/presenca', label: 'Presença' },
   { href: '/semana/sobre-nos', label: 'Sobre nós' },
@@ -48,7 +48,7 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
     >
       <header className="sticky top-0 z-40 border-b-[6px] border-[hsl(var(--semana-contrast))] bg-background/95 backdrop-blur">
         <div className="mx-auto grid h-20 max-w-6xl grid-cols-3 items-center px-6">
-          <Link className="flex items-center" href="/semana/inicio">
+          <Link className="flex items-center" href="/semana">
             <Image
               alt="IME-USP"
               className="h-auto w-12 brightness-0 invert sm:w-14"
@@ -60,7 +60,7 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
           </Link>
 
           <div className="col-start-2 row-start-1 flex items-center justify-center">
-            <Link href="/semana/inicio">
+            <Link href="/semana">
               <Image
                 alt="Semana da Computação"
                 height={47}
