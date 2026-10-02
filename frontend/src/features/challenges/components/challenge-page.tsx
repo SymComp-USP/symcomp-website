@@ -39,7 +39,7 @@ export function ChallengePage() {
       })
       .catch((err: Error) => {
         if (err.message.includes('challenge has ended')) {
-          router.replace('/semana/inicio')
+          router.replace('/semana')
           return
         }
         setError(err.message)

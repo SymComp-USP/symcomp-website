@@ -2,7 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -27,12 +27,18 @@ type Values = z.infer<typeof schema>
 
 export function LoginForm() {
   const router = useRouter()
-  const { login } = useAuth()
+  const { loading, login, user } = useAuth()
   const [error, setError] = useState<string>()
   const form = useForm<Values>({
     resolver: zodResolver(schema),
     defaultValues: { email: '', password: '' },
   })
+
+  useEffect(() => {
+    if (!loading && user) router.replace('/semana/perfil')
+  }, [loading, router, user])
+
+  if (loading || user) return <p>{user ? 'Você já está conectado.' : 'Carregando…'}</p>
 
   async function submit(values: Values) {
     setError(undefined)

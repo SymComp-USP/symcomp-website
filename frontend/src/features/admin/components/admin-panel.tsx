@@ -71,7 +71,7 @@ export function AdminPanel() {
   const [refresh, setRefresh] = useState(0)
 
   useEffect(() => {
-    if (!loading && (!user || !user.isAdmin)) router.replace('/semana/login')
+    if (!loading && (!user || !user.isAdmin)) router.replace('/semana')
   }, [loading, router, user])
 
   useEffect(() => {

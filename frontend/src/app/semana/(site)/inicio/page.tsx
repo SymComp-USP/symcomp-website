@@ -1,5 +1,5 @@
-import { SemanaHome } from '@/features/semana/components/semana-home'
+import { redirect } from 'next/navigation'
 
 export default function SemanaInicioPage() {
-  return <SemanaHome />
+  redirect('/semana')
 }
