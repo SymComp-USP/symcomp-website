@@ -107,7 +107,10 @@ async def test_admin_can_list_participants_ordered_by_challenge_and_score(
 
     filtered_response = await as_user(admin).get(
         "/api/v1/admin/challenge/participants",
-        params={"challenge_id": str(challenge.id), "participant_query": other_user.name},
+        params={
+            "challenge_id": str(challenge.id),
+            "participant_query": other_user.email,
+        },
     )
 
     assert filtered_response.status_code == 200, filtered_response.text
