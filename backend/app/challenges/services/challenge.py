@@ -85,7 +85,8 @@ async def process_submission(
         else 0
     )
 
-    participant.submitted_at = datetime.now(UTC)
+    is_complete = bool(question_count) and (correct_count or 0) == question_count
+    participant.submitted_at = datetime.now(UTC) if is_complete else None
     participant.score = score
 
     await session.flush()
