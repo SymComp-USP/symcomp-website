@@ -9,6 +9,7 @@ from httpx import AsyncClient
 
 from app.challenges.models.challenge import ChallengeScoringType
 from app.challenges.models.input import Input
+from app.semana.models import SemanaEvent, SemanaParticipant
 
 
 async def test_input_challenge_scores_using_challenge_points(
@@ -130,6 +131,33 @@ async def test_nickname_is_reused_across_challenge_joins(
     assert len(first_join.json()["nickname"]) > 0
     assert re.fullmatch(r"[A-Za-z]+\d{4}", first_join.json()["nickname"])
     assert second_join.json()["nickname"] == first_join.json()["nickname"]
+
+
+async def test_profile_returns_the_nickname_for_each_week(
+    client: AsyncClient, as_user, user, challenge, db_session
+):
+    c = as_user(user)
+    joined = await c.post(f"api/v1/challenge/{challenge.id}/join")
+    assert joined.status_code == 200, joined.text
+
+    other_week = SemanaEvent(nome="Outra Semana", ano=2025)
+    db_session.add(other_week)
+    await db_session.flush()
+    db_session.add(
+        SemanaParticipant(
+            semana_id=other_week.id,
+            user_id=user.id,
+            nickname="OutraPessoa2025",
+        )
+    )
+    await db_session.flush()
+
+    response = await c.get("/api/v1/semanas/participacao")
+
+    assert response.status_code == 200, response.text
+    weeks = {week["semana_id"]: week for week in response.json()["semanas"]}
+    assert weeks[challenge.semana_id]["nickname"] == joined.json()["nickname"]
+    assert weeks[other_week.id]["nickname"] == "OutraPessoa2025"
 
 
 async def test_submitting_without_joining_returns_400(

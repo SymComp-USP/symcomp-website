@@ -19,6 +19,7 @@ export type Participation = {
     semana_id: number
     nome: string
     ano: number
+    nickname: string | null
     pontos: number
     horas: number
   }[]
