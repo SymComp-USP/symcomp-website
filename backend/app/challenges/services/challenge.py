@@ -166,6 +166,7 @@ async def list_admin_challenges_paginated(
 async def create_challenge(
     session: AsyncSession,
     title: str,
+    description: str = "",
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ,
     finishes_at: datetime | None = None,
     semana_id: int | None = None,
@@ -174,6 +175,7 @@ async def create_challenge(
 ) -> Challenge:
     challenge = Challenge(
         title=title,
+        description=description,
         points_value=points_value,
         scoring_type=scoring_type,
         semana_id=semana_id,
@@ -191,6 +193,7 @@ async def update_challenge(
     challenge: Challenge,
     *,
     title: str | None = None,
+    description: str | None = None,
     scoring_type: ChallengeScoringType | None = None,
     finishes_at: datetime | None = None,
     semana_id: int | None = None,
@@ -199,6 +202,8 @@ async def update_challenge(
 ) -> Challenge:
     if title is not None:
         challenge.title = title
+    if description is not None:
+        challenge.description = description
     if scoring_type is not None:
         challenge.scoring_type = scoring_type
     if points_value is not None:

@@ -4,7 +4,7 @@ from datetime import UTC, datetime, timedelta
 from enum import StrEnum
 from typing import TYPE_CHECKING
 
-from sqlalchemy import JSON, DateTime, ForeignKey, String, text
+from sqlalchemy import JSON, DateTime, ForeignKey, String, Text, text
 from sqlalchemy import Enum as SQLEnum
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -27,6 +27,7 @@ class Challenge(Base, UUIDPKMixin, TimestampsMixin):
     __tablename__ = "challenges"
 
     title: Mapped[str] = mapped_column(String(255))
+    description: Mapped[str] = mapped_column(Text, default="")
     points_value: Mapped[int] = mapped_column(default=0)
     scoring_type: Mapped[ChallengeScoringType] = mapped_column(
         SQLEnum(ChallengeScoringType, native_enum=False, length=20),

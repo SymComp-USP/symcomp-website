@@ -63,6 +63,7 @@ class QuestionUpdate(BaseModel):
 
 class ChallengeCreate(BaseModel):
     title: str
+    description: str = ""
     prompt: str | None = None
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ
     finishes_at: datetime | None = None
@@ -92,6 +93,7 @@ class ChallengeCreate(BaseModel):
 
 class ChallengeUpdate(BaseModel):
     title: str | None = None
+    description: str | None = None
     scoring_type: ChallengeScoringType | None = None
     prompt: str | None = None
     questions: list[QuestionCreate] | None = None
@@ -164,6 +166,7 @@ class ChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
     prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
@@ -178,6 +181,7 @@ class ChallengePublicResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
     prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
@@ -191,6 +195,7 @@ class AdminChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
     prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime

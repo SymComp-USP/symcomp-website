@@ -12,6 +12,7 @@ export type AdminUser = {
 export type AdminChallenge = {
   id: string
   title: string
+  description: string
   prompt: string
   input_answer?: string | null
   scoring_type: 'input' | 'quiz' | 'manual'
@@ -23,6 +24,7 @@ export type AdminChallenge = {
 
 type AdminChallengeInput = {
   title: string
+  description?: string
   scoring_type: AdminChallenge['scoring_type']
   finishes_at: string
   points_value?: number

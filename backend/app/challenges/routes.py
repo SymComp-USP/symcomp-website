@@ -271,6 +271,7 @@ async def get_challenge(
     return challenge_schemas.ChallengeResponse(
         id=challenge.id,
         title=challenge.title,
+        description=challenge.description,
         prompt=challenge.input.prompt if challenge.input is not None else "",
         scoring_type=challenge.scoring_type,
         image_path=challenge.image_path,

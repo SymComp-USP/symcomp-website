@@ -111,6 +111,7 @@ function ChallengeForm({
     ?.id.toString()
   const [form, setForm] = useState(() => ({
     title: challenge?.title ?? '',
+    description: challenge?.description ?? '',
     prompt: challenge?.prompt ?? '',
     scoring_type: challenge?.scoring_type ?? ('quiz' as const),
     finishes_at: challenge ? toDateTimeLocal(challenge.finishes_at) : '',
@@ -137,6 +138,7 @@ function ChallengeForm({
     try {
       const challengeInput = {
         title: form.title,
+        description: form.description,
         scoring_type: form.scoring_type,
         finishes_at: new Date(form.finishes_at).toISOString(),
         semana_id: form.semana_id ? Number(form.semana_id) : undefined,
@@ -176,6 +178,12 @@ function ChallengeForm({
         value={form.title}
         onChange={(event) => setForm({ ...form, title: event.target.value })}
       />
+      <textarea
+        className="min-h-20 rounded-md border border-input bg-background px-3 py-2 text-sm sm:col-span-2"
+        placeholder="Descrição"
+        value={form.description}
+        onChange={(event) => setForm({ ...form, description: event.target.value })}
+      />
       <select
         aria-label="Tipo de desafio"
         className="h-10 rounded-md border border-input bg-background px-3 text-sm"
@@ -189,7 +197,7 @@ function ChallengeForm({
       >
         <option value="quiz">Quiz</option>
         <option value="input">Resposta livre</option>
-        <option value="manual">Manual</option>
+        <option value="manual">Pontuação Manual</option>
       </select>
       <select
         className="h-10 rounded-md border border-input bg-background px-3 text-sm"

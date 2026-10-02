@@ -23,11 +23,16 @@ async def test_admin_can_create_challenge(client: AsyncClient, as_user, admin):
     c = as_user(admin)
     r = await c.post(
         "/api/v1/admin/challenge/",
-        json={"title": "Novo", "scoring_type": "quiz"},
+        json={
+            "title": "Novo",
+            "description": "Descrição inicial",
+            "scoring_type": "quiz",
+        },
     )
     assert r.status_code == 201, r.text
     body = r.json()
     assert body["title"] == "Novo"
+    assert body["description"] == "Descrição inicial"
     assert body["scoring_type"] == "quiz"
     default_deadline = datetime.fromisoformat(body["finishes_at"])
     assert default_deadline.tzinfo is not None
@@ -112,11 +117,16 @@ async def test_admin_can_update_input_challenge(client: AsyncClient, as_user, ad
 
     r = await c.patch(
         f"/api/v1/admin/challenge/{challenge_id}",
-        json={"prompt": "Nova pergunta", "points_value": 35},
+        json={
+            "description": "Descrição atualizada",
+            "prompt": "Nova pergunta",
+            "points_value": 35,
+        },
     )
 
     assert r.status_code == 200, r.text
     assert r.json()["prompt"] == "Nova pergunta"
+    assert r.json()["description"] == "Descrição atualizada"
     assert r.json()["points_value"] == 35
     assert r.json()["input_answer"] == "42"
 

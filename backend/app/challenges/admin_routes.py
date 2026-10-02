@@ -69,6 +69,7 @@ async def create_challenge_endpoint(
     challenge = await challenge_service.create_challenge(
         session,
         title=data.title,
+        description=data.description,
         scoring_type=data.scoring_type,
         finishes_at=data.finishes_at,
         semana_id=data.semana_id,
@@ -123,6 +124,7 @@ async def update_challenge_endpoint(
         session,
         challenge,
         title=data.title,
+        description=data.description,
         scoring_type=data.scoring_type,
         finishes_at=data.finishes_at,
         semana_id=data.semana_id,
