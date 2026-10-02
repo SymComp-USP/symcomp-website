@@ -101,6 +101,7 @@ async def challenge(db_session: AsyncSession, semana: SemanaEvent) -> Challenge:
     c = Challenge(
         title="Quiz Teste",
         scoring_type=ChallengeScoringType.QUIZ,
+        points_value=225,
         semana_id=semana.id,
     )
     db_session.add(c)
@@ -126,19 +127,16 @@ async def questions(db_session: AsyncSession, challenge: Challenge) -> list[Ques
         Question(
             prompt="2+2?",
             answer="4",
-            points_value=100,
             challenge_id=challenge.id,
         ),
         Question(
             prompt="3*3?",
             answer="9",
-            points_value=50,
             challenge_id=challenge.id,
         ),
         Question(
             prompt="Capital do Brasil?",
             answer="Brasília",
-            points_value=75,
             challenge_id=challenge.id,
         ),
     ]

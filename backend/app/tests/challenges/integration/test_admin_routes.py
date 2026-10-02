@@ -9,6 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.challenges.models.challenge_participant import ChallengeParticipant
+from app.challenges.models.input import Input
 from app.challenges.models.question import Question
 
 
@@ -43,8 +44,9 @@ async def test_admin_can_create_challenge_with_questions(
         "/api/v1/admin/challenge/",
         json={
             "title": "Quiz com perguntas",
+            "points_value": 60,
             "questions": [
-                {"prompt": "2+2?", "answer": "4", "points_value": 10},
+                {"prompt": "2+2?", "answer": "4"},
                 {"prompt": "3+3?", "answer": "6"},
             ],
         },
@@ -54,8 +56,69 @@ async def test_admin_can_create_challenge_with_questions(
     created_questions = r.json()["questions"]
     assert len(created_questions) == 2
     assert created_questions[0]["prompt"] == "2+2?"
-    assert created_questions[0]["points_value"] == 10
-    assert created_questions[1]["points_value"] == 0
+    assert r.json()["points_value"] == 60
+
+
+async def test_admin_can_create_input_challenge(
+    client: AsyncClient, as_user, admin, db_session: AsyncSession
+):
+    c = as_user(admin)
+    r = await c.post(
+        "/api/v1/admin/challenge/",
+        json={
+            "title": "Resposta livre",
+            "scoring_type": "input",
+            "prompt": "Qual é a resposta?",
+            "points_value": 20,
+            "input_answer": "42",
+        },
+    )
+
+    assert r.status_code == 201, r.text
+    body = r.json()
+    assert body["prompt"] == "Qual é a resposta?"
+    assert body["points_value"] == 20
+    assert body["input_answer"] == "42"
+    input_data = await db_session.scalar(
+        select(Input).where(Input.challenge_id == body["id"])
+    )
+    assert input_data is not None
+
+
+async def test_admin_rejects_input_challenge_without_answer(
+    client: AsyncClient, as_user, admin
+):
+    c = as_user(admin)
+    r = await c.post(
+        "/api/v1/admin/challenge/",
+        json={"title": "Resposta livre", "scoring_type": "input", "prompt": "Q?"},
+    )
+
+    assert r.status_code == 422
+
+
+async def test_admin_can_update_input_challenge(client: AsyncClient, as_user, admin):
+    c = as_user(admin)
+    created = await c.post(
+        "/api/v1/admin/challenge/",
+        json={
+            "title": "Resposta livre",
+            "scoring_type": "input",
+            "prompt": "Q?",
+            "input_answer": "42",
+        },
+    )
+    challenge_id = created.json()["id"]
+
+    r = await c.patch(
+        f"/api/v1/admin/challenge/{challenge_id}",
+        json={"prompt": "Nova pergunta", "points_value": 35},
+    )
+
+    assert r.status_code == 200, r.text
+    assert r.json()["prompt"] == "Nova pergunta"
+    assert r.json()["points_value"] == 35
+    assert r.json()["input_answer"] == "42"
 
 
 async def test_admin_can_set_challenge_deadline(client: AsyncClient, as_user, admin):
@@ -135,11 +198,7 @@ async def test_admin_patch_replaces_questions_and_hard_deletes_old_ones(
 
     r = await c.patch(
         f"/api/v1/admin/challenge/{challenge.id}",
-        json={
-            "questions": [
-                {"prompt": "New prompt", "answer": "New answer", "points_value": 25}
-            ]
-        },
+        json={"questions": [{"prompt": "New prompt", "answer": "New answer"}]},
     )
 
     assert r.status_code == 200, r.text
@@ -148,7 +207,6 @@ async def test_admin_patch_replaces_questions_and_hard_deletes_old_ones(
     assert len(body["questions"]) == 1
     assert body["questions"][0]["prompt"] == "New prompt"
     assert body["questions"][0]["answer"] == "New answer"
-    assert body["questions"][0]["points_value"] == 25
     remaining_old_ids = set(
         (
             await db_session.scalars(

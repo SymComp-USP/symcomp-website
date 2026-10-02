@@ -7,6 +7,29 @@ from datetime import UTC, datetime, timedelta
 
 from httpx import AsyncClient
 
+from app.challenges.models.challenge import ChallengeScoringType
+from app.challenges.models.input import Input
+
+
+async def test_input_challenge_scores_using_challenge_points(
+    client: AsyncClient, as_user, user, challenge, db_session
+):
+    challenge.scoring_type = ChallengeScoringType.INPUT
+    challenge.points_value = 40
+    challenge.input = Input(prompt="Answer?", input_answer="correct")
+    await db_session.flush()
+
+    c = as_user(user)
+    joined = await c.post(f"api/v1/challenge/{challenge.id}/join")
+    assert joined.status_code == 200, joined.text
+
+    response = await c.post(
+        f"api/v1/challenge/{challenge.id}/input", json={"answer": "correct"}
+    )
+
+    assert response.status_code == 200, response.text
+    assert response.json()["score"] == 40
+
 
 async def test_full_quiz_lifecycle(
     client: AsyncClient,
@@ -63,7 +86,7 @@ async def test_full_quiz_lifecycle(
     r = await c.post(f"api/v1/challenge/{challenge.id}/submit")
     assert r.status_code == 200, r.text
     body = r.json()
-    assert body["score"] == 150  # 100 + 50
+    assert body["score"] == 150
     assert body["submitted_at"] is not None
 
     # 6. Submit de novo → idempotente
@@ -127,9 +150,7 @@ async def test_submitting_question_from_other_challenge_returns_404(
 ):
     from app.challenges.models.question import Question
 
-    q = Question(
-        prompt="?", answer="?", points_value=10, challenge_id=manual_challenge.id
-    )
+    q = Question(prompt="?", answer="?", challenge_id=manual_challenge.id)
     db_session.add(q)
     await db_session.flush()
 

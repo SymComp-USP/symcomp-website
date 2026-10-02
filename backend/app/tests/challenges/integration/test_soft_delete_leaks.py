@@ -88,4 +88,4 @@ async def test_deleted_answer_not_counted_on_submit(
     await db_session.flush()
 
     r = await c.post(f"api/v1/challenge/{challenge.id}/submit")
-    assert r.json()["score"] == 100, "resposta deletada somou pontos"
+    assert r.json()["score"] == 75, "resposta deletada somou pontos"

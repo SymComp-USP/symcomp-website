@@ -39,14 +39,12 @@ async def create_question(
     prompt: str,
     answer: str,
     challenge_id: uuid.UUID,
-    points_value: int = 0,
 ) -> Question:
 
     question = Question(
         prompt=prompt,
         answer=answer,
         challenge_id=challenge_id,
-        points_value=points_value,
     )
 
     session.add(question)
@@ -67,7 +65,6 @@ async def replace_challenge_questions(
         Question(
             prompt=question.prompt,
             answer=question.answer,
-            points_value=question.points_value,
             challenge_id=challenge.id,
         )
         for question in questions
@@ -83,15 +80,11 @@ async def update_question(
     question: Question,
     prompt: str | None = None,
     answer: str | None = None,
-    points_value: int | None = None,
 ) -> Question:
     if prompt is not None:
         question.prompt = prompt
     if answer is not None:
         question.answer = answer
-    if points_value is not None:
-        question.points_value = points_value
-
     await session.flush()
     return question
 
