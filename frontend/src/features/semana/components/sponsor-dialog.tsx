@@ -116,14 +116,20 @@ function SponsorDetails({ sponsor }: { sponsor: Sponsor }) {
             <p className="text-white/90 lg:text-lg">{talk.descricao}</p>
             <div className="mt-auto flex justify-center pt-6">
               <a
-                className="semana-notch block bg-[hsl(var(--semana-sponsor-soft))] p-1 [--notch:10px] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring"
+                className="group relative block pb-1.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring"
                 href={schedule.calendarUrl}
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <span className="semana-notch block bg-black [--notch:10px] px-6 py-2 text-sm font-bold uppercase text-white">
-                  Salvar na agenda
-                  <span className="sr-only"> (abre em nova aba)</span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-3 bottom-0 h-3 bg-[hsl(var(--semana-sponsor-soft))]"
+                />
+                <span className="semana-notch relative block bg-[hsl(var(--semana-sponsor-soft))] p-1.5 [--notch:12px] transition-transform group-hover:-translate-y-0.5">
+                  <span className="semana-notch block bg-black px-8 py-3 text-lg font-bold uppercase leading-none text-white [--notch:12px] lg:text-xl">
+                    Salvar na agenda
+                    <span className="sr-only"> (abre em nova aba)</span>
+                  </span>
                 </span>
               </a>
             </div>
