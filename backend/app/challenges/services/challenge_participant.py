@@ -14,12 +14,20 @@ from app.users.models import User
 async def list_admin_challenge_participants_paginated(
     session: AsyncSession,
     pagination: PaginationParams,
+    challenge_id: uuid.UUID | None = None,
+    participant_query: str | None = None,
 ) -> Page[challenge_schemas.AdminChallengeParticipantResponse]:
-    conditions = (
+    conditions = [
         ChallengeParticipant.deleted_at.is_(None),
         Challenge.deleted_at.is_(None),
         User.deleted_at.is_(None),
-    )
+    ]
+    if challenge_id is not None:
+        conditions.append(ChallengeParticipant.challenge_id == challenge_id)
+    if participant_query and participant_query.strip():
+        search = f"%{participant_query.strip()}%"
+        conditions.append(User.name.ilike(search) | User.email.ilike(search))
+
     total = await session.scalar(
         select(func.count(ChallengeParticipant.id))
         .join(Challenge, Challenge.id == ChallengeParticipant.challenge_id)

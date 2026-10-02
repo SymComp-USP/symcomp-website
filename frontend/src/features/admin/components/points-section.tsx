@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input'
 import {
   adjustAdminChallengeParticipantScore,
   listAdminChallengeParticipants,
+  type AdminChallenge,
   type AdminChallengeParticipant,
 } from '../api'
 
@@ -21,10 +22,12 @@ type ParticipantPage = {
   offset: number
 }
 
-export function PointsSection() {
+export function PointsSection({ challenges }: { challenges: AdminChallenge[] }) {
   const [page, setPage] = useState<ParticipantPage>()
   const [offset, setOffset] = useState(0)
   const [refresh, setRefresh] = useState(0)
+  const [challengeId, setChallengeId] = useState('')
+  const [participantQuery, setParticipantQuery] = useState('')
   const [pendingId, setPendingId] = useState<string>()
   const [amounts, setAmounts] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
@@ -34,7 +37,7 @@ export function PointsSection() {
     let active = true
     setLoading(true)
     setError('')
-    listAdminChallengeParticipants(PAGE_SIZE, offset)
+    listAdminChallengeParticipants(PAGE_SIZE, offset, challengeId, participantQuery)
       .then((result) => {
         if (active) setPage(result)
       })
@@ -48,7 +51,13 @@ export function PointsSection() {
     return () => {
       active = false
     }
-  }, [offset, refresh])
+  }, [challengeId, offset, participantQuery, refresh])
+
+  function updateFilters(nextChallengeId: string, nextParticipantQuery: string) {
+    setChallengeId(nextChallengeId)
+    setParticipantQuery(nextParticipantQuery)
+    setOffset(0)
+  }
 
   async function adjustScore(participant: AdminChallengeParticipant, direction: 1 | -1) {
     const amount = Number(amounts[participant.id] ?? '1')
@@ -104,6 +113,28 @@ export function PointsSection() {
           {error}
         </p>
       )}
+      <div className="mt-5 grid gap-3 sm:grid-cols-2">
+        <select
+          aria-label="Filtrar por desafio"
+          className="h-10 rounded-md border border-input bg-background px-3 text-sm"
+          value={challengeId}
+          onChange={(event) => updateFilters(event.target.value, participantQuery)}
+        >
+          <option value="">Todos os desafios</option>
+          {challenges.map((challenge) => (
+            <option key={challenge.id} value={challenge.id}>
+              {challenge.title}
+            </option>
+          ))}
+        </select>
+        <Input
+          aria-label="Filtrar por participante"
+          placeholder="Nome ou e-mail do participante"
+          type="search"
+          value={participantQuery}
+          onChange={(event) => updateFilters(challengeId, event.target.value)}
+        />
+      </div>
       <div className="mt-5 overflow-x-auto rounded-lg border border-slate-200 bg-white">
         <table className="w-full min-w-[680px] text-left text-sm">
           <thead className="border-b border-slate-200 bg-slate-50 text-xs uppercase text-slate-500">

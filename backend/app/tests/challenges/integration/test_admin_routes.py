@@ -105,6 +105,16 @@ async def test_admin_can_list_participants_ordered_by_challenge_and_score(
     assert body["items"][0]["challenge_id"] == str(challenge.id)
     assert body["total"] == 3
 
+    filtered_response = await as_user(admin).get(
+        "/api/v1/admin/challenge/participants",
+        params={"challenge_id": str(challenge.id), "participant_query": other_user.name},
+    )
+
+    assert filtered_response.status_code == 200, filtered_response.text
+    filtered_body = filtered_response.json()
+    assert filtered_body["total"] == 1
+    assert filtered_body["items"][0]["user_id"] == str(other_user.id)
+
 
 async def test_admin_can_create_input_challenge(
     client: AsyncClient, as_user, admin, db_session: AsyncSession

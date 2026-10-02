@@ -113,9 +113,17 @@ export function listAdminChallenges() {
   return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100')
 }
 
-export function listAdminChallengeParticipants(limit = 50, offset = 0) {
+export function listAdminChallengeParticipants(
+  limit = 50,
+  offset = 0,
+  challengeId?: string,
+  participantQuery?: string,
+) {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) })
+  if (challengeId) params.set('challenge_id', challengeId)
+  if (participantQuery?.trim()) params.set('participant_query', participantQuery.trim())
   return requestApi<Page<AdminChallengeParticipant>>(
-    `/admin/challenge/participants?limit=${limit}&offset=${offset}`,
+    `/admin/challenge/participants?${params}`,
     { cache: 'no-store' },
   )
 }

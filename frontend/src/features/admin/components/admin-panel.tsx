@@ -220,7 +220,7 @@ export function AdminPanel() {
               onActivityChanged={() => setRefresh((value) => value + 1)}
             />
           )}
-          {tab === 'points' && <PointsSection />}
+          {tab === 'points' && <PointsSection challenges={challenges} />}
         </div>
       </main>
     </div>

@@ -185,9 +185,14 @@ async def list_challenge_participants_admin(
     _: AdminUser,
     limit: int = Query(default=50, ge=1, le=100),
     offset: int = Query(default=0, ge=0),
+    challenge_id: Annotated[UUID | None, Query()] = None,
+    participant_query: Annotated[str | None, Query(max_length=200)] = None,
 ):
     return await participant_service.list_admin_challenge_participants_paginated(
-        session, PaginationParams(limit=limit, offset=offset)
+        session,
+        PaginationParams(limit=limit, offset=offset),
+        challenge_id=challenge_id,
+        participant_query=participant_query,
     )
 
 
