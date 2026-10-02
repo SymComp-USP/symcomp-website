@@ -12,11 +12,26 @@ export type AdminUser = {
 export type AdminChallenge = {
   id: string
   title: string
+  description: string
   prompt: string
+  input_answer?: string | null
   scoring_type: 'input' | 'quiz' | 'manual'
   finishes_at: string
   semana_id: number | null
   points_value: number
+  questions?: { id?: string; prompt: string; answer: string }[]
+}
+
+type AdminChallengeInput = {
+  title: string
+  description?: string
+  scoring_type: AdminChallenge['scoring_type']
+  finishes_at: string
+  points_value?: number
+  prompt?: string
+  input_answer?: string
+  questions?: { prompt: string; answer: string }[]
+  semana_id?: number
 }
 
 export type AdminSemana = {
@@ -53,6 +68,17 @@ export type AdminPresenca = {
   horas: number
 }
 
+export type AdminChallengeParticipant = {
+  id: string
+  user_id: string
+  user_name: string
+  user_email: string
+  challenge_id: string
+  challenge_title: string
+  score: number
+  submitted_at: string | null
+}
+
 type Page<T> = { items: T[]; total: number; limit: number; offset: number }
 
 export function listAdminUsers() {
@@ -87,17 +113,42 @@ export function listAdminChallenges() {
   return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100')
 }
 
-export function createAdminChallenge(input: {
-  title: string
-  prompt: string
-  scoring_type: AdminChallenge['scoring_type']
-  finishes_at: string
-  points_value: number
-  input_answer: string
-  semana_id?: number
-}) {
+export function listAdminChallengeParticipants(
+  limit = 50,
+  offset = 0,
+  challengeId?: string,
+  participantQuery?: string,
+) {
+  const params = new URLSearchParams({ limit: String(limit), offset: String(offset) })
+  if (challengeId) params.set('challenge_id', challengeId)
+  if (participantQuery?.trim()) params.set('participant_query', participantQuery.trim())
+  return requestApi<Page<AdminChallengeParticipant>>(
+    `/admin/challenge/participants?${params}`,
+    { cache: 'no-store' },
+  )
+}
+
+export function adjustAdminChallengeParticipantScore(
+  challengeId: string,
+  participantId: string,
+  amount: number,
+) {
+  return requestApi<{ id: string; challenge_id: string; score: number }>(
+    `/admin/challenge/${challengeId}/participants/${participantId}/score`,
+    { method: 'PATCH', body: JSON.stringify({ amount }) },
+  )
+}
+
+export function createAdminChallenge(input: AdminChallengeInput) {
   return requestApi<AdminChallenge>('/admin/challenge', {
     method: 'POST',
+    body: JSON.stringify(input),
+  })
+}
+
+export function updateAdminChallenge(id: string, input: Partial<AdminChallengeInput>) {
+  return requestApi<AdminChallenge>(`/admin/challenge/${id}`, {
+    method: 'PATCH',
     body: JSON.stringify(input),
   })
 }
@@ -195,6 +246,7 @@ export function uploadAdminPalestrantePhoto(
 export function listAdminPresencas(semanaId: number, atividadeId: string) {
   return requestApi<AdminPresenca[]>(
     `/admin/semanas/${semanaId}/atividades/${atividadeId}/presencas`,
+    { cache: 'no-store' },
   )
 }
 

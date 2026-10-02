@@ -43,8 +43,8 @@ export function LoginForm() {
   async function submit(values: Values) {
     setError(undefined)
     try {
-      await login(values)
-      router.push('/semana/perfil')
+      const user = await login(values)
+      router.push(user?.isAdmin ? '/admin' : '/semana/perfil')
     } catch {
       setError('Não foi possível entrar. Tente novamente.')
     }

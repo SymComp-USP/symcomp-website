@@ -13,11 +13,13 @@ if TYPE_CHECKING:
     from app.challenges.models.challenge import Challenge
 
 
-class Question(Base, UUIDPKMixin):
-    __tablename__ = "questions"
+class Input(Base, UUIDPKMixin):
+    __tablename__ = "inputs"
 
     prompt: Mapped[str] = mapped_column(String(5000))
-    answer: Mapped[str] = mapped_column(String(255))
+    input_answer: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
-    challenge_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("challenges.id"))
-    challenge: Mapped[Challenge] = relationship(back_populates="questions")
+    challenge_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("challenges.id", ondelete="CASCADE"), unique=True
+    )
+    challenge: Mapped[Challenge] = relationship("Challenge", back_populates="input")

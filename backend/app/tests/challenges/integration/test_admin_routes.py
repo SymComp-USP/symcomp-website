@@ -9,6 +9,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.challenges.models.challenge_participant import ChallengeParticipant
+from app.challenges.models.input import Input
 from app.challenges.models.question import Question
 
 
@@ -22,11 +23,16 @@ async def test_admin_can_create_challenge(client: AsyncClient, as_user, admin):
     c = as_user(admin)
     r = await c.post(
         "/api/v1/admin/challenge/",
-        json={"title": "Novo", "scoring_type": "quiz"},
+        json={
+            "title": "Novo",
+            "description": "Descrição inicial",
+            "scoring_type": "quiz",
+        },
     )
     assert r.status_code == 201, r.text
     body = r.json()
     assert body["title"] == "Novo"
+    assert body["description"] == "Descrição inicial"
     assert body["scoring_type"] == "quiz"
     default_deadline = datetime.fromisoformat(body["finishes_at"])
     assert default_deadline.tzinfo is not None
@@ -43,8 +49,9 @@ async def test_admin_can_create_challenge_with_questions(
         "/api/v1/admin/challenge/",
         json={
             "title": "Quiz com perguntas",
+            "points_value": 60,
             "questions": [
-                {"prompt": "2+2?", "answer": "4", "points_value": 10},
+                {"prompt": "2+2?", "answer": "4"},
                 {"prompt": "3+3?", "answer": "6"},
             ],
         },
@@ -54,8 +61,129 @@ async def test_admin_can_create_challenge_with_questions(
     created_questions = r.json()["questions"]
     assert len(created_questions) == 2
     assert created_questions[0]["prompt"] == "2+2?"
-    assert created_questions[0]["points_value"] == 10
-    assert created_questions[1]["points_value"] == 0
+    assert r.json()["points_value"] == 60
+
+
+async def test_admin_can_list_participants_ordered_by_challenge_and_score(
+    client: AsyncClient,
+    as_user,
+    admin,
+    user,
+    other_user,
+    challenge,
+    manual_challenge,
+    db_session: AsyncSession,
+):
+    challenge.title = "Alpha Challenge"
+    manual_challenge.title = "Beta Challenge"
+    db_session.add_all(
+        [
+            ChallengeParticipant(user_id=user.id, challenge_id=challenge.id, score=10),
+            ChallengeParticipant(
+                user_id=other_user.id, challenge_id=challenge.id, score=25
+            ),
+            ChallengeParticipant(
+                user_id=user.id, challenge_id=manual_challenge.id, score=100
+            ),
+        ]
+    )
+    await db_session.flush()
+
+    response = await as_user(admin).get("/api/v1/admin/challenge/participants")
+
+    assert response.status_code == 200, response.text
+    body = response.json()
+    assert [item["challenge_title"] for item in body["items"]] == [
+        "Alpha Challenge",
+        "Alpha Challenge",
+        "Beta Challenge",
+    ]
+    assert [item["score"] for item in body["items"]] == [25, 10, 100]
+    assert body["items"][0]["user_id"] == str(other_user.id)
+    assert body["items"][0]["user_name"] == other_user.name
+    assert body["items"][0]["user_email"] == other_user.email
+    assert body["items"][0]["challenge_id"] == str(challenge.id)
+    assert body["total"] == 3
+
+    filtered_response = await as_user(admin).get(
+        "/api/v1/admin/challenge/participants",
+        params={
+            "challenge_id": str(challenge.id),
+            "participant_query": other_user.email,
+        },
+    )
+
+    assert filtered_response.status_code == 200, filtered_response.text
+    filtered_body = filtered_response.json()
+    assert filtered_body["total"] == 1
+    assert filtered_body["items"][0]["user_id"] == str(other_user.id)
+
+
+async def test_admin_can_create_input_challenge(
+    client: AsyncClient, as_user, admin, db_session: AsyncSession
+):
+    c = as_user(admin)
+    r = await c.post(
+        "/api/v1/admin/challenge/",
+        json={
+            "title": "Resposta livre",
+            "scoring_type": "input",
+            "prompt": "Qual é a resposta?",
+            "points_value": 20,
+            "input_answer": "42",
+        },
+    )
+
+    assert r.status_code == 201, r.text
+    body = r.json()
+    assert body["prompt"] == "Qual é a resposta?"
+    assert body["points_value"] == 20
+    assert body["input_answer"] == "42"
+    input_data = await db_session.scalar(
+        select(Input).where(Input.challenge_id == body["id"])
+    )
+    assert input_data is not None
+
+
+async def test_admin_rejects_input_challenge_without_answer(
+    client: AsyncClient, as_user, admin
+):
+    c = as_user(admin)
+    r = await c.post(
+        "/api/v1/admin/challenge/",
+        json={"title": "Resposta livre", "scoring_type": "input", "prompt": "Q?"},
+    )
+
+    assert r.status_code == 422
+
+
+async def test_admin_can_update_input_challenge(client: AsyncClient, as_user, admin):
+    c = as_user(admin)
+    created = await c.post(
+        "/api/v1/admin/challenge/",
+        json={
+            "title": "Resposta livre",
+            "scoring_type": "input",
+            "prompt": "Q?",
+            "input_answer": "42",
+        },
+    )
+    challenge_id = created.json()["id"]
+
+    r = await c.patch(
+        f"/api/v1/admin/challenge/{challenge_id}",
+        json={
+            "description": "Descrição atualizada",
+            "prompt": "Nova pergunta",
+            "points_value": 35,
+        },
+    )
+
+    assert r.status_code == 200, r.text
+    assert r.json()["prompt"] == "Nova pergunta"
+    assert r.json()["description"] == "Descrição atualizada"
+    assert r.json()["points_value"] == 35
+    assert r.json()["input_answer"] == "42"
 
 
 async def test_admin_can_set_challenge_deadline(client: AsyncClient, as_user, admin):
@@ -135,11 +263,7 @@ async def test_admin_patch_replaces_questions_and_hard_deletes_old_ones(
 
     r = await c.patch(
         f"/api/v1/admin/challenge/{challenge.id}",
-        json={
-            "questions": [
-                {"prompt": "New prompt", "answer": "New answer", "points_value": 25}
-            ]
-        },
+        json={"questions": [{"prompt": "New prompt", "answer": "New answer"}]},
     )
 
     assert r.status_code == 200, r.text
@@ -148,7 +272,6 @@ async def test_admin_patch_replaces_questions_and_hard_deletes_old_ones(
     assert len(body["questions"]) == 1
     assert body["questions"][0]["prompt"] == "New prompt"
     assert body["questions"][0]["answer"] == "New answer"
-    assert body["questions"][0]["points_value"] == 25
     remaining_old_ids = set(
         (
             await db_session.scalars(
@@ -215,6 +338,13 @@ async def test_admin_can_add_and_subtract_participant_score(
         "challenge_id": str(challenge.id),
         "score": 55,
     }
+    added_participants = await c.get("/api/v1/admin/challenge/participants")
+    listed_after_add = next(
+        item
+        for item in added_participants.json()["items"]
+        if item["id"] == str(participant.id)
+    )
+    assert listed_after_add["score"] == 55
 
     subtract_response = await c.patch(
         f"/api/v1/admin/challenge/{challenge.id}/participants/{participant.id}/score",
@@ -222,6 +352,13 @@ async def test_admin_can_add_and_subtract_participant_score(
     )
     assert subtract_response.status_code == 200, subtract_response.text
     assert subtract_response.json()["score"] == -15
+    subtracted_participants = await c.get("/api/v1/admin/challenge/participants")
+    listed_after_subtract = next(
+        item
+        for item in subtracted_participants.json()["items"]
+        if item["id"] == str(participant.id)
+    )
+    assert listed_after_subtract["score"] == -15
 
 
 async def test_admin_score_adjustment_requires_matching_challenge(

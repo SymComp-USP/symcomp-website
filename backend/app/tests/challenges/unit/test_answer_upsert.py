@@ -66,9 +66,7 @@ async def test_upsert_rejects_question_from_other_challenge(
     """Pergunta não pertence ao challenge do participante → NotFoundError."""
     from app.challenges.models.question import Question
 
-    foreign_q = Question(
-        prompt="?", answer="?", points_value=10, challenge_id=manual_challenge.id
-    )
+    foreign_q = Question(prompt="?", answer="?", challenge_id=manual_challenge.id)
     db_session.add(foreign_q)
     await db_session.flush()
 

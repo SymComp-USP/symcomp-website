@@ -15,8 +15,8 @@ import type { LoginInput, RegisterInput, User } from './types'
 type AuthContextValue = {
   user: User | null
   loading: boolean
-  login: (input: LoginInput) => Promise<void>
-  register: (input: RegisterInput) => Promise<void>
+  login: (input: LoginInput) => Promise<User>
+  register: (input: RegisterInput) => Promise<User>
   logout: () => Promise<void>
 }
 
@@ -37,11 +37,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       user,
       loading,
       async login(input) {
-        setUser(await login(input))
+        const user = await login(input)
+        setUser(user)
+        return user
       },
       async register(input) {
         await register(input)
-        setUser(await login(input))
+        const user = await login(input)
+        setUser(user)
+        return user
       },
       async logout() {
         await logout()

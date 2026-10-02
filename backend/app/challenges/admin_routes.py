@@ -11,6 +11,7 @@ from app.challenges import schemas as challenge_schemas
 from app.challenges.models.challenge import ChallengeScoringType
 from app.challenges.services import challenge as challenge_service
 from app.challenges.services import challenge_participant as participant_service
+from app.challenges.services import input as input_service
 from app.challenges.services import question as question_service
 from app.core.database import get_session
 from app.core.exceptions.app_errors import BadRequestError, NotFoundError
@@ -59,10 +60,6 @@ async def create_challenge_endpoint(
 ):
     """Cria um challenge com título, tipo e (no caso de challenges do tipo quiz) as perguntas dadas"""
 
-    if len(data.questions) != 0 and data.scoring_type == ChallengeScoringType.MANUAL:
-        raise BadRequestError("Manual challenges cannot have questions.")
-    if data.scoring_type == ChallengeScoringType.INPUT and not data.input_answer:
-        raise BadRequestError("Input challenges require an expected answer.")
     if (
         data.semana_id is not None
         and await semana_service.get_semana(session, data.semana_id) is None
@@ -72,18 +69,24 @@ async def create_challenge_endpoint(
     challenge = await challenge_service.create_challenge(
         session,
         title=data.title,
+        description=data.description,
         scoring_type=data.scoring_type,
         finishes_at=data.finishes_at,
-        prompt=data.prompt,
         semana_id=data.semana_id,
         points_value=data.points_value,
-        input_answer=data.input_answer,
         resource_urls=data.resource_urls,
     )
 
     if data.questions:
         await question_service.replace_challenge_questions(
             session, challenge, data.questions
+        )
+    elif data.scoring_type == ChallengeScoringType.INPUT:
+        await input_service.create_input(
+            session,
+            challenge,
+            prompt=data.prompt or "",
+            input_answer=data.input_answer,
         )
 
     return await get_challenge_admin(session, challenge.id, current_user)
@@ -102,10 +105,15 @@ async def update_challenge_endpoint(
     if challenge is None:
         raise NotFoundError("Challenge not found.")
 
-    if data.questions and challenge.scoring_type == ChallengeScoringType.MANUAL:
-        raise BadRequestError("Manual challenges cannot have questions.")
-    if challenge.scoring_type == ChallengeScoringType.INPUT and data.input_answer == "":
-        raise BadRequestError("Input challenges require an expected answer.")
+    scoring_type = data.scoring_type or challenge.scoring_type
+    if data.questions and scoring_type != ChallengeScoringType.QUIZ:
+        raise BadRequestError("Only quiz challenges can have questions.")
+    input_data = await input_service.get_input_by_challenge_id(session, challenge.id)
+    if scoring_type == ChallengeScoringType.INPUT:
+        if input_data is None and (data.prompt is None or not data.input_answer):
+            raise BadRequestError("Input challenges require a prompt and an answer.")
+        if data.input_answer == "":
+            raise BadRequestError("Input challenges require an expected answer.")
     if (
         data.semana_id is not None
         and await semana_service.get_semana(session, data.semana_id) is None
@@ -116,17 +124,41 @@ async def update_challenge_endpoint(
         session,
         challenge,
         title=data.title,
+        description=data.description,
+        scoring_type=data.scoring_type,
         finishes_at=data.finishes_at,
         semana_id=data.semana_id,
-        prompt=data.prompt,
         points_value=data.points_value,
-        input_answer=data.input_answer,
         resource_urls=data.resource_urls,
     )
-    if data.questions is not None:
-        await question_service.replace_challenge_questions(
-            session, challenge, data.questions
-        )
+
+    if scoring_type == ChallengeScoringType.QUIZ:
+        if input_data is not None:
+            await input_service.delete_input(session, input_data)
+        if data.questions is not None:
+            await question_service.replace_challenge_questions(
+                session, challenge, data.questions
+            )
+    elif scoring_type == ChallengeScoringType.INPUT:
+        await question_service.replace_challenge_questions(session, challenge, [])
+        if input_data is None:
+            await input_service.create_input(
+                session,
+                challenge,
+                prompt=data.prompt or "",
+                input_answer=data.input_answer,
+            )
+        else:
+            await input_service.update_input(
+                session,
+                input_data,
+                prompt=data.prompt,
+                input_answer=data.input_answer,
+            )
+    else:
+        if input_data is not None:
+            await input_service.delete_input(session, input_data)
+        await question_service.replace_challenge_questions(session, challenge, [])
 
     return await get_challenge_admin(session, challenge.id, current_user)
 
@@ -142,6 +174,26 @@ async def delete_challenge_endpoint(
         raise NotFoundError("Challenge not found.")
 
     await challenge_service.delete_challenge(session, challenge)
+
+
+@router.get(
+    "/participants",
+    response_model=Page[challenge_schemas.AdminChallengeParticipantResponse],
+)
+async def list_challenge_participants_admin(
+    session: Annotated[AsyncSession, Depends(get_session)],
+    _: AdminUser,
+    limit: int = Query(default=50, ge=1, le=100),
+    offset: int = Query(default=0, ge=0),
+    challenge_id: Annotated[UUID | None, Query()] = None,
+    participant_query: Annotated[str | None, Query(max_length=200)] = None,
+):
+    return await participant_service.list_admin_challenge_participants_paginated(
+        session,
+        PaginationParams(limit=limit, offset=offset),
+        challenge_id=challenge_id,
+        participant_query=participant_query,
+    )
 
 
 @router.get("/{challenge_id}", response_model=challenge_schemas.AdminChallengeResponse)
@@ -183,11 +235,13 @@ async def adjust_participant_score(
             reason="Admin score adjustment",
         )
 
-    return challenge_schemas.ParticipantScoreResponse(
+    response = challenge_schemas.ParticipantScoreResponse(
         id=participant.id,
         challenge_id=participant.challenge_id,
         score=participant.score,
     )
+    await session.commit()
+    return response
 
 
 # ---------- Challenge Cover Image -----------

@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from app.challenges.models.challenge import ChallengeScoringType
+from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.services.image import build_challenge_image_url
 
 
@@ -26,7 +26,6 @@ class QuestionResponse(BaseModel):
 
     id: UUID
     prompt: str
-    points_value: int
     current_answer: str | None = None
 
 
@@ -52,21 +51,31 @@ class ParticipantScoreResponse(BaseModel):
     score: int
 
 
+class AdminChallengeParticipantResponse(BaseModel):
+    id: UUID
+    user_id: UUID
+    user_name: str
+    user_email: str
+    challenge_id: UUID
+    challenge_title: str
+    score: int
+    submitted_at: datetime | None
+
+
 class QuestionCreate(BaseModel):
     prompt: str
     answer: str
-    points_value: int = 0
 
 
 class QuestionUpdate(BaseModel):
     prompt: str | None = None
     answer: str | None = None
-    points_value: int | None = None
 
 
 class ChallengeCreate(BaseModel):
     title: str
-    prompt: str = ""
+    description: str = ""
+    prompt: str | None = None
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ
     finishes_at: datetime | None = None
     semana_id: int | None = None
@@ -75,6 +84,15 @@ class ChallengeCreate(BaseModel):
     resource_urls: list[str] = Field(default_factory=list)
 
     questions: list[QuestionCreate] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_scoring_data(self):
+        if self.scoring_type == ChallengeScoringType.INPUT:
+            if self.prompt is None or not self.input_answer:
+                raise ValueError("Input challenges require a prompt and an answer.")
+        elif self.scoring_type != ChallengeScoringType.QUIZ and self.questions:
+            raise ValueError("Only quiz challenges can have questions.")
+        return self
 
     @field_validator("finishes_at")
     @classmethod
@@ -86,6 +104,8 @@ class ChallengeCreate(BaseModel):
 
 class ChallengeUpdate(BaseModel):
     title: str | None = None
+    description: str | None = None
+    scoring_type: ChallengeScoringType | None = None
     prompt: str | None = None
     questions: list[QuestionCreate] | None = None
     finishes_at: datetime | None = None
@@ -120,7 +140,6 @@ class AdminQuestionResponse(BaseModel):
     id: UUID
     prompt: str
     answer: str
-    points_value: int
 
 
 class ChallengeImageMixin(BaseModel):
@@ -132,6 +151,19 @@ class ChallengeImageMixin(BaseModel):
 
     image_path: str | None = Field(default=None, exclude=True)
     image_url: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _include_input_data(cls, value):
+        if isinstance(value, Challenge):
+            data = value.__dict__.copy()
+            input_data = value.input
+            data["prompt"] = input_data.prompt if input_data is not None else ""
+            data["input_answer"] = (
+                input_data.input_answer if input_data is not None else None
+            )
+            return data
+        return value
 
     @model_validator(mode="after")
     def _fill_image_url(self):
@@ -145,6 +177,7 @@ class ChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
     prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
@@ -159,6 +192,7 @@ class ChallengePublicResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
     prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime
@@ -172,6 +206,7 @@ class AdminChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
     prompt: str
     scoring_type: ChallengeScoringType
     finishes_at: datetime

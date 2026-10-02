@@ -131,10 +131,12 @@ async def submit_input(
 
     participant.submission = data.answer
     participant.submitted_at = datetime.now(UTC)
+    input_data = challenge.input
     participant.score = (
         challenge.points_value
-        if challenge.input_answer is not None
-        and data.answer.strip().lower() == challenge.input_answer.strip().lower()
+        if input_data is not None
+        and input_data.input_answer is not None
+        and data.answer.strip().lower() == input_data.input_answer.strip().lower()
         else 0
     )
     await session.flush()
@@ -221,7 +223,7 @@ async def submit_challenge(
         )
 
     challenge_service.ensure_challenge_open(challenge.finishes_at)
-    score = await challenge_service.process_submission(session, participant)
+    score = await challenge_service.process_submission(session, participant, challenge)
     if participant.semana_participant is not None:
         await semana_service.add_points(
             session,
@@ -261,7 +263,6 @@ async def get_challenge(
         challenge_schemas.QuestionResponse(
             id=q.id,
             prompt=q.prompt,
-            points_value=q.points_value,
             current_answer=current_answers_by_qid.get(q.id),
         )
         for q in questions
@@ -270,7 +271,8 @@ async def get_challenge(
     return challenge_schemas.ChallengeResponse(
         id=challenge.id,
         title=challenge.title,
-        prompt=challenge.prompt,
+        description=challenge.description,
+        prompt=challenge.input.prompt if challenge.input is not None else "",
         scoring_type=challenge.scoring_type,
         image_path=challenge.image_path,
         finishes_at=challenge.finishes_at,

@@ -3,6 +3,7 @@ import { requestApi } from '@/features/auth/api'
 export type Challenge = {
   id: string
   title: string
+  description: string
   prompt: string
   scoring_type: 'input' | 'quiz' | 'manual'
   finishes_at: string

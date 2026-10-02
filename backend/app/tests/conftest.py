@@ -29,7 +29,10 @@ def jwt_settings(test_settings: Settings) -> Settings:
 async def db_session(test_settings: Settings):
     engine = create_async_engine(str(test_settings.database_url))
     TestingSessionLocal = async_sessionmaker(
-        bind=engine, class_=AsyncSession, expire_on_commit=False
+        bind=engine,
+        class_=AsyncSession,
+        expire_on_commit=False,
+        join_transaction_mode="create_savepoint",
     )
     async with engine.connect() as connection:
         transaction = await connection.begin()

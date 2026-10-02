@@ -34,7 +34,7 @@ async def get_challenge_with_context(
         select(Challenge)
         .where(Challenge.id == challenge_id)
         .where(Challenge.deleted_at.is_(None))
-        .options(selectinload(Challenge.questions))
+        .options(selectinload(Challenge.questions), selectinload(Challenge.input))
     )
 
     if challenge is None:
@@ -62,19 +62,28 @@ async def get_challenge_with_context(
 
 
 async def process_submission(
-    session: AsyncSession, participant: ChallengeParticipant
+    session: AsyncSession, participant: ChallengeParticipant, challenge: Challenge
 ) -> int:
-    """Processa a pontuação das respostas de challenge que sea do tipo "quiz" """
+    """Scores correct quiz answers proportionally against the challenge total."""
 
-    rows = (
-        await session.execute(
-            select(Answer.is_correct, Question.points_value)
-            .join(Question, Question.id == Answer.question_id)
-            .where(Answer.participant_id == participant.id, Answer.deleted_at.is_(None))
+    correct_count = await session.scalar(
+        select(func.count(Answer.id))
+        .join(Question, Question.id == Answer.question_id)
+        .where(
+            Answer.participant_id == participant.id,
+            Answer.deleted_at.is_(None),
+            Answer.is_correct.is_(True),
         )
-    ).all()
+    )
 
-    score = sum(row[1] for row in rows if row[0])
+    question_count = await session.scalar(
+        select(func.count(Question.id)).where(Question.challenge_id == challenge.id)
+    )
+    score = (
+        challenge.points_value * (correct_count or 0) // (question_count or 1)
+        if question_count
+        else 0
+    )
 
     participant.submitted_at = datetime.now(UTC)
     participant.score = score
@@ -93,7 +102,7 @@ async def get_challenge_by_id(
             Challenge.id == challenge_id,
             Challenge.deleted_at.is_(None),
         )
-        .options(selectinload(Challenge.questions))
+        .options(selectinload(Challenge.questions), selectinload(Challenge.input))
     )
     return result.scalar_one_or_none()
 
@@ -110,6 +119,7 @@ async def list_challenges_paginated(
         await session.scalars(
             select(Challenge)
             .where(Challenge.deleted_at.is_(None))
+            .options(selectinload(Challenge.input))
             .order_by(Challenge.created_at.desc(), Challenge.id)
             .limit(pagination.limit)
             .offset(pagination.offset)
@@ -137,7 +147,7 @@ async def list_admin_challenges_paginated(
         await session.scalars(
             select(Challenge)
             .where(Challenge.deleted_at.is_(None))
-            .options(selectinload(Challenge.questions))
+            .options(selectinload(Challenge.questions), selectinload(Challenge.input))
             .order_by(Challenge.created_at.desc(), Challenge.id)
             .limit(pagination.limit)
             .offset(pagination.offset)
@@ -156,21 +166,19 @@ async def list_admin_challenges_paginated(
 async def create_challenge(
     session: AsyncSession,
     title: str,
+    description: str = "",
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ,
     finishes_at: datetime | None = None,
-    prompt: str = "",
     semana_id: int | None = None,
     points_value: int = 0,
-    input_answer: str | None = None,
     resource_urls: list[str] | None = None,
 ) -> Challenge:
     challenge = Challenge(
         title=title,
-        prompt=prompt,
+        description=description,
+        points_value=points_value,
         scoring_type=scoring_type,
         semana_id=semana_id,
-        points_value=points_value,
-        input_answer=input_answer,
         resource_urls=resource_urls or [],
     )
     if finishes_at is not None:
@@ -185,25 +193,25 @@ async def update_challenge(
     challenge: Challenge,
     *,
     title: str | None = None,
+    description: str | None = None,
+    scoring_type: ChallengeScoringType | None = None,
     finishes_at: datetime | None = None,
     semana_id: int | None = None,
-    prompt: str | None = None,
     points_value: int | None = None,
-    input_answer: str | None = None,
     resource_urls: list[str] | None = None,
 ) -> Challenge:
     if title is not None:
         challenge.title = title
+    if description is not None:
+        challenge.description = description
+    if scoring_type is not None:
+        challenge.scoring_type = scoring_type
+    if points_value is not None:
+        challenge.points_value = points_value
     if finishes_at is not None:
         challenge.finishes_at = finishes_at
     if semana_id is not None:
         challenge.semana_id = semana_id
-    if prompt is not None:
-        challenge.prompt = prompt
-    if points_value is not None:
-        challenge.points_value = points_value
-    if input_answer is not None:
-        challenge.input_answer = input_answer
     if resource_urls is not None:
         challenge.resource_urls = resource_urls
 

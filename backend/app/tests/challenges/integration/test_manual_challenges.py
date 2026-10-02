@@ -25,6 +25,6 @@ async def test_manual_challenge_cannot_receive_questions(
     c = as_user(admin)
     r = await c.patch(
         f"api/v1/admin/challenge/{manual_challenge.id}",
-        json={"questions": [{"prompt": "?", "answer": "!", "points_value": 10}]},
+        json={"questions": [{"prompt": "?", "answer": "!"}]},
     )
     assert r.status_code == 400
