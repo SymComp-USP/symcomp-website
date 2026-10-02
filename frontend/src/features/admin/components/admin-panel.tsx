@@ -181,6 +181,7 @@ export function AdminPanel() {
           {tab === 'users' && (
             <UsersSection
               users={users}
+              currentUserId={user.id}
               onCreated={() => setRefresh((value) => value + 1)}
               onDelete={removeUser}
               onToggleAdmin={toggleAdmin}
@@ -212,7 +213,11 @@ export function AdminPanel() {
             />
           )}
           {tab === 'activities' && (
-            <ActivitiesSection atividades={atividades} semanas={semanas} />
+            <ActivitiesSection
+              atividades={atividades}
+              semanas={semanas}
+              onActivityChanged={() => setRefresh((value) => value + 1)}
+            />
           )}
           {tab === 'points' && (
             <Unavailable

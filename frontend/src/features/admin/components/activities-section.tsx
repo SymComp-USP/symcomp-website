@@ -1,7 +1,9 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Trash2 } from 'lucide-react'
+import { Pencil, Trash2 } from 'lucide-react'
+
+import { Button } from '@/components/ui/button'
 
 import {
   deleteAdminPresenca,
@@ -12,13 +14,16 @@ import {
 } from '../api'
 
 import { ActivityCodeAction, ManualPresenceForm } from './activity-presence'
+import { ActivityForm } from './activity-form'
 
 export function ActivitiesSection({
   atividades,
   semanas,
+  onActivityChanged,
 }: {
   atividades: Record<number, AdminAtividade[]>
   semanas: AdminSemana[]
+  onActivityChanged: () => void
 }) {
   const allActivities = semanas.flatMap((semana) =>
     (atividades[semana.id] ?? []).map((atividade) => ({ atividade, semana })),
@@ -28,6 +33,7 @@ export function ActivitiesSection({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [refresh, setRefresh] = useState(0)
+  const [editing, setEditing] = useState(false)
   const selected = allActivities.find(({ atividade }) => atividade.id === selectedId)
   const selectedSemanaId = selected?.semana.id
 
@@ -65,7 +71,10 @@ export function ActivitiesSection({
             <button
               className={`w-full rounded-xl border p-4 text-left ${selectedId === atividade.id ? 'border-slate-950 bg-slate-950 text-white' : 'border-slate-200 bg-white hover:border-slate-400'}`}
               key={atividade.id}
-              onClick={() => setSelectedId(atividade.id)}
+              onClick={() => {
+                setSelectedId(atividade.id)
+                setEditing(false)
+              }}
               type="button"
             >
               <p className="text-xs font-bold uppercase tracking-wider opacity-70">
@@ -90,9 +99,30 @@ export function ActivitiesSection({
             <p className="text-xs font-bold uppercase tracking-wider text-indigo-600">
               {selected.semana.nome} · {selected.semana.ano}
             </p>
-            <h2 className="mt-1 text-xl font-bold">
-              {selected.atividade.titulo || 'Sem título'}
-            </h2>
+            <div className="flex items-start justify-between gap-3">
+              <h2 className="mt-1 text-xl font-bold">
+                {selected.atividade.titulo || 'Sem título'}
+              </h2>
+              <Button
+                onClick={() => setEditing((value) => !value)}
+                size="sm"
+                type="button"
+                variant="outline"
+              >
+                {editing ? ' Cancelar' : 'Editar'}
+              </Button>
+            </div>
+            {editing && (
+              <ActivityForm
+                atividade={selected.atividade}
+                onDone={() => {
+                  setEditing(false)
+                  onActivityChanged()
+                  setRefresh((value) => value + 1)
+                }}
+                semanaId={selected.semana.id}
+              />
+            )}
             <ActivityCodeAction
               atividade={selected.atividade}
               onChanged={() => setRefresh((value) => value + 1)}

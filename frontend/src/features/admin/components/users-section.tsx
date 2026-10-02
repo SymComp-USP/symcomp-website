@@ -10,11 +10,13 @@ import { createAdminUser, type AdminUser } from '../api'
 
 export function UsersSection({
   users,
+  currentUserId,
   onCreated,
   onDelete,
   onToggleAdmin,
 }: {
   users: AdminUser[]
+  currentUserId: string
   onCreated: () => void
   onDelete: (id: string) => void
   onToggleAdmin: (user: AdminUser) => void
@@ -59,8 +61,14 @@ export function UsersSection({
                   <div className="flex justify-end gap-3">
                     <button
                       aria-label={`Alternar admin de ${item.name}`}
-                      className="text-slate-400 hover:text-indigo-600"
+                      className="text-slate-400 hover:text-indigo-600 disabled:cursor-not-allowed disabled:opacity-40"
+                      disabled={item.id === currentUserId}
                       onClick={() => onToggleAdmin(item)}
+                      title={
+                        item.id === currentUserId
+                          ? 'Você não pode alterar seu próprio acesso de administrador'
+                          : undefined
+                      }
                     >
                       <Shield size={17} />
                     </button>
