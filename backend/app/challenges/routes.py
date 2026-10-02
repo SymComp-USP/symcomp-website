@@ -125,11 +125,11 @@ async def submit_input(
         raise NotFoundError("Challenge not found.")
     if challenge.scoring_type != ChallengeScoringType.INPUT:
         raise BadRequestError("Challenge does not accept input submissions.")
-    challenge_service.ensure_challenge_open(challenge.finishes_at)
     if participant.submitted_at is not None:
         return challenge_schemas.SubmissionResponse(
             submitted_at=participant.submitted_at, score=participant.score
         )
+    challenge_service.ensure_challenge_open(challenge.finishes_at)
 
     participant.submission = data.answer
     input_data = challenge.input

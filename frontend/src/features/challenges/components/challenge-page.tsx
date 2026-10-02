@@ -68,11 +68,11 @@ export function ChallengePage() {
       setChallenge((current) =>
         current
           ? {
-            ...current,
-            is_participant: true,
-            submitted_at: participant.submitted_at,
-            score: participant.score,
-          }
+              ...current,
+              is_participant: true,
+              submitted_at: participant.submitted_at,
+              score: participant.score,
+            }
           : current,
       )
     } catch (err) {
@@ -107,10 +107,10 @@ export function ChallengePage() {
       setChallenge((current) =>
         current
           ? {
-            ...current,
-            submitted_at: submission.submitted_at,
-            score: submission.score,
-          }
+              ...current,
+              submitted_at: submission.submitted_at,
+              score: submission.score,
+            }
           : current,
       )
     } catch (err) {

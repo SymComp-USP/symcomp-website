@@ -77,6 +77,14 @@ async def test_input_challenge_scores_using_challenge_points(
         )
     ) == 1
 
+    challenge.finishes_at = datetime.now(UTC) - timedelta(seconds=1)
+    await db_session.flush()
+    expired_retry = await c.post(
+        f"api/v1/challenge/{challenge.id}/input", json={"answer": "incorrect"}
+    )
+    assert expired_retry.status_code == 200
+    assert expired_retry.json() == correct_response.json()
+
 
 async def test_input_submission_is_rejected_after_challenge_expires(
     client: AsyncClient, as_user, user, challenge, db_session
@@ -96,7 +104,7 @@ async def test_input_submission_is_rejected_after_challenge_expires(
         f"api/v1/challenge/{challenge.id}/input", json={"answer": "incorrect"}
     )
 
-    assert response.status_code == 400
+    assert response.status_code == 409
 
 
 async def test_full_quiz_lifecycle(
@@ -225,7 +233,7 @@ async def test_quiz_submission_is_rejected_after_challenge_expires(
 
     response = await c.post(f"api/v1/challenge/{challenge.id}/submit")
 
-    assert response.status_code == 400
+    assert response.status_code == 409
 
 
 async def test_answering_without_joining_returns_400(
@@ -391,12 +399,23 @@ async def test_existing_submission_remains_idempotent_after_deadline(
     as_user,
     user,
     challenge,
+    questions,
     db_session,
 ):
     c = as_user(user)
-    await c.post(f"api/v1/challenge/{challenge.id}/join")
+    joined = await c.post(f"api/v1/challenge/{challenge.id}/join")
+    assert joined.status_code == 200, joined.text
+    saved_answers = await c.post(
+        f"api/v1/challenge/{challenge.id}/answer/all",
+        json=[
+            {"question_id": str(question.id), "answer": question.answer}
+            for question in questions
+        ],
+    )
+    assert saved_answers.status_code == 204
     first_response = await c.post(f"api/v1/challenge/{challenge.id}/submit")
     assert first_response.status_code == 200
+    assert first_response.json()["submitted_at"] is not None
 
     challenge.finishes_at = datetime.now(UTC) - timedelta(seconds=1)
     await db_session.flush()
