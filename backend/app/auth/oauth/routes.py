@@ -168,6 +168,7 @@ async def oauth_callback(
                 email = profile.get("email", "")
                 verified = profile.get("email_verified") in (True, "true")
                 name = profile.get("name") or email.split("@", 1)[0]
+                subject = str(profile.get("sub", ""))
             else:
                 token_res = await client.post(
                     "https://github.com/login/oauth/access_token",
@@ -212,31 +213,44 @@ async def oauth_callback(
                     or profile.get("login")
                     or email.split("@", 1)[0]
                 )
+                subject = str(profile.get("id", ""))
     except (httpx.HTTPError, KeyError, ValueError) as exc:
         logger.warning("OAuth exchange error with provider %s: %s", provider, exc)
         return fail("oauth_provider_error")
 
     email = email.strip().lower()
     name = " ".join(str(name).split())[:255]
+    subject = subject.strip()
     if not email or not verified or not name:
         return fail("oauth_unverified_email" if not verified else "oauth_profile")
+    if not subject:
+        return fail("oauth_profile")
 
     user = await db.scalar(
-        select(User).where(func.lower(User.email) == email).with_for_update()
+        select(User)
+        .where(User.oauth_provider == provider, User.oauth_subject == subject)
+        .with_for_update()
     )
-    if user is not None:
-        return fail("email_exists")
+    if user is None:
+        user = await db.scalar(
+            select(User).where(func.lower(User.email) == email).with_for_update()
+        )
+        if user is not None:
+            return fail("email_exists")
 
-    user = User(
-        email=email,
-        name=name,
-        password_hash=None,
-        oauth_provider=provider,
-        is_verified=True,
-        is_admin=False,
-    )
-    db.add(user)
-    await db.flush()
+        user = User(
+            email=email,
+            name=name,
+            password_hash=None,
+            oauth_provider=provider,
+            oauth_subject=subject,
+            is_verified=True,
+            is_admin=False,
+        )
+        db.add(user)
+        await db.flush()
+    elif user.deleted_at is not None:
+        return fail("email_exists")
 
     scopes = list(DEFAULT_SCOPES)
     if user.is_admin:

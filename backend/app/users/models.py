@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from sqlalchemy import Boolean, String
+from sqlalchemy import Boolean, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.core.mixins import TimestampsMixin, UUIDPKMixin
@@ -18,6 +18,12 @@ class User(Base, UUIDPKMixin, TimestampsMixin):
     a partir do nome da classe ("User" -> "users").
     """
 
+    __table_args__ = (
+        UniqueConstraint(
+            "oauth_provider", "oauth_subject", name="users_oauth_identity_key"
+        ),
+    )
+
     email: Mapped[str] = mapped_column(
         String(255), unique=True, index=True, nullable=False
     )
@@ -28,6 +34,7 @@ class User(Base, UUIDPKMixin, TimestampsMixin):
     password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
     oauth_provider: Mapped[str | None] = mapped_column(String(16), nullable=True)
+    oauth_subject: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
     is_admin: Mapped[bool] = mapped_column(
         Boolean, nullable=False, default=False, server_default="false"
