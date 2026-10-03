@@ -35,6 +35,23 @@ const navLinkClassName = cn(
   semanaBody.variable,
 )
 
+// Pixel-art button from the "Inscreva-se" design, used by Entrar and Sair.
+const pixelButtonClassName = cn(
+  'group mx-auto mt-4 block w-fit focus-visible:outline-none',
+  semanaDisplay.variable,
+)
+
+function PixelButtonLabel({ children }: { children: ReactNode }) {
+  return (
+    // Thin navy outline with a thicker bottom edge as the shadow.
+    <span className="semana-notch-xy block bg-[hsl(var(--semana-contrast))] px-1.5 pb-[13px] pt-1.5 [--notch-bottom:12px] [--notch-top:10px] [--notch-x:19px] group-focus-visible:bg-[hsl(var(--ring))]">
+      <span className="semana-notch-xy block bg-white px-10 py-4 font-[family-name:var(--font-semana-display)] text-[1.6rem] uppercase leading-none tracking-[0.04em] text-[hsl(var(--semana-contrast))] transition-colors [--notch-bottom:10px] [--notch-top:10px] [--notch-x:19px] group-hover:bg-[hsl(var(--semana-hover))]">
+        {children}
+      </span>
+    </span>
+  )
+}
+
 export function SemanaShell({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
@@ -136,29 +153,18 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                 {!loading &&
                   (user ? (
                     <SheetClose asChild>
-                      <Button
-                        className="mt-2 justify-start"
+                      <button
+                        className={pixelButtonClassName}
                         onClick={logout}
-                        variant="outline"
+                        type="button"
                       >
-                        Sair
-                      </Button>
+                        <PixelButtonLabel>Sair</PixelButtonLabel>
+                      </button>
                     </SheetClose>
                   ) : (
                     <SheetClose asChild>
-                      <Link
-                        className={cn(
-                          'group mx-auto mt-4 block w-fit focus-visible:outline-none',
-                          semanaDisplay.variable,
-                        )}
-                        href="/semana/login"
-                      >
-                        {/* Thin navy outline with a thicker bottom edge as the shadow. */}
-                        <span className="semana-notch-xy block bg-[hsl(var(--semana-contrast))] px-1.5 pb-[13px] pt-1.5 [--notch-bottom:12px] [--notch-top:10px] [--notch-x:19px] group-focus-visible:bg-[hsl(var(--ring))]">
-                          <span className="semana-notch-xy block bg-white px-10 py-4 font-[family-name:var(--font-semana-display)] text-[1.6rem] uppercase leading-none tracking-[0.04em] text-[hsl(var(--semana-contrast))] transition-colors [--notch-bottom:10px] [--notch-top:10px] [--notch-x:19px] group-hover:bg-[hsl(var(--semana-hover))]">
-                            Entrar
-                          </span>
-                        </span>
+                      <Link className={pixelButtonClassName} href="/semana/login">
+                        <PixelButtonLabel>Entrar</PixelButtonLabel>
                       </Link>
                     </SheetClose>
                   ))}
