@@ -104,7 +104,7 @@ async def test_oauth_callback_denied(db_client: AsyncClient, test_settings: Sett
 
 
 @pytest.mark.asyncio
-async def test_oauth_callback_google_success_creates_user(
+async def test_oauth_callback_google_creates_and_reauthenticates_user(
     db_client: AsyncClient, db_session, test_settings: Settings
 ):
     test_settings.google_client_id = "test-google-id"
@@ -124,6 +124,7 @@ async def test_oauth_callback_google_success_creates_user(
         "email": "oauth.user@example.com",
         "email_verified": True,
         "name": "OAuth User",
+        "sub": "google-user-id",
     }
     mock_claims_resp.raise_for_status.return_value = None
 
@@ -148,14 +149,41 @@ async def test_oauth_callback_google_success_creates_user(
     assert user is not None
     assert user.name == "OAuth User"
     assert user.oauth_provider == "google"
+    assert user.oauth_subject == "google-user-id"
     assert user.is_verified is True
     assert user.password_hash is None
+
+    repeat_state = "returning-google-state"
+    db_client.cookies.set(
+        "oauth_state", _make_state_cookie(test_settings, "google", repeat_state)
+    )
+    with (
+        patch("httpx.AsyncClient.post", return_value=mock_token_resp),
+        patch("httpx.AsyncClient.get", return_value=mock_claims_resp),
+    ):
+        response = await db_client.get(
+            "/api/v1/auth/oauth/google/callback",
+            params={"code": "returning-auth-code", "state": repeat_state},
+            follow_redirects=False,
+        )
+
+    assert response.status_code == 303
+    assert response.headers.get("Location", "").endswith("/semana/perfil")
+    returning_user = await db_session.scalar(
+        select(User).where(User.oauth_subject == "google-user-id")
+    )
+    assert returning_user is not None
+    assert returning_user.id == user.id
 
 
 @pytest.mark.asyncio
 @pytest.mark.parametrize(
-    ("oauth_provider", "deleted"),
-    [(None, False), ("github", False), (None, True)],
+    ("oauth_provider", "oauth_subject", "deleted"),
+    [
+        (None, None, False),
+        ("github", "github-user-id", False),
+        ("google", "google-user-id", True),
+    ],
 )
 async def test_oauth_callback_blocks_existing_email(
     db_client: AsyncClient,
@@ -164,6 +192,7 @@ async def test_oauth_callback_blocks_existing_email(
     user_factory,
     test_settings: Settings,
     oauth_provider: str | None,
+    oauth_subject: str | None,
     deleted: bool,
 ):
     if deleted:
@@ -171,6 +200,7 @@ async def test_oauth_callback_blocks_existing_email(
     else:
         user = await user_factory(email="existing-pwd@example.com")
     user.oauth_provider = oauth_provider
+    user.oauth_subject = oauth_subject
     await db_session.flush()
 
     test_settings.google_client_id = "test-google-id"
@@ -190,6 +220,7 @@ async def test_oauth_callback_blocks_existing_email(
         "email": "existing-pwd@example.com",
         "email_verified": True,
         "name": "Imposter",
+        "sub": "google-user-id",
     }
     mock_claims_resp.raise_for_status.return_value = None
 
@@ -207,5 +238,6 @@ async def test_oauth_callback_blocks_existing_email(
     assert response.status_code == 303
     assert "error=email_exists" in response.headers.get("Location", "")
     assert user.oauth_provider == oauth_provider
+    assert user.oauth_subject == oauth_subject
     assert user.password_hash is not None
     assert (user.deleted_at is not None) is deleted
