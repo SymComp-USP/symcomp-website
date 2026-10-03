@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export function SemanaHome() {
   const links = [
-    { href: '/semana/cronograma', label: 'Programação' },
+    { href: '/semana/cronograma', label: 'Cronograma' },
     { href: '/semana/cadastro', label: 'Se inscrever' },
   ]
 
