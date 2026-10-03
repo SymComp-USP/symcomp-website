@@ -40,7 +40,9 @@ export function SemanaShell({ children }: { children: ReactNode }) {
 
 function SemanaShellContent({ children }: { children: ReactNode }) {
   const { user, loading, logout } = useAuth()
-  const isSponsorsPage = usePathname() === '/semana/patrocinadores'
+  const pathname = usePathname()
+  const isSponsorsPage = pathname === '/semana/patrocinadores'
+  const isSchedulePage = pathname === '/semana/cronograma'
 
   return (
     <div
@@ -53,7 +55,9 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
       <header
         className={cn(
           'sticky top-0 z-40 border-b-[6px] border-[hsl(var(--semana-contrast))] backdrop-blur',
-          isSponsorsPage ? 'bg-[hsl(var(--semana-sponsor))]' : 'bg-background/95',
+          isSponsorsPage && 'bg-[hsl(var(--semana-sponsor))]',
+          isSchedulePage && 'bg-[hsl(var(--semana-schedule))]',
+          !isSponsorsPage && !isSchedulePage && 'bg-background/95',
         )}
       >
         <div className="mx-auto grid h-20 max-w-6xl grid-cols-3 items-center px-6">

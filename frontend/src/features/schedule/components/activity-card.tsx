@@ -1,150 +1,62 @@
-import {
-  CalendarPlus,
-  Clock,
-  Coffee,
-  MapPin,
-  MessageCircle,
-  Presentation,
-  Users,
-  Youtube,
-} from 'lucide-react'
+import { Coffee, MessageCircle, Presentation, Users, Wrench } from 'lucide-react'
 
-import { SemanaButton } from '@/features/semana/components/semana-button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
-
-import { googleCalendarUrl } from '../calendar'
-import type { Activity, ActivityType } from '../types'
-
-const typeLabels: Record<ActivityType, string> = {
-  talk: 'Palestra',
-  conversation: 'Conversa',
-  closing: 'Encerramento',
-  coffee_break: 'Intervalo',
-}
+import { formatTimeRange } from '../time'
+import { type Activity, activityTypeLabels } from '../types'
 
 const typeIcons = {
   talk: Presentation,
+  workshop: Wrench,
   conversation: MessageCircle,
   closing: Users,
   coffee_break: Coffee,
 }
 
-const timeFormatter = new Intl.DateTimeFormat('pt-BR', {
-  hour: '2-digit',
-  minute: '2-digit',
-  timeZone: 'America/Sao_Paulo',
-})
-
-export function ActivityCard({ activity }: { activity: Activity }) {
+export function ActivityCard({
+  activity,
+  onOpen,
+}: {
+  activity: Activity
+  onOpen: () => void
+}) {
   const Icon = typeIcons[activity.type]
   const speakers = activity.speakers.map((speaker) => speaker.name).join(', ')
+  const photo = activity.speakers.find((speaker) => speaker.photo)?.photo
 
   return (
-    <article className="rounded-none border-[7px] border-white bg-card p-5 text-card-foreground shadow-[0_8px_0_hsl(var(--semana-contrast))]">
-      <div className="flex items-start gap-4">
-        <div className="rounded-none border-2 border-[hsl(var(--semana-contrast))] bg-primary p-2.5">
-          <Icon aria-hidden="true" size={22} />
-        </div>
-        <div className="min-w-0 flex-1 space-y-3">
-          <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-              {typeLabels[activity.type]}
-            </p>
-            <h3 className="mt-1 text-xl font-semibold leading-tight">{activity.title}</h3>
-          </div>
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm text-muted-foreground">
-            <span className="inline-flex items-center gap-1.5">
-              <Clock aria-hidden="true" size={16} />
-              {timeFormatter.format(new Date(activity.startsAt))}–
-              {timeFormatter.format(new Date(activity.endsAt))}
-            </span>
-            {activity.location && (
-              <span className="inline-flex items-center gap-1.5">
-                <MapPin aria-hidden="true" size={16} />
-                {activity.location}
-              </span>
-            )}
-          </div>
-          {speakers && <p className="text-sm font-medium">{speakers}</p>}
-          {activity.description && (
-            <p className="text-sm leading-6 text-muted-foreground">
-              {activity.description}
-            </p>
-          )}
-          {activity.liveUrl && (
-            <a
-              className="inline-flex items-center gap-2 text-sm font-semibold underline"
-              href={activity.liveUrl}
-              rel="noreferrer"
-              target="_blank"
-            >
-              <Youtube aria-hidden="true" size={16} /> Assistir transmissão
-            </a>
-          )}
-          <div className="flex flex-wrap gap-3">
-            <SemanaButton
-              asChild
-              className="border-4 px-3 py-2 text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
-            >
-              <a href={googleCalendarUrl(activity)} rel="noreferrer" target="_blank">
-                <CalendarPlus aria-hidden="true" className="mr-2" size={16} /> Adicionar à
-                agenda
-              </a>
-            </SemanaButton>
-            {(activity.description ||
-              activity.speakers.some((speaker) => speaker.bio || speaker.photo)) && (
-              <Dialog>
-                <DialogTrigger asChild>
-                  <SemanaButton className="border-4 px-3 py-2 text-xs" variant="outline">
-                    Saber mais
-                  </SemanaButton>
-                </DialogTrigger>
-                <DialogContent className="semana-theme">
-                  <DialogHeader>
-                    <DialogTitle>{activity.title}</DialogTitle>
-                    <DialogDescription>
-                      {activity.speakers.map((speaker) => speaker.name).join(', ')}
-                    </DialogDescription>
-                  </DialogHeader>
-                  {activity.description && (
-                    <p className="text-sm leading-6">{activity.description}</p>
-                  )}
-                  <div className="space-y-3">
-                    {activity.speakers.map(
-                      (speaker) =>
-                        (speaker.bio || speaker.photo) && (
-                          <div className="flex gap-3" key={speaker.name}>
-                            {speaker.photo && (
-                              <img
-                                alt=""
-                                className="size-12 rounded-full object-cover"
-                                src={speaker.photo}
-                              />
-                            )}
-                            <div>
-                              <h3 className="font-semibold">{speaker.name}</h3>
-                              {speaker.bio && (
-                                <p className="text-sm text-muted-foreground">
-                                  {speaker.bio}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        ),
-                    )}
-                  </div>
-                </DialogContent>
-              </Dialog>
+    <article className="relative mb-3.5 border-[6px] border-white bg-[hsl(var(--semana-schedule))] after:absolute after:inset-x-2 after:-bottom-5 after:h-3.5 after:bg-[hsl(var(--semana-schedule-ink))]">
+      <div className="flex items-center gap-4 p-3 sm:p-4">
+        <div className="semana-pixel-octagon flex size-24 shrink-0 items-center justify-center bg-white sm:size-28">
+          <div className="flex size-[76px] items-center justify-center overflow-hidden rounded-full bg-[hsl(var(--semana-schedule-ink))] text-white sm:size-[90px]">
+            {photo ? (
+              <img alt="" className="size-full object-cover" src={photo} />
+            ) : (
+              <Icon aria-hidden="true" size={36} />
             )}
           </div>
         </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="text-xl font-semibold leading-tight text-[hsl(var(--semana-schedule-ink))] sm:text-2xl">
+            {activity.title}
+          </h3>
+          <p className="mt-1 text-base font-light text-white sm:text-lg">
+            {speakers || activityTypeLabels[activity.type]}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-stretch border-t-[6px] border-white">
+        <button
+          aria-haspopup="dialog"
+          className="flex-1 bg-[hsl(var(--semana-schedule-ink))] px-3 py-2 text-center text-base font-semibold uppercase text-white transition-colors hover:bg-[hsl(var(--semana-schedule-ink)/0.85)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-ring sm:text-lg"
+          onClick={onOpen}
+          type="button"
+        >
+          Saber mais +<span className="sr-only">: {activity.title}</span>
+        </button>
+        <p className="flex items-center bg-white px-3 py-2 text-base font-semibold text-[hsl(var(--semana-schedule-ink))] sm:text-lg">
+          <span className="sr-only">Horário: </span>
+          {formatTimeRange(activity.startsAt, activity.endsAt)}
+        </p>
       </div>
     </article>
   )

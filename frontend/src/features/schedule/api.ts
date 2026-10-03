@@ -9,7 +9,15 @@ type ApiActivity = {
   titulo: string
   descricao: string | null
   local: string | null
-  palestrantes: { nome: string; sobre?: string; foto?: string }[]
+  palestrantes: {
+    nome: string
+    sobre?: string
+    foto?: string
+    linkedin?: string
+    youtube?: string
+    instagram?: string
+    patrocinador?: string
+  }[]
   comeca_as: string
   termina_as: string
   link_live: string | null
@@ -31,7 +39,7 @@ function mediaUrl(path: string) {
 export function mapActivity(activity: ApiActivity) {
   const typeByActivity: Record<ApiActivity['tipo'], Activity['type']> = {
     palestra: 'talk',
-    workshop: 'talk',
+    workshop: 'workshop',
     encerramento: 'closing',
     conversa: 'conversation',
     coffee_break: 'coffee_break',
@@ -46,6 +54,10 @@ export function mapActivity(activity: ApiActivity) {
       name: speaker.nome,
       bio: speaker.sobre,
       photo: speaker.foto ? mediaUrl(speaker.foto) : undefined,
+      linkedin: speaker.linkedin,
+      youtube: speaker.youtube,
+      instagram: speaker.instagram,
+      sponsor: speaker.patrocinador,
     })),
     startsAt: activity.comeca_as,
     endsAt: activity.termina_as,

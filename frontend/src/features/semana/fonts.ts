@@ -9,5 +9,5 @@ export const semanaDisplay = Silkscreen({
 export const semanaBody = Barlow_Semi_Condensed({
   subsets: ['latin'],
   variable: '--font-semana-body',
-  weight: ['400', '700'],
+  weight: ['300', '400', '600', '700'],
 })
