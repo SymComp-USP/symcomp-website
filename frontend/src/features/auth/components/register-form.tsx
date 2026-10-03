@@ -17,6 +17,7 @@ import {
 import { useAuth } from '@/features/auth/auth-provider'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
+import { OAuthButtons } from './oauth-buttons'
 
 const schema = z.object({
   name: z.string().trim().min(1, 'Digite seu nome.').max(255),
@@ -55,6 +56,9 @@ export function RegisterForm() {
 
   return (
     <Form {...form}>
+      <div className="mb-5">
+        <OAuthButtons />
+      </div>
       <form className="space-y-5" onSubmit={form.handleSubmit(submit)}>
         <FormField
           control={form.control}

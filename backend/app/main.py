@@ -7,6 +7,7 @@ from fastapi.staticfiles import StaticFiles
 from app.atividade.routes import admin_router as atividade_admin_router
 from app.atividade.routes import attendance_router as atividade_attendance_router
 from app.atividade.routes import router as atividade_router
+from app.auth.oauth.routes import router as oauth_router
 from app.auth.routes import router as auth_router
 from app.challenges.admin_routes import router as challenge_admin_router
 from app.challenges.routes import router as challenge_router
@@ -54,6 +55,7 @@ app.add_middleware(RateLimitMiddleware)
 
 app.include_router(health_router, prefix="/api/v1")
 app.include_router(auth_router, prefix="/api/v1/auth")
+app.include_router(oauth_router, prefix="/api/v1/auth")
 app.include_router(user_router, prefix="/api/v1/user")
 app.include_router(semana_router, prefix="/api/v1")
 app.include_router(semana_admin_router, prefix="/api/v1")

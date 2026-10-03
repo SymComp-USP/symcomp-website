@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import time
 from collections import defaultdict
 from collections.abc import Callable
 from re import fullmatch
+from typing import ClassVar
 
 from fastapi import Request
 from fastapi.responses import JSONResponse
@@ -19,11 +22,19 @@ ATTENDANCE_LIMIT: RateLimit = (10, 60)
 
 class RateLimitMiddleware:
     # ponytail: process-local limits; use Redis when running multiple workers/instances.
+    _instances: ClassVar[list[RateLimitMiddleware]] = []
+
     def __init__(self, app: Callable):
         self.app = app
         self.requests: defaultdict[tuple[str, str, str], list[float]] = defaultdict(
             list
         )
+        RateLimitMiddleware._instances.append(self)
+
+    @classmethod
+    def reset_all(cls) -> None:
+        for instance in cls._instances:
+            instance.requests.clear()
 
     async def __call__(self, scope, receive, send):
         if scope["type"] != "http":

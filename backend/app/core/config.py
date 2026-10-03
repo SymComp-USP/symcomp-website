@@ -83,6 +83,13 @@ class Settings(BaseSettings):
         description="Identificador do cliente que consome o id_token (claim 'aud')",
     )
 
+    google_client_id: str | None = None
+    google_client_secret: SecretStr | None = None
+    github_client_id: str | None = None
+    github_client_secret: SecretStr | None = None
+    oauth_redirect_base: AnyHttpUrl = Field(default="http://localhost:8000")
+    frontend_base_url: AnyHttpUrl = Field(default="http://localhost:3000")
+
     media_root: Path = Field(
         # o default aqui assume /backend/app/core/config.py como caminho deste arquivo
         # se isso mudar, é bom atualizar
