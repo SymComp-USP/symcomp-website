@@ -34,6 +34,7 @@ export function ActivitiesSection({
   const [error, setError] = useState('')
   const [refresh, setRefresh] = useState(0)
   const [editing, setEditing] = useState(false)
+  const [sorteada, setSorteada] = useState<AdminPresenca>()
   const listRequestId = useRef(0)
   const selectedIdRef = useRef(selectedId)
   const selected = allActivities.find(({ atividade }) => atividade.id === selectedId)
@@ -97,6 +98,7 @@ export function ActivitiesSection({
               onClick={() => {
                 setSelectedId(atividade.id)
                 setEditing(false)
+                setSorteada(undefined)
               }}
               type="button"
             >
@@ -155,6 +157,23 @@ export function ActivitiesSection({
             <div className="mt-6 flex items-center justify-between">
               <h3 className="font-bold">Presenças ({presencas.length})</h3>
               {loading && <span className="text-xs text-slate-500">Carregando…</span>}
+            </div>
+            <div className="mt-3 flex items-center gap-3">
+              <Button
+                disabled={!presencas.length || loading}
+                onClick={() =>
+                  setSorteada(presencas[Math.floor(Math.random() * presencas.length)])
+                }
+                size="sm"
+                type="button"
+              >
+                Sortear participante
+              </Button>
+              {sorteada && (
+                <p className="text-sm">
+                  Sorteado: <span className="font-bold">{sorteada.nome}</span>
+                </p>
+              )}
             </div>
             <div className="mt-3 space-y-2">
               {presencas.map((presenca) => (
