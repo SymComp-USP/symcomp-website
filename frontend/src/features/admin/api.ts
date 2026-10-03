@@ -196,7 +196,9 @@ export function deleteAdminSemana(id: number) {
 }
 
 export function listAdminAtividades(semanaId: number) {
-  return requestApi<AdminAtividade[]>(`/admin/semanas/${semanaId}/atividades`)
+  return requestApi<AdminAtividade[]>(`/admin/semanas/${semanaId}/atividades`, {
+    cache: 'no-store',
+  })
 }
 
 export function createAdminAtividade(

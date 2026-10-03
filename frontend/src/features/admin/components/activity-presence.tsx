@@ -61,12 +61,14 @@ export function ActivityCodeAction({
 export function ActivityCard({
   atividade,
   semanaId,
+  onActivitySaved,
   onChanged,
   onError,
   onDelete,
 }: {
   atividade: AdminAtividade
   semanaId: number
+  onActivitySaved: (atividade: AdminAtividade) => void
   onChanged: () => void
   onError: (message: string) => void
   onDelete: () => void
@@ -108,9 +110,9 @@ export function ActivityCard({
       {editing && (
         <ActivityForm
           atividade={atividade}
-          onDone={() => {
+          onDone={(savedActivity) => {
             setEditing(false)
-            onChanged()
+            onActivitySaved(savedActivity)
           }}
           semanaId={semanaId}
         />

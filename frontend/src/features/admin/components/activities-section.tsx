@@ -19,11 +19,11 @@ import { ActivityForm } from './activity-form'
 export function ActivitiesSection({
   atividades,
   semanas,
-  onActivityChanged,
+  onActivitySaved,
 }: {
   atividades: Record<number, AdminAtividade[]>
   semanas: AdminSemana[]
-  onActivityChanged: () => void
+  onActivitySaved: (atividade: AdminAtividade) => void
 }) {
   const allActivities = semanas.flatMap((semana) =>
     (atividades[semana.id] ?? []).map((atividade) => ({ atividade, semana })),
@@ -138,10 +138,9 @@ export function ActivitiesSection({
             {editing && (
               <ActivityForm
                 atividade={selected.atividade}
-                onDone={() => {
+                onDone={(atividade) => {
                   setEditing(false)
-                  onActivityChanged()
-                  setRefresh((value) => value + 1)
+                  onActivitySaved(atividade)
                 }}
                 semanaId={selected.semana.id}
               />

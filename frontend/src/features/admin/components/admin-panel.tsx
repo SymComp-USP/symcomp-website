@@ -57,6 +57,7 @@ export function AdminPanel() {
   const [error, setError] = useState('')
   const [refresh, setRefresh] = useState(0)
   const deletedChallengeIds = useRef(new Set<string>())
+  const activityLoadId = useRef(0)
 
   useEffect(() => {
     if (!loading && (!user || !user.isAdmin)) router.replace('/semana')
@@ -65,6 +66,7 @@ export function AdminPanel() {
   useEffect(() => {
     if (!user?.isAdmin) return
     let active = true
+    const requestId = ++activityLoadId.current
     Promise.all([listAdminUsers(), listAdminChallenges(), listAdminSemanas()])
       .then(([userPage, challengePage, semanaList]) => {
         if (!active) return
@@ -82,7 +84,9 @@ export function AdminPanel() {
         )
       })
       .then((activityLists) => {
-        if (active && activityLists) setAtividades(Object.fromEntries(activityLists))
+        if (active && requestId === activityLoadId.current && activityLists) {
+          setAtividades(Object.fromEntries(activityLists))
+        }
       })
       .catch((reason: Error) => {
         if (active) setError(reason.message)
@@ -94,6 +98,30 @@ export function AdminPanel() {
   }, [refresh, user])
 
   if (loading || !user?.isAdmin) return null
+
+  function saveActivity(atividade: AdminAtividade) {
+    activityLoadId.current += 1
+    setAtividades((current) => {
+      const currentWeek = current[atividade.semana_id] ?? []
+      const exists = currentWeek.some((item) => item.id === atividade.id)
+      return {
+        ...current,
+        [atividade.semana_id]: exists
+          ? currentWeek.map((item) => (item.id === atividade.id ? atividade : item))
+          : [atividade, ...currentWeek],
+      }
+    })
+  }
+
+  function removeActivity(semanaId: number, atividadeId: string) {
+    activityLoadId.current += 1
+    setAtividades((current) => ({
+      ...current,
+      [semanaId]: (current[semanaId] ?? []).filter(
+        (atividade) => atividade.id !== atividadeId,
+      ),
+    }))
+  }
 
   async function removeUser(id: string) {
     if (!window.confirm('Remover este usuário?')) return
@@ -236,6 +264,8 @@ export function AdminPanel() {
             <SemanasSection
               atividades={atividades}
               semanas={semanas}
+              onActivitySaved={saveActivity}
+              onActivityDeleted={removeActivity}
               onActivityChanged={() => setRefresh((value) => value + 1)}
               onChanged={() => setRefresh((value) => value + 1)}
             />
@@ -244,7 +274,7 @@ export function AdminPanel() {
             <ActivitiesSection
               atividades={atividades}
               semanas={semanas}
-              onActivityChanged={() => setRefresh((value) => value + 1)}
+              onActivitySaved={saveActivity}
             />
           )}
           {tab === 'points' && <PointsSection challenges={challenges} />}
