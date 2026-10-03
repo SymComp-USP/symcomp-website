@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Check, Pencil, Plus, Trash2 } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
@@ -86,7 +86,7 @@ export function ChallengesSection({
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-500">
-              {item.points_value} pontos ·
+              {item.scoring_type === 'manual' ? "Pontuação manual · " : `${item.points_value} pontos · `}
               começa em{' '}
               {new Date(item.starts_at).toLocaleDateString('pt-BR')} ·
               encerra em{' '}
@@ -130,6 +130,8 @@ function ChallengeForm({
   }))
   const [image, setImage] = useState<File | null>(null)
   const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const submitLocked = useRef(false)
 
   useEffect(() => {
     if (!latestSemanaId) return
@@ -141,6 +143,10 @@ function ChallengeForm({
 
   async function submit(event: React.FormEvent) {
     event.preventDefault()
+    if (submitLocked.current) return
+    submitLocked.current = true
+    setSubmitting(true)
+    setError('')
     try {
       const challengeInput = {
         title: form.title,
@@ -171,6 +177,9 @@ function ChallengeForm({
       onDone(savedChallenge)
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Não foi possível criar.')
+    } finally {
+      submitLocked.current = false
+      setSubmitting(false)
     }
   }
 
@@ -352,8 +361,13 @@ function ChallengeForm({
         </label>
       )}
       {error && <p className="text-sm text-red-700">{error}</p>}
-      <Button className="sm:col-span-2" type="submit">
-        <Check size={16} /> {challenge ? 'Salvar alterações' : 'Criar desafio'}
+      <Button className="sm:col-span-2" disabled={submitting} type="submit">
+        <Check size={16} />
+        {submitting
+          ? 'Salvando…'
+          : challenge
+            ? 'Salvar alterações'
+            : 'Criar desafio'}
       </Button>
     </form>
   )

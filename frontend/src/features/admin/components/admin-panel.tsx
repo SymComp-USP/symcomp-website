@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   CalendarDays,
   CircleAlert,
@@ -56,6 +56,7 @@ export function AdminPanel() {
   const [atividades, setAtividades] = useState<Record<number, AdminAtividade[]>>({})
   const [error, setError] = useState('')
   const [refresh, setRefresh] = useState(0)
+  const deletedChallengeIds = useRef(new Set<string>())
 
   useEffect(() => {
     if (!loading && (!user || !user.isAdmin)) router.replace('/semana')
@@ -63,10 +64,16 @@ export function AdminPanel() {
 
   useEffect(() => {
     if (!user?.isAdmin) return
+    let active = true
     Promise.all([listAdminUsers(), listAdminChallenges(), listAdminSemanas()])
       .then(([userPage, challengePage, semanaList]) => {
+        if (!active) return
         setUsers(userPage.items)
-        setChallenges(challengePage.items)
+        setChallenges(
+          challengePage.items.filter(
+            (challenge) => !deletedChallengeIds.current.has(challenge.id),
+          ),
+        )
         setSemanas(semanaList)
         return Promise.all(
           semanaList.map(
@@ -75,9 +82,15 @@ export function AdminPanel() {
         )
       })
       .then((activityLists) => {
-        if (activityLists) setAtividades(Object.fromEntries(activityLists))
+        if (active && activityLists) setAtividades(Object.fromEntries(activityLists))
       })
-      .catch((reason: Error) => setError(reason.message))
+      .catch((reason: Error) => {
+        if (active) setError(reason.message)
+      })
+
+    return () => {
+      active = false
+    }
   }, [refresh, user])
 
   if (loading || !user?.isAdmin) return null
@@ -96,7 +109,21 @@ export function AdminPanel() {
     if (!window.confirm('Remover este desafio?')) return
     try {
       await deleteAdminChallenge(id)
-      setRefresh((value) => value + 1)
+      deletedChallengeIds.current.add(id)
+      const removedChallenge = challenges.find((challenge) => challenge.id === id)
+      setChallenges((current) => current.filter((item) => item.id !== id))
+      if (
+        removedChallenge?.semana_id !== null &&
+        removedChallenge?.semana_id !== undefined
+      ) {
+        setSemanas((current) =>
+          current.map((semana) =>
+            semana.id === removedChallenge.semana_id
+              ? { ...semana, challenge_count: Math.max(0, semana.challenge_count - 1) }
+              : semana,
+          ),
+        )
+      }
     } catch (reason) {
       setError(reason instanceof Error ? reason.message : 'Não foi possível remover.')
     }

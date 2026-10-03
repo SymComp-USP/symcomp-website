@@ -112,7 +112,9 @@ export function deleteAdminUser(id: string) {
 }
 
 export function listAdminChallenges() {
-  return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100')
+  return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100', {
+    cache: 'no-store',
+  })
 }
 
 export function listAdminChallengeParticipants(
