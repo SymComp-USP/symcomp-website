@@ -30,6 +30,12 @@ const links = [
   { href: '/semana/sobre-nos', label: 'Sobre nós' },
 ]
 
+// The menu renders in a portal, outside the shell that defines the font variables.
+const navLinkClassName = cn(
+  'h-auto justify-start py-2.5 font-[family-name:var(--font-semana-body)] text-lg font-bold uppercase tracking-wide',
+  semanaBody.variable,
+)
+
 export function SemanaShell({ children }: { children: ReactNode }) {
   return (
     <AuthProvider>
@@ -97,18 +103,19 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
             </SheetTrigger>
             <SheetContent className="semana-theme border-l-[6px] border-[hsl(var(--semana-contrast))] bg-background font-[family-name:var(--font-semana-body)] text-foreground">
               <SheetHeader>
-                <SheetTitle className="font-[family-name:var(--font-semana-display)] uppercase">
+                <SheetTitle
+                  className={cn(
+                    'font-[family-name:var(--font-semana-display)] text-xl uppercase',
+                    semanaDisplay.variable,
+                  )}
+                >
                   Semana da Computação
                 </SheetTitle>
               </SheetHeader>
               <nav aria-label="Navegação principal" className="mt-8 flex flex-col gap-2">
                 {links.map((link) => (
                   <SheetClose asChild key={link.href}>
-                    <Button
-                      asChild
-                      className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
-                      variant="ghost"
-                    >
+                    <Button asChild className={navLinkClassName} variant="ghost">
                       <Link href={link.href}>{link.label}</Link>
                     </Button>
                   </SheetClose>
@@ -116,20 +123,12 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                 {user && (
                   <>
                     <SheetClose asChild>
-                      <Button
-                        asChild
-                        className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
-                        variant="ghost"
-                      >
+                      <Button asChild className={navLinkClassName} variant="ghost">
                         <Link href="/semana/ranking">Ranking</Link>
                       </Button>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Button
-                        asChild
-                        className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
-                        variant="ghost"
-                      >
+                      <Button asChild className={navLinkClassName} variant="ghost">
                         <Link href="/semana/perfil">Perfil</Link>
                       </Button>
                     </SheetClose>
