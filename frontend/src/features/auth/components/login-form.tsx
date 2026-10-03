@@ -53,6 +53,9 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
+      <div className="mb-5">
+        <OAuthButtons />
+      </div>
       <form className="space-y-5" onSubmit={form.handleSubmit(submit)}>
         <FormField
           control={form.control}
@@ -98,9 +101,6 @@ export function LoginForm() {
           {form.formState.isSubmitting ? 'Entrando…' : 'Entrar'}
         </SemanaButton>
       </form>
-      <div className="mt-5">
-        <OAuthButtons />
-      </div>
     </Form>
   )
 }

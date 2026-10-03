@@ -224,29 +224,19 @@ async def oauth_callback(
     user = await db.scalar(
         select(User).where(func.lower(User.email) == email).with_for_update()
     )
-    if user is not None and user.deleted_at is None and user.oauth_provider is None:
+    if user is not None:
         return fail("email_exists")
-    if user is not None and user.deleted_at is not None:
-        user.deleted_at = None
-        user.name = name
-        user.password_hash = None
-        user.oauth_provider = provider
-        user.is_admin = False
-        user.is_verified = True
-    elif user is None:
-        user = User(
-            email=email,
-            name=name,
-            password_hash=None,
-            oauth_provider=provider,
-            is_verified=True,
-            is_admin=False,
-        )
-        db.add(user)
-        await db.flush()
-    else:
-        # OAuth-origin accounts may authenticate with either configured provider.
-        user.is_verified = True
+
+    user = User(
+        email=email,
+        name=name,
+        password_hash=None,
+        oauth_provider=provider,
+        is_verified=True,
+        is_admin=False,
+    )
+    db.add(user)
+    await db.flush()
 
     scopes = list(DEFAULT_SCOPES)
     if user.is_admin:

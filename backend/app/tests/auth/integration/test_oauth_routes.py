@@ -153,10 +153,25 @@ async def test_oauth_callback_google_success_creates_user(
 
 
 @pytest.mark.asyncio
-async def test_oauth_callback_cannot_override_existing_password_user(
-    db_client: AsyncClient, user_factory, test_settings: Settings
+@pytest.mark.parametrize(
+    ("oauth_provider", "deleted"),
+    [(None, False), ("github", False), (None, True)],
+)
+async def test_oauth_callback_blocks_existing_email(
+    db_client: AsyncClient,
+    db_session,
+    deleted_user_factory,
+    user_factory,
+    test_settings: Settings,
+    oauth_provider: str | None,
+    deleted: bool,
 ):
-    await user_factory(email="existing-pwd@example.com")
+    if deleted:
+        user = await deleted_user_factory(email="existing-pwd@example.com")
+    else:
+        user = await user_factory(email="existing-pwd@example.com")
+    user.oauth_provider = oauth_provider
+    await db_session.flush()
 
     test_settings.google_client_id = "test-google-id"
     test_settings.google_client_secret = SecretStr("test-google-secret")
@@ -191,3 +206,6 @@ async def test_oauth_callback_cannot_override_existing_password_user(
 
     assert response.status_code == 303
     assert "error=email_exists" in response.headers.get("Location", "")
+    assert user.oauth_provider == oauth_provider
+    assert user.password_hash is not None
+    assert (user.deleted_at is not None) is deleted

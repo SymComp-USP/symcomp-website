@@ -56,6 +56,9 @@ export function RegisterForm() {
 
   return (
     <Form {...form}>
+      <div className="mb-5">
+        <OAuthButtons />
+      </div>
       <form className="space-y-5" onSubmit={form.handleSubmit(submit)}>
         <FormField
           control={form.control}
@@ -114,9 +117,6 @@ export function RegisterForm() {
           {form.formState.isSubmitting ? 'Criando conta…' : 'Criar conta'}
         </SemanaButton>
       </form>
-      <div className="mt-5">
-        <OAuthButtons />
-      </div>
     </Form>
   )
 }
