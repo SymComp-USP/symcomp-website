@@ -27,6 +27,8 @@ class User(Base, UUIDPKMixin, TimestampsMixin):
     # podem não ter senha própria.
     password_hash: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
+    oauth_provider: Mapped[str | None] = mapped_column(String(16), nullable=True)
+
     is_admin: Mapped[bool] = mapped_column(
         Boolean, nullable=False, default=False, server_default="false"
     )

@@ -17,6 +17,7 @@ import {
 import { useAuth } from '@/features/auth/auth-provider'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
+import { OAuthButtons } from './oauth-buttons'
 
 const schema = z.object({
   email: z.string().email('Digite um e-mail válido.'),
@@ -97,6 +98,9 @@ export function LoginForm() {
           {form.formState.isSubmitting ? 'Entrando…' : 'Entrar'}
         </SemanaButton>
       </form>
+      <div className="mt-5">
+        <OAuthButtons />
+      </div>
     </Form>
   )
 }
