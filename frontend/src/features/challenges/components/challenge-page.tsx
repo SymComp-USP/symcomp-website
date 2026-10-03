@@ -159,9 +159,7 @@ export function ChallengePage() {
         <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase">
           {challenge.title}
         </h1>
-        {challenge.description && (
-          <p className="text-lg">{challenge.description}</p>
-        )}
+        {challenge.description && <p className="text-lg">{challenge.description}</p>}
         <p className="text-xl">{challenge.prompt}</p>
         {challenge.image_url && (
           <div className="space-y-3">

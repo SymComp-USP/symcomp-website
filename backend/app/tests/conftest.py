@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from app.core.config import Settings, get_settings
 from app.core.database import get_session
+from app.core.rate_limit import RateLimitMiddleware
 from app.main import app
 from app.users import services as user_services
 from app.users.schemas import UserCreate
@@ -23,6 +24,20 @@ def test_settings() -> Settings:
 @pytest.fixture
 def jwt_settings(test_settings: Settings) -> Settings:
     return test_settings
+
+
+@pytest.fixture(autouse=True)
+def reset_rate_limit_state():
+    middleware = app.middleware_stack
+    if middleware is None:
+        middleware = app.build_middleware_stack()
+        app.middleware_stack = middleware
+
+    while middleware is not None:
+        if isinstance(middleware, RateLimitMiddleware):
+            middleware.requests.clear()
+            break
+        middleware = getattr(middleware, "app", None)
 
 
 @pytest_asyncio.fixture

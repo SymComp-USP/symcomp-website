@@ -86,11 +86,11 @@ export function ChallengesSection({
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-500">
-              {item.scoring_type === 'manual' ? "Pontuação manual · " : `${item.points_value} pontos · `}
-              começa em{' '}
-              {new Date(item.starts_at).toLocaleDateString('pt-BR')} ·
-              encerra em{' '}
-              {new Date(item.finishes_at).toLocaleDateString('pt-BR')}
+              {item.scoring_type === 'manual'
+                ? 'Pontuação manual · '
+                : `${item.points_value} pontos · `}
+              começa em {new Date(item.starts_at).toLocaleDateString('pt-BR')} · encerra
+              em {new Date(item.finishes_at).toLocaleDateString('pt-BR')}
             </p>
           </article>
         ))}
@@ -159,10 +159,10 @@ function ChallengeForm({
       const scoringInput =
         form.scoring_type === 'input'
           ? {
-            points_value: form.points_value,
-            prompt: form.prompt,
-            input_answer: form.input_answer,
-          }
+              points_value: form.points_value,
+              prompt: form.prompt,
+              input_answer: form.input_answer,
+            }
           : form.scoring_type === 'quiz'
             ? { points_value: form.points_value, questions: form.questions }
             : {}
@@ -320,7 +320,9 @@ function ChallengeForm({
         </div>
       )}
       <label className="sm:col-span-2">
-        <span className="mb-2 block text-sm font-medium">Imagem do desafio (MAX: 5MB)</span>
+        <span className="mb-2 block text-sm font-medium">
+          Imagem do desafio (MAX: 5MB)
+        </span>
         <Input
           accept="image/*"
           type="file"
@@ -363,11 +365,7 @@ function ChallengeForm({
       {error && <p className="text-sm text-red-700">{error}</p>}
       <Button className="sm:col-span-2" disabled={submitting} type="submit">
         <Check size={16} />
-        {submitting
-          ? 'Salvando…'
-          : challenge
-            ? 'Salvar alterações'
-            : 'Criar desafio'}
+        {submitting ? 'Salvando…' : challenge ? 'Salvar alterações' : 'Criar desafio'}
       </Button>
     </form>
   )
