@@ -14,6 +14,7 @@ from app.core import config, database
 from app.core.exceptions.app_errors import AppError
 from app.core.exceptions.handlers import app_error_handler, exception_handler
 from app.core.health import router as health_router
+from app.core.rate_limit import RateLimitMiddleware
 from app.semana.routes import admin_router as semana_admin_router
 from app.semana.routes import router as semana_router
 from app.users.admin_router import router as user_admin_router
@@ -44,6 +45,8 @@ if _settings.cors_origins:
         allow_methods=["*"],
         allow_headers=["*"],
     )
+
+app.add_middleware(RateLimitMiddleware)
 
 # ---------------------------------------------------------------------------
 # Rotas da API
