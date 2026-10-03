@@ -203,26 +203,27 @@
   }
 
   .semana-theme {
-    --background: 179 73% 29%;
+    --background: 177.6 22.6% 42.5%;
     --foreground: 0 0% 100%;
     --card: 0 0% 100%;
     --card-foreground: 244 75% 16%;
     --popover: 0 0% 100%;
     --popover-foreground: 244 75% 16%;
-    --primary: 45 100% 52%;
+    --primary: 60 46.4% 81%;
     --primary-foreground: 244 75% 16%;
     --secondary: 285 44% 53%;
     --secondary-foreground: 0 0% 100%;
     --muted: 221 100% 92%;
     --muted-foreground: 244 30% 35%;
-    --accent: 285 44% 53%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 257.1 61.9% 71.2%;
+    --accent-foreground: 244 75% 16%;
     --border: 244 75% 16%;
     --input: 244 75% 16%;
-    --ring: 45 100% 52%;
+    --ring: 60 46.4% 81%;
     --semana-tertiary: 17 97% 51%;
     --semana-contrast: 244 75% 16%;
     --semana-accent: 221 100% 92%;
+    --semana-hover: 257.1 61.9% 71.2%;
     --semana-sponsor: 336 52% 40%;
     --semana-sponsor-soft: 336 32% 47%;
     --semana-schedule: 257 62% 71%;

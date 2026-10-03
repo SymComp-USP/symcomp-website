@@ -33,7 +33,7 @@ export function SemanaHome() {
         >
           {links.map((link) => (
             <Link
-              className="rounded-full border-4 border-[hsl(var(--semana-contrast))] bg-white px-5 py-3 font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase text-[hsl(var(--semana-contrast))] shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 hover:bg-[hsl(var(--semana-accent))] active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))]"
+              className="rounded-full border-4 border-[hsl(var(--semana-contrast))] bg-white px-5 py-3 font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase text-[hsl(var(--semana-contrast))] shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 hover:bg-[hsl(var(--semana-hover))] active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))]"
               href={link.href}
               key={link.href}
             >
