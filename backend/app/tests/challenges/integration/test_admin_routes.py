@@ -34,11 +34,43 @@ async def test_admin_can_create_challenge(client: AsyncClient, as_user, admin):
     assert body["title"] == "Novo"
     assert body["description"] == "Descrição inicial"
     assert body["scoring_type"] == "quiz"
+    default_start = datetime.fromisoformat(body["starts_at"])
+    assert default_start.tzinfo is not None
+    assert timedelta(seconds=-1) <= default_start - datetime.now(UTC)
+    assert default_start - datetime.now(UTC) <= timedelta(seconds=1)
     default_deadline = datetime.fromisoformat(body["finishes_at"])
     assert default_deadline.tzinfo is not None
     assert timedelta(hours=23, minutes=59) <= default_deadline - datetime.now(UTC)
     assert default_deadline - datetime.now(UTC) <= timedelta(days=1, minutes=1)
     assert body["questions"] == []
+
+
+async def test_admin_can_set_challenge_start(client: AsyncClient, as_user, admin):
+    c = as_user(admin)
+    starts_at = datetime.now(UTC) + timedelta(days=2)
+    created = await c.post(
+        "/api/v1/admin/challenge/",
+        json={"title": "Início agendado", "starts_at": starts_at.isoformat()},
+    )
+
+    assert created.status_code == 201, created.text
+    challenge_id = created.json()["id"]
+    assert datetime.fromisoformat(created.json()["starts_at"]) == starts_at
+
+    updated_starts_at = starts_at + timedelta(days=1)
+    updated = await c.patch(
+        f"/api/v1/admin/challenge/{challenge_id}",
+        json={"starts_at": updated_starts_at.isoformat()},
+    )
+
+    assert updated.status_code == 200, updated.text
+    assert datetime.fromisoformat(updated.json()["starts_at"]) == updated_starts_at
+
+    admin_detail = await c.get(f"/api/v1/admin/challenge/{challenge_id}")
+    assert admin_detail.status_code == 200
+    admin_list = await c.get("/api/v1/admin/challenge", params={"limit": 100})
+    assert admin_list.status_code == 200
+    assert challenge_id in {item["id"] for item in admin_list.json()["items"]}
 
 
 async def test_admin_can_create_challenge_with_questions(

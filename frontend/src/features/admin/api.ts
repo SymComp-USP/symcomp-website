@@ -16,6 +16,7 @@ export type AdminChallenge = {
   prompt: string
   input_answer?: string | null
   scoring_type: 'input' | 'quiz' | 'manual'
+  starts_at: string
   finishes_at: string
   semana_id: number | null
   points_value: number
@@ -26,6 +27,7 @@ type AdminChallengeInput = {
   title: string
   description?: string
   scoring_type: AdminChallenge['scoring_type']
+  starts_at: string
   finishes_at: string
   points_value?: number
   prompt?: string
@@ -110,7 +112,9 @@ export function deleteAdminUser(id: string) {
 }
 
 export function listAdminChallenges() {
-  return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100')
+  return requestApi<Page<AdminChallenge>>('/admin/challenge?limit=100', {
+    cache: 'no-store',
+  })
 }
 
 export function listAdminChallengeParticipants(
@@ -192,7 +196,9 @@ export function deleteAdminSemana(id: number) {
 }
 
 export function listAdminAtividades(semanaId: number) {
-  return requestApi<AdminAtividade[]>(`/admin/semanas/${semanaId}/atividades`)
+  return requestApi<AdminAtividade[]>(`/admin/semanas/${semanaId}/atividades`, {
+    cache: 'no-store',
+  })
 }
 
 export function createAdminAtividade(

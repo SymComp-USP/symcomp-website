@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import uuid
+from datetime import UTC, datetime, timedelta
 
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -17,9 +18,25 @@ async def test_list_challenges_paginated(
 ):
     for i in range(5):
         db_session.add(Challenge(title=f"C{i}", scoring_type=ChallengeScoringType.QUIZ))
+    future_challenge = Challenge(
+        title="Future challenge",
+        scoring_type=ChallengeScoringType.QUIZ,
+        starts_at=datetime.now(UTC) + timedelta(days=1),
+    )
+    db_session.add(future_challenge)
     await db_session.flush()
 
     c = as_user(user)
+
+    anonymous_list = await client.get(
+        "/api/v1/challenge", params={"limit": 100, "offset": 0}
+    )
+    assert anonymous_list.status_code == 200
+    assert anonymous_list.json()["total"] == 5
+    assert all(
+        item["id"] != str(future_challenge.id)
+        for item in anonymous_list.json()["items"]
+    )
 
     r = await c.get("api/v1/challenge", params={"limit": 2, "offset": 0})
     assert r.status_code == 200
@@ -31,6 +48,20 @@ async def test_list_challenges_paginated(
 
     r = await c.get("api/v1/challenge/", params={"limit": 2, "offset": 4})
     assert len(r.json()["items"]) == 1
+
+
+async def test_future_challenge_is_hidden_from_public_detail_and_ranking(
+    client: AsyncClient, as_user, user, challenge, db_session: AsyncSession
+):
+    challenge.starts_at = datetime.now(UTC) + timedelta(days=1)
+    await db_session.flush()
+
+    c = as_user(user)
+    detail = await c.get(f"/api/v1/challenge/{challenge.id}")
+    ranking = await c.get(f"/api/v1/challenge/{challenge.id}/ranking")
+
+    assert detail.status_code == 404
+    assert ranking.status_code == 404
 
 
 async def test_list_rejects_bad_pagination(client: AsyncClient, as_user, user):

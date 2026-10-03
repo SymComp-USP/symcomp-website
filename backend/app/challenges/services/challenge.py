@@ -20,6 +20,11 @@ def ensure_challenge_open(finishes_at: datetime) -> None:
         raise challenge_exceptions.ChallengeClosedError()
 
 
+def ensure_challenge_started(starts_at: datetime) -> None:
+    if starts_at > datetime.now(UTC):
+        raise challenge_exceptions.ChallengeNotStartedError()
+
+
 async def get_challenge_with_context(
     session: AsyncSession,
     challenge_id: uuid.UUID,
@@ -34,6 +39,7 @@ async def get_challenge_with_context(
         select(Challenge)
         .where(Challenge.id == challenge_id)
         .where(Challenge.deleted_at.is_(None))
+        .where(Challenge.starts_at <= datetime.now(UTC))
         .options(selectinload(Challenge.questions), selectinload(Challenge.input))
     )
 
@@ -112,14 +118,16 @@ async def list_challenges_paginated(
     session: AsyncSession,
     pagination: PaginationParams,
 ) -> Page[challenge_schemas.ChallengePublicResponse]:  # ← tipo correto
-    total = await session.scalar(
-        select(func.count(Challenge.id)).where(Challenge.deleted_at.is_(None))
+    conditions = (
+        Challenge.deleted_at.is_(None),
+        Challenge.starts_at <= datetime.now(UTC),
     )
+    total = await session.scalar(select(func.count(Challenge.id)).where(*conditions))
 
     rows = (
         await session.scalars(
             select(Challenge)
-            .where(Challenge.deleted_at.is_(None))
+            .where(*conditions)
             .options(selectinload(Challenge.input))
             .order_by(Challenge.created_at.desc(), Challenge.id)
             .limit(pagination.limit)
@@ -169,6 +177,7 @@ async def create_challenge(
     title: str,
     description: str = "",
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ,
+    starts_at: datetime | None = None,
     finishes_at: datetime | None = None,
     semana_id: int | None = None,
     points_value: int = 0,
@@ -184,6 +193,8 @@ async def create_challenge(
     )
     if finishes_at is not None:
         challenge.finishes_at = finishes_at
+    if starts_at is not None:
+        challenge.starts_at = starts_at
     session.add(challenge)
     await session.flush()
     return challenge
@@ -196,6 +207,7 @@ async def update_challenge(
     title: str | None = None,
     description: str | None = None,
     scoring_type: ChallengeScoringType | None = None,
+    starts_at: datetime | None = None,
     finishes_at: datetime | None = None,
     semana_id: int | None = None,
     points_value: int | None = None,
@@ -211,6 +223,8 @@ async def update_challenge(
         challenge.points_value = points_value
     if finishes_at is not None:
         challenge.finishes_at = finishes_at
+    if starts_at is not None:
+        challenge.starts_at = starts_at
     if semana_id is not None:
         challenge.semana_id = semana_id
     if resource_urls is not None:

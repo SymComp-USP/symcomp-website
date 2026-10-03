@@ -70,7 +70,7 @@ export function ActivityForm({
 }: {
   semanaId: number
   atividade?: AdminAtividade
-  onDone: () => void
+  onDone: (atividade: AdminAtividade) => void
 }) {
   const [form, setForm] = useState(() => activityFormState(atividade))
   const [error, setError] = useState('')
@@ -97,15 +97,20 @@ export function ActivityForm({
         comeca_as: new Date(form.comeca_as).toISOString(),
         termina_as: new Date(form.termina_as).toISOString(),
       }
-      const saved = atividade
+      let saved = atividade
         ? await updateAdminAtividade(semanaId, atividade.id, input)
         : await createAdminAtividade(semanaId, input)
       for (const [index, speaker] of speakers.entries()) {
         if (speaker.foto) {
-          await uploadAdminPalestrantePhoto(semanaId, saved.id, index, speaker.foto)
+          saved = await uploadAdminPalestrantePhoto(
+            semanaId,
+            saved.id,
+            index,
+            speaker.foto,
+          )
         }
       }
-      onDone()
+      onDone(saved)
     } catch (reason) {
       setError(
         reason instanceof Error ? reason.message : 'Não foi possível criar a atividade.',

@@ -21,11 +21,15 @@ import { ActivityCard } from './activity-presence'
 export function SemanasSection({
   atividades,
   semanas,
+  onActivitySaved,
+  onActivityDeleted,
   onActivityChanged,
   onChanged,
 }: {
   atividades: Record<number, AdminAtividade[]>
   semanas: AdminSemana[]
+  onActivitySaved: (atividade: AdminAtividade) => void
+  onActivityDeleted: (semanaId: number, atividadeId: string) => void
   onActivityChanged: () => void
   onChanged: () => void
 }) {
@@ -147,9 +151,9 @@ export function SemanasSection({
               </div>
               {openActivityForm === semana.id && (
                 <ActivityForm
-                  onDone={() => {
+                  onDone={(atividade) => {
                     setOpenActivityForm(undefined)
-                    onActivityChanged()
+                    onActivitySaved(atividade)
                   }}
                   semanaId={semana.id}
                 />
@@ -159,6 +163,7 @@ export function SemanasSection({
                   <ActivityCard
                     atividade={atividade}
                     key={atividade.id}
+                    onActivitySaved={onActivitySaved}
                     onChanged={onActivityChanged}
                     onError={setError}
                     onDelete={async () => {
@@ -170,7 +175,7 @@ export function SemanasSection({
                         return
                       try {
                         await deleteAdminAtividade(semana.id, atividade.id)
-                        onActivityChanged()
+                        onActivityDeleted(semana.id, atividade.id)
                       } catch (reason) {
                         setError(
                           reason instanceof Error
