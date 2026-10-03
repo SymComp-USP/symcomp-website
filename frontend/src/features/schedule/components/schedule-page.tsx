@@ -47,7 +47,7 @@ export function SchedulePage() {
         <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-5xl">
           Programação
         </h1>
-        <p className="text-xl text-white/80">
+        <p className="text-xl text-foreground/80">
           Confira palestras, conversas e atividades da Semana da Computação.
         </p>
       </div>
@@ -67,7 +67,7 @@ export function SchedulePage() {
                 >
                   {weekdayFormatter.format(day)}
                 </h2>
-                <p className="text-lg text-white/75">{dayFormatter.format(day)}</p>
+                <p className="text-lg text-foreground/75">{dayFormatter.format(day)}</p>
               </div>
               <div className="space-y-4">
                 {activities.map((activity) => (

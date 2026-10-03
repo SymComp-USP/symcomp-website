@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 export function SemanaHome() {
   const links = [
@@ -7,17 +8,22 @@ export function SemanaHome() {
   ]
 
   return (
-    <main className="min-h-[calc(100svh-65px)] bg-background text-foreground">
+    <main className="min-h-[calc(100svh-65px)] text-foreground">
       <section className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl flex-col items-center justify-center px-6 py-20 text-center">
-        <p className="max-w-full font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase leading-tight tracking-[0.1em] text-primary sm:text-6xl sm:tracking-[0.25em]">
-          Semana da Computação 2026
-        </p>
+        <Image
+          alt="16ª Semana da Computação"
+          className="mb-8 h-auto w-full max-w-xl"
+          height={1403}
+          priority
+          src="/semana/2026/logo-plate.svg"
+          width={3412}
+        />
         <div className="mt-6 space-y-4">
           <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-7xl">
             Outubro
           </h1>
-          <p className="font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase text-primary sm:text-5xl">
-            05 à 09
+          <p className="font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase text-white sm:text-5xl">
+            05 a 09
           </p>
           <p className="font-[family-name:var(--font-semana-display)] text-2xl font-bold uppercase sm:text-4xl">
             12h - 18h

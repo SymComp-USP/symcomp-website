@@ -40,12 +40,35 @@ export function SemanaShell({ children }: { children: ReactNode }) {
 
 function SemanaShellContent({ children }: { children: ReactNode }) {
   const { user, loading, logout } = useAuth()
-  const isSponsorsPage = usePathname() === '/semana/patrocinadores'
+  const pathname = usePathname()
+  const isSponsorsPage = pathname === '/semana/patrocinadores'
+  const pageTheme =
+    pathname === '/semana'
+      ? 'semana-page-home'
+      : pathname === '/semana/cronograma'
+        ? 'semana-page-schedule'
+        : pathname === '/semana/ranking'
+          ? 'semana-page-ranking'
+          : pathname === '/semana/perfil'
+            ? 'semana-page-profile'
+            : pathname.startsWith('/semana/desafios/')
+              ? 'semana-page-challenge'
+              : pathname === '/semana/patrocinadores'
+                ? 'semana-page-sponsors'
+                : pathname === '/semana/login' || pathname === '/semana/cadastro'
+                  ? 'semana-page-auth'
+                  : ''
+  const illustratedPage =
+    pathname === '/semana' ||
+    pathname === '/semana/login' ||
+    pathname === '/semana/cadastro'
 
   return (
     <div
       className={cn(
         'semana-theme grid min-h-svh grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] bg-background font-[family-name:var(--font-semana-body)] text-foreground',
+        pageTheme,
+        illustratedPage && 'semana-page-illustrated',
         semanaBody.variable,
         semanaDisplay.variable,
       )}
@@ -60,7 +83,7 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
           <Link className="flex items-center" href="/semana">
             <Image
               alt="IME-USP"
-              className="h-auto w-12 brightness-0 invert sm:w-14"
+              className="h-auto w-12 sm:w-14"
               height={52}
               priority
               src="/logo/ime_usp.svg"
@@ -91,7 +114,13 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                 <Menu aria-hidden="true" />
               </Button>
             </SheetTrigger>
-            <SheetContent className="semana-theme border-l-[6px] border-[hsl(var(--semana-contrast))] bg-background font-[family-name:var(--font-semana-body)] text-foreground">
+            <SheetContent
+              className={cn(
+                'semana-theme border-l-[6px] border-[hsl(var(--semana-contrast))] bg-background font-[family-name:var(--font-semana-body)] text-foreground',
+                pageTheme,
+                semanaDisplay.variable,
+              )}
+            >
               <SheetHeader>
                 <SheetTitle className="font-[family-name:var(--font-semana-display)] uppercase">
                   Semana da Computação

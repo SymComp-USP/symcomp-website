@@ -19,12 +19,12 @@ export function AuthCard({
           <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight">
             {title}
           </h1>
-          <p className="mx-auto max-w-xs font-[family-name:var(--font-semana-body)] text-lg text-[hsl(var(--semana-contrast))]">
+          <p className="mx-auto max-w-xs font-[family-name:var(--font-semana-body)] text-lg text-foreground">
             {description}
           </p>
         </div>
         {children}
-        <p className="text-center text-sm text-[hsl(var(--semana-contrast))]">
+        <p className="text-center text-sm text-foreground">
           {footer.text}{' '}
           <Link
             className="font-medium text-foreground underline underline-offset-4"

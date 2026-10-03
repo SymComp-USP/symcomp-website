@@ -203,29 +203,78 @@
   }
 
   .semana-theme {
-    --background: 179 73% 29%;
-    --foreground: 0 0% 100%;
+    --background: 179 23% 43%;
+    --foreground: 198 100% 11%;
     --card: 0 0% 100%;
     --card-foreground: 244 75% 16%;
     --popover: 0 0% 100%;
     --popover-foreground: 244 75% 16%;
-    --primary: 45 100% 52%;
-    --primary-foreground: 244 75% 16%;
-    --secondary: 285 44% 53%;
-    --secondary-foreground: 0 0% 100%;
+    --primary: 255 62% 71%;
+    --primary-foreground: 198 100% 11%;
+    --secondary: 60 47% 81%;
+    --secondary-foreground: 198 100% 11%;
     --muted: 221 100% 92%;
     --muted-foreground: 244 30% 35%;
-    --accent: 285 44% 53%;
-    --accent-foreground: 0 0% 100%;
-    --border: 244 75% 16%;
-    --input: 244 75% 16%;
-    --ring: 45 100% 52%;
-    --semana-tertiary: 17 97% 51%;
-    --semana-contrast: 244 75% 16%;
-    --semana-accent: 221 100% 92%;
-    --semana-sponsor: 336 52% 40%;
-    --semana-sponsor-soft: 336 32% 47%;
+    --accent: 60 47% 81%;
+    --accent-foreground: 198 100% 11%;
+    --border: 198 100% 11%;
+    --input: 198 100% 11%;
+    --ring: 255 62% 71%;
+    --semana-tertiary: 339 51% 40%;
+    --semana-contrast: 198 100% 11%;
+    --semana-accent: 60 47% 81%;
+    --semana-sponsor: 339 51% 40%;
+    --semana-sponsor-soft: 338 31% 46%;
     --radius: 0.125rem;
+  }
+
+  .semana-page-home {
+    --background: 255 62% 71%;
+  }
+
+  .semana-page-schedule,
+  .semana-page-challenge {
+    --background: 60 47% 81%;
+    --foreground: 0 0% 0%;
+  }
+
+  .semana-page-profile,
+  .semana-page-ranking {
+    --background: 338 31% 46%;
+  }
+
+  .semana-page-sponsors {
+    --background: 339 51% 40%;
+    --foreground: 0 0% 100%;
+  }
+
+  .semana-page-auth {
+    --foreground: 0 0% 100%;
+  }
+
+  .semana-page-illustrated {
+    isolation: isolate;
+    position: relative;
+  }
+
+  .semana-page-illustrated::before {
+    background-image: url('/semana/2026/possible_background.png');
+    background-position: center 80%;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+    content: '';
+    inset: 0;
+    opacity: 0.28;
+    pointer-events: none;
+    position: absolute;
+    z-index: -1;
+  }
+
+  @media (max-width: 640px) {
+    .semana-page-illustrated::before {
+      background-position: center 20%;
+      background-size: 200vw auto;
+    }
   }
 
   body {
