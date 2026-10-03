@@ -41,3 +41,9 @@ backups, and the firewall before running:
 ```bash
 docker compose up -d --build
 ```
+
+To fill up the initial semana data (after confirming it right):
+
+```bash
+docker compose exec backend python -m scripts.seed_semana_data
+```
