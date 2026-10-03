@@ -138,6 +138,24 @@
   );
 }
 
+/* Like .semana-notch, with separate corner sizes: --notch-x, and --notch-top / --notch-bottom. */
+.semana-notch-xy {
+  clip-path: polygon(
+    var(--notch-x) 0,
+    calc(100% - var(--notch-x)) 0,
+    calc(100% - var(--notch-x)) var(--notch-top),
+    100% var(--notch-top),
+    100% calc(100% - var(--notch-bottom)),
+    calc(100% - var(--notch-x)) calc(100% - var(--notch-bottom)),
+    calc(100% - var(--notch-x)) 100%,
+    var(--notch-x) 100%,
+    var(--notch-x) calc(100% - var(--notch-bottom)),
+    0 calc(100% - var(--notch-bottom)),
+    0 var(--notch-top),
+    var(--notch-x) var(--notch-top)
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   .semana-sheet-content,
   .semana-sheet-overlay {

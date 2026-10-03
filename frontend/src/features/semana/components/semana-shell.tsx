@@ -19,7 +19,6 @@ import {
 import { cn } from '@/lib/utils'
 
 import { semanaBody, semanaDisplay } from '../fonts'
-import { SemanaButton } from './semana-button'
 
 const links = [
   { href: '/semana', label: 'Início' },
@@ -147,9 +146,20 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
                     </SheetClose>
                   ) : (
                     <SheetClose asChild>
-                      <SemanaButton asChild className="mt-2">
-                        <Link href="/semana/login">Entrar</Link>
-                      </SemanaButton>
+                      <Link
+                        className={cn(
+                          'group mx-auto mt-4 block w-fit focus-visible:outline-none',
+                          semanaDisplay.variable,
+                        )}
+                        href="/semana/login"
+                      >
+                        {/* Thin navy outline with a thicker bottom edge as the shadow. */}
+                        <span className="semana-notch-xy block bg-[hsl(var(--semana-contrast))] px-1.5 pb-[13px] pt-1.5 [--notch-bottom:12px] [--notch-top:10px] [--notch-x:19px] group-focus-visible:bg-[hsl(var(--ring))]">
+                          <span className="semana-notch-xy block bg-white px-10 py-4 font-[family-name:var(--font-semana-display)] text-[1.6rem] uppercase leading-none tracking-[0.04em] text-[hsl(var(--semana-contrast))] transition-colors [--notch-bottom:10px] [--notch-top:10px] [--notch-x:19px] group-hover:bg-[hsl(var(--semana-hover))]">
+                            Entrar
+                          </span>
+                        </span>
+                      </Link>
                     </SheetClose>
                   ))}
               </nav>
