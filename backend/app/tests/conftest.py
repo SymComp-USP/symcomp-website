@@ -14,6 +14,13 @@ from app.users import services as user_services
 from app.users.schemas import UserCreate
 
 
+@pytest.fixture(autouse=True)
+def reset_rate_limits():
+    RateLimitMiddleware.reset_all()
+    yield
+    RateLimitMiddleware.reset_all()
+
+
 @pytest.fixture
 def test_settings() -> Settings:
     settings = get_settings()
