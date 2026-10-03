@@ -86,7 +86,10 @@ export function ChallengesSection({
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-500">
-              {item.points_value} pontos · encerra em{' '}
+              {item.points_value} pontos ·
+              começa em{' '}
+              {new Date(item.starts_at).toLocaleDateString('pt-BR')} ·
+              encerra em{' '}
               {new Date(item.finishes_at).toLocaleDateString('pt-BR')}
             </p>
           </article>
@@ -114,6 +117,9 @@ function ChallengeForm({
     description: challenge?.description ?? '',
     prompt: challenge?.prompt ?? '',
     scoring_type: challenge?.scoring_type ?? ('quiz' as const),
+    starts_at: challenge
+      ? toDateTimeLocal(challenge.starts_at)
+      : toDateTimeLocal(new Date().toISOString()),
     finishes_at: challenge ? toDateTimeLocal(challenge.finishes_at) : '',
     points_value: challenge?.points_value ?? 10,
     input_answer: challenge?.input_answer ?? '',
@@ -140,16 +146,17 @@ function ChallengeForm({
         title: form.title,
         description: form.description,
         scoring_type: form.scoring_type,
+        starts_at: new Date(form.starts_at).toISOString(),
         finishes_at: new Date(form.finishes_at).toISOString(),
         semana_id: form.semana_id ? Number(form.semana_id) : undefined,
       }
       const scoringInput =
         form.scoring_type === 'input'
           ? {
-              points_value: form.points_value,
-              prompt: form.prompt,
-              input_answer: form.input_answer,
-            }
+            points_value: form.points_value,
+            prompt: form.prompt,
+            input_answer: form.input_answer,
+          }
           : form.scoring_type === 'quiz'
             ? { points_value: form.points_value, questions: form.questions }
             : {}
@@ -304,29 +311,45 @@ function ChallengeForm({
         </div>
       )}
       <label className="sm:col-span-2">
-        <span className="mb-2 block text-sm font-medium">Imagem do desafio</span>
+        <span className="mb-2 block text-sm font-medium">Imagem do desafio (MAX: 5MB)</span>
         <Input
           accept="image/*"
           type="file"
           onChange={(event) => setImage(event.target.files?.[0] ?? null)}
         />
       </label>
-      <Input
-        required
-        type="datetime-local"
-        value={form.finishes_at}
-        onChange={(event) => setForm({ ...form, finishes_at: event.target.value })}
-      />
-      {form.scoring_type !== 'manual' && (
+      <label className="space-y-2">
+        <span className="block text-sm font-medium">Início do desafio</span>
         <Input
-          min={0}
           required
-          type="number"
-          value={form.points_value}
-          onChange={(event) =>
-            setForm({ ...form, points_value: Number(event.target.value) })
-          }
+          type="datetime-local"
+          value={form.starts_at}
+          onChange={(event) => setForm({ ...form, starts_at: event.target.value })}
         />
+      </label>
+      <label className="space-y-2">
+        <span className="block text-sm font-medium">Fim do desafio</span>
+        <Input
+          required
+          type="datetime-local"
+          value={form.finishes_at}
+          onChange={(event) => setForm({ ...form, finishes_at: event.target.value })}
+        />
+      </label>
+      {form.scoring_type !== 'manual' && (
+        <label className="space-y-2">
+          <span className="block text-sm font-medium">Pontos por completar</span>
+
+          <Input
+            min={0}
+            required
+            type="number"
+            value={form.points_value}
+            onChange={(event) =>
+              setForm({ ...form, points_value: Number(event.target.value) })
+            }
+          />
+        </label>
       )}
       {error && <p className="text-sm text-red-700">{error}</p>}
       <Button className="sm:col-span-2" type="submit">

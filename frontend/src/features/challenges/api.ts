@@ -6,6 +6,7 @@ export type Challenge = {
   description: string
   prompt: string
   scoring_type: 'input' | 'quiz' | 'manual'
+  starts_at: string
   finishes_at: string
   resource_urls: string[]
   image_url: string | null

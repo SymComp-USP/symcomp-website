@@ -34,6 +34,12 @@ class Challenge(Base, UUIDPKMixin, TimestampsMixin):
         default=ChallengeScoringType.QUIZ,
         nullable=False,
     )
+    starts_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True),
+        default=lambda: datetime.now(UTC),
+        server_default=text("now()"),
+        nullable=False,
+    )
 
     finishes_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

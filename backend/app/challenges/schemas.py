@@ -77,6 +77,7 @@ class ChallengeCreate(BaseModel):
     description: str = ""
     prompt: str | None = None
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ
+    starts_at: datetime | None = None
     finishes_at: datetime | None = None
     semana_id: int | None = None
     points_value: int = 0
@@ -101,6 +102,13 @@ class ChallengeCreate(BaseModel):
             raise ValueError("finishes_at must include a timezone.")
         return value
 
+    @field_validator("starts_at")
+    @classmethod
+    def validate_starts_at_timezone(cls, value: datetime | None) -> datetime | None:
+        if value is not None and value.utcoffset() is None:
+            raise ValueError("starts_at must include a timezone.")
+        return value
+
 
 class ChallengeUpdate(BaseModel):
     title: str | None = None
@@ -108,6 +116,7 @@ class ChallengeUpdate(BaseModel):
     scoring_type: ChallengeScoringType | None = None
     prompt: str | None = None
     questions: list[QuestionCreate] | None = None
+    starts_at: datetime | None = None
     finishes_at: datetime | None = None
     semana_id: int | None = None
     points_value: int | None = None
@@ -119,6 +128,13 @@ class ChallengeUpdate(BaseModel):
     def validate_finishes_at_timezone(cls, value: datetime | None) -> datetime | None:
         if value is not None and value.utcoffset() is None:
             raise ValueError("finishes_at must include a timezone.")
+        return value
+
+    @field_validator("starts_at")
+    @classmethod
+    def validate_starts_at_timezone(cls, value: datetime | None) -> datetime | None:
+        if value is not None and value.utcoffset() is None:
+            raise ValueError("starts_at must include a timezone.")
         return value
 
 
@@ -180,6 +196,7 @@ class ChallengeResponse(ChallengeImageMixin):
     description: str
     prompt: str
     scoring_type: ChallengeScoringType
+    starts_at: datetime
     finishes_at: datetime
     resource_urls: list[str] = Field(default_factory=list)
     questions: list[QuestionResponse] = Field(default_factory=list)
@@ -196,6 +213,7 @@ class ChallengePublicResponse(ChallengeImageMixin):
     description: str
     prompt: str
     scoring_type: ChallengeScoringType
+    starts_at: datetime
     finishes_at: datetime
     resource_urls: list[str] = Field(default_factory=list)
 
@@ -210,6 +228,7 @@ class AdminChallengeResponse(ChallengeImageMixin):
     description: str
     prompt: str
     scoring_type: ChallengeScoringType
+    starts_at: datetime
     finishes_at: datetime
     semana_id: int | None = None
     points_value: int = 0

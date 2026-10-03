@@ -21,3 +21,13 @@ class ChallengeClosedError(AppError):
             title="Challenge closed",
             detail="This challenge has ended and no longer accepts answers or submissions.",
         )
+
+
+class ChallengeNotStartedError(AppError):
+    def __init__(self) -> None:
+        super().__init__(
+            status_code=409,
+            type="challenge_not_started",
+            title="Challenge not started",
+            detail="This challenge has not started yet.",
+        )

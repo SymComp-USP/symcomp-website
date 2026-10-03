@@ -249,6 +249,53 @@ async def test_quiz_submission_is_rejected_after_challenge_expires(
     assert response.status_code == 409
 
 
+async def test_future_quiz_rejects_join_answer_and_submission(
+    client: AsyncClient,
+    as_user,
+    user,
+    challenge,
+    questions,
+    db_session,
+):
+    challenge.starts_at = datetime.now(UTC) + timedelta(days=1)
+    participant = ChallengeParticipant(user_id=user.id, challenge_id=challenge.id)
+    db_session.add(participant)
+    await db_session.flush()
+
+    c = as_user(user)
+    joined = await c.post(f"api/v1/challenge/{challenge.id}/join")
+    answer = await c.post(
+        f"api/v1/challenge/{challenge.id}/answer",
+        json={"question_id": str(questions[0].id), "answer": "4"},
+    )
+    answers = await c.post(
+        f"api/v1/challenge/{challenge.id}/answer/all",
+        json=[{"question_id": str(questions[0].id), "answer": "4"}],
+    )
+    submission = await c.post(f"api/v1/challenge/{challenge.id}/submit")
+
+    assert joined.status_code == 409
+    assert answer.status_code == 409
+    assert answers.status_code == 409
+    assert submission.status_code == 409
+
+
+async def test_future_input_rejects_submission(
+    client: AsyncClient, as_user, user, challenge, db_session
+):
+    challenge.starts_at = datetime.now(UTC) + timedelta(days=1)
+    challenge.scoring_type = ChallengeScoringType.INPUT
+    challenge.input = Input(prompt="Answer?", input_answer="correct")
+    db_session.add(ChallengeParticipant(user_id=user.id, challenge_id=challenge.id))
+    await db_session.flush()
+
+    response = await as_user(user).post(
+        f"api/v1/challenge/{challenge.id}/input", json={"answer": "correct"}
+    )
+
+    assert response.status_code == 409
+
+
 async def test_answering_without_joining_returns_400(
     client: AsyncClient, as_user, user, challenge, questions
 ):

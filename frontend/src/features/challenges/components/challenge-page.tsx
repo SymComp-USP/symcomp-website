@@ -160,9 +160,9 @@ export function ChallengePage() {
           {challenge.title}
         </h1>
         {challenge.description && (
-          <p className="text-lg text-white/80">{challenge.description}</p>
+          <p className="text-lg">{challenge.description}</p>
         )}
-        <p className="text-xl text-white/80">{challenge.prompt}</p>
+        <p className="text-xl">{challenge.prompt}</p>
         {challenge.image_url && (
           <div className="space-y-3">
             <Image

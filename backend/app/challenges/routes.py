@@ -36,6 +36,7 @@ async def join_challenge(
         raise NotFoundError("Challenge with given ID not found.")
     if challenge.semana_id is None:
         raise BadRequestError("Challenge must belong to a Semana.")
+    challenge_service.ensure_challenge_started(challenge.starts_at)
 
     current_participant = await participant_service.get_challenge_participant(
         session, current_user.id, challenge_id, for_update=True
@@ -125,6 +126,7 @@ async def submit_input(
         raise NotFoundError("Challenge not found.")
     if challenge.scoring_type != ChallengeScoringType.INPUT:
         raise BadRequestError("Challenge does not accept input submissions.")
+    challenge_service.ensure_challenge_started(challenge.starts_at)
     if participant.submitted_at is not None:
         return challenge_schemas.SubmissionResponse(
             submitted_at=participant.submitted_at, score=participant.score
@@ -219,6 +221,7 @@ async def submit_challenge(
         raise NotFoundError("Challenge not found")
     if challenge.scoring_type != ChallengeScoringType.QUIZ:
         raise BadRequestError("Manual challenges cannot be submitted by participants.")
+    challenge_service.ensure_challenge_started(challenge.starts_at)
 
     # idempotência: se o usuário já submeteu antes, retorna o valor anterior
     if participant.submitted_at is not None:
@@ -281,6 +284,7 @@ async def get_challenge(
         description=challenge.description,
         prompt=challenge.input.prompt if challenge.input is not None else "",
         scoring_type=challenge.scoring_type,
+        starts_at=challenge.starts_at,
         image_path=challenge.image_path,
         finishes_at=challenge.finishes_at,
         resource_urls=challenge.resource_urls,
@@ -301,6 +305,10 @@ async def get_ranking(
     """
     Obtém o ranking (Top 10) de um challenge
     """
+
+    challenge = await challenge_service.get_challenge_by_id(session, challenge_id)
+    if challenge is None or challenge.starts_at > datetime.now(UTC):
+        raise NotFoundError("Challenge not found.")
 
     participants = await participant_service.get_challenge_ranking(
         session, challenge_id
