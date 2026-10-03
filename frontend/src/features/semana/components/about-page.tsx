@@ -1,5 +1,3 @@
-import Image from 'next/image'
-import Link from 'next/link'
 import { BsInstagram, BsLinkedin, BsYoutube } from 'react-icons/bs'
 
 import { SymcompLogo } from './symcomp-logo'
@@ -19,27 +17,6 @@ const socialLinks = [
     label: 'Canal da Semana da Computação no YouTube',
     href: 'https://www.youtube.com/@semanadacomputacaoime-usp',
     icon: BsYoutube,
-  },
-]
-
-const projects = [
-  {
-    label: 'Semana da Computação',
-    href: '/semana',
-    imageUrl: '/logo/sc.png',
-    imageWidth: 1080,
-    imageHeight: 1080,
-    description:
-      'Anualmente reunimos alunos da graduação e visitantes para participar de uma semana de palestras, competições, brindes, networking e coffee breaks.',
-  },
-  {
-    label: 'ByteCafé',
-    href: '/bytecafe',
-    imageUrl: '/logo/bc.png',
-    imageWidth: 477,
-    imageHeight: 592,
-    description:
-      'Duas vezes por semestre convidamos alunos do Ensino Médio para conhecer a USP e o curso de Ciência da Computação.',
   },
 ]
 
@@ -85,46 +62,6 @@ export function AboutPage() {
           ))}
         </ul>
       </div>
-
-      <section aria-labelledby="nossos-projetos" className="mt-20">
-        <h2
-          className="mb-5 border-b-[6px] border-[hsl(var(--semana-contrast))] pb-3 font-[family-name:var(--font-semana-display)] text-2xl font-bold uppercase"
-          id="nossos-projetos"
-        >
-          Nossos projetos
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2">
-          {projects.map((project) => (
-            <article
-              className="flex flex-col gap-4 rounded-none border-[7px] border-white bg-card p-5 text-card-foreground shadow-[0_8px_0_hsl(var(--semana-contrast))]"
-              key={project.href}
-            >
-              <div className="flex h-32 items-center justify-center bg-[hsl(var(--semana-accent))] p-4">
-                <Image
-                  alt={`Logo ${project.label}`}
-                  className="h-full w-auto object-contain"
-                  height={project.imageHeight}
-                  src={project.imageUrl}
-                  width={project.imageWidth}
-                />
-              </div>
-              <h3 className="font-[family-name:var(--font-semana-display)] text-xl font-bold uppercase">
-                {project.label}
-              </h3>
-              <p className="flex-1 text-muted-foreground">{project.description}</p>
-              <Link
-                className="w-fit border-4 border-[hsl(var(--semana-contrast))] bg-primary px-4 py-2 font-[family-name:var(--font-semana-display)] text-sm font-bold uppercase text-primary-foreground shadow-[0_4px_0_hsl(var(--semana-contrast))] transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-ring active:translate-y-1 active:shadow-[0_2px_0_hsl(var(--semana-contrast))]"
-                href={project.href}
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Conhecer
-                <span className="sr-only"> {project.label} (abre em nova aba)</span>
-              </Link>
-            </article>
-          ))}
-        </div>
-      </section>
     </main>
   )
 }
