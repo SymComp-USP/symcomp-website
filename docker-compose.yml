@@ -46,7 +46,7 @@ services:
       target: production
     restart: unless-stopped
     env_file:
-      - .env
+      - backend/.env
     environment:
       APP_ENV: prod
       DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:?Set POSTGRES_USER}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:?Set POSTGRES_DB}

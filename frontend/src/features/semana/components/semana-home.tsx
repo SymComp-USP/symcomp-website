@@ -20,8 +20,11 @@ export function SemanaHome() {
         />
         <div className="mt-6 space-y-4">
           <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-7xl">
-            Outubro
+            16ª Semana da Computação
           </h1>
+          <h2 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight sm:text-7xl">
+            Outubro
+          </h2>
           <p className="font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase text-white sm:text-5xl">
             05 a 09
           </p>
@@ -30,8 +33,9 @@ export function SemanaHome() {
           </p>
         </div>
         <p className="mt-8 max-w-xl text-lg text-white/75 sm:text-xl">
-          Um encontro de estudantes, pesquisadores e profissionais para celebrar a
-          computação no IME-USP.
+          Evento da SymComp no IME-USP para estudantes, pesquisadores e profissionais
+          celebrarem a computação. O site reúne programação, inscrições, desafios e
+          presença na Semana da Computação.
         </p>
         <nav
           aria-label="Páginas da Semana da Computação"
