@@ -14,9 +14,10 @@ export function PrivacyPolicyContent() {
     <>
       <Section title="Política de Privacidade completa">
         <p>
-          Conheça a política de privacidade do https://symcomp.ime.usp.br. Esta política
-          ajudará você a entender quais dados coletamos, por que os coletamos e quais são
-          seus direitos em relação a eles.
+          Esta política se aplica ao aplicativo 16ª Semana da Computação, organizado pela
+          SymComp no IME-USP e disponível em https://symcomp.ime.usp.br/semana. Ela
+          explica como tratamos seus dados no cadastro, no login e na participação nas
+          atividades e desafios do evento.
         </p>
         <p>Última atualização: 4 de outubro de 2026.</p>
       </Section>
@@ -41,8 +42,16 @@ export function PrivacyPolicyContent() {
 
       <Section title="Tipos de Dados coletados">
         <p>
-          Entre os tipos de Dados Pessoais que este Aplicativo coleta, por si mesmo ou
-          através de terceiros, existem: e-mail e senha.
+          Coletamos nome, e-mail e informações de verificação da conta. No cadastro
+          direto, recebemos uma senha e armazenamos seu hash, não a senha em texto
+          legível. No login por Google ou GitHub, armazenamos também o provedor e o
+          identificador da conta nesse provedor; não recebemos sua senha do provedor.
+        </p>
+        <p>
+          Conforme sua participação, também tratamos apelido, inscrição no evento,
+          registros de presença, respostas aos desafios, resultados, pontuação e horas de
+          participação, vinculados à sua conta. Dados técnicos de sessão e registros de
+          operação são usados para autenticação, manutenção e segurança.
         </p>
         <p>
           Detalhes completos sobre cada tipo de Dados Pessoais coletados são fornecidos
@@ -90,12 +99,11 @@ export function PrivacyPolicyContent() {
           O processamento dos Dados é realizado utilizando computadores e/ou ferramentas
           de TI habilitadas, seguindo procedimentos organizacionais e meios estritamente
           relacionados com os fins indicados. Além do Proprietário, em alguns casos, os
-          Dados podem ser acessados por pessoas encarregadas da operação deste Serviço,
-          como administração, vendas, marketing e administração legal do sistema, ou por
-          pessoas externas, como fornecedores de serviços técnicos, provedores de
-          hospedagem, empresas de TI e agências de comunicação, nomeadas quando necessário
-          como Processadores de Dados. A lista atualizada destas partes pode ser
-          solicitada ao Proprietário a qualquer momento.
+          Dados podem ser acessados pela equipe autorizada responsável pela operação do
+          evento e do sistema e por prestadores de infraestrutura e serviços técnicos, na
+          medida necessária para prestar o serviço, atender solicitações, proteger as
+          contas ou cumprir obrigações legais. Você pode solicitar informações sobre os
+          prestadores envolvidos pelo e-mail de contato desta política.
         </p>
         <h3 className="text-xl font-semibold">Lugar</h3>
         <p>
@@ -111,6 +119,16 @@ export function PrivacyPolicyContent() {
           foram coletados e poderão ser retidos por mais tempo em razão de obrigação legal
           aplicável ou com base no consentimento dos Usuários.
         </p>
+        <p>
+          Os dados de cadastro, inclusive os obtidos do Google, ficam no banco de dados do
+          aplicativo para manter sua conta e reconhecer acessos posteriores. Os registros
+          de participação são mantidos enquanto necessários à gestão do evento e ao
+          histórico de participação. Desativar uma conta não apaga automaticamente esses
+          registros. Para solicitar exclusão ou informações sobre a retenção dos seus
+          dados, use o e-mail de contato abaixo. Eventuais dados cuja conservação seja
+          necessária por obrigação legal ou exercício de direitos serão tratados apenas
+          para essas finalidades.
+        </p>
       </Section>
 
       <Section title="As finalidades do processamento">
@@ -119,7 +137,8 @@ export function PrivacyPolicyContent() {
           preste seu Serviço, cumpra suas obrigações legais, responda a solicitações de
           execução, proteja seus direitos e interesses (ou aqueles de seus Usuários ou
           terceiros), detecte atividade maliciosa ou fraudulenta, bem como para registro e
-          autenticação.
+          autenticação, gestão das inscrições, confirmação de presença, correção dos
+          desafios e cálculo de pontos e horas de participação.
         </p>
       </Section>
 
@@ -129,27 +148,86 @@ export function PrivacyPolicyContent() {
           Ao se registrar ou autenticar, os Usuários permitem a este serviço
           identificá-los e dar-lhes acesso a serviços dedicados. Os serviços podem ser
           fornecidos por terceiros; neste caso, o Aplicativo poderá acessar alguns Dados
-          armazenados por estes serviços para fins de registro ou identificação. Alguns
-          serviços também podem coletar Dados Pessoais para fins de direcionamento e
-          perfil.
+          armazenados por estes serviços para fins de registro ou identificação, conforme
+          descrito abaixo.
         </p>
-        <h3 className="text-xl font-semibold">Google OAuth</h3>
+        <h3 className="text-xl font-semibold">
+          Login com Google: acesso e uso dos dados
+        </h3>
         <p>
-          Companhia: Google Ireland Limited.
-          <br />
-          Lugar de processamento: Irlanda.
-          <br />
-          Dados Pessoais processados: vários tipos de Dados como especificados na política
-          de privacidade do serviço.
+          Ao escolher entrar com Google, solicitamos as permissões openid, email e
+          profile. Recebemos informações de identidade e perfil básico e utilizamos seu
+          nome, endereço de e-mail, confirmação de que o e-mail foi verificado e
+          identificador único da conta Google (sub). Esses dados permitem criar sua conta,
+          reconhecer você em acessos posteriores e dar acesso ao perfil e às
+          funcionalidades de participação no evento.
+        </p>
+        <p>
+          Não solicitamos acesso ao Gmail, Google Drive, contatos ou calendário. Não
+          recebemos sua senha Google. A foto de perfil não é armazenada no cadastro. Os
+          tokens recebidos do Google são usados durante a autenticação e não são
+          armazenados no cadastro; a sessão do aplicativo utiliza tokens próprios.
+        </p>
+        <h3 className="text-xl font-semibold">
+          Compartilhamento e proteção dos dados Google
+        </h3>
+        <p>
+          Os dados de identidade recebidos do Google são armazenados no banco de dados do
+          aplicativo, com acesso às funções administrativas restrito a usuários
+          autorizados. A autenticação usa HTTPS e cookies de sessão protegidos contra
+          acesso por scripts no navegador. O tratamento segue as finalidades, os
+          destinatários e os critérios de retenção descritos nesta política.
+        </p>
+        <p>
+          Não vendemos dados Google nem os usamos para publicidade, direcionamento de
+          anúncios ou treinamento de modelos de inteligência artificial. Não fornecemos
+          esses dados a patrocinadores para marketing. O compartilhamento limita-se ao
+          necessário para operar as funcionalidades do aplicativo, proteger sua segurança
+          ou cumprir obrigações legais. O uso e a transferência de informações recebidas
+          das APIs Google seguem a{' '}
+          <a
+            className="underline underline-offset-4"
+            href="https://developers.google.com/terms/api-services-user-data-policy"
+          >
+            Política de Dados do Usuário dos Serviços de API do Google
+          </a>
+          , incluindo os requisitos de Uso Limitado.
+        </p>
+        <h3 className="text-xl font-semibold">
+          Revogação de acesso e pedidos de exclusão
+        </h3>
+        <p>
+          Você pode remover a conexão com o aplicativo nas{' '}
+          <a
+            className="underline underline-offset-4"
+            href="https://myaccount.google.com/connections"
+          >
+            configurações de conexões da sua Conta Google
+          </a>
+          . A revogação não exclui automaticamente sua conta ou os dados já armazenados no
+          aplicativo, nem encerra necessariamente uma sessão já iniciada. Para encerrar a
+          sessão, use a opção de sair do site.
+        </p>
+        <p>
+          Para solicitar acesso, correção ou exclusão dos dados da sua conta e da sua
+          participação, inclusive os recebidos do Google, escreva para{' '}
+          <a
+            className="underline underline-offset-4"
+            href="mailto:semanadacomputacao@ime.usp.br"
+          >
+            semanadacomputacao@ime.usp.br
+          </a>
+          . Informe o e-mail da conta e o pedido, sem enviar senhas ou tokens. Podemos
+          solicitar confirmação de identidade antes de atender ao pedido. A exclusão está
+          sujeita às hipóteses de conservação descritas nesta política.
         </p>
         <h3 className="text-xl font-semibold">GitHub OAuth</h3>
         <p>
-          Companhia: GitHub Inc.
-          <br />
-          Lugar de processamento: EUA.
-          <br />
-          Dados Pessoais processados: vários tipos de Dados como especificados na política
-          de privacidade do serviço.
+          Ao escolher entrar com GitHub, solicitamos read:user e user:email para obter o
+          perfil e identificar o e-mail principal verificado. Armazenamos o nome (ou nome
+          de usuário), e-mail, identificador da conta e estado de verificação para criar e
+          autenticar sua conta, com os mesmos critérios de retenção e canais de
+          atendimento descritos nesta política.
         </p>
         <h3 className="text-xl font-semibold">
           Registro e autenticação fornecidos diretamente por este Aplicativo
@@ -160,7 +238,19 @@ export function PrivacyPolicyContent() {
           prestação do serviço solicitado pelos Usuários.
         </p>
         <h3 className="text-xl font-semibold">Registro direto</h3>
-        <p>Dados Pessoais processados: e-mail +1.</p>
+        <p>
+          Dados tratados: nome, e-mail, hash da senha e estado de verificação da conta.
+          Usamos o e-mail também para enviar mensagens de verificação e recuperação de
+          acesso quando solicitadas.
+        </p>
+        <h3 className="text-xl font-semibold">Participação e ranking público</h3>
+        <p>
+          O ranking público exibe o apelido do participante e sua pontuação, associados a
+          um identificador de participação. Escolha um apelido que você aceite tornar
+          público. O ranking não exibe seu e-mail nem seu identificador Google. A equipe
+          autorizada pode consultar registros de participação, presenças e respostas aos
+          desafios para administrar o evento e conferir resultados.
+        </p>
       </Section>
 
       <Section title="Informações adicionais para Usuários no Brasil">
@@ -335,15 +425,17 @@ export function PrivacyPolicyContent() {
           deste documento.
         </p>
         <p>
-          Este Aplicativo usa apenas Rastreadores gerenciados diretamente pelo
-          Proprietário, conhecidos como Rastreadores próprios. A validade e expiração
-          podem variar; alguns expiram ao término da sessão de navegação.
+          O aplicativo usa cookies próprios para autenticação. Ao acessar Google ou GitHub
+          para entrar, o tratamento realizado nos sites desses provedores também está
+          sujeito às respectivas políticas de privacidade.
         </p>
         <h3 className="text-xl font-semibold">Como este Aplicativo usa Rastreadores</h3>
         <p>
-          <strong>Necessários.</strong> Este Aplicativo usa Cookies técnicos e
-          Rastreadores similares para executar atividades estritamente necessárias para
-          operar ou prestar o Serviço.
+          <strong>Necessários.</strong> O cookie oauth_state protege o fluxo de login por
+          Google ou GitHub e tem validade de até dez minutos. O cookie refresh_token
+          mantém a sessão autenticada pelo prazo de validade configurado pelo serviço; ele
+          é removido ao sair. Você pode apagar ou bloquear cookies nas configurações do
+          navegador, mas isso pode impedir o login e o acesso às áreas autenticadas.
         </p>
         <p>
           Em função da complexidade objetiva dessas tecnologias, recomendamos que os
