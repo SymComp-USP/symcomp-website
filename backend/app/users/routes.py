@@ -27,7 +27,9 @@ async def signup_with_password(
 @router.patch("/me", response_model=UserMe)
 async def update_my_name(
     db_session: Annotated[AsyncSession, Depends(get_session)],
-    current_user: Annotated[User, Security(get_current_user, scopes=[Scope.PROFILE])],
+    current_user: Annotated[
+        User, Security(get_current_user, scopes=[Scope.PROFILE, Scope.EMAIL])
+    ],
     user_in: UserNameUpdate,
 ):
     """Altera o nome do usuário autenticado. O e-mail não pode ser alterado aqui."""

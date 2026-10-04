@@ -41,6 +41,20 @@ async def test_update_name_without_profile_scope_returns_401(
     assert regular_user.name == original_name
 
 
+async def test_update_name_without_email_scope_returns_401(
+    db_client, regular_user, db_session: AsyncSession
+):
+    original_name = regular_user.name
+
+    r = await db_client.patch(
+        URL, json={"name": "Novo Nome"}, headers=_auth(regular_user, [Scope.PROFILE])
+    )
+
+    assert r.status_code == 401
+    await db_session.refresh(regular_user)
+    assert regular_user.name == original_name
+
+
 async def test_update_name_of_deleted_user_returns_401(db_client, deleted_user_factory):
     deleted = await deleted_user_factory()
 
