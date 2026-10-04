@@ -18,7 +18,6 @@ class Question(Base, UUIDPKMixin):
 
     prompt: Mapped[str] = mapped_column(String(5000))
     answer: Mapped[str] = mapped_column(String(255))
-    points_value: Mapped[int] = mapped_column(default=0)
 
     challenge_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("challenges.id"))
     challenge: Mapped[Challenge] = relationship(back_populates="questions")

@@ -13,19 +13,21 @@ export function AuthCard({
   footer: { text: string; label: string; href: string }
 }) {
   return (
-    <main className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl items-center justify-center px-6 py-16">
-      <section className="w-full max-w-md space-y-8 rounded-none border-[8px] border-white bg-card p-6 text-card-foreground shadow-[0_10px_0_hsl(var(--semana-contrast))] sm:p-8">
-        <div className="space-y-2">
-          <h1 className="font-[family-name:var(--font-semana-display)] text-3xl font-bold uppercase tracking-tight">
+    <main className="mx-auto flex min-h-[calc(100svh-65px)] max-w-6xl items-start justify-center px-6 py-10 sm:py-16">
+      <section className="w-full max-w-md space-y-8 text-foreground">
+        <div className="space-y-2 text-center">
+          <h1 className="font-[family-name:var(--font-semana-display)] text-4xl font-bold uppercase tracking-tight">
             {title}
           </h1>
-          <p className="text-muted-foreground">{description}</p>
+          <p className="mx-auto max-w-xs font-[family-name:var(--font-semana-body)] text-lg text-foreground">
+            {description}
+          </p>
         </div>
         {children}
-        <p className="text-center text-sm text-muted-foreground">
+        <p className="text-center text-sm text-foreground">
           {footer.text}{' '}
           <Link
-            className="font-medium text-card-foreground underline underline-offset-4"
+            className="font-medium text-foreground underline underline-offset-4"
             href={footer.href}
           >
             {footer.label}

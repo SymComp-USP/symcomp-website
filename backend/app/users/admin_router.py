@@ -33,7 +33,13 @@ async def _get_user_or_404(
     return user
 
 
-@router.post("/", response_model=UserRead, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=UserRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/",
+    response_model=UserRead,
+    include_in_schema=False,
+    status_code=status.HTTP_201_CREATED,
+)
 async def create_user(
     session: Annotated[AsyncSession, Depends(get_session)],
     user_in: AdminUserCreate,
@@ -45,7 +51,8 @@ async def create_user(
     return user
 
 
-@router.get("/", response_model=Page[UserRead])
+@router.get("", response_model=Page[UserRead])
+@router.get("/", response_model=Page[UserRead], include_in_schema=False)
 async def list_users(
     session: Annotated[AsyncSession, Depends(get_session)],
     pagination: Annotated[PaginationParams, Depends()],

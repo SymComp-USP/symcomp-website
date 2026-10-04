@@ -12,8 +12,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from app.auth.dependencies import get_current_admin_user, get_current_user
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.models.question import Question
+from app.semana.models import SemanaEvent
 from app.users.models import User
-from app.users.username import services as username_service
 
 # ---------------------------------------------------------------------------
 # Factories
@@ -38,29 +38,26 @@ def _make_user(*, is_admin: bool = False) -> User:
 
 
 @pytest.fixture
-async def user(db_session: AsyncSession, username_catalog) -> User:
+async def user(db_session: AsyncSession) -> User:
     u = _make_user()
     db_session.add(u)
     await db_session.flush()
-    await username_service.assign_username(u.id, db_session)
     return u
 
 
 @pytest.fixture
-async def other_user(db_session: AsyncSession, username_catalog) -> User:
+async def other_user(db_session: AsyncSession) -> User:
     u = _make_user()
     db_session.add(u)
     await db_session.flush()
-    await username_service.assign_username(u.id, db_session)
     return u
 
 
 @pytest.fixture
-async def admin(db_session: AsyncSession, username_catalog) -> User:
+async def admin(db_session: AsyncSession) -> User:
     u = _make_user(is_admin=True)
     db_session.add(u)
     await db_session.flush()
-    await username_service.assign_username(u.id, db_session)
     return u
 
 
@@ -92,16 +89,33 @@ def as_user(db_client: AsyncClient) -> Callable[[User], AsyncClient]:
 
 
 @pytest.fixture
-async def challenge(db_session: AsyncSession) -> Challenge:
-    c = Challenge(title="Quiz Teste", scoring_type=ChallengeScoringType.QUIZ)
+async def semana(db_session: AsyncSession) -> SemanaEvent:
+    event = SemanaEvent(nome="Semana Teste", ano=2026)
+    db_session.add(event)
+    await db_session.flush()
+    return event
+
+
+@pytest.fixture
+async def challenge(db_session: AsyncSession, semana: SemanaEvent) -> Challenge:
+    c = Challenge(
+        title="Quiz Teste",
+        scoring_type=ChallengeScoringType.QUIZ,
+        points_value=225,
+        semana_id=semana.id,
+    )
     db_session.add(c)
     await db_session.flush()
     return c
 
 
 @pytest.fixture
-async def manual_challenge(db_session: AsyncSession) -> Challenge:
-    c = Challenge(title="Manual Teste", scoring_type=ChallengeScoringType.MANUAL)
+async def manual_challenge(db_session: AsyncSession, semana: SemanaEvent) -> Challenge:
+    c = Challenge(
+        title="Manual Teste",
+        scoring_type=ChallengeScoringType.MANUAL,
+        semana_id=semana.id,
+    )
     db_session.add(c)
     await db_session.flush()
     return c
@@ -113,19 +127,16 @@ async def questions(db_session: AsyncSession, challenge: Challenge) -> list[Ques
         Question(
             prompt="2+2?",
             answer="4",
-            points_value=100,
             challenge_id=challenge.id,
         ),
         Question(
             prompt="3*3?",
             answer="9",
-            points_value=50,
             challenge_id=challenge.id,
         ),
         Question(
             prompt="Capital do Brasil?",
             answer="Brasília",
-            points_value=75,
             challenge_id=challenge.id,
         ),
     ]

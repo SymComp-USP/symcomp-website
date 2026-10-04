@@ -10,7 +10,6 @@ async def test_manual_challenge_cannot_be_submitted(
     as_user,
     user,
     manual_challenge,
-    username_catalog,
 ):
     c = as_user(user)
     r = await c.post(f"api/v1/challenge/{manual_challenge.id}/join")
@@ -26,6 +25,6 @@ async def test_manual_challenge_cannot_receive_questions(
     c = as_user(admin)
     r = await c.patch(
         f"api/v1/admin/challenge/{manual_challenge.id}",
-        json={"questions": [{"prompt": "?", "answer": "!", "points_value": 10}]},
+        json={"questions": [{"prompt": "?", "answer": "!"}]},
     )
     assert r.status_code == 400

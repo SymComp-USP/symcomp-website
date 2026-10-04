@@ -14,7 +14,7 @@ from app.auth.security import (
     hash_token,
     verify_password,
 )
-from app.core.config import get_settings
+from app.core.config import AppEnv, get_settings
 from app.core.exceptions.app_errors import ForbiddenError, UnauthorizedError
 from app.users.models import User
 
@@ -32,7 +32,7 @@ async def authenticate(db_session: AsyncSession, email: str, password: str):
     if user is None:
         return None
 
-    if not verify_password(password, user.password_hash):
+    if user.password_hash is None or not verify_password(password, user.password_hash):
         return None
 
     return user
@@ -124,7 +124,7 @@ def build_refresh_token_cookie(refresh_token: str) -> dict:
         "key": "refresh_token",
         "value": refresh_token,
         "httponly": True,
-        "secure": True,
+        "secure": get_settings().app_env == AppEnv.production,
         "samesite": "lax",
         "max_age": REFRESH_EXPIRE_TIME_SECONDS,
     }
@@ -141,6 +141,8 @@ async def refresh_access_token(
     scopes = _narrow_scopes(old.scopes.split(" "), requested_scopes)
 
     user = await user_services.get_user_by_id(session, old.user_id)
+    if requested_scopes is None and user.is_admin and Scope.ADMIN not in scopes:
+        scopes.append(Scope.ADMIN)
     not_allowed = set(scopes) - get_grantable_scopes(user)
     if not_allowed:
         raise ForbiddenError(detail=f"Scopes not allowed: {sorted(not_allowed)}")

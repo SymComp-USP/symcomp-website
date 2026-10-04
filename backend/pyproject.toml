@@ -10,6 +10,8 @@ dependencies = [
     "fastapi[standard]>=0.141.1",
     "pwdlib[argon2]>=0.2.0",
     "PyJWT>=2.13.0",
+    "httpx>=0.28.1",
+    "itsdangerous>=2.2.0",
     "sqlalchemy>=2.0.51",
 ]
 

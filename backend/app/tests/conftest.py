@@ -1,4 +1,3 @@
-import uuid
 from datetime import UTC, datetime
 from shutil import rmtree
 
@@ -9,10 +8,17 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from app.core.config import Settings, get_settings
 from app.core.database import get_session
+from app.core.rate_limit import RateLimitMiddleware
 from app.main import app
 from app.users import services as user_services
 from app.users.schemas import UserCreate
-from app.users.username.models import Username, UsernameMother
+
+
+@pytest.fixture(autouse=True)
+def reset_rate_limits():
+    RateLimitMiddleware.reset_all()
+    yield
+    RateLimitMiddleware.reset_all()
 
 
 @pytest.fixture
@@ -27,11 +33,28 @@ def jwt_settings(test_settings: Settings) -> Settings:
     return test_settings
 
 
+@pytest.fixture(autouse=True)
+def reset_rate_limit_state():
+    middleware = app.middleware_stack
+    if middleware is None:
+        middleware = app.build_middleware_stack()
+        app.middleware_stack = middleware
+
+    while middleware is not None:
+        if isinstance(middleware, RateLimitMiddleware):
+            middleware.requests.clear()
+            break
+        middleware = getattr(middleware, "app", None)
+
+
 @pytest_asyncio.fixture
 async def db_session(test_settings: Settings):
     engine = create_async_engine(str(test_settings.database_url))
     TestingSessionLocal = async_sessionmaker(
-        bind=engine, class_=AsyncSession, expire_on_commit=False
+        bind=engine,
+        class_=AsyncSession,
+        expire_on_commit=False,
+        join_transaction_mode="create_savepoint",
     )
     async with engine.connect() as connection:
         transaction = await connection.begin()
@@ -72,7 +95,7 @@ async def db_client(db_session: AsyncSession, test_settings: Settings):
 
 
 @pytest.fixture
-def user_factory(db_session: AsyncSession, username_catalog):
+def user_factory(db_session: AsyncSession):
     async def _make(
         email: str = "factory-user@example.com",
         name: str = "Factory User",
@@ -98,38 +121,6 @@ def deleted_user_factory(db_session: AsyncSession, user_factory):
         return user
 
     return _make
-
-
-def _make_username_mother() -> UsernameMother:
-    return UsernameMother(
-        first_name="Maria",
-        last_name="Silva",
-        full_name=f"Maria Silva {uuid.uuid4().hex[:6]}",
-        description="Mãe de teste",
-    )
-
-
-def _make_username(
-    first_mother: UsernameMother, last_mother: UsernameMother
-) -> Username:
-    return Username(
-        nickname=f"nick-{uuid.uuid4().hex[:10]}",
-        first_mother_id=first_mother.id,
-        last_mother_id=last_mother.id,
-    )
-
-
-@pytest.fixture
-async def username_catalog(db_session: AsyncSession) -> list[Username]:
-    first_mother = _make_username_mother()
-    last_mother = _make_username_mother()
-    db_session.add_all([first_mother, last_mother])
-    await db_session.flush()
-
-    usernames = [_make_username(first_mother, last_mother) for _ in range(5)]
-    db_session.add_all(usernames)
-    await db_session.flush()
-    return usernames
 
 
 @pytest.fixture(autouse=True)

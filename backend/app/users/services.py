@@ -4,7 +4,6 @@ from datetime import UTC, datetime
 
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import selectinload
 
 from app.auth.security import hash_password
 from app.core.pagination import Page, PaginationParams
@@ -16,8 +15,6 @@ from app.users.schemas import (
     UserRead,
     UserUpdate,
 )
-from app.users.username import services as username_services
-from app.users.username.models import Username
 
 
 # --- buscas "normais": ignoram usuários soft-deletados ---
@@ -34,10 +31,6 @@ async def get_user_profile_by_id(
     result = await session.execute(
         select(User)
         .where(User.id == user_id, User.deleted_at.is_(None))
-        .options(
-            selectinload(User.username).selectinload(Username.first_mother),
-            selectinload(User.username).selectinload(Username.last_mother),
-        )
         .execution_options(populate_existing=True)
     )
     return result.scalar_one_or_none()
@@ -103,7 +96,6 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
         deleted_user.is_verified = False
 
         await session.flush()
-        await username_services.assign_username(deleted_user.id, session)
         await session.refresh(deleted_user)
 
         return deleted_user
@@ -116,7 +108,6 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
 
     session.add(user)
     await session.flush()
-    await username_services.assign_username(user.id, session)
     await session.refresh(user)
 
     return user
@@ -125,8 +116,8 @@ async def create_user(session: AsyncSession, user_in: UserCreate) -> User:
 async def admin_create_user(session: AsyncSession, user_in: AdminUserCreate) -> User:
     """Cria um usuário como admin, podendo definir `is_admin` e `is_verified`.
 
-    Reaproveita `create_user` (mesmas regras de e-mail duplicado, reativação de
-    conta deletada e atribuição de username) e aplica os privilégios em seguida.
+    Reaproveita `create_user` (mesmas regras de e-mail duplicado e reativação de
+    conta deletada) e aplica os privilégios em seguida.
 
     Não faz commit.
     """
