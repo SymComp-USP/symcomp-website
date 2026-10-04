@@ -63,3 +63,13 @@ $ uv run alembic upgrade head
 5. Commit your changes. 
 
 Commit together: SQLAlchemy model changes, migration files (under `alembic/versions/`) and tests for new behaviour. In new environments, `alembic upgrade head` builds the full schema from zero.
+
+### Login social (Google e GitHub)
+
+Defina no ambiente do backend `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`,
+`GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `OAUTH_REDIRECT_BASE` (origem pública
+que encaminha `/api` ao backend) e `FRONTEND_BASE_URL`. Cadastre nos consoles OAuth
+as callbacks `/api/v1/auth/oauth/google/callback` e
+`/api/v1/auth/oauth/github/callback` sob essa origem. Execute `alembic upgrade head`
+para adicionar `users.oauth_provider`. O login exige e-mail verificado; e-mails já
+associados a contas com senha não são vinculados automaticamente.

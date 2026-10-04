@@ -1,9 +1,13 @@
-import { CalendarDays, Menu, UserRound } from 'lucide-react'
+'use client'
+
+import { Menu } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import type { ReactNode } from 'react'
 
 import { Button } from '@/components/ui/button'
+import { AuthProvider, useAuth } from '@/features/auth/auth-provider'
 import {
   Sheet,
   SheetClose,
@@ -18,108 +22,227 @@ import { semanaBody, semanaDisplay } from '../fonts'
 import { SemanaButton } from './semana-button'
 
 const links = [
-  { href: '/semana/inicio', label: 'Início' },
+  { href: '/semana', label: 'Início' },
   { href: '/semana/cronograma', label: 'Programação' },
-  { href: '/semana/perfil', label: 'Perfil' },
+  { href: '/semana/presenca', label: 'Presença' },
+  { href: '/semana/desafios', label: 'Desafios' },
+  { href: '/semana/patrocinadores', label: 'Patrocinadores' },
+  { href: '/semana/sobre-nos', label: 'Sobre nós' },
 ]
 
 export function SemanaShell({ children }: { children: ReactNode }) {
   return (
+    <AuthProvider>
+      <SemanaShellContent>{children}</SemanaShellContent>
+    </AuthProvider>
+  )
+}
+
+function SemanaShellContent({ children }: { children: ReactNode }) {
+  const { user, loading, logout } = useAuth()
+  const pathname = usePathname()
+  const isSponsorsPage = pathname === '/semana/patrocinadores'
+  const pageTheme =
+    pathname === '/semana'
+      ? 'semana-page-home'
+      : pathname === '/semana/cronograma'
+        ? 'semana-page-schedule'
+        : pathname === '/semana/ranking'
+          ? 'semana-page-ranking'
+          : pathname === '/semana/perfil'
+            ? 'semana-page-profile'
+            : pathname.startsWith('/semana/desafios/')
+              ? 'semana-page-challenge'
+              : pathname === '/semana/patrocinadores'
+                ? 'semana-page-sponsors'
+                : pathname === '/semana/login' || pathname === '/semana/cadastro'
+                  ? 'semana-page-auth'
+                  : ''
+  const illustratedPage =
+    pathname === '/semana' ||
+    pathname === '/semana/login' ||
+    pathname === '/semana/cadastro'
+
+  return (
     <div
       className={cn(
-        'semana-theme min-h-svh bg-background font-[family-name:var(--font-semana-body)] text-foreground',
+        'semana-theme grid min-h-svh grid-cols-[minmax(0,1fr)] grid-rows-[auto_1fr_auto] bg-background font-[family-name:var(--font-semana-body)] text-foreground',
+        pageTheme,
+        illustratedPage && 'semana-page-illustrated',
         semanaBody.variable,
         semanaDisplay.variable,
       )}
     >
-      <header className="sticky top-0 z-40 border-b-[6px] border-[hsl(var(--semana-contrast))] bg-background/95 backdrop-blur">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
-          <Link className="flex items-center gap-3" href="/semana/inicio">
+      <header
+        className={cn(
+          'sticky top-0 z-40 border-b-[6px] border-[hsl(var(--semana-contrast))] backdrop-blur',
+          isSponsorsPage ? 'bg-[hsl(var(--semana-sponsor))]' : 'bg-background/95',
+        )}
+      >
+        <div className="mx-auto grid h-20 max-w-6xl grid-cols-3 items-center px-6">
+          <Link className="flex items-center" href="/semana">
             <Image
-              alt="Semana da Computação"
-              height={46}
+              alt="IME-USP"
+              className="h-auto w-12 sm:w-14"
+              height={52}
               priority
-              src="/semana/2025/logo-horizontal.svg"
-              width={196}
+              src="/logo/ime_usp.svg"
+              width={59}
             />
           </Link>
 
-          <nav
-            aria-label="Navegação principal"
-            className="hidden items-center gap-1 md:flex"
-          >
-            {links.map((link) => (
-              <Button asChild key={link.href} variant="ghost">
-                <Link href={link.href}>{link.label}</Link>
-              </Button>
-            ))}
-            <SemanaButton
-              asChild
-              className="ml-2 border-4 px-4 py-2 text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
-            >
-              <Link href="/semana/login">Entrar</Link>
-            </SemanaButton>
-          </nav>
+          <div className="col-start-2 row-start-1 flex items-center justify-center">
+            <Link href="/semana">
+              <Image
+                alt="Semana da Computação"
+                height={47}
+                priority
+                src="/semana/2026/logo-horizontal.svg"
+                width={196}
+              />
+            </Link>
+          </div>
 
           <Sheet>
             <SheetTrigger asChild>
               <Button
                 aria-label="Abrir menu"
-                className="md:hidden"
+                className="col-start-3 row-start-1 ml-auto"
                 size="icon"
                 variant="ghost"
               >
                 <Menu aria-hidden="true" />
               </Button>
             </SheetTrigger>
-            <SheetContent className="semana-theme border-l-[6px] border-[hsl(var(--semana-contrast))] bg-background font-[family-name:var(--font-semana-body)] text-foreground">
+            <SheetContent
+              className={cn(
+                'semana-theme border-l-[6px] border-[hsl(var(--semana-contrast))] bg-background font-[family-name:var(--font-semana-body)] text-foreground',
+                pageTheme,
+                semanaDisplay.variable,
+              )}
+            >
               <SheetHeader>
-                <SheetTitle>Semana da Computação</SheetTitle>
+                <SheetTitle className="font-[family-name:var(--font-semana-display)] uppercase">
+                  Semana da Computação
+                </SheetTitle>
               </SheetHeader>
-              <nav aria-label="Navegação móvel" className="mt-8 flex flex-col gap-2">
+              <nav aria-label="Navegação principal" className="mt-8 flex flex-col gap-2">
                 {links.map((link) => (
                   <SheetClose asChild key={link.href}>
-                    <Button asChild className="justify-start" variant="ghost">
+                    <Button
+                      asChild
+                      className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
+                      variant="ghost"
+                    >
                       <Link href={link.href}>{link.label}</Link>
                     </Button>
                   </SheetClose>
                 ))}
-                <SheetClose asChild>
-                  <SemanaButton asChild className="mt-2">
-                    <Link href="/semana/login">Entrar</Link>
-                  </SemanaButton>
-                </SheetClose>
+                {user && (
+                  <>
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
+                        variant="ghost"
+                      >
+                        <Link href="/semana/ranking">Ranking</Link>
+                      </Button>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Button
+                        asChild
+                        className="justify-start font-[family-name:var(--font-semana-display)] uppercase"
+                        variant="ghost"
+                      >
+                        <Link href="/semana/perfil">Perfil</Link>
+                      </Button>
+                    </SheetClose>
+                  </>
+                )}
+                {!loading &&
+                  (user ? (
+                    <SheetClose asChild>
+                      <Button
+                        className="mt-2 justify-start"
+                        onClick={logout}
+                        variant="outline"
+                      >
+                        Sair
+                      </Button>
+                    </SheetClose>
+                  ) : (
+                    <SheetClose asChild>
+                      <SemanaButton asChild className="mt-2">
+                        <Link href="/semana/login">Entrar</Link>
+                      </SemanaButton>
+                    </SheetClose>
+                  ))}
               </nav>
             </SheetContent>
           </Sheet>
         </div>
       </header>
 
-      {children}
+      <div>{children}</div>
 
       <footer className="border-t-[6px] border-[hsl(var(--semana-contrast))] bg-[hsl(var(--semana-contrast))] text-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-4 px-6 py-8 text-sm text-white/80 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-3">
-            <Image
-              alt="IME-USP"
-              height={38}
-              src="/semana/2025/ime-usp-branca.svg"
-              width={42}
-            />
-            <p>Semana da Computação — IME-USP</p>
-          </div>
-          <div className="flex gap-4">
-            <Link
-              className="inline-flex items-center gap-1 hover:text-foreground"
-              href="/semana/cronograma"
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 py-10 text-sm text-white/80 md:grid-cols-2">
+          <section aria-labelledby="sponsors-title">
+            <h2
+              className="font-[family-name:var(--font-semana-display)] text-sm uppercase text-white"
+              id="sponsors-title"
             >
-              <CalendarDays aria-hidden="true" size={16} /> Programação
-            </Link>
-            <Link
-              className="inline-flex items-center gap-1 hover:text-foreground"
-              href="/semana/perfil"
+              Patrocinado por
+            </h2>
+            <div className="mt-6 flex flex-wrap items-center gap-x-8 gap-y-6">
+              <Image
+                alt="Incognia"
+                className="h-auto w-32 brightness-0 invert"
+                height={158}
+                src="/company-logos/incognia.webp"
+                width={848}
+              />
+              <Image
+                alt="Tako"
+                className="h-auto w-28 brightness-0 invert"
+                height={207}
+                src="/company-logos/tako_logotipo.svg"
+                width={791}
+              />
+              <Image
+                alt="Asper"
+                className="h-auto w-28 brightness-0 invert"
+                height={592}
+                src="/company-logos/colored-1.webp"
+                width={2500}
+              />
+            </div>
+          </section>
+
+          <section aria-labelledby="supporters-title">
+            <h2
+              className="font-[family-name:var(--font-semana-display)] text-sm uppercase text-white"
+              id="supporters-title"
             >
-              <UserRound aria-hidden="true" size={16} /> Perfil
+              Apoio
+            </h2>
+            <div className="mt-5 flex items-center gap-8">
+              <Image alt="IME-USP" height={66} src="/logo/ime_branca.png" width={53} />
+              <Image
+                alt="Universidade de São Paulo"
+                height={58}
+                src="/logo/usp_branca.png"
+                width={125}
+              />
+            </div>
+          </section>
+          <div className="md:col-span-2">
+            <Link
+              className="underline underline-offset-4 hover:text-white"
+              href="/semana/privacy"
+            >
+              Política de privacidade
             </Link>
           </div>
         </div>

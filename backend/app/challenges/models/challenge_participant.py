@@ -4,7 +4,7 @@ import uuid
 from datetime import datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import DateTime, ForeignKey, UniqueConstraint
+from sqlalchemy import DateTime, ForeignKey, String, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.core.mixins import TimestampsMixin, UUIDPKMixin
@@ -14,6 +14,8 @@ from app.users.models import User
 from .challenge import Challenge
 
 if TYPE_CHECKING:
+    from app.semana.models import SemanaParticipant
+
     from .answer import Answer
 
 
@@ -26,8 +28,14 @@ class ChallengeParticipant(Base, UUIDPKMixin, TimestampsMixin):
         ForeignKey("users.id", ondelete="CASCADE")
     )
     challenge_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("challenges.id"))
+    semana_participant_id: Mapped[uuid.UUID | None] = mapped_column(
+        ForeignKey("semana_participants.id"), nullable=True
+    )
     user: Mapped[User] = relationship()
     challenge: Mapped[Challenge] = relationship()
+    semana_participant: Mapped[SemanaParticipant | None] = relationship(
+        back_populates="challenge_attempts"
+    )
 
     score: Mapped[int] = mapped_column(default=0)
     answers: Mapped[list[Answer]] = relationship(
@@ -37,6 +45,7 @@ class ChallengeParticipant(Base, UUIDPKMixin, TimestampsMixin):
     submitted_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
+    submission: Mapped[str | None] = mapped_column(String(255), nullable=True)
 
     __table_args__ = (
         UniqueConstraint(

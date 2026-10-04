@@ -3,6 +3,7 @@ export type ActivityType = 'talk' | 'conversation' | 'closing' | 'coffee_break'
 export type Speaker = {
   name: string
   bio?: string
+  photo?: string
 }
 
 export type Activity = {
@@ -14,4 +15,5 @@ export type Activity = {
   startsAt: string
   endsAt: string
   location?: string
+  liveUrl?: string
 }

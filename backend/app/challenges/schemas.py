@@ -3,7 +3,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
-from app.challenges.models.challenge import ChallengeScoringType
+from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.services.image import build_challenge_image_url
 
 
@@ -13,8 +13,12 @@ class AnswerBody(BaseModel):
 
 
 class SubmissionResponse(BaseModel):
-    submitted_at: datetime
+    submitted_at: datetime | None
     score: int
+
+
+class InputSubmission(BaseModel):
+    answer: str
 
 
 class QuestionResponse(BaseModel):
@@ -22,7 +26,6 @@ class QuestionResponse(BaseModel):
 
     id: UUID
     prompt: str
-    points_value: int
     current_answer: str | None = None
 
 
@@ -48,24 +51,49 @@ class ParticipantScoreResponse(BaseModel):
     score: int
 
 
+class AdminChallengeParticipantResponse(BaseModel):
+    id: UUID
+    user_id: UUID
+    user_name: str
+    user_email: str
+    challenge_id: UUID
+    challenge_title: str
+    score: int
+    submitted_at: datetime | None
+
+
 class QuestionCreate(BaseModel):
     prompt: str
     answer: str
-    points_value: int = 0
 
 
 class QuestionUpdate(BaseModel):
     prompt: str | None = None
     answer: str | None = None
-    points_value: int | None = None
 
 
 class ChallengeCreate(BaseModel):
     title: str
+    description: str = ""
+    prompt: str | None = None
     scoring_type: ChallengeScoringType = ChallengeScoringType.QUIZ
+    starts_at: datetime | None = None
     finishes_at: datetime | None = None
+    semana_id: int | None = None
+    points_value: int = 0
+    input_answer: str | None = None
+    resource_urls: list[str] = Field(default_factory=list)
 
     questions: list[QuestionCreate] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_scoring_data(self):
+        if self.scoring_type == ChallengeScoringType.INPUT:
+            if self.prompt is None or not self.input_answer:
+                raise ValueError("Input challenges require a prompt and an answer.")
+        elif self.scoring_type != ChallengeScoringType.QUIZ and self.questions:
+            raise ValueError("Only quiz challenges can have questions.")
+        return self
 
     @field_validator("finishes_at")
     @classmethod
@@ -74,17 +102,39 @@ class ChallengeCreate(BaseModel):
             raise ValueError("finishes_at must include a timezone.")
         return value
 
+    @field_validator("starts_at")
+    @classmethod
+    def validate_starts_at_timezone(cls, value: datetime | None) -> datetime | None:
+        if value is not None and value.utcoffset() is None:
+            raise ValueError("starts_at must include a timezone.")
+        return value
+
 
 class ChallengeUpdate(BaseModel):
     title: str | None = None
+    description: str | None = None
+    scoring_type: ChallengeScoringType | None = None
+    prompt: str | None = None
     questions: list[QuestionCreate] | None = None
+    starts_at: datetime | None = None
     finishes_at: datetime | None = None
+    semana_id: int | None = None
+    points_value: int | None = None
+    input_answer: str | None = None
+    resource_urls: list[str] | None = None
 
     @field_validator("finishes_at")
     @classmethod
     def validate_finishes_at_timezone(cls, value: datetime | None) -> datetime | None:
         if value is not None and value.utcoffset() is None:
             raise ValueError("finishes_at must include a timezone.")
+        return value
+
+    @field_validator("starts_at")
+    @classmethod
+    def validate_starts_at_timezone(cls, value: datetime | None) -> datetime | None:
+        if value is not None and value.utcoffset() is None:
+            raise ValueError("starts_at must include a timezone.")
         return value
 
 
@@ -106,7 +156,6 @@ class AdminQuestionResponse(BaseModel):
     id: UUID
     prompt: str
     answer: str
-    points_value: int
 
 
 class ChallengeImageMixin(BaseModel):
@@ -118,6 +167,19 @@ class ChallengeImageMixin(BaseModel):
 
     image_path: str | None = Field(default=None, exclude=True)
     image_url: str | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def _include_input_data(cls, value):
+        if isinstance(value, Challenge):
+            data = value.__dict__.copy()
+            input_data = value.input
+            data["prompt"] = input_data.prompt if input_data is not None else ""
+            data["input_answer"] = (
+                input_data.input_answer if input_data is not None else None
+            )
+            return data
+        return value
 
     @model_validator(mode="after")
     def _fill_image_url(self):
@@ -131,11 +193,16 @@ class ChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
+    prompt: str
     scoring_type: ChallengeScoringType
+    starts_at: datetime
     finishes_at: datetime
+    resource_urls: list[str] = Field(default_factory=list)
     questions: list[QuestionResponse] = Field(default_factory=list)
     is_participant: bool = False
     submitted_at: datetime | None = None
+    score: int | None = None
 
 
 class ChallengePublicResponse(ChallengeImageMixin):
@@ -143,8 +210,12 @@ class ChallengePublicResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
+    prompt: str
     scoring_type: ChallengeScoringType
+    starts_at: datetime
     finishes_at: datetime
+    resource_urls: list[str] = Field(default_factory=list)
 
 
 class AdminChallengeResponse(ChallengeImageMixin):
@@ -154,6 +225,13 @@ class AdminChallengeResponse(ChallengeImageMixin):
 
     id: UUID
     title: str
+    description: str
+    prompt: str
     scoring_type: ChallengeScoringType
+    starts_at: datetime
     finishes_at: datetime
+    semana_id: int | None = None
+    points_value: int = 0
+    input_answer: str | None = None
+    resource_urls: list[str] = Field(default_factory=list)
     questions: list[AdminQuestionResponse] = Field(default_factory=list)

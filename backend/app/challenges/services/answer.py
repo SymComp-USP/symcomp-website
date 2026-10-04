@@ -47,7 +47,7 @@ async def upsert_answer(
 ) -> Answer:
 
     result = await session.execute(
-        select(Question, Challenge.finishes_at)
+        select(Question, Challenge.starts_at, Challenge.finishes_at)
         .join(Challenge, Challenge.id == Question.challenge_id)
         .join(ChallengeParticipant, ChallengeParticipant.challenge_id == Challenge.id)
         .where(
@@ -62,7 +62,8 @@ async def upsert_answer(
     if question_and_deadline is None:
         raise NotFoundError("Could not find question with given ID.")
 
-    question, finishes_at = question_and_deadline
+    question, starts_at, finishes_at = question_and_deadline
+    challenge_service.ensure_challenge_started(starts_at)
     challenge_service.ensure_challenge_open(finishes_at)
 
     is_correct = content.strip().lower() == question.answer.strip().lower()

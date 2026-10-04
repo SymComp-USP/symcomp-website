@@ -23,6 +23,7 @@ async def _make_participant(
 async def test_process_submission_sums_only_correct_answers(
     db_session: AsyncSession, user, challenge, questions
 ):
+    challenge.points_value = 225
     participant = await _make_participant(db_session, user.id, challenge.id)
 
     # Duas corretas, uma errada
@@ -50,11 +51,13 @@ async def test_process_submission_sums_only_correct_answers(
     )
     await db_session.flush()
 
-    score = await challenge_service.process_submission(db_session, participant)
+    score = await challenge_service.process_submission(
+        db_session, participant, challenge
+    )
 
-    assert score == 150  # 100 + 50
+    assert score == 150
     assert participant.score == 150
-    assert participant.submitted_at is not None
+    assert participant.submitted_at is None
 
 
 async def test_process_submission_ignores_deleted_answers(
@@ -62,6 +65,7 @@ async def test_process_submission_ignores_deleted_answers(
 ):
     from datetime import UTC, datetime
 
+    challenge.points_value = 225
     participant = await _make_participant(db_session, user.id, challenge.id)
 
     correct = Answer(
@@ -80,15 +84,19 @@ async def test_process_submission_ignores_deleted_answers(
     db_session.add_all([correct, deleted_correct])
     await db_session.flush()
 
-    score = await challenge_service.process_submission(db_session, participant)
+    score = await challenge_service.process_submission(
+        db_session, participant, challenge
+    )
 
-    assert score == 100
+    assert score == 75
 
 
 async def test_process_submission_zero_when_no_answers(
     db_session: AsyncSession, user, challenge
 ):
     participant = await _make_participant(db_session, user.id, challenge.id)
-    score = await challenge_service.process_submission(db_session, participant)
+    score = await challenge_service.process_submission(
+        db_session, participant, challenge
+    )
     assert score == 0
     assert participant.score == 0

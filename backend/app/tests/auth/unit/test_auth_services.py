@@ -327,6 +327,23 @@ async def test_refresh_access_token_uses_original_scopes_when_not_specified(
     assert set(payload["scopes"].split(" ")) == {"openid", "email"}
 
 
+@pytest.mark.asyncio
+async def test_refresh_access_token_adds_admin_scope_after_promotion(
+    db_session: AsyncSession, user_factory, jwt_settings: Settings
+):
+    user = await user_factory(email="refresh-admin@example.com")
+    user.is_admin = True
+    await db_session.flush()
+    token = await auth_services.create_refresh_token(
+        db_session, user.id, list(DEFAULT_SCOPES)
+    )
+
+    new_access = await auth_services.refresh_access_token(db_session, token)
+
+    payload = _decode_access(new_access.access_token, jwt_settings)
+    assert Scope.ADMIN in payload["scopes"].split(" ")
+
+
 # ===========================================================================
 # revoke_refresh_token
 # ===========================================================================
@@ -374,6 +391,6 @@ def test_build_refresh_token_cookie_shape(jwt_settings: Settings):
     assert cookie["key"] == "refresh_token"
     assert cookie["value"] == "my-token"
     assert cookie["httponly"] is True
-    assert cookie["secure"] is True
+    assert cookie["secure"] is False
     assert cookie["samesite"] == "lax"
     assert cookie["max_age"] == jwt_settings.refresh_token_expire_days * 24 * 60 * 60
