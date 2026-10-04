@@ -91,11 +91,11 @@ export function ActivityCard({ activity }: { activity: Activity }) {
           <div className="flex flex-wrap gap-3">
             <SemanaButton
               asChild
-              className="border-4 px-3 py-2 text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
+              className="max-w-full flex-wrap whitespace-normal break-words border-4 px-3 py-2 text-left text-xs shadow-[0_4px_0_hsl(var(--semana-contrast))]"
             >
               <a href={googleCalendarUrl(activity)} rel="noreferrer" target="_blank">
-                <CalendarPlus aria-hidden="true" className="mr-2" size={16} /> Adicionar à
-                agenda
+                <CalendarPlus aria-hidden="true" className="mr-2 shrink-0" size={16} />
+                <span className="min-w-0">Adicionar à agenda</span>
               </a>
             </SemanaButton>
             {(activity.description ||
@@ -106,7 +106,7 @@ export function ActivityCard({ activity }: { activity: Activity }) {
                     Saber mais
                   </SemanaButton>
                 </DialogTrigger>
-                <DialogContent className="semana-theme">
+                <DialogContent className="semana-theme w-[calc(100vw-2rem)] max-h-[calc(100dvh-2rem)] overflow-y-auto">
                   <DialogHeader>
                     <DialogTitle>{activity.title}</DialogTitle>
                     <DialogDescription>
@@ -120,11 +120,14 @@ export function ActivityCard({ activity }: { activity: Activity }) {
                     {activity.speakers.map(
                       (speaker) =>
                         (speaker.bio || speaker.photo) && (
-                          <div className="flex gap-3" key={speaker.name}>
+                          <div
+                            className="flex flex-col gap-3 sm:flex-row"
+                            key={speaker.name}
+                          >
                             {speaker.photo && (
                               <img
                                 alt=""
-                                className="size-12 rounded-full object-cover"
+                                className="size-12 shrink-0 rounded-full object-cover"
                                 src={speaker.photo}
                               />
                             )}

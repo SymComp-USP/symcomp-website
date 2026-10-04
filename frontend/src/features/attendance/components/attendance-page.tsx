@@ -132,7 +132,11 @@ export function AttendancePage() {
             </p>
           )}
 
-          <SemanaButton className="w-full" disabled={pageLoading} type="submit">
+          <SemanaButton
+            className="w-full flex-wrap whitespace-normal break-words"
+            disabled={pageLoading}
+            type="submit"
+          >
             {pageLoading ? 'Carregando…' : 'Registrar presença'}
           </SemanaButton>
         </form>
