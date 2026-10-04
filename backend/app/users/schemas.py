@@ -30,6 +30,15 @@ class UserUpdate(BaseModel):
     password: Password | None = None
 
 
+class UserNameUpdate(BaseModel):
+    # alteração do próprio nome pelo usuário autenticado: nome obrigatório e
+    # nenhum outro campo aceito (e-mail, senha e privilégios não podem ser
+    # alterados por esta via)
+    model_config = ConfigDict(extra="forbid")
+
+    name: Name
+
+
 class AdminUserCreate(UserCreate):
     # criação feita por um admin: pode definir os privilégios já na criação
     is_admin: bool = False

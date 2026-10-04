@@ -93,6 +93,15 @@ export async function getCurrentUser(): Promise<User> {
   return mapUser(await requestApi<ApiUser>('/auth/me'))
 }
 
+export async function updateMyName(name: string): Promise<User> {
+  return mapUser(
+    await requestApi<ApiUser>('/user/me', {
+      method: 'PATCH',
+      body: JSON.stringify({ name }),
+    }),
+  )
+}
+
 export async function restoreSession(): Promise<User | null> {
   try {
     await refresh()

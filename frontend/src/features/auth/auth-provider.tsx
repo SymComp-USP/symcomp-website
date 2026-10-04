@@ -9,7 +9,7 @@ import {
   type ReactNode,
 } from 'react'
 
-import { login, logout, register, restoreSession } from './api'
+import { login, logout, register, restoreSession, updateMyName } from './api'
 import type { LoginInput, RegisterInput, User } from './types'
 
 type AuthContextValue = {
@@ -18,6 +18,7 @@ type AuthContextValue = {
   login: (input: LoginInput) => Promise<User>
   register: (input: RegisterInput) => Promise<User>
   logout: () => Promise<void>
+  updateName: (name: string) => Promise<User>
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null)
@@ -50,6 +51,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       async logout() {
         await logout()
         setUser(null)
+      },
+      async updateName(name) {
+        const updated = await updateMyName(name)
+        setUser(updated)
+        return updated
       },
     }),
     [loading, user],
