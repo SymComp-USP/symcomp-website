@@ -237,6 +237,14 @@ function SemanaShellContent({ children }: { children: ReactNode }) {
               />
             </div>
           </section>
+          <div className="md:col-span-2">
+            <Link
+              className="underline underline-offset-4 hover:text-white"
+              href="/semana/privacy"
+            >
+              Política de privacidade
+            </Link>
+          </div>
         </div>
       </footer>
     </div>
