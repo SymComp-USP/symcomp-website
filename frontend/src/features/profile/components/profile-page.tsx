@@ -1,21 +1,12 @@
 'use client'
 
-import { CalendarCheck, CheckCircle2, Clock3, Mail, Trophy } from 'lucide-react'
+import { CalendarCheck, Clock3, Trophy } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { useAuth } from '@/features/auth/auth-provider'
+import { ProfileIdentity } from '@/features/profile/components/profile-identity'
 import { getMyParticipation, type Participation } from '@/features/semana/api'
-
-function initials(name: string) {
-  return name
-    .split(' ')
-    .slice(0, 2)
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase()
-}
 
 export function ProfilePage() {
   const router = useRouter()
@@ -53,26 +44,7 @@ export function ProfilePage() {
         </h1>
       </div>
 
-      <section className="rounded-none border-[8px] border-white bg-card p-6 text-card-foreground shadow-[0_10px_0_hsl(var(--semana-contrast))] sm:p-8">
-        <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-          <Avatar className="h-20 w-20">
-            <AvatarFallback className="text-xl font-semibold">
-              {initials(user.name)}
-            </AvatarFallback>
-          </Avatar>
-          <div className="min-w-0 flex-1">
-            <h2 className="text-2xl font-semibold">{user.name}</h2>
-            <p className="mt-1 inline-flex items-center gap-2 text-muted-foreground">
-              <Mail aria-hidden="true" size={16} />
-              {user.email}
-            </p>
-          </div>
-          <span className="inline-flex w-fit items-center gap-2 rounded-full border px-3 py-1 text-sm font-medium">
-            <CheckCircle2 aria-hidden="true" size={16} />
-            {user.isVerified ? 'Conta verificada' : 'Verificação pendente'}
-          </span>
-        </div>
-      </section>
+      <ProfileIdentity user={user} />
 
       <div className="mt-6">
         <section className="rounded-none border-[6px] border-[hsl(var(--semana-contrast))] bg-muted p-6 text-card-foreground">
