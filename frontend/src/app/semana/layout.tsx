@@ -6,7 +6,7 @@ interface SemanaLayoutProps {
 }
 
 export const metadata: Metadata = {
-  title: 'SYMCOMP | Semana da Computação',
+  title: '16ª Semana da Computação | IME-USP',
   description: 'A Semana da Computação é o evento anual da SymComp no IME USP.',
 }
 
