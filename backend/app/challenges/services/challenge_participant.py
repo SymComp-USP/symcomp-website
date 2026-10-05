@@ -76,9 +76,11 @@ async def get_challenge_ranking(
 ) -> list[ChallengeParticipant]:
     results = await session.scalars(
         select(ChallengeParticipant)
+        .join(Challenge, Challenge.id == ChallengeParticipant.challenge_id)
         .where(
             ChallengeParticipant.challenge_id == challenge_id,
             ChallengeParticipant.deleted_at.is_(None),
+            Challenge.deleted_at.is_(None),
         )
         .options(
             selectinload(ChallengeParticipant.user),

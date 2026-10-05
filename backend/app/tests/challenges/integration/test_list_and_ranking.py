@@ -10,6 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.challenges.models.challenge import Challenge, ChallengeScoringType
 from app.challenges.models.challenge_participant import ChallengeParticipant
+from app.challenges.services.challenge_participant import get_challenge_ranking
 from app.semana.models import SemanaParticipant
 
 
@@ -127,3 +128,21 @@ async def test_ranking_orders_by_score_desc(
     assert scores == sorted(scores, reverse=True)
     assert scores[0] == 140
     assert ranking[0]["nickname"] == ranking_nickname
+
+
+async def test_ranking_excludes_participants_for_deleted_challenge(
+    db_session: AsyncSession, user, challenge
+):
+    db_session.add(
+        ChallengeParticipant(
+            user_id=user.id,
+            challenge_id=challenge.id,
+            score=100,
+        )
+    )
+    challenge.deleted_at = datetime.now(UTC)
+    await db_session.flush()
+
+    ranking = await get_challenge_ranking(db_session, challenge.id)
+
+    assert ranking == []
