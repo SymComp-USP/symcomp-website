@@ -1,6 +1,6 @@
 import asyncio
 
-from app.core.rate_limit import RateLimitMiddleware
+from app.core.rate_limit import ATTENDANCE_LIMIT, LIMITS, RateLimitMiddleware
 
 
 def test_rate_limit_blocks_after_limit():
@@ -25,18 +25,19 @@ def test_rate_limit_blocks_after_limit():
     }
 
     sent: list[dict] = []
+    limit = LIMITS[("POST", "/api/v1/auth/login")][0]
 
     async def send(message):
         sent.append(message)
 
     async def run():
-        for _ in range(5):
+        for _ in range(limit):
             await limiter(scope, None, send)
         await limiter(scope, None, send)
 
     asyncio.run(run())
 
-    assert calls == 5
+    assert calls == limit
     assert next(message for message in sent if "status" in message)["status"] == 429
 
 
@@ -54,7 +55,7 @@ def test_rate_limit_blocks_attendance_code_guessing_across_codes():
         sent.append(message)
 
     async def run():
-        for code in range(10):
+        for code in range(ATTENDANCE_LIMIT[0]):
             scope = {
                 "type": "http",
                 "method": "POST",
@@ -72,5 +73,5 @@ def test_rate_limit_blocks_attendance_code_guessing_across_codes():
 
     asyncio.run(run())
 
-    assert calls == 10
+    assert calls == ATTENDANCE_LIMIT[0]
     assert next(message for message in sent if "status" in message)["status"] == 429

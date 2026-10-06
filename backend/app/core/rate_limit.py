@@ -12,12 +12,12 @@ from fastapi.responses import JSONResponse
 RateLimit = tuple[int, int]
 
 LIMITS: dict[tuple[str, str], RateLimit] = {
-    ("POST", "/api/v1/auth/login"): (5, 60),
-    ("POST", "/api/v1/auth/refresh"): (20, 60),
-    ("POST", "/api/v1/user"): (7, 60 * 60),
+    ("POST", "/api/v1/auth/login"): (30, 60),
+    ("POST", "/api/v1/auth/refresh"): (120, 60),
+    ("POST", "/api/v1/user"): (60, 60 * 60),
 }
 ATTENDANCE_PATH = r"/api/v1/semanas/\d+/atividades/registrar/\d{4}"
-ATTENDANCE_LIMIT: RateLimit = (10, 60)
+ATTENDANCE_LIMIT: RateLimit = (100, 60)
 
 
 class RateLimitMiddleware:
