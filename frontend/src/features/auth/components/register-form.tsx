@@ -17,6 +17,7 @@ import {
 import { useAuth } from '@/features/auth/auth-provider'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
+import { AuthNotice } from './auth-notice'
 import { OAuthButtons } from './oauth-buttons'
 
 const schema = z.object({
@@ -27,7 +28,7 @@ const schema = z.object({
 
 type Values = z.infer<typeof schema>
 
-export function RegisterForm() {
+export function RegisterForm({ onSuccess }: { onSuccess: (message: string) => void }) {
   const router = useRouter()
   const { loading, register, user } = useAuth()
   const [error, setError] = useState<string>()
@@ -48,7 +49,8 @@ export function RegisterForm() {
     setError(undefined)
     try {
       await register(values)
-      router.push('/semana/perfil')
+      onSuccess('Conta criada. Verifique seu e-mail para ativar o acesso.')
+      form.reset()
     } catch {
       setError('Não foi possível criar sua conta. Tente novamente.')
     }
@@ -104,11 +106,7 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-        {error && (
-          <p className="text-sm text-destructive" role="alert">
-            {error}
-          </p>
-        )}
+        {error && <AuthNotice variant="error">{error}</AuthNotice>}
         <SemanaButton
           className="w-full"
           disabled={form.formState.isSubmitting}

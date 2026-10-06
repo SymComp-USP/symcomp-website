@@ -42,6 +42,7 @@ async def test_authenticate_returns_user_for_valid_credentials(
     db_session: AsyncSession, user_factory
 ):
     user = await user_factory(email="auth-ok@example.com")
+    user.is_verified = True
 
     result = await auth_services.authenticate(db_session, user.email, "password123")
 

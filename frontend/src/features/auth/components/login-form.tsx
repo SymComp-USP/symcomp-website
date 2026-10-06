@@ -1,6 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -15,8 +16,10 @@ import {
   FormMessage,
 } from '@/components/ui/form'
 import { useAuth } from '@/features/auth/auth-provider'
+import { AuthNotice } from './auth-notice'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
+import { resendVerification } from '../api'
 import { OAuthButtons } from './oauth-buttons'
 
 const schema = z.object({
@@ -47,7 +50,10 @@ export function LoginForm() {
       const user = await login(values)
       router.push(user?.isAdmin ? '/admin' : '/semana/perfil')
     } catch {
-      setError('Não foi possível entrar. Tente novamente.')
+      await resendVerification(values.email).catch(() => undefined)
+      setError(
+        'Não foi possível entrar. Se sua conta ainda não foi verificada, enviamos um novo e-mail de verificação.',
+      )
     }
   }
 
@@ -84,15 +90,17 @@ export function LoginForm() {
               <FormControl>
                 <SemanaInput autoComplete="current-password" type="password" {...field} />
               </FormControl>
+              <Link
+                className="text-sm underline underline-offset-4"
+                href="/semana/reset-password"
+              >
+                Esqueci minha senha
+              </Link>
               <FormMessage />
             </FormItem>
           )}
         />
-        {error && (
-          <p className="text-sm text-destructive" role="alert">
-            {error}
-          </p>
-        )}
+        {error && <AuthNotice variant="error">{error}</AuthNotice>}
         <SemanaButton
           className="w-full"
           disabled={form.formState.isSubmitting}

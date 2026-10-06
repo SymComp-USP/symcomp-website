@@ -76,17 +76,56 @@ async function refresh() {
 
 export async function login(input: LoginInput): Promise<User> {
   const body = new URLSearchParams({ username: input.email, password: input.password })
-  const token = await requestApi<TokenResponse>('/auth/login', {
-    method: 'POST',
-    body,
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-  })
+  const token = await requestApi<TokenResponse>(
+    '/auth/login',
+    {
+      method: 'POST',
+      body,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    },
+    false,
+  )
   accessToken = token.access_token
   return getCurrentUser()
 }
 
 export async function register(input: RegisterInput): Promise<void> {
   await requestApi('/user', { method: 'POST', body: JSON.stringify(input) })
+}
+
+export async function resendVerification(email: string): Promise<void> {
+  await requestApi(
+    '/auth/resend-verification',
+    { method: 'POST', body: JSON.stringify({ email }) },
+    false,
+  )
+}
+
+export async function verifyEmail(token: string): Promise<void> {
+  await requestApi(
+    '/auth/verify-email',
+    { method: 'POST', body: JSON.stringify({ token }) },
+    false,
+  )
+}
+
+export async function requestPasswordReset(email: string): Promise<void> {
+  await requestApi(
+    '/auth/password-reset/request',
+    { method: 'POST', body: JSON.stringify({ email }) },
+    false,
+  )
+}
+
+export async function confirmPasswordReset(
+  token: string,
+  password: string,
+): Promise<void> {
+  await requestApi(
+    '/auth/password-reset/confirm',
+    { method: 'POST', body: JSON.stringify({ token, password }) },
+    false,
+  )
 }
 
 export async function getCurrentUser(): Promise<User> {

@@ -38,10 +38,10 @@ async def get_user_profile_by_id(
 
 async def get_user_by_email(session: AsyncSession, email: str) -> User | None:
     result = await session.execute(
-        select(User).where(User.email == email, User.deleted_at.is_(None))
+        select(User).where(
+            func.lower(User.email) == email.lower(), User.deleted_at.is_(None)
+        )
     )
-
-    print(result)
 
     return result.scalar_one_or_none()
 

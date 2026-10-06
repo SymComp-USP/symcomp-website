@@ -1,6 +1,8 @@
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, EmailStr, Field
+
+from app.users.schemas import Password
 
 
 class Token(BaseModel):
@@ -21,3 +23,15 @@ class RequestedScopesBody(BaseModel):
 class RotationResult(BaseModel):
     access_token: str
     refresh_token: str
+
+
+class EmailRequest(BaseModel):
+    email: EmailStr
+
+
+class AuthTokenRequest(BaseModel):
+    token: str
+
+
+class PasswordResetRequest(AuthTokenRequest):
+    password: Password

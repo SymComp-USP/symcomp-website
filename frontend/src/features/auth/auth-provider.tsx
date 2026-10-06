@@ -16,7 +16,7 @@ type AuthContextValue = {
   user: User | null
   loading: boolean
   login: (input: LoginInput) => Promise<User>
-  register: (input: RegisterInput) => Promise<User>
+  register: (input: RegisterInput) => Promise<void>
   logout: () => Promise<void>
   updateName: (name: string) => Promise<User>
 }
@@ -44,9 +44,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       },
       async register(input) {
         await register(input)
-        const user = await login(input)
-        setUser(user)
-        return user
       },
       async logout() {
         await logout()

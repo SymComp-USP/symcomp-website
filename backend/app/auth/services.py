@@ -5,7 +5,7 @@ from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 import app.users.services as user_services
-from app.auth.models import RefreshToken
+from app.auth.models import AuthToken, AuthTokenPurpose, RefreshToken
 from app.auth.schemas import RotationResult
 from app.auth.scopes import Scope
 from app.auth.security import (
@@ -32,10 +32,73 @@ async def authenticate(db_session: AsyncSession, email: str, password: str):
     if user is None:
         return None
 
-    if user.password_hash is None or not verify_password(password, user.password_hash):
+    if (
+        user.password_hash is None
+        or not user.is_verified
+        or not verify_password(password, user.password_hash)
+    ):
         return None
 
     return user
+
+
+async def create_auth_token(
+    session: AsyncSession,
+    user_id: uuid.UUID,
+    purpose: AuthTokenPurpose,
+    expires_in: timedelta,
+) -> str:
+    now = datetime.now(UTC)
+    await session.execute(
+        AuthToken.__table__.update()
+        .where(
+            AuthToken.user_id == user_id,
+            AuthToken.purpose == purpose,
+            AuthToken.used_at.is_(None),
+            AuthToken.revoked_at.is_(None),
+        )
+        .values(revoked_at=now)
+    )
+    token = create_random_token()
+    session.add(
+        AuthToken(
+            user_id=user_id,
+            token_hash=hash_token(token),
+            purpose=purpose,
+            expires_at=now + expires_in,
+        )
+    )
+    await session.flush()
+    return token
+
+
+async def consume_auth_token(
+    session: AsyncSession, token: str, purpose: AuthTokenPurpose
+) -> AuthToken | None:
+    auth_token = await session.scalar(
+        select(AuthToken)
+        .where(
+            AuthToken.token_hash == hash_token(token),
+            AuthToken.purpose == purpose,
+        )
+        .with_for_update()
+    )
+    if auth_token is None:
+        return None
+
+    expires_at = auth_token.expires_at
+    if expires_at.tzinfo is None:
+        expires_at = expires_at.replace(tzinfo=UTC)
+    if (
+        auth_token.used_at is not None
+        or auth_token.revoked_at is not None
+        or expires_at <= datetime.now(UTC)
+    ):
+        return None
+
+    auth_token.used_at = datetime.now(UTC)
+    await session.flush()
+    return auth_token
 
 
 def create_access_token(user_id: uuid.UUID, requested_scopes: list[str]):
@@ -113,6 +176,14 @@ async def revoke_refresh_token(session: AsyncSession, refresh_token_str: str):
 
     refresh_token.revoked_at = datetime.now(UTC)
     await session.flush()
+
+
+async def revoke_user_refresh_tokens(session: AsyncSession, user_id: uuid.UUID):
+    await session.execute(
+        RefreshToken.__table__.update()
+        .where(RefreshToken.user_id == user_id, RefreshToken.revoked_at.is_(None))
+        .values(revoked_at=datetime.now(UTC))
+    )
 
 
 def build_refresh_token_cookie(refresh_token: str) -> dict:

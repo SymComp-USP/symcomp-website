@@ -14,6 +14,8 @@ RateLimit = tuple[int, int]
 LIMITS: dict[tuple[str, str], RateLimit] = {
     ("POST", "/api/v1/auth/login"): (30, 60),
     ("POST", "/api/v1/auth/refresh"): (120, 60),
+    ("POST", "/api/v1/auth/resend-verification"): (5, 15 * 60),
+    ("POST", "/api/v1/auth/password-reset/request"): (5, 15 * 60),
     ("POST", "/api/v1/user"): (60, 60 * 60),
 }
 ATTENDANCE_PATH = r"/api/v1/semanas/\d+/atividades/registrar/\d{4}"

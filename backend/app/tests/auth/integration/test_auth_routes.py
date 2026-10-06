@@ -14,6 +14,7 @@ async def test_login_returns_tokens_and_sets_refresh_cookie(
     db_client: AsyncClient, user_factory
 ):
     user = await user_factory(email="login-ok@example.com")
+    user.is_verified = True
 
     response = await db_client.post(
         "/api/v1/auth/login",
@@ -37,6 +38,7 @@ async def test_login_without_openid_scope_returns_no_id_token(
     db_client: AsyncClient, user_factory
 ):
     user = await user_factory(email="login-no-openid@example.com")
+    user.is_verified = True
 
     response = await db_client.post(
         "/api/v1/auth/login",

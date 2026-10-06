@@ -1,4 +1,5 @@
 import { AuthCard } from '@/features/auth/components/auth-card'
+import { AuthNotice } from '@/features/auth/components/auth-notice'
 import { LoginForm } from '@/features/auth/components/login-form'
 
 const oauthErrors: Record<string, string> = {
@@ -30,9 +31,7 @@ export default async function LoginPage({
       title="Entrar"
     >
       {error && oauthErrors[error] && (
-        <p className="mb-4 text-sm text-destructive" role="alert">
-          {oauthErrors[error]}
-        </p>
+        <AuthNotice variant="error">{oauthErrors[error]}</AuthNotice>
       )}
       <LoginForm />
     </AuthCard>

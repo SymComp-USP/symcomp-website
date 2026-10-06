@@ -100,6 +100,13 @@ class Settings(BaseSettings):
 
     media_url_prefix: str = Field(default="/media", title="Media directory path prefix")
 
+    smtp_host: str | None = None
+    smtp_port: int = 587
+    smtp_username: str | None = None
+    smtp_password: SecretStr | None = None
+    smtp_from: str | None = None
+    smtp_use_tls: bool = True
+
 
 @lru_cache
 def get_settings() -> Settings:
