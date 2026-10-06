@@ -65,11 +65,32 @@ async def create_auth_token(
             user_id=user_id,
             token_hash=hash_token(token),
             purpose=purpose,
+            created_at=now,
             expires_at=now + expires_in,
         )
     )
     await session.flush()
     return token
+
+
+async def has_recent_auth_token(
+    session: AsyncSession,
+    user_id: uuid.UUID,
+    purpose: AuthTokenPurpose,
+    since: datetime,
+) -> bool:
+    now = datetime.now(UTC)
+    token_id = await session.scalar(
+        select(AuthToken.id).where(
+            AuthToken.user_id == user_id,
+            AuthToken.purpose == purpose,
+            AuthToken.created_at >= since,
+            AuthToken.expires_at > now,
+            AuthToken.used_at.is_(None),
+            AuthToken.revoked_at.is_(None),
+        )
+    )
+    return token_id is not None
 
 
 async def consume_auth_token(

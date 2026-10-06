@@ -33,6 +33,8 @@ export function LoginForm() {
   const router = useRouter()
   const { loading, login, user } = useAuth()
   const [error, setError] = useState<string>()
+  const [resendMessage, setResendMessage] = useState<string>()
+  const [resending, setResending] = useState(false)
   const form = useForm<Values>({
     resolver: zodResolver(schema),
     defaultValues: { email: '', password: '' },
@@ -46,14 +48,23 @@ export function LoginForm() {
 
   async function submit(values: Values) {
     setError(undefined)
+    setResendMessage(undefined)
     try {
       const user = await login(values)
       router.push(user?.isAdmin ? '/admin' : '/semana/perfil')
     } catch {
-      await resendVerification(values.email).catch(() => undefined)
-      setError(
-        'Não foi possível entrar. Se sua conta ainda não foi verificada, enviamos um novo e-mail de verificação.',
-      )
+      setError('Não foi possível entrar. Verifique seus dados ou confirme seu e-mail.')
+    }
+  }
+
+  async function resend() {
+    setResending(true)
+    setResendMessage(undefined)
+    try {
+      await resendVerification(form.getValues('email'))
+      setResendMessage('Se sua conta precisar de verificação, enviaremos um e-mail.')
+    } finally {
+      setResending(false)
     }
   }
 
@@ -101,6 +112,17 @@ export function LoginForm() {
           )}
         />
         {error && <AuthNotice variant="error">{error}</AuthNotice>}
+        {error && (
+          <button
+            className="text-sm font-medium underline underline-offset-4"
+            disabled={resending}
+            onClick={resend}
+            type="button"
+          >
+            {resending ? 'Enviando…' : 'Reenviar verificação'}
+          </button>
+        )}
+        {resendMessage && <AuthNotice>{resendMessage}</AuthNotice>}
         <SemanaButton
           className="w-full"
           disabled={form.formState.isSubmitting}

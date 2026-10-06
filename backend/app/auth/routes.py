@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Cookie, Depends, Request, Response, Security, status
@@ -31,6 +31,7 @@ from app.users.schemas import UserMe, UserUpdate
 
 router = APIRouter(tags=["auth"])
 GENERIC_EMAIL_RESPONSE = {"detail": "If the account exists, an email was sent."}
+VERIFICATION_RESEND_COOLDOWN = timedelta(minutes=15)
 logger = logging.getLogger(__name__)
 
 
@@ -107,6 +108,13 @@ async def resend_verification_email(
 ):
     user = await user_services.get_user_by_email(db_session, str(payload.email))
     if user is not None and not user.is_verified:
+        if await services.has_recent_auth_token(
+            db_session,
+            user.id,
+            AuthTokenPurpose.VERIFY_EMAIL,
+            datetime.now(UTC) - VERIFICATION_RESEND_COOLDOWN,
+        ):
+            return GENERIC_EMAIL_RESPONSE
         token = await services.create_auth_token(
             db_session, user.id, AuthTokenPurpose.VERIFY_EMAIL, timedelta(hours=24)
         )
