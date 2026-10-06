@@ -24,22 +24,13 @@ const socialLinks = [
 
 const projects = [
   {
-    label: 'Semana da Computação',
-    href: '/semana',
-    imageUrl: '/logo/sc.png',
-    imageWidth: 1080,
-    imageHeight: 1080,
-    description:
-      'Anualmente reunimos alunos da graduação e visitantes para participar de uma semana de palestras, competições, brindes, networking e coffee breaks.',
-  },
-  {
     label: 'ByteCafé',
     href: '/bytecafe',
     imageUrl: '/logo/bc.png',
     imageWidth: 477,
     imageHeight: 592,
     description:
-      'Duas vezes por semestre convidamos alunos do Ensino Médio para conhecer a USP e o curso de Ciência da Computação.',
+      'Convidamos escolas para trazer alunos do Ensino Médio em visitas monitoradas ao IME-USP, onde conhecem na prática o curso de Ciência da Computação, a universidade, as formas de ingresso e os auxílios estudantis.',
   },
 ]
 
