@@ -20,11 +20,17 @@ import { SemanaInput } from '@/features/semana/components/semana-input'
 import { AuthNotice } from './auth-notice'
 import { OAuthButtons } from './oauth-buttons'
 
-const schema = z.object({
-  name: z.string().trim().min(1, 'Digite seu nome completo.').max(255),
-  email: z.string().email('Digite um e-mail válido.'),
-  password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres.'),
-})
+const schema = z
+  .object({
+    name: z.string().trim().min(1, 'Digite seu nome completo.').max(255),
+    email: z.string().email('Digite um e-mail válido.'),
+    password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres.'),
+    passwordConfirmation: z.string().min(1, 'Confirme sua senha.'),
+  })
+  .refine((values) => values.password === values.passwordConfirmation, {
+    message: 'As senhas não coincidem.',
+    path: ['passwordConfirmation'],
+  })
 
 type Values = z.infer<typeof schema>
 
@@ -34,7 +40,7 @@ export function RegisterForm({ onSuccess }: { onSuccess: (message: string) => vo
   const [error, setError] = useState<string>()
   const form = useForm<Values>({
     resolver: zodResolver(schema),
-    defaultValues: { name: '', email: '', password: '' },
+    defaultValues: { name: '', email: '', password: '', passwordConfirmation: '' },
   })
 
   useEffect(() => {
@@ -48,7 +54,8 @@ export function RegisterForm({ onSuccess }: { onSuccess: (message: string) => vo
   async function submit(values: Values) {
     setError(undefined)
     try {
-      await register(values)
+      const { passwordConfirmation: _, ...registration } = values
+      await register(registration)
       onSuccess('Conta criada. Verifique seu e-mail para ativar o acesso.')
       form.reset()
     } catch {
@@ -104,6 +111,19 @@ export function RegisterForm({ onSuccess }: { onSuccess: (message: string) => vo
           render={({ field }) => (
             <FormItem>
               <FormLabel>Senha</FormLabel>
+              <FormControl>
+                <SemanaInput autoComplete="new-password" type="password" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="passwordConfirmation"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirmar senha</FormLabel>
               <FormControl>
                 <SemanaInput autoComplete="new-password" type="password" {...field} />
               </FormControl>
