@@ -18,6 +18,7 @@ import {
 } from '@/components/ui/form'
 import { Label } from '@/components/ui/label'
 import { useAuth } from '@/features/auth/auth-provider'
+import { AuthNotice } from '@/features/auth/components/auth-notice'
 import type { User } from '@/features/auth/types'
 import { SemanaButton } from '@/features/semana/components/semana-button'
 import { SemanaInput } from '@/features/semana/components/semana-input'
@@ -27,7 +28,7 @@ const schema = z.object({
   name: z
     .string()
     .trim()
-    .min(1, 'Digite seu nome.')
+    .min(1, 'Digite seu nome completo.')
     .max(255, 'O nome deve ter no máximo 255 caracteres.'),
 })
 
@@ -108,17 +109,18 @@ export function ProfileIdentity({ user }: { user: User }) {
             className="mt-6 space-y-5 border-t pt-6"
             onSubmit={form.handleSubmit(submit)}
           >
+            <AuthNotice>Use seu nome completo, como no documento.</AuthNotice>
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nome</FormLabel>
+                  <FormLabel>Nome completo</FormLabel>
                   <FormControl>
                     <SemanaInput
                       autoComplete="name"
                       autoFocus
-                      placeholder="Seu nome"
+                      placeholder="Nome e sobrenome"
                       {...field}
                     />
                   </FormControl>

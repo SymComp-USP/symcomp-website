@@ -21,7 +21,7 @@ import { AuthNotice } from './auth-notice'
 import { OAuthButtons } from './oauth-buttons'
 
 const schema = z.object({
-  name: z.string().trim().min(1, 'Digite seu nome.').max(255),
+  name: z.string().trim().min(1, 'Digite seu nome completo.').max(255),
   email: z.string().email('Digite um e-mail válido.'),
   password: z.string().min(8, 'A senha deve ter pelo menos 8 caracteres.'),
 })
@@ -58,6 +58,7 @@ export function RegisterForm({ onSuccess }: { onSuccess: (message: string) => vo
 
   return (
     <Form {...form}>
+      <AuthNotice>Use seu nome completo, como no documento.</AuthNotice>
       <div className="mb-5">
         <OAuthButtons />
       </div>
@@ -67,9 +68,13 @@ export function RegisterForm({ onSuccess }: { onSuccess: (message: string) => vo
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nome</FormLabel>
+              <FormLabel>Nome completo</FormLabel>
               <FormControl>
-                <SemanaInput autoComplete="name" placeholder="Seu nome" {...field} />
+                <SemanaInput
+                  autoComplete="name"
+                  placeholder="Nome e sobrenome"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
