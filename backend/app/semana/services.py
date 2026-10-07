@@ -1,9 +1,8 @@
-from sqlalchemy import and_, case, func, select
+from sqlalchemy import and_, func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from app.atividade.models import Atividade, Presenca
-from app.challenges.models.challenge import Challenge
 from app.semana.models import PointEvent, Semana, SemanaParticipant
 from app.semana.nicknames import generate_nickname
 from app.users.models import User
@@ -94,26 +93,17 @@ async def add_points(
 
 
 async def list_ranking(session: AsyncSession, semana_id: int):
-    points = case(
-        (PointEvent.source_type != "challenge", PointEvent.amount),
-        (
-            and_(Challenge.id.is_not(None), Challenge.deleted_at.is_(None)),
-            PointEvent.amount,
-        ),
-        else_=0,
-    )
     rows = await session.execute(
         select(
             SemanaParticipant.id,
             SemanaParticipant.nickname,
-            func.coalesce(func.sum(points), 0).label("points"),
+            func.coalesce(func.sum(PointEvent.amount), 0).label("points"),
         )
-        .outerjoin(PointEvent)
         .outerjoin(
-            Challenge,
+            PointEvent,
             and_(
-                PointEvent.source_type == "challenge",
-                PointEvent.source_id == Challenge.id,
+                PointEvent.semana_participant_id == SemanaParticipant.id,
+                PointEvent.deleted_at.is_(None),
             ),
         )
         .where(SemanaParticipant.semana_id == semana_id)
@@ -121,7 +111,7 @@ async def list_ranking(session: AsyncSession, semana_id: int):
             SemanaParticipant.id,
             SemanaParticipant.nickname,
         )
-        .order_by(func.coalesce(func.sum(points), 0).desc())
+        .order_by(func.coalesce(func.sum(PointEvent.amount), 0).desc())
     )
     return rows.all()
 
